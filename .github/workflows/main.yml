@@ -28,11 +28,10 @@ jobs:
           hugo-version: 'latest'
 
     - name: Build
-      run: hugo --baseURL="https://loganmarchione.dev"
+      run: hugo --baseURL="https://${{ env.DEV_URL }}"
 
     - name: SSH setup
       run: |
-        rsync --version
         mkdir -p ~/.ssh
         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
         ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.DEV_URL }} > ~/.ssh/known_hosts
