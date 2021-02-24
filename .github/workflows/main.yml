@@ -31,7 +31,7 @@ jobs:
       run: ls -la
 
     - name: Build
-      run: hugo --gc --baseURL=${{ env.DEV_URL}}  --publishDir=${{ env.DEV_URL }}
+      run: hugo --gc --baseURL=${{ env.DEV_URL}}
 
     - name: This is a test
       run: |
