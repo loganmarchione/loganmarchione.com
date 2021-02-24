@@ -34,4 +34,7 @@ jobs:
       run: hugo --gc --baseURL=$DEV_URL
 
     - name: This is a test
-      run: ls -la
+      run: |
+        ls -la
+        rsync --version
+

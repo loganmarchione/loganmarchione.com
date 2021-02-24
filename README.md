@@ -1,5 +1,7 @@
 # loganmarchione.com
 
+![CI/CD](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml/badge.svg)
+
 ## Overview
 
 This repo contains the source for https://loganmarchione.com, built via Hugo.
