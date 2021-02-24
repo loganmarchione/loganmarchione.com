@@ -31,7 +31,7 @@ jobs:
       run: ls -la
 
     - name: Build
-      run: hugo --baseURL=${{ env.DEV_URL}}
+      run: hugo --baseURL="https://loganmarchione.dev"
 
     - name: This is a test
       run: |
