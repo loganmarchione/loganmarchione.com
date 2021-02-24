@@ -45,4 +45,4 @@ jobs:
 
     - name: Rsync deployment
       run: |
-        ssh ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL}} -p ${{ secrets.DEPLOY_PORT }}
+        rsync -avz -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" --delete public/ ${{ env.RSYNC_USER }}@${{ env.HOST }}:/var/www/test
