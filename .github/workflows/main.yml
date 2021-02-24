@@ -39,7 +39,7 @@ jobs:
         rsync --version
         mkdir -p ~/.ssh
         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} {{ env.DEV_URL }} > ~/.ssh/known_hosts
+        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.DEV_URL }} > ~/.ssh/known_hosts
         chmod -R 700 ~/.ssh
         chmod 600 ~/.ssh/deploy_key
         ls -la ~/.ssh
