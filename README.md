@@ -10,7 +10,7 @@ This repo contains the source for https://loganmarchione.com, built via [Hugo](h
 
 ```
 # get a copy of the code
-git clone https://git.internal.loganmarchione.xyz/logan/loganmarchione.com.git
+git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 git submodule update --init --recursive
 
@@ -18,6 +18,7 @@ git submodule update --init --recursive
 
 # test changes locally
 hugo server -D --ignoreCache
+
 # test in browser http://localhost:1313
 
 # create static copy

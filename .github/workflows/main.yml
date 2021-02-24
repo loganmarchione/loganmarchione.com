@@ -28,7 +28,7 @@ jobs:
           hugo-version: 'latest'
 
     - name: Build
-      run: hugo --baseURL="https://${{ env.DEV_URL }}"
+      run: hugo --gc --baseURL="https://${{ env.DEV_URL }}"
 
     - name: SSH setup
       run: |
