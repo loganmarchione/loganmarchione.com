@@ -43,6 +43,6 @@ jobs:
         chmod -R 700 ~/.ssh
         chmod 600 ~/.ssh/deploy_key
         ls -la ~/.ssh
-        rsync -cavz --delete --omit-dir-times \
+        rsync -rltvz --delete --omit-dir-times \
           -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" public/ \
           ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL }}:/var/www/${{ env.DEV_URL }}
