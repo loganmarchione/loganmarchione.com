@@ -39,10 +39,10 @@ jobs:
         rsync --version
         mkdir -p ~/.ssh
         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} {{ env.DEV_URL }} > ~/.ssh/known_hosts
         chmod -R 700 ~/.ssh
         chmod 600 ~/.ssh/deploy_key
         ls -la ~/.ssh
-
-    - name: Rsync deployment
-      run: |
-        rsync -avz -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" --delete public/ ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL }}:/var/www/test
+        rsync -avz --delete \
+          -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" public/ \
+          ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL }}:/var/www/test
