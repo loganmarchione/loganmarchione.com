@@ -4,17 +4,22 @@
 
 ## Overview
 
-This repo contains the source for https://loganmarchione.com, built via Hugo.
+This repo contains the source for https://loganmarchione.com, built via [Hugo](https://gohugo.io/).
 
 ## Usage
 
 ```
+# get a copy of the code
 git clone https://git.internal.loganmarchione.xyz/logan/loganmarchione.com.git
 cd loganmarchione.com
 git submodule update --init --recursive
-hugo server -D --ignoreCache
-## make your changes here
-## test in browser http://localhost:1313
-hugo
-```
 
+# make changes to the site
+
+# test changes locally
+hugo server -D --ignoreCache
+# test in browser http://localhost:1313
+
+# create static copy
+hugo --gc
+```

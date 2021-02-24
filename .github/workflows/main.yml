@@ -31,10 +31,18 @@ jobs:
       run: ls -la
 
     - name: Build
-      run: hugo --gc --baseURL=$DEV_URL
+      run: hugo --gc --baseURL=${{ env.DEV_URL}}  --publishDir=${{ env.DEV_URL }}
 
     - name: This is a test
       run: |
         ls -la
         rsync --version
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+        chmod -R 700 ~/.ssh
+        chmod 600 ~/.ssh/deploy_key
+        ls -la ~/.ssh
 
+    - name: Rsync deployment
+      run: |
+        ssh ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL}} -p ${{ secrets.DEPLOY_PORT }}
