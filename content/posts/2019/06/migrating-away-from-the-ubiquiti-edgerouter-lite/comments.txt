@@ -1,0 +1,99 @@
+## Comments
+
+### Comment by Cardin Nguyen on 2019-09-16 18:18:09 -0400
+after reading your blog, I made the same decision. I been using EdgeRouter. Last year I moved to USG. The basic features such as multiple ips requested over 5 years ago UBNT hasn&#8217;t been implemented. They focus adding new hardware. 
+
+After thinking a few days yesterday I made the jump to OPNSense and really like it so far. 
+
+Thanks for this great post. Your point clearly stated why you did it. Its exactly how I felt about UBNT too.
+
+### Comment by Logan Marchione on 2019-09-19 20:39:04 -0400
+It&#8217;s unfortunate, because Ubiquiti really makes good products, but can&#8217;t seem to focus on something.
+
+Just curious, why did you choose OPNsense instead of pfSense?
+
+### Comment by Swamp Donkey on 2019-10-10 15:25:03 -0400
+I would have just kept the ER and installed OpenBSD on it instead. Set up your pf.conf and get on with your life.
+
+Why even bother replacing it with a junk OS such as FreeBSD that constantly has kernel holes? (TCP stack holes, fd holes, unpatched ipv6 DoS attacks, etc. come to mind)
+
+### Comment by Logan Marchione on 2019-10-10 15:40:32 -0400
+I considered that but don’t know enough about BSD to do it by hand.
+
+Honestly, I didn’t know FreeBSD was “worse” than OpenBSD. Do you have a link I could read to learn more about it? Also, isn’t OpnSense based on OpenBSD?
+
+### Comment by Bruce on 2019-10-22 07:07:51 -0400
+Opnsense have a custom version based on HardenedBSD with security on focus.
+
+<a href="https://hardenedbsd.org/" rel="nofollow ugc">https://hardenedbsd.org/</a>
+
+### Comment by Logan Marchione on 2019-10-27 20:40:07 -0400
+I&#8217;ll look into this, thanks!
+
+### Comment by Oscar on 2020-02-22 14:02:11 -0500
+Greetings,
+
+Last fall, I replaced my core network router, a RasPI, with one of Globalscale EspressoBIN SBCs. I believe this is the same hardware as is in the Netgate. It took some fiddling to get software loaded onto the system that would route. FWIW, there were a few interesting glitches
+
+1) I had to cut a slot in the case so that the SD card could be replaced while the case is closed.  
+2) My preference was to run Debian, but it required a custom UBoot that was not reliable. The system would fail to power-on reliably.  
+3) The show-stopper, though, was that the board couldn&#8217;t handle gigabit throughput. My fiber link is 1G/1G. the EB could only forward something in the 400Mbit range.
+
+So, while I know that corporate whims can make a product bothersome, the fact that neither the RasPI nor the EspressoBIN could route at line-rate was a deal breaker. The hardware acceleration in the Octeon seems to be the important component. Even with a relatively low clock speed, the hardware forwarding is enough to allow line-rate routing.
+
+Cheers
+
+### Comment by Logan Marchione on 2020-02-23 18:44:41 -0500
+You&#8217;re pretty brave, I wouldn&#8217;t have even bothered to try to get anything running on the EspressoBIN! Unfortunately, as you discovered, there just isn&#8217;t reliable software support for ARM yet.
+
+And yes, it&#8217;s well-known that open-source software (Debian, pfSense, VyOS, etc&#8230;) can&#8217;t take advantage of hardware acceleration like proprietary software can. In your case, your best bet is to get a slightly more powerful x86 machine and load Debian of pfSense on that. I haven&#8217;t used them personally, but I&#8217;ve heard good things about the Fitlet and Protectli boxes.
+
+### Comment by Cristian Zamora on 2020-04-23 11:13:46 -0400
+Hey there. Does the Netgate have dual-wan ability?
+
+### Comment by Logan Marchione on 2020-04-23 11:53:10 -0400
+Yep!
+
+<a href="https://docs.netgate.com/pfsense/en/latest/routing/multi-wan.html" rel="nofollow ugc">https://docs.netgate.com/pfsense/en/latest/routing/multi-wan.html</a>
+
+### Comment by Enzo on 2020-04-26 07:52:37 -0400
+try Mikrotik HAP ac2. I was shocked when I saw how efficient it is. at this price.
+
+### Comment by Logan Marchione on 2020-04-27 10:29:03 -0400
+I&#8217;ve considered Mikrotik products in the past but never ended up with one. I&#8217;ll have to look into them, thanks!
+
+### Comment by Brad Francis on 2020-12-19 01:53:09 -0500
+Hi All,  
+I&#8217;m a bit disappointed how Ubiquiti has basically abandoned future USG-PRO4 features. My USG-Pro4 is only 5 months old and running fine, however I want more that pfSense with their add ons can offer.
+
+So I decided to jump from USG-PRO4 to pfSense on an i7 Intel quadcore with 16GB Ram during this holiday break. The new equipment just arrived today. I purchase a rackmount 2nd Fortigate 8 Port already running pfSense and a band new NetGate SG1100 as a future backup only &#8211; hopefully the basic pfSense configuration from the rack Fortigate (when done) will directly port/copy onto the SG-1100. Anyone &#8211; I&#8217;m I right here &#8211; Yes/No???
+
+I have 3 x 48 POE Port switches (1 USW 48-1500 gen2 + 2 x Cisco 2nd POE) plus 5 x 8 Port UniFi POE switches. I have a complicated network with 12 APs over 18 WiFi network with 21 non WiFi networks &#8211; all of course VLANS. I also have a Synlogoy 10 Drive NAS. All of this controls both my home with 32 4G cameras plus a heavy Io payload security devices plus 4 remote WiFi PTP links over my farm property. We only have a mixture of 8 computer devices &#8211; 2 iMacs, 4 Laptops and 2 iPads plus 2 iPhone 8. All of this is running perfectly now with zero problems and zero anomalies reported on UniFi Ctrl Desktop.
+
+I&#8217;m just starting to deploy other IoT devices around my farm running beef cattle management and RFID chips in my cattle too &#8211; just early days with this cattle stuff. Has anybody done on of this stuff? If so, I would like to exchange some ideas etc.
+
+I believe that the changeover from USGPro4 to pfSense will take some effort and good deal of time (about 3 days full time), but I think it will well worth it in the long run. My plan of attack is basic as stated above. Has anybody got any other suggestions for me.
+
+### Comment by Logan Marchione on 2020-12-21 11:33:26 -0500
+I can&#8217;t answer your question directly, I would ask around over on <a href="https://www.reddit.com/r/PFSENSE/" target="_blank" rel="noopener nofollow ugc">r/pfsense</a>.
+
+### Comment by Dwayne on 2020-12-28 03:40:35 -0500
+My ERL-3 is now my back up device. Got tired of the buggy firmware, where features in the GUI wouldn&#8217;t work.
+
+Moved to OPNSense on an HP thin client, just under a year ago. After about 3-4 months of solid use it&#8217;ll just stop working, won&#8217;t connect to the internet so I&#8217;ll reinstall the firmware and reconfigure the whole thing. Today I could not even ping the device, so pulled out the ERL-3 and instantly online again. Whether the issue is caused by the firmware, the hardware or my configuration I don&#8217;t know. Blinkin&#8217; frustating though, as I just want to set and forget it.
+
+Prior to the ERL-3, I had run OpenWRT on a TP-Link TL1043-ND , which I liked a lot but needed to upgrade to beefier hardware.
+
+Considering switching back to OpenWRT on the said thin client. I&#8217;m much more familiar with OpenWRT than EdgeOS and OPNSense.
+
+### Comment by Logan Marchione on 2020-12-30 11:31:30 -0500
+That&#8217;s tough to diagnose without logs. Do BSD-based distributions have the Linux equivalent of `dmesg`? Could be hardware or software. You could try OpenWRT and see if locks up after the same amount of time. You could also try pfSense, but that&#8217;s probably pretty close to OPNSense.
+
+### Comment by Eric on 2021-01-30 17:55:17 -0500
+According to the Netgate site, the SG-1100 has only 1GB of DDR4 ram, not 4GB as you list above. Did you get an older SKU, or am I missing something?
+
+### Comment by Logan Marchione on 2021-01-31 15:27:49 -0500
+My bad, it was 1GB. Nice catch! I updated the table.
+
+### Comment by Eric on 2021-02-01 12:33:05 -0500
+Cool, thanks!

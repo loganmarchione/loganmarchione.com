@@ -1,0 +1,7 @@
+## Comments
+
+### Comment by XiaoKe on 2016-10-18 02:41:32 -0400
+Verification/digital signature picture has error? yes: signature invalid? valid?
+
+### Comment by Logan on 2016-10-18 09:00:35 -0400
+Thanks for pointing that out! I grabbed this off Google, so I&#8217;m not sure of the source. I&#8217;ll make a note in the post.

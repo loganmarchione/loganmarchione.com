@@ -1,0 +1,109 @@
+## Comments
+
+### Comment by AO on 2016-09-10 14:23:08 -0400
+Can you give a recipe for setting up VLANs between an EdgeRouter Lite and an EdgeSwitch Lite? Each VLAN will have it&#8217;s own DHCP server within the EdgeRouter. We have this configured, but can&#8217;t get traffic on the tagged ports pf the switch&#8230; missing some config on the router, and not sure what.
+
+### Comment by Logan on 2016-09-11 20:49:39 -0400
+I actually haven&#8217;t setup any VLANs yet, sorry!
+
+### Comment by Paul P on 2017-01-17 05:39:10 -0500
+Hey there. This is by far the most well written guide for getting familiar with the ERL and command line interface! I&#8217;m and ERL noob and am excited to dig in to your guides! 
+
+That said, (total rookie question), when i connect via putty and run the SHOW command, I can tab complete only to the following options: firewall interfaces port-forward services system.
+
+So I can&#8217;t run the SHOW VERSION for example. I know I am missing something obvious. Is it because I am connected via putty and not directly to the device? Keep in mind this device has already been configured via GUI. 
+
+Thanks again for these great writeups!
+
+### Comment by Logan on 2017-01-17 08:27:58 -0500
+Thanks, glad to help!
+
+You&#8217;re in &#8220;configure&#8221; mode (see the &#8220;edit&#8221; above the prompt).  
+`[edit]<br />
+ubnt@erl# show<br />
+firewall      interfaces    port-forward  service       system`
+
+Type `exit` to get back to normal mode, then retry your tab completion.
+
+### Comment by WireRydr on 2017-01-22 21:42:18 -0500
+Thanks for the write-up &#8211; very useful. I thought I&#8217;d point out that (at least as of v1.9.1) under &#8220;Verify Hardware Offload&#8221;, you go into configure mode before running the &#8220;show ubnt offload&#8221; cmd. This doesn&#8217;t work &#8211; that command, which shows what is actually active, should be run outside of configure mode. To see what is configured, use &#8220;show system offload&#8221; inside configuration mode. See <a href="https://community.ubnt.com/t5/EdgeMAX/Difference-Between-show-ubnt-offload-and-show-system-offload/m-p/1790494#M143726" rel="nofollow ugc">https://community.ubnt.com/t5/EdgeMAX/Difference-Between-show-ubnt-offload-and-show-system-offload/m-p/1790494#M143726</a> for more info, but the following transcript illustrates:
+
+user@erl:~$ show ubnt offload
+
+IP offload module : loaded  
+IPv4  
+forwarding: enabled  
+vlan : disabled  
+pppoe : disabled  
+gre : disabled  
+IPv6  
+forwarding: disabled  
+vlan : disabled  
+pppoe : disabled
+
+IPSec offload module: loaded
+
+Traffic Analysis :  
+export : enabled  
+dpi : enabled  
+user@erl:~$ configure  
+[edit]  
+user@erl:~# show system offload  
+Configuration under specified path is empty  
+[edit]  
+user@erl:~# exit  
+exit  
+user@erl:~$
+
+### Comment by Logan on 2017-01-26 09:00:51 -0500
+Thanks, I updated the post to remove &#8220;configure&#8221;!
+
+### Comment by wd on 2017-03-15 11:53:39 -0400
+In the Setup Interfaces &#8211; Setup DHCP server for eth1, you show &#8220;LAN subnet 10.10.2.1/24&#8221;. Shouldn&#8217;t this be 10.10.2.0/24 for the subnet?
+
+configure  
+set service dhcp-server disabled false  
+set service dhcp-server shared-network-name LAN authoritative enable  
+set service dhcp-server shared-network-name LAN subnet 10.10.2.1/24 start 10.10.2.100 stop 10.10.2.199  
+set service dhcp-server shared-network-name LAN subnet 10.10.2.1/24 default-router 10.10.2.1  
+set service dhcp-server shared-network-name LAN subnet 10.10.2.1/24 dns-server 10.10.2.1  
+set service dhcp-server shared-network-name LAN subnet 10.10.2.1/24 lease 86400
+
+### Comment by Logan on 2017-03-15 14:05:45 -0400
+Hmm, it seems you are right. According to <a href="https://help.ubnt.com/hc/en-us/articles/204952254-EdgeRouter-Configure-DHCP-server-on-EdgeRouter" target="_blank" rel="nofollow">this doc</a>, it&#8217;s .0, not .1. Not sure how I missed that. However, my configuration is currently working with .1, so I&#8217;m going to have to go back and change it and see what breaks. Thanks for spotting that!
+
+### Comment by wd on 2017-08-14 16:05:14 -0400
+I have configured my router to use OpenNIC DNS servers. One of them has been taken off line so I need to delete it and add another.
+
+Is this the correct syntax to delete a server?
+
+configure  
+delete service dns forwarding name-server xxx.xxx.xxx.xxx  
+commit  
+save
+
+### Comment by Logan Marchione on 2017-08-14 16:21:54 -0400
+Yep!  
+Try &#8220;compare&#8221; to see the changes before you &#8220;commit&#8221;. It will show you additions (+) or subtractions (-).  
+If you don&#8217;t like what you did, you can &#8220;exit discard&#8221; to discard any changes instead of committing them.
+
+### Comment by wd on 2017-08-14 16:43:09 -0400
+Thanks, I&#8217;ll give that a try.
+
+### Comment by crs on 2018-04-15 11:34:23 -0400
+These write ups are very helpful, thanks.  
+From my limited understanding of subnet nomenclature, the /24 means the first 24 bits (the 10.10.2 part) specify the subnet and therefore the last 8 bits (the .0 or .1 up to .255) can change.  
+Conceivably, any number from 0 to 255 could work there. If you specify more bits for the subnet (say /30) then you’re only left with 2 bits so only 0 to 3 would be valid.  
+Of course this is entirely a thought experiment. 🙂
+
+### Comment by Scott on 2020-04-12 00:55:08 -0400
+Dude!!! 2020 here!! This was GREAT! I literally bought my router 6 hours ago because the thing I was originally trying to buy at a store wasn&#8217;t able to be found (some small POE switch). I had researched my endgame though and it was this line of stuff and I found this router at like $60 off as an open box clearance. LOL! I can see how someone expecting an easy router config would be returning this, so unless it was actually some undiscovered hardware failure (It&#8217;s Microcenter, so they are actually pretty good at figuring out if it is customer-induced or actually a hardware issue), I could also return it AND make sure it never got back into stock. Anyway&#8230;
+
+I&#8217;m in IT, but in Security. Did a fair share of Cisco IOS in the past, but new is new&#8230; This little thing you did here was a great gateway to how this line works. My needs were mostly just routing internal networks back to my internal router network that is hosting for my AT&T gateway. Basically, one interface on my current network and another network that can get DHCP for its network and route DNS back to the main router. I only needed the first half of this guide, modified for my needs where applicable. And, success!!!
+
+I also noticed that I can directly mod the /config/config.boot using vi bypassing the [edit] shell altogether It requires a manual reboot of the service and a whole lot of trust in yourself &#8211; so not recommended for general folks, but saves a lot of typing when you know exactly what you are doing (and triple check if these are in a critical location). 
+
+Anyway, this got me introduced into the ecosystem and got me running fast!!!!! Thank you for that time years ago documenting this for the internet!
+
+### Comment by Logan Marchione on 2020-04-12 15:02:17 -0400
+This post is old, but I&#8217;m glad you found it helpful!

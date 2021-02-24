@@ -1,0 +1,17 @@
+## Comments
+
+### Comment by Ro on 2020-09-07 15:52:53 -0400
+I&#8217;m following this closely as I am also looking to move away from Ubiquiti. It one broken promise after another with them. I used pfsense years ago and then monowall, but I&#8217;m a bit out of practice. I&#8217;m going to spin up a VM on my ESXi box this week to re-educate myself. 
+
+I have a USG4, Cloud Key (Gen 1), and ERL-3 already on the eBay chopping block. Totally fed up w/ Ubiqiti and I&#8217;m not alone. 
+
+Good luck and I look forward to more updates on your progress.
+
+### Comment by Logan Marchione on 2020-09-08 09:30:50 -0400
+I highly recommend pfSense. However, Ubiquiti still makes the best consumer APs, so I haven&#8217;t replace those (yet). Not sure if you saw, but there&#8217;s a <a href="https://loganmarchione.com/2019/08/pfsense-on-the-pc-engines-apu2/" rel="noopener noreferrer" target="_blank">newer post</a> than this one where I installed pfSense on an APU2, I highly recommend that little device.
+
+### Comment by Magnus on 2020-10-13 10:40:01 -0400
+I just bought SG 1100 (received it yesterday), and I have now configured it and are ready to replace my EdgeRouter Lite (3 ports). I noticed yesterday that SG 1100 was very warm when I only managed the box from web UI (no traffic). Do you recommend me to stop replacing my old EdgeRouter and refund my SG 1100 due to hardware problems?
+
+### Comment by Logan Marchione on 2020-10-13 14:01:30 -0400
+No way to know until you try. I would check the CPU temperature on the pfSense web UI and see how that compares to others online.

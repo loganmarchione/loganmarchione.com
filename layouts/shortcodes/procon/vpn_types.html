@@ -1,0 +1,61 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Software</th>
+        <th>Advantage</th>
+        <th>Disadvantage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>PPTP</th>
+        <td>
+          <ul>
+            <li>Available in most operating systems by default</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Uses IP protocol 47 (GRE) and UDP port 1723, making it easily detectable and blockable by a firewall</li>
+            <li>Encryption is not strong</li>
+            <li>First on NSA's "to-hack" list</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>L2TP/IPSec</th>
+        <td>
+          <ul>
+            <li>Available in most operating systems by default</li>
+            <li>More secure than PPTP</li>
+            <li>No known security flaws</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Uses UDP ports 50, 500, 1701, and 4500, making it easily detectable and blockable by a firewall</li>
+            <li>Slightly more overhead than OpenVPN, since traffic is passing through the tunnel and encryption in two separate steps</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>OpenVPN</th>
+        <td>
+          <ul>
+            <li>Very configurable</li>
+            <li>Uses open source software</li>
+            <li>More secure than PPTP</li>
+            <li>No known security flaws</li>
+            <li>Can use any port, setting to TCP 443 makes it almost indistinguishable from HTTPS traffic</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Not available in most operating systems by default, requires a third-party application</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

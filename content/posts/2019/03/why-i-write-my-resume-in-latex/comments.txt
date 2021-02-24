@@ -1,0 +1,16 @@
+## Comments
+
+### Comment by Jared on 2019-08-24 23:15:31 -0400
+I&#8217;ve been making my resume / CV in latex since university. Treating your resume like source in a version control system is huge. Impossible to do with word. And the output is just beautiful. Having latex as a skill with some proof in the reviewer&#8217;s hands is a big plus too. Biggest disadvantage: spell check.
+
+### Comment by Logan Marchione on 2019-08-29 08:21:03 -0400
+Yes, I agree! I think a few GUI editors have spell check built-in, but I&#8217;m not sure about command-line use.
+
+### Comment by UARTman on 2019-11-01 02:43:04 -0400
+I use Vim as my text editor and it has spell check. But regrettably Vim is not easy to master and definitely is not useful for everybody&#8230; It also requires careful configuration to be really useful.
+
+### Comment by Logan Marchione on 2019-11-01 09:01:35 -0400
+Vim definitely has a steep learning curve, but it&#8217;s worth it once you get there!
+
+### Comment by Nick on 2020-11-15 11:02:25 -0500
+Its really not that steep, just need to sit down and start doing it. Just remember, whenever you think &#8220;there&#8217;s gotta be a faster way&#8221; while using Vim, there probably is, just have to look it up!

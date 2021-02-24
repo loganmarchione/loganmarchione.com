@@ -1,0 +1,114 @@
+## Comments
+
+### Comment by Karl on 2020-01-17 13:31:53 -0500
+Thanks for sharing. Just wondering, why such a large SSD for this device?
+
+### Comment by Logan Marchione on 2020-01-19 11:55:48 -0500
+I like Samsung SSDs and that was the smallest Samsung SSD I could find that.
+
+### Comment by Cee Jay on 2020-03-03 15:48:04 -0500
+Hi you mentioned &#8220;the number of NICs (2, 3, or 4 – this is where you get APU2, APU3, or APU4)&#8221;
+
+Slight correction here. The number of NICs is not determined by the APU#. Case and point, &#8220;APU2d4&#8221; is &#8220;APU&#8221; platform generation &#8220;2&#8221; board revision &#8220;d&#8221; with &#8220;4&#8221; gigs of ECC RAM. The current models of the APU2 platform consist of the following.
+
+apu2d0 (2 GB DRAM, 2 i211AT NICs)  
+apu2e2 (2 GB DRAM, 3 i211AT NICs)  
+apu2e4 (4 GB DRAM, 3 i210AT NICs)  
+apu3c2 (2 GB DRAM, 3 i211AT NICs, optimized for 3G/LTE modems)  
+apu3c4 (4 GB DRAM, 3 i211AT NICs, optimized for 3G/LTE modems)  
+apu4d2 (2 GB DRAM, 4 i211AT NICs)  
+apu4d4 (4 GB DRAM, 4 i211AT NICs)
+
+### Comment by Logan Marchione on 2020-03-03 15:59:40 -0500
+Ah good catch, thanks! I updated my article.
+
+### Comment by Cee Jay on 2020-03-03 22:44:14 -0500
+No prob. BTW I have the APU2e4 and get full speed [940 dn/940 up] on multi-que speed test using iperf3, but single-que maxes out at around [740 dn /940 up]. This is with all the mentioned tweaks from Teklager. My guest is that there are some other settings to look at. If you haven&#8217;t found this page yet take a look. It has some nice configuration suggestions. <a href="https://nguvu.org/" rel="nofollow ugc">https://nguvu.org/</a>
+
+### Comment by Logan Marchione on 2020-03-04 11:23:16 -0500
+Yep, I&#8217;ve seen both the Teklager and nguvu guides, but I haven&#8217;t set anything in my config file since my internet is only 400/400 right now. I didn&#8217;t however use the nguvu guide for general setup and guidance. You&#8217;re not doing anything else on your APU2, right? Like IDS or IPS?
+
+### Comment by Cee Jay on 2020-03-04 17:46:44 -0500
+VLAN&#8217;s for network segmentation for IOT, Gaming, Printer, Guest Wifi, NAS. All separated with limited access in case one device is compromised the net result is minimal. Also using DNSSEC via TLS for secure DNS queries. pfBlockerNG for domain restrictions.
+
+### Comment by Logan Marchione on 2020-03-05 08:46:08 -0500
+Nice! I have an almost identical setup!
+
+### Comment by Ed McGuigan on 2020-06-23 15:02:32 -0400
+If you can, verify your laptop and USB to Serial Adapter with another device beyond just hairpinning SD and RD with a paperclip.
+
+I am having some real trouble here. Can&#8217;t get a reliable connection into the serial port. Definitely have a good null modem cable and my settings are according to instructions ( 115200-8N1 ). It spits out &#8220;garbage&#8221; then the pfSense initial dialog shows up but when it starts booting it seems to hang with more garbage characters being emitted.
+
+I eventually determined this was a problem between my laptop and serial adapter. I broke out my old 2012 HP Laptop, albeit running Mint 19.3, and I had no issues from there. That was almost two days wasted. The HP laptop was my work laptop when I was connecting to a lot of Cisco switches via console so I knew it was a sure thing. Problem is, I am at home so don&#8217;t have other equipment to verify with, like a switch with a console port. If I hadn&#8217;t been able to get a switch to talk to me I would have known it was my issue with adapter or laptop.
+
+### Comment by Logan Marchione on 2020-06-23 16:10:49 -0400
+Ugh that sucks, who would have guessed it would be the serial adapter/laptop combo? This is the only device I use that has an actual RS-232 port, so I may pickup an extra adapter just to be safe. Thanks for sharing!
+
+### Comment by C on 2020-07-05 11:40:17 -0400
+Hows this setup working now that you&#8217;ve been using it for a while? I&#8217;m on edge lite and interested in what you consider improvements from that to your new setup? Anything cons?
+
+Thanks
+
+### Comment by Logan Marchione on 2020-07-05 16:05:24 -0400
+That&#8217;s a really good question!
+
+I love pfSense and the APU2 combo. I&#8217;ve performed a pfSense version upgrade and multiple APU2 BIOS upgrades without issue. To be honest, this is the one device on my network I can basically forget about because it runs so smoothly. I basically just expect it to work 100% of the time.
+
+My only con of the APU2 is the old/slow CPU. It&#8217;s fine for my use case, which is only routing and firewall (e.g., no IDS/IPS). I think if I started doing any IDS/IPS, the CPU would start to choke. Also, I&#8217;ve heard the APU2 can only handle connections speeds of around 600Mbps (without tuning), but my internet is only 400Mbps, so I have yet to see a bottleneck.
+
+Also, not a con of the APU2, but pfSense lacks an API or way to configure the router programmatically. You basically need to write down all of your settings in the web UI if you&#8217;re doing a new install, whereas on EdgeOS you can copy/paste your configuration commands.
+
+For me, I wasn&#8217;t a fan of the direction Ubiquiti was heading. They seemed to be creating products no one was asking for, while pushing beta software to users as &#8220;stable&#8221;. I want my router to be secure and stable, not full of flashy new features. However, I do prefer the zone-based firewall of EdgeOS, whereas the interface-based firewall of pfSense can be sometimes hard to wrap my head around (e.g., traffic from out of VLAN10, into the LAN, etc&#8230;).
+
+If I were to switch from EdgeOS, I think I would give <a href="https://www.vyos.io/" target="_blank" rel="noopener noreferrer nofollow ugc">VyOS</a> a try. It&#8217;s built on the same base as EdgeOS, but isn&#8217;t customized by Ubiquiti. They offer an open-source rolling release, or a stable release that is paid. However, I believe you can get the stable if you either build it yourself from source, or contribute back to the project.
+
+### Comment by Stefan Weber on 2020-08-15 16:40:59 -0400
+Hi Logan, great, timely blog post! I had a similar journey, went from Edgerouter X to SG-1100. My Netgate router went bad after a couple of months (kept rebooting periodically, sometimes in the middle of my &#8220;work from home&#8221; day). Netgate processed RMA, but it was a repair, rather than a swap of the hardware. Good that I still had my old router handy. I&#8217;m glad that I saw your post before I ordered the APU2, got the model with the i210AT NICs (APU2E4) directly from PC Engines in Switzerland. Very good shopping experience, fast shipping via UPS (S&H was 25 USD to California). Your links were helpful, especially the tips related to BIOS update. I&#8217;m still learning to navigate pfSense, picked up some limited knowledge online. I&#8217;d be interested to see a pfSense blog from you in the future, best practices, especially related to firewall rules, etc. Thanks, stay safe and healthy!
+
+### Comment by Logan Marchione on 2020-08-17 10:57:46 -0400
+Glad I was able to help you get started! I was going to post a how-to guide for pfSense, but it can quickly get out of date and there is already so much good material out there.
+
+Lawrence Systems has a really good YouTube channel that I recommend. The owner (Tom) does cabling and network installs for a living, so he knows his networking. They publish a ton of videos on pfSense and Ubiquiti solutions.  
+<a href="https://www.youtube.com/watch?v=fsdm5uc_LsU" rel="nofollow ugc">https://www.youtube.com/watch?v=fsdm5uc_LsU</a>
+
+Also, this site has an always up-to-date pfSense setup guide.  
+<a href="https://nguvu.org/pfsense/pfsense-baseline-setup/" rel="nofollow ugc">https://nguvu.org/pfsense/pfsense-baseline-setup/</a>
+
+### Comment by Ro on 2020-09-08 19:56:49 -0400
+Good write up. I&#8217;m going to add this to my list of considerations. I also would like to go low power, but it&#8217;s my least important requirement. I am also considering a server between $250-400. I can get a decent HP DL360 G8 or Dell PowerEdge for around the same price. Not in the long run, of course, if you consider the electricity!
+
+### Comment by Sam on 2020-09-18 09:31:48 -0400
+Logan,  
+This is an amazing post and has really helped me make a decision on the pfsense box I need. I was using the USG3 and good Lord, it sucks, I agree 100% that Ubiquiti needs to clear their thoughts on “stable” release vs beta. I am a100% remote employee and need my internet to be up and running at al times.  
+I had one question about the throughput- call me crazy but will I be able to run pfsense and an IDS/IPS like Suricata and get a decent throughput? I currently have 500/500 FiOS, have about 50 connected devices. 
+
+Appreciate the good work!  
+Sam
+
+### Comment by Logan Marchione on 2020-09-18 10:58:00 -0400
+Glad to help!
+
+I don&#8217;t run an IDS/IPS myself (yet). I believe the APU2 can run some basic services like Suricata, but you may not be able to get your full 500/500 while doing it. You may need to step up to a Protectli box for that kind of horsepower.
+
+### Comment by dguy on 2020-11-28 11:17:36 -0500
+@Local Marchione & Sam
+
+Just an FYI:
+
+I have an older AMD E2100 and it&#8217;s got only 2 cores running 1Ghz with 4GB RAM. I run snort with no issues at all on this machine. 
+
+I have another older Atom CPU D510 (2Core/4 Thread) with 2GB RAM and I have issues running snort with the smaller RAM size. 
+
+I just recently got an APU2E4 (my reason for visiting your post, which is great btw!) and it&#8217;s got 4Core/1Ghz & 4GB RAM. I&#8217;m guessing that it should perform similar/better than my current primary pfSense router.
+
+According to the pfSense documents Snort/Suricata require more RAM to run efficiently (<a href="https://docs.netgate.com/pfsense/en/latest/hardware/size.html" rel="nofollow ugc">https://docs.netgate.com/pfsense/en/latest/hardware/size.html</a>) with no mention of CPU. This is why my 2GB rig doesn&#8217;t handle Snort as well when doing my full snort config.
+
+I don&#8217;t have any experience with Suricata only because I haven&#8217;t found a decent setup guide for a basic config.
+
+So you may be interested to try IDS/IPS out on the APU2E4.
+
+### Comment by dguy on 2020-11-28 11:19:10 -0500
+Sorry, *Logan Marchione
+
+### Comment by Logan Marchione on 2020-11-29 12:15:39 -0500
+I&#8217;ll look into this, thanks for sharing!

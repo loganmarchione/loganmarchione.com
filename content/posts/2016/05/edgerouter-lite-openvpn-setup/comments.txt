@@ -1,0 +1,813 @@
+## Comments
+
+### Comment by NR on 2016-07-27 14:24:38 -0400
+This was extremely helpful, thanks. Worked without a hitch the first time.
+
+### Comment by JP on 2016-08-06 01:07:43 -0400
+Logan thanks for a great guide!
+
+There are some other features also documented here: <a href="https://community.openvpn.net/openvpn/wiki/Hardening" rel="nofollow ugc">https://community.openvpn.net/openvpn/wiki/Hardening</a>
+
+What are your thoughts on enabling TLS auth?
+
+### Comment by Logan on 2016-08-07 20:49:59 -0400
+Glad to help!
+
+I&#8217;ve never used it, but it seems like a good idea! It seems like there is a configuration for it (shared-secret-key-file). You&#8217;d have to find a way to get it to your clients in a secure manner.  
+`shared-secret-key-file<br />
+  		File containing the secret key shared with remote end of tunnel`
+
+### Comment by Karen on 2016-08-08 01:11:57 -0400
+Thanks for the great directions! You rock. Really.
+
+One small error:
+
+&#8220;client1.conf (client1 configuration)&#8221; &#8211;> I assume you mean client1.ovpn
+
+Also, do you know how to bundle the keys and all into a single OVPN file? This makes it easier to import into OpenVPN.
+
+### Comment by Logan on 2016-08-08 08:39:45 -0400
+Updated, thank you!
+
+What you&#8217;re referring to is unified format. Check out <a href="https://docs.openvpn.net/docs/openvpn-connect/openvpn-connect-android-faq.html" target="_blank" rel="nofollow">this</a> page, about 1/3 of the way down. Just a heads up, some clients may not like that format and may require separate files.
+
+### Comment by David on 2016-08-25 15:09:30 -0400
+Hi Logan,
+
+Great guide! Thanks for explaining each step &#8211; helps me know what I&#8217;m doing as I&#8217;m going along.
+
+Question:  
+Do you know configuration changes I would need to make in order to make this setup a split tunnel configuration? E.g. internet connectivity goes through my local connection, and then the VPN traffic(e.g. access a file server) goes through the the VPN?
+
+### Comment by Logan on 2016-08-25 15:18:57 -0400
+Thanks! Unfortunately, I don&#8217;t know how to do that. I would recommend asking on the <a href="https://community.ubnt.com/t5/EdgeMAX/bd-p/EdgeMAX" target="_blank" rel="nofollow">forums</a> or <a href="https://www.reddit.com/r/ubiquiti" target="_blank" rel="nofollow">Reddit</a> page.
+
+### Comment by David on 2016-08-30 13:08:25 -0400
+Hey logan,  
+I stuffed up on the first step when putting in,
+
+cd /usr/lib/ssl/misc/  
+./CA.sh -newca
+
+I stuffed up when I entered the password the second time and it looks like it failed creating the /usr/lib/ssl/misc/demoCA/cacert.pem File is there a way I can restart the process?  
+I did try but its just not creating the missing file?
+
+### Comment by Logan on 2016-08-30 13:47:05 -0400
+If you do a `ls -la`, what do you see? I&#8217;m assuming you can delete the files and start over, right?
+
+### Comment by David on 2016-08-31 04:18:56 -0400
+I am very much a noob when it comes to the CLI,  
+I did run it and it shows.  
+root@ubnt:~# ls -la  
+total 13  
+drwxr-xr-x 1 root root 4096 Aug 30 16:38 .  
+drwxr-xr-x 1 root vyattacf 4096 Aug 30 16:38 ..  
+-rw-r&#8211;r&#8211; 1 root root 206 May 28 16:01 .bashrc  
+-rw-r&#8211;r&#8211; 1 root root 140 Nov 19 2007 .profile  
+-rw&#8212;&#8212;- 1 root root 1024 Aug 30 16:42 .rnd
+
+so I don&#8217;t know what any of that means.
+
+I will keep looking online to see what I can find.  
+Thanks for any help 🙂
+
+### Comment by Logan on 2016-08-31 08:41:16 -0400
+Sorry, you need to move to the directory first.
+
+`cd /usr/lib/ssl/misc/<br />
+ls -la`
+
+Also, if you&#8217;re not familiar with the CLI, the EdgeRouter may not be the router for you.
+
+### Comment by nicolas on 2016-10-08 19:06:45 -0400
+Hello, i really like to read your tutorial, you take your time to explain things so even a newbie like me could make it so thanks for that lol. How you ever tried to use openvpn like a server in the cloud ? i see aws got instances set for that. I was thinking about running one and connect as client several edgerouter from different location on it for remote access each of them separately from time to time. 
+
+What will be the best configuration on both part ? I keep looking around but don&#8217;t see no tutorial on this case ! thanks for your thoughts
+
+### Comment by Logan on 2016-10-09 21:50:18 -0400
+Yes, you&#8217;re looking for an OpenVPN client (I only setup a server). You&#8217;ll want a guide like <a href="https://mediarealm.com.au/articles/2014/03/ubiquiti-edgemax-router-openvpn-client-setup/" target="_blank" rel="nofollow">this</a>.
+
+### Comment by Ryan on 2016-11-25 23:18:00 -0500
+Hi,
+
+after I run this line:  
+openssl dhparam -out /config/auth/dh2048.pem -2 2048
+
+It took 3-4 Hours instead of 5-10mins, is this normal?
+
+I didn&#8217;t want to proceed just incase
+
+### Comment by Logan on 2016-11-26 13:10:44 -0500
+As long as it finishes, you should be ok. 
+
+It&#8217;s possible that your router was too busy (no CPU time for generating entropy), or not busy enough (no entropy present for DH parameters).
+
+### Comment by Randy on 2016-12-18 16:21:34 -0500
+Your client configuration worked in Windows 10 for me. I started by toying with the client configuration by comparing it to an old OpenVPN setup I had but in the end used the same conf you have. Thanks for such a straight forward tutorial.
+
+client  
+dev tun  
+proto udp  
+remote server.com 443  
+cipher AES-256-CBC  
+auth SHA256  
+resolv-retry infinite  
+redirect-gateway def1  
+nobind  
+comp-lzo yes  
+persist-key  
+persist-tun  
+user nobody  
+group nogroup  
+verb 3  
+ca cacert.pem  
+cert client1.pem  
+key client1-decrypted.key
+
+### Comment by Logan on 2016-12-19 11:25:34 -0500
+Thanks! I updated the post and added your comment!
+
+### Comment by Axel Boersma on 2017-01-02 11:22:31 -0500
+Would be nice if you add the index.* files and serial to your copy action. So you can recreate the demoCA dir. So if you need to add a client you don&#8217;t have to start from scratch as I now have to do.
+
+### Comment by Logan on 2017-01-03 12:31:34 -0500
+Thanks for this, I ran into the same issue after an upgrade and had to create new keys. I added a [section][1] for this.
+
+ [1]: https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#Backup_CA
+
+### Comment by Chris on 2017-01-05 13:21:29 -0500
+FYI: My Edgerouter Lite took about 3-4 hours as well
+
+### Comment by Shane on 2017-01-16 08:18:23 -0500
+This is really an excellent tutorial on OpenVPN. I followed your instructions and it worked. I used windows 7 OpenVPN client. 
+
+OpenVPN supports both certificate authentication and username/password authentication. Based on OpenVPN doc, &#8220;When combined together, both valid certificates and valid credentials are required, which improves security. &#8220;.
+
+Do you know how to add username+password authentication to your OpenVPN configuration on EdgeMax routers?
+
+It might relate to:  
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login  
+or  
+&#8211;auth-user-pass-verify cmd method
+
+I just could not figure out how.
+
+### Comment by Logan on 2017-01-17 08:51:15 -0500
+Shane, unfortunately, I don&#8217;t know how to add it. I believe the PAM plugin would be to authenticate with a username/password on the ERL itself. According to the docs, `--auth-user-pass-verify` should do it.
+
+You may need to add a line to the client config as well.  
+`--auth-user-pass [up]<br />
+    Authenticate with server using username/password. up is a file containing username/password on 2 lines (Note: OpenVPN will only read passwords from a file if it has been built with the --enable-password-save configure option, or on Windows by defining ENABLE_PASSWORD_SAVE in config-win32.h).<br />
+    If up is omitted, username/password will be prompted from the console.<br />
+    The server configuration must specify an --auth-user-pass-verify script to verify the username/password provided by the client.`
+
+### Comment by Shane on 2017-01-17 10:53:15 -0500
+Thank you, Logan. EdgeMax is really HARD to setup. I miss my Asuswrt-Merlin routers 🙂
+
+### Comment by GreenUkr on 2017-01-19 09:30:13 -0500
+Couple words according tls-auth 🙂  
+You may use it via  
+set interfaces openvpn vtun0 openvpn-option &#8220;&#8211;tls-auth 0&#8221;  
+for ex  
+openvpn-option &#8220;&#8211;tls-auth /config/auth/static.key 0&#8221; at the server side  
+and  
+&#8211;tls-auth 1 in client config  
+or  
+remote-cert-tls server  
+key-direction 1
+
+&#8212;&#8211;BEGIN OpenVPN Static key V1&#8212;&#8211;  
+&#8212;&#8211;END OpenVPN Static key V1&#8212;&#8211;
+
+in ovpn file  
+I had to remove hash256 to force it works  
+Also some options may be ommited like  
+set interfaces openvpn vtun0 openvpn-option &#8211;tls-server  
+you may check which options sent twice via ps|grep
+
+### Comment by Logan on 2017-01-20 12:49:40 -0500
+Thanks for this, I&#8217;m planning on adding this to my config soon!
+
+### Comment by reedog117 on 2017-01-25 12:54:06 -0500
+If I accidentally forgot to backup /usr/lib/ssl/misc during a firmware upgrade, is there some way to recover the index.txt and serial files needed to create new client certs? I was able to grab the CA certs and key from /config/auth but it seems that isn&#8217;t enough.
+
+### Comment by Logan on 2017-01-25 13:25:58 -0500
+Unfortunately, no (unless you get some forensic tools to recover data from deleted portions of the filesystem). I got bit by this as well and had to create a new CA. Now, I backup /usr/lib/ssl before an upgrade.
+
+### Comment by Skrettis on 2017-01-25 19:02:14 -0500
+Nice ERL blog you got here, for us that are found of the UBNT ERL series.  
+&#8211; I was looking around for a faster way to do SITE2SITE &#8211; IPsec trottling above 150Mps, when I dropped into your blog, but have to admit its like beliving in Santa that Ubiquity will release some faster below USD100 routers that have optimized ASICS&#8230;
+
+May-be the Calculator people what won the battle of now releasing new stuff until the market is fed up waiting..
+
+Ive been running the expensive stuff in yrs (like Junos +++), and do fancy more the Vyos fork than the Microtik os shit when looking for the best bang for the buck. A bit disappointing with the slow release of new firmware since Stig quit the dev department. What a shame for Ubiquity 🙁
+
+But hopefully they will &#8211; give the community more power, better os and bang for the buck in the future.
+
+I wish that Egdeos also will have more power for coping with black-list ip´s and services that makes it easier to setup and more ram for routing &#8211; tables.. ++
+
+Edgemax is the poor mans stuff for crowd-blocking the DDos from growing spammers.. 
+
+If they manage to make the firmware better for doing that OUTofTHEbox!
+
+### Comment by Phil on 2017-01-31 11:09:59 -0500
+First, great set of blogs on configuring the ERL. It has been very helpful. Thanks for providing them.
+
+I am planning on replacing an existing NGFW/Router with the ERL and I am slightly confused on the settings and rules I may need to recreate. Specifically for OpenVPN access. I currently have an OpenVPN server in my network (using Synology OpenVPN). I am assuming that because I already have the server and the client certs generated, I can just skip to the setting up the firewall sections of your instructions? Do I still need to create the interface?
+
+In my configuration I have Verizon FIOS as well. My network setup is a sfollows:
+
+Verizon router External interface on NGFW (192.168.x.x) Internal Interface on NGFW (192.168.y.y) Ethernet switch for internal network  
+(Hopefully that makes sense) The OpenVPN server sits on the internal network and both the Verizon router and the NGFW have the OpenVPN port forwarded to the IP Address of the server. I use the Tunnelblick client on my MAC to access the VPN. I also already have the Dyn setup on the FIOS router. I had to use destination NAT for the port forwarding the NGFW. I am assuming that is not the case on the ERL. Please let me know if I am not explaining anything correctly.
+
+### Comment by Logan on 2017-01-31 12:10:45 -0500
+Thanks, glad to help!
+
+Sounds like the hard work is already done, you just need to swap out the router/firewall. So you&#8217;re double-NATed right? You have the FiOS router in front, the then ERL behind it? If that&#8217;s the case, you can skip the firewall section for the ERL (assuming you use/trust the FiOS firewall). Although, it wouldn&#8217;t hurt to run two firewalls. You don&#8217;t need an interface for vtun0 on the ERL, since the Synology runs OpenVPN. The OpenVPN traffic is just passing through the ERL.
+
+Just thinking out loud, I think all you need to do is forward the port (assuming you&#8217;re using 1194) through the ERL to the Synology. Something like this just says &#8220;forward 1194 to 1194 on 192.168.2.25&#8221;.  
+`port-forward {<br />
+    auto-firewall enable<br />
+    hairpin-nat enable<br />
+    lan-interface eth1<br />
+    rule 10 {<br />
+        description "Forward VPN to Synology"<br />
+        forward-to {<br />
+            address 192.168.2.25<br />
+            port 1194<br />
+        }<br />
+        original-port 1194<br />
+        protocol udp<br />
+    }<br />
+    wan-interface eth0<br />
+}`
+
+If you run into issues, just tail the logs and grep for that port.  
+`tail -f /var/log/messages | grep 1194`
+
+### Comment by Phil on 2017-01-31 15:19:40 -0500
+Logan,
+
+Thanks for getting back to me so quickly. You are correct, I am double NAT-ed thanks to Verizon and the crazy way they configure their media server stuff. (I have FIOS TV as well as their internet service, have never been able to change the default IP addressing scheme on the FIOS router because the media server is hard coded to look for their default address. Stupidest thing I&#8217;ve ever heard of, if you know a way around that, I&#8217;m all ears). 
+
+I don&#8217;t mind running two FW&#8217;s but I&#8217;ll try your suggested config first and see were it takes me. I&#8217;m glad I was thinking along the correct path too, thanks for confirming.
+
+### Comment by Logan on 2017-01-31 15:42:48 -0500
+Let me know how it goes!
+
+### Comment by Garrett Snelling on 2017-02-19 19:00:48 -0500
+I am running into some issues and was hoping for some sage advice. I ran through all the steps, everything went smoothly, no errors. Grabbed the keys off the router via sftp, made an openvpn profile with the configs above, but I am getting a tls error and it won&#8217;t connect. Any suggestions? Here is my client config:
+
+client  
+dev tun  
+proto udp  
+remote xxx.xxx.xxx.xxx 443  
+cipher AES-256-CBC  
+auth SHA256  
+resolv-retry infinite  
+redirect-gateway def1  
+nobind  
+comp-lzo yes  
+persist-key  
+persist-tun  
+user nobody  
+group nogroup  
+verb 3  
+ca cacert.pem  
+cert john.pem  
+key john-decrypted.key
+
+When running show interfaces in the cli I get this under vtun0  
+openvpn vtun0 {  
+description &#8220;OpenVPN Server&#8221;  
+encryption aes256  
+hash sha256  
+mode server  
+openvpn-option &#8220;&#8211;port 1194&#8221;  
+openvpn-option &#8211;tls-server  
+openvpn-option &#8220;&#8211;comp-lzo yes&#8221;  
+openvpn-option &#8211;persist-key  
+openvpn-option &#8211;persist-tun  
+openvpn-option &#8220;&#8211;keepalive 10 120&#8221;  
+openvpn-option &#8220;&#8211;user nobody&#8221;  
+openvpn-option &#8220;&#8211;group nogroup&#8221;  
+server {  
+name-server 10.10.2.1  
+push-route 10.10.2.0/24  
+subnet 10.10.10.0/24  
+}  
+tls {  
+ca-cert-file /config/auth/cacert.pem  
+cert-file /config/auth/host.pem  
+dh-file /config/auth/dh2048.pem  
+key-file /config/auth/host-decrypted.key
+
+### Comment by Garrett Snelling on 2017-02-19 22:18:47 -0500
+Never mind, got it worked out. For some reason my router and modem required a reboot.
+
+### Comment by Logan on 2017-02-20 18:22:50 -0500
+Weird, but I&#8217;m glad you got it working!
+
+### Comment by Garrett Snelling on 2017-02-21 10:06:38 -0500
+Something I&#8217;d like to add. I had some issues with accessing network shares unless I did a full tunnel. I didn&#8217;t want the internet traffic to be going over the vpn, as my main purpose is for file sharing, not anything else. So I found that I could add  
+route 0.0.0.0 192.0.0.0 net_gateway  
+route 64.0.0.0 192.0.0.0 net_gateway  
+route 128.0.0.0 192.0.0.0 net_gateway  
+route 192.0.0.0 192.0.0.0 net_gateway
+
+to the openvpn config and everything worked. I referenced this article  
+<a href="https://community.openvpn.net/openvpn/wiki/IgnoreRedirectGateway" rel="nofollow ugc">https://community.openvpn.net/openvpn/wiki/IgnoreRedirectGateway</a>
+
+I figured I&#8217;d drop this here in case anyone finds it useful. Thanks for the great walkthrough.
+
+### Comment by Logan on 2017-02-22 14:49:23 -0500
+Good to know, thanks! I&#8217;ve never setup split-tunnel myself.
+
+### Comment by Dave on 2017-03-01 14:46:34 -0500
+Logan thanks a million for the amazing write-ups. These instructions worked right out of the box for me too, and are clear and super straightforward.
+
+As you note, &#8220;The VPN subnet can’t be the same as your LAN subnet.&#8221;
+
+As given, I can join my LAN from a device on openvpn and use dns for explicit routing to systems on my LAN, but has anyone tried (or, hopefully, succeeded) in setting up some sort of masquerade to bridge vtun0 to eth1 so they&#8217;re in the same broadcast domain? 
+
+What I want are random apps (like smartthings and the like) to work remotely over openvpn&#8230; any advice?
+
+### Comment by Logan on 2017-03-02 14:43:30 -0500
+Glad to help!
+
+I don&#8217;t know how to do that, but I&#8217;d ask on <a href="https://www.reddit.com/r/Ubiquiti/" target="_blank" rel="nofollow">r/Ubiquiti</a> or the <a href="https://community.ubnt.com/t5/EdgeMAX/bd-p/EdgeMAX" target="_blank" rel="nofollow">EdgeMax forums</a>.
+
+### Comment by Oscar on 2017-05-22 15:31:20 -0400
+Simply perfect!! Thanks you very much from Spain.
+
+### Comment by Logan on 2017-05-24 10:24:02 -0400
+Thanks!
+
+### Comment by chr on 2017-06-03 17:00:54 -0400
+Excellent guide. Thanks !
+
+### Comment by Logan Marchione on 2017-06-04 22:27:10 -0400
+Glad to help!
+
+### Comment by chr on 2017-06-18 07:40:06 -0400
+found out that for proper windows network configuration we should also  
+push-route 0.0.0.0/0
+
+### Comment by Logan Marchione on 2017-06-18 10:43:56 -0400
+Thanks for your email! I added [your settings][1] to my post.
+
+ [1]: https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#Windows_10
+
+### Comment by Omar Tarzi on 2017-06-22 19:42:17 -0400
+Excellent Guide for sure! Do I need to poke a hole on my Cable Modem? If so, can you please recommend which ports I should open.
+
+### Comment by Logan Marchione on 2017-06-23 20:54:44 -0400
+No, a cable modem is not a firewall, so there are no ports to open.
+
+### Comment by Tamir on 2017-08-07 12:28:46 -0400
+Thanks for this posting. It was very helpful to get my rig configured. I am setting up OpenVPN CLIENT on my ER-X but not using the .opvn file.
+
+My configs are here: <a href="https://tscheinok.wordpress.com/2017/08/07/openvpn-client-on-my-ubiquiti-er-x/" rel="nofollow ugc">https://tscheinok.wordpress.com/2017/08/07/openvpn-client-on-my-ubiquiti-er-x/</a>
+
+Thanks Again!
+
+### Comment by Logan Marchione on 2017-08-07 14:19:11 -0400
+Glad to help! I&#8217;m thinking about running an OpenVPN client on my ERL, so I might use some of your config if I set it up.
+
+### Comment by Tim on 2017-10-04 18:53:04 -0400
+To embed the certs, simply place the Base64 encoded cert text into the respective , and tags in your .ovpn config file and comment out the “ca”, “cert” and “key” keywords.
+
+\***\***\***\***\***\***  
+client  
+remote my-server 1194  
+proto udp  
+dev tun  
+persist-key  
+persist-tun  
+resolv-retry infinite  
+nobind  
+#ca ca.crt  
+#cert client.crt  
+#key client.key  
+comp-lzo  
+verb 3
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+\*\\*\*Paste CA Cert Text Here\*\**
+
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+\*\\*\*Paste Your Cert Text Here\*\**
+
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;  
+\*\\*\*Paste Your Cert Private Key Here\*\**
+
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;
+
+\***\***\***\***\***\***\***\***
+
+### Comment by Tim on 2017-10-04 18:54:23 -0400
+Note :  
+encase each cert section with
+
+### Comment by Logan Marchione on 2017-10-05 09:19:52 -0400
+Yep, that works just as well. I personally prefer to keep the files separate.
+
+### Comment by Mike Brewer on 2017-11-14 12:34:17 -0500
+I have implemented this on my EdgeRouter and have tested with my iPhone GREAT INSTRUCTIONS. I want to also use with my Win10 laptop.
+
+1) How do you create the ta.key on the EdgeRouter? 
+
+2) How does that get implemented into the iOS setup?
+
+### Comment by Logan Marchione on 2017-11-14 14:55:00 -0500
+Thanks!
+
+I haven&#8217;t setup TLS auth yet, but according to <a href="https://community.openvpn.net/openvpn/wiki/Hardening#Useof--tls-auth" target="_blank" rel="noopener nofollow">this document</a>, you just need to create the ta.key file on the ERL, then change the configuration on the ERL and in each client .OVPN file.
+
+Here are some instructions specific to the ERL.  
+<a href="https://community.ubnt.com/t5/EdgeMAX/OpenVPN-server-config-help/m-p/446595#M7580" rel="nofollow ugc">https://community.ubnt.com/t5/EdgeMAX/OpenVPN-server-config-help/m-p/446595#M7580</a>  
+<a href="http://www.forshee.me/2016/03/16/ubiquiti-edgerouter-lite-setup-part-5-openvpn-setup.html#hardening" rel="nofollow ugc">http://www.forshee.me/2016/03/16/ubiquiti-edgerouter-lite-setup-part-5-openvpn-setup.html#hardening</a>
+
+Just so you know, you don&#8217;t need to use TLS auth for Windows 10. If you do use it, you&#8217;ll need to make sure your iOS devices use it as well.
+
+### Comment by Tim Grogan on 2017-11-16 08:06:41 -0500
+Hi Logan,
+
+Thanks for the step-by-step it is great!! I am getting the error &#8221; OpenVPN configuration error: Specified cert-file &#8220;/config/auth/host.pem&#8221; is not valid. &#8221; I have tried to recreate the host.pem file but I still get the error. Any thoghts?
+
+Thanks
+
+Tim
+
+### Comment by Logan Marchione on 2017-11-16 08:47:38 -0500
+Did you sign the key before you moved it? Also, make sure the actual file location matches what you have in your config.
+
+### Comment by Tim Grogan on 2017-11-17 09:18:21 -0500
+Thanks Logan,  
+You were right on with the signing of the key. Oh the joy of copy-and-paste 🙂 I didn&#8217;t notice that the cli had kicked me out the step prior to the signing. New to the ubnt world and am really getting to like the edge router and switch.  
+I made the mistake of getting a unifi switch, as well which I can&#8217;t configure without all of the other cloud software. I&#8217;m using it like an expensive hub now 🙁 Again thanks and I enjoy reading your blog,  
+R/  
+Tim
+
+### Comment by Logan Marchione on 2017-11-17 09:41:39 -0500
+Glad it worked!
+
+You can host the controller on a your desktop temporarily (Win/Mac/Ubuntu/Debian) until you find a more permanent home for it. I host mine on a VM, but a <a href="https://loganmarchione.com/2016/11/ubiquiti-unifi-controller-setup-raspberry-pi-3/" rel="noopener" target="_blank">RPi3</a> will work, as well as a VPS. Ubiquiti also sells the <a href="https://www.ubnt.com/unifi/unifi-cloud-key/" target="_blank" rel="noopener nofollow">Cloud Key</a> that is basically a linux device that hosts the controller locally.
+
+### Comment by Austin on 2017-11-28 21:42:55 -0500
+Mine took 3-4 hours as well.
+
+### Comment by Lawson on 2017-12-02 10:41:39 -0500
+Incredibly helpful&#8211;thank you! I came back to your site a year later after my certificates expired and was able to get my EdgeRouter X-SFP OpenVPN server back up and running (with longer expiration dates).
+
+### Comment by Logan Marchione on 2017-12-02 11:06:56 -0500
+Glad it was helpful! I just did the same thing, one year seemed too short.
+
+### Comment by Shane on 2017-12-14 04:29:49 -0500
+How to check certificate expiration date? Check cacert.pem file? In my configuration, it says:
+
+Validity  
+Not Before: Jan 16 11:21:55 2017 GMT  
+Not After : Jan 16 11:21:55 2020 GMT
+
+It seems to have 3 years lifespan. Any other certificates to check?
+
+Thanks again for your wonderful blog. It is very helpful.
+
+### Comment by Shane on 2017-12-14 04:40:31 -0500
+I just found client1.pem and host.pem expire in 1 year. For the client.pem, I can easily generate a new one by following your instruction. How about host.pem? 
+
+How to generate these certificates with longer validity time?
+
+### Comment by Shane on 2017-12-14 05:00:55 -0500
+I found CA.sh use environment variable DAYS and CADAYS, defaults are 1 year and 3 years respectively. I guess we just need set up those environment variables before generating certificates. Could you please confirm?
+
+### Comment by Logan Marchione on 2017-12-14 08:21:15 -0500
+You can use the command below. Each .pem file will have an expiration date (in my guide, you&#8217;ll need to check the CA, host, and client files).  
+`openssl x509 -dates -noout -in /path/to/cert.pem`
+
+### Comment by Logan Marchione on 2017-12-14 08:24:10 -0500
+The host and client certificates aren&#8217;t any different, they are the same thing, we&#8217;re just calling one &#8220;host&#8221; and one &#8220;client&#8221;. So, you can generate a new host certificate just like a new client certificate, just rename it to &#8220;host&#8221; when you&#8217;re done.
+
+### Comment by Logan Marchione on 2017-12-14 08:24:25 -0500
+You&#8217;ve got it! Check out <a href="https://community.ubnt.com/t5/EdgeMAX/OpenVPN-certificate-expiration-date/m-p/1567553/highlight/true#M111148" target="_blank" rel="noopener nofollow">this post</a>.
+
+### Comment by jig on 2018-07-13 03:47:49 -0400
+I&#8217;ve found it difficult to get the 4 files over to the OpenVPN app on an iPhone. Immensely easier to embed into the ovpn and just get the one file across. The note above by Tim seems good, but I wanted to update what worked for me specifically on an up to date iPhone/iOS (July 2018).
+
+To embed the certs and keys, simply place the appropriate text from each cert/key into the respective tags in your .ovpn config file. Example draft text is below (you can use this to create your ovpn file).
+
+#\***\***\***\***\***\***  
+client  
+dev tun  
+proto udp  
+remote MY-SERVER 1194  
+cipher AES-256-CBC  
+auth SHA256  
+resolv-retry infinite  
+redirect-gateway def1  
+nobind  
+comp-lzo yes  
+persist-key  
+persist-tun  
+user nobody  
+group nogroup  
+verb 3
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+\*\\*\*Paste CA Cert Text Here\*\**  
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+\*\\*\*Paste Your Cert Text Here\*\**  
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN PRIVATE KEY&#8212;&#8211;  
+\*\\*\*Paste Your RSA Private Key Here\*\**  
+&#8212;&#8211;END PRIVATE KEY&#8212;&#8211;
+
+#\***\***\***\***\***\***\***\***
+
+### Comment by Logan Marchione on 2018-07-13 15:44:01 -0400
+I agree, this method is much easier on iPhone than for Android. Thanks for sharing!
+
+### Comment by Luis Guerrero on 2018-07-28 18:14:02 -0400
+Thanks for the post, really useful. I follow all the steps and I was able to connect using Android, everything works, I see the traffic in the dashboard.
+
+The only thing that I can&#8217;t make it work is be able to connect to ip addresses that belong to my home network. I type them in the browser but nothing. I follow the very same IP address schema in your post but no luck. What do you think am I missing?
+
+### Comment by Logan Marchione on 2018-07-29 21:31:42 -0400
+Did you push a route on the server? Also, did you reboot the ERL?  
+`set interfaces openvpn vtun0 server push-route 10.10.2.0/24`
+
+### Comment by Luis Guerrero on 2018-08-07 13:14:20 -0400
+Yes. My home subnet is 10.10.0.0/24 and the VPN subnet is 10.10.10.0/24. From a client I can successfully query my internal DNS and it works (I have some custom domain names) but I can&#8217;t reach any device in my local network. I did reboot the ERL but nothing.
+
+### Comment by Logan Marchione on 2018-08-08 21:24:27 -0400
+What client OS are you using? Windows?  
+Can you not even ping a device on your home network while on the VPN?
+
+### Comment by Intel on 2018-08-20 09:45:22 -0400
+Thank you for the guide! I manged to create android client, and it works!  
+But cannot make windows 10 client. I don&#8217;t understand what are needed steps to make windows 10 client?
+
+### Comment by Logan Marchione on 2018-08-20 09:47:42 -0400
+Did you look at the Windows 10 section of the post?  
+<a href="https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#Windows_10" rel="nofollow ugc">https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#Windows_10</a>
+
+### Comment by Intel on 2018-08-21 02:36:25 -0400
+Hey Logan.  
+I have seen it, but it&#8217;s unclear to me what changes I have to make in order to connect with win client?  
+I followed your guide and successfully connected with android device, but I am unable to connect with same certificate on windows machine.  
+Do I have to create new cert? Is there anything I have to change on edgerouter itself?  
+Thank you for your patiance.
+
+### Comment by Intel on 2018-08-21 08:05:04 -0400
+I have tried with Randy&#8217;s ovpn file, still no go&#8230;
+
+### Comment by Logan Marchione on 2018-08-21 08:57:45 -0400
+The certificate files are the same. For the server, you may need to push a route for 0.0.0.0.  
+`push-route 0.0.0.0/0`
+
+What client on the Windows machine are you using and what error messages are you receiving in the logs?
+
+### Comment by Intel on 2018-08-21 09:24:23 -0400
+I&#8217;m using openvpn client on windows 10 &#8211; OpenVPN-GUI.
+
+### Comment by Intel on 2018-08-21 09:27:33 -0400
+Here is the error log
+
+Tue Aug 21 15:25:40 2018 NOTE: &#8211;user option is not implemented on Windows  
+Tue Aug 21 15:25:40 2018 NOTE: &#8211;group option is not implemented on Windows  
+Options error: &#8211;ca fails with &#8216;cacert.pem&#8217;: No such file or directory (errno=2)  
+Options error: &#8211;cert fails with &#8216;bb1.pem&#8217;: No such file or directory (errno=2)  
+Tue Aug 21 15:25:40 2018 WARNING: cannot stat file &#8216;bb1-decrypted.key&#8217;: No such file or directory (errno=2)  
+Options error: &#8211;key fails with &#8216;bb1-decrypted.key&#8217;: No such file or directory (errno=2)  
+Options error: Please correct these errors.  
+Use &#8211;help for more information.
+
+### Comment by Logan Marchione on 2018-08-21 09:28:59 -0400
+Seems like it can&#8217;t find your certs. Did you move the certs to the Windows client? Also, try embedding the certs directly in the .ovpn file.
+
+### Comment by Intel on 2018-08-21 09:34:02 -0400
+I tried that already, when i embedd all certs here is the error log
+
+Tue Aug 21 15:32:29 2018 NOTE: &#8211;user option is not implemented on Windows  
+Tue Aug 21 15:32:29 2018 NOTE: &#8211;group option is not implemented on Windows  
+Tue Aug 21 15:32:29 2018 ERROR: Endtag missing  
+Tue Aug 21 15:32:29 2018 Exiting due to fatal error
+
+### Comment by Logan Marchione on 2018-08-21 09:37:05 -0400
+Looks like you&#8217;re missing something at the end of one of your certificates. A closing bracket or some whitespace maybe?
+
+### Comment by Intel on 2018-08-21 09:54:51 -0400
+I copied cert file from android device, and edited .ovpn file like randy&#8217;s, also changed the ranys file with my ip adress and port, and client cert name.
+
+### Comment by Logan Marchione on 2018-08-21 09:56:08 -0400
+I would attempt to make a .ovpn file from scratch, instead of copying/pasting Randy&#8217;s. Just use Randy&#8217;s as a guide.
+
+### Comment by Intel on 2018-08-21 09:59:52 -0400
+Finaly maged to connect!  
+The problem was I saved a folder with certs in there on root of the c driver, when I moved the folder in C:\Users\USER\OpenVPN\config and edited with Randy&#8217;s ovpn template, everything works!  
+Thank&#8217;s a lot for your patiance!
+
+### Comment by Logan Marchione on 2018-08-21 11:52:42 -0400
+Glad it&#8217;s working!
+
+### Comment by Intel on 2018-08-22 02:21:40 -0400
+Thank you for helping out!  
+Trying to embedd all files in one .ovpn file, not shure how the file should look like?  
+Do you have a sample meybe?  
+Thank&#8217;s again!
+
+### Comment by Logan Marchione on 2018-08-22 13:21:27 -0400
+There is an example here.  
+<a href="https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#comment-149679" rel="nofollow ugc">https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#comment-149679</a>
+
+### Comment by Intel on 2018-08-24 06:10:32 -0400
+Thank&#8217;s again! I did manage to get it up and running, but I had trouble creating new client cert&#8217;s, also in last few days I had trouble opening web pages from remote pc connected to OpenVPN&#8230;  
+So I managed to setup L2TP ipsec VPN, and it&#8217;s working way better than OpenVPN, also it was super easy to set it up! Already created and succssesfuly connected multiple users (android, windows10, iOs&#8230;).  
+So I&#8217;m giving up on OpenVPN, since I&#8217;m way more satesfied with L2TP setup.  
+One last thing remains is to remove OpenVpn server from edgerouter.  
+Is it enough to delete interface from config tree, and delet firewall rule for 1943, or is there something else I should remove also?
+
+### Comment by Logan Marchione on 2018-08-24 07:56:00 -0400
+Just to play it safe I remove every reference to OpenVPN in the config (should be the interface and the server itself).
+
+### Comment by Intel on 2018-08-24 08:22:40 -0400
+Is there a way to do it from GUI, or are there any CLI commands to do it?
+
+### Comment by Logan Marchione on 2018-08-24 08:25:26 -0400
+Check out chapter 11 of this PDF.  
+<a href="https://dl.ubnt.com/guides/edgemax/EdgeOS_UG.pdf" rel="nofollow ugc">https://dl.ubnt.com/guides/edgemax/EdgeOS_UG.pdf</a>
+
+### Comment by Intel on 2018-08-24 09:24:23 -0400
+Thank&#8217;s. I did delete OpenVPN from config Tree, only thing left is certificates on router probobly&#8230;.
+
+### Comment by Intel on 2018-08-24 09:39:01 -0400
+Only thing visable in config tree about OpenVPN is this  
+<a href="https://imgur.com/a/f9IRxP0" rel="nofollow ugc">https://imgur.com/a/f9IRxP0</a>
+
+Cannot delete with &#8220;delete interfaces openvpn&#8221;
+
+### Comment by jeff on 2018-11-02 15:34:38 -0400
+receiving this after attempt of first commit:
+
+[ interfaces openvpn vtun0 ]  
+OpenVPN configuration error: Failed to start OpenVPN tunnel.
+
+Commit failed
+
+### Comment by Logan Marchione on 2018-11-02 15:50:15 -0400
+There must be a typo or something. Do you see anything in the log files?  
+`cat /var/log/messages | grep -i vpn`
+
+### Comment by jeff on 2018-11-02 17:08:04 -0400
+OpenVPN core 3.2 ios arm64 64-bit PT_PROXY built on Oct 3 2018 06:35:04
+
+2018-03-02 17:03:49 Frame=512/2048/512 mssfix-ctrl=1250
+
+2018-03-02 17:03:49 UNUSED OPTIONS  
+6 \[resolv-retry\] \[infinite\]  
+8 [nobind]  
+10 [persist-key]  
+11 [persist-tun]  
+12 \[user\] \[nobody\]  
+13 \[group\] \[nogroup\]  
+14 \[verb\] \[3\] 
+
+2018-03-02 17:03:49 EVENT: RESOLVE
+
+2018-03-02 17:03:49 Contacting [73.56.18.206]:443/UDP via UDP
+
+2018-03-02 17:03:49 EVENT: WAIT
+
+2018-03-02 17:03:49 Connecting to [lochbarboca.from-fl.com]:443 (73.56.18.206) via UDPv4
+
+2018-04-02 17:04:00 Server poll timeout, trying next remote entry&#8230;
+
+2018-04-02 17:04:00 EVENT: RECONNECTING
+
+2018-04-02 17:04:00 EVENT: RESOLVE
+
+2018-04-02 17:04:00 Contacting [73.56.18.206]:443/UDP via UDP
+
+2018-04-02 17:04:00 EVENT: WAIT
+
+2018-04-02 17:04:00 Connecting to [XXXX]:443 (XXXX) via UDPv4
+
+2018-04-02 17:04:10 Server poll timeout, trying next remote entry&#8230;
+
+2018-04-02 17:04:10 EVENT: RECONNECTING
+
+2018-04-02 17:04:10 EVENT: RESOLVE
+
+2018-04-02 17:04:10 Contacting [73.56.18.206]:443/UDP via UDP
+
+2018-04-02 17:04:10 EVENT: WAIT
+
+2018-04-02 17:04:10 Connecting to [lochbarboca.from-fl.com]:443 (73.56.18.206) via UDPv4
+
+2018-04-02 17:04:20 EVENT: CONNECTION_TIMEOUT [ERR]
+
+2018-04-02 17:04:20 Raw stats on disconnect:  
+BYTES_OUT : 406  
+PACKETS_OUT : 29  
+CONNECTION_TIMEOUT : 1  
+N_RECONNECT : 2
+
+2018-04-02 17:04:20 Performance stats on disconnect:  
+CPU usage (microseconds): 59985  
+Network bytes per CPU second: 6768  
+Tunnel bytes per CPU second: 0
+
+2018-04-02 17:04:20 EVENT: DISCONNECTED
+
+### Comment by Logan Marchione on 2018-11-06 20:13:26 -0500
+I see that it never connects successfully. You also have Comcast, right? Does Comcast block 443 inbound? Can you check 443 <a href="http://canyouseeme.org/" target="_blank" rel="noopener nofollow">here</a>? Have you tried a higher number port, or the OpenVPN port of 1194?
+
+### Comment by Joe Wise on 2018-12-23 16:13:51 -0500
+Howdy!  
+Great stuff here! I&#8217;m thinking of implementing this, or at least testing it in a few days and I&#8217;ll definitely be following your guide. 
+
+I also prefer openvpn, but, I&#8217;m concerned about the speed.
+
+My internet connection is 1Gbs symmetric, so, the pipe should be plenty obviously. I saw that your test with your phone topped out at 11 down and 5 up over LTE. Have you done any tests on a hardline say from a friends house? I&#8217;d be curious to know what the absolute fastest speed is, when you take out variables like wifi, wireless, etc.
+
+Thanks and keep up the good work!!
+
+-Joe
+
+### Comment by Logan Marchione on 2018-12-24 12:44:17 -0500
+Joe,
+
+I have not done any tests from another hard-wired client. I found the CPU from my EdgeRouter Lite would jump up to 50% when someone was on the VPN, so I switched to running OpenVPN in a virtual machine. Most recently, I just switched from OpenVPN to WireGuard (again, on a virtual machine).
+
+### Comment by jig on 2019-01-02 06:47:42 -0500
+Just a quick update. In order to get the ovpn file with embedded certs/key to work with the latest OpenVPN client for iOS, I had to add in some markers to designate stuff. 
+
+The format below works (as of this morning) with latest Edge firmware, latest iOS, latest iOS OpenVPN client, and the above instructions.
+
+\***\***\***\***  
+client  
+dev tun  
+proto udp  
+remote your.vpn.server 1194  
+cipher AES-256-CBC  
+auth SHA256  
+resolv-retry infinite  
+redirect-gateway def1  
+nobind  
+comp-lzo yes  
+persist-key  
+persist-tun  
+user nobody  
+group nogroup  
+verb 8
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+#$%^  
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN CERTIFICATE&#8212;&#8211;  
+#$%^  
+&#8212;&#8211;END CERTIFICATE&#8212;&#8211;
+
+&#8212;&#8211;BEGIN RSA PRIVATE KEY&#8212;&#8211;  
+#$%^  
+&#8212;&#8211;END RSA PRIVATE KEY&#8212;&#8211;
+
+\***\***\***\***\***\***
+
+### Comment by Logan Marchione on 2019-01-02 16:27:01 -0500
+Thanks for sharing! FYI &#8211; If you&#8217;ve never used <a href="https://loganmarchione.com/2018/12/i-just-setup-wireguard-and-ill-never-go-back-to-openvpn/" rel="noopener" target="_blank">WireGuard</a> give it a shot. There is an EdgeOS package, but I&#8217;m running mine on a Linux VM. It&#8217;s amazingly fast compared to OpenVPN.
+
+### Comment by Christian on 2019-12-28 16:09:00 -0500
+Thanks for this guide. It really help me out.
+
+One question 🙂 I have a device on my LAN subnet that I suspect must be on the same subnet as the VPN client when opening a certain app for it to be found there. Is it possible to map a device from my LAN subnet to the VPN subnet?
+
+DEVICE: 10.10.1.160  
+VPN Client: 10.10.10.2
+
+VPN Client app searches 10.10.10.* for the DEVICE but doesn&#8217;t find it.
+
+### Comment by Logan Marchione on 2019-12-30 15:49:59 -0500
+I&#8217;m confused what you&#8217;re asking. I haven&#8217;t used this setup in years, but I believe this setup allows anything on the VPN network (e.g., 10.10.10.1) to communicate to anything on your LAN (e.g., 10.10.1.1).
+
+### Comment by Mitch on 2020-01-19 20:17:22 -0500
+Thanks. This worked like a charm. The lines are added to the client config, er.ovpn, in case someone was uncertain.
+
+### Comment by James Cockerham on 2020-04-01 19:20:28 -0400
+How do you create a new CA ? I had a working VPN but messed something up. I started over with the instructions but can&#8217;t seem to create a new CA
+
+### Comment by Logan Marchione on 2020-04-01 23:07:44 -0400
+I don&#8217;t use the ERL3 anymore, so I can&#8217;t say this comment is 100% accurate&#8230;
+
+You need to delete the directory called /usr/lib/ssl/misc/demoCA (I believe that&#8217;s the default CA name). Then, re-run the steps [here][1]. However, this will mean **you need to re-sign and re-issue all of your client certificates**.
+
+ [1]: https://loganmarchione.com/2016/05/edgerouter-lite-openvpn-setup/#Create_CA

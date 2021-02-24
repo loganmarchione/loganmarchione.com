@@ -1,0 +1,27 @@
+## Comments
+
+### Comment by Dwayne on 2019-03-28 15:11:28 -0400
+Hi Logan.  
+I have a bash script that I want to set up cname records so that google searches are forced to use forcesafesearch.google.com.  
+e.g.  
+host-record=forcesafesearch.google.com,216.239.38.120  
+cname=www.google.com,forcesafesearch.google.com  
+cname=google.com,forcesafesearch.google.com
+
+I&#8217;ll do this for all the google supported domains from <a href="https://www.google.com/supported_domains" rel="nofollow ugc">https://www.google.com/supported_domains</a>  
+Is the above the correct format? I&#8217;ve saved the configuration file in the /etc/dnsmasq.d directory, is this the correct place?
+
+Cheers  
+Dwayne
+
+### Comment by Logan Marchione on 2019-03-31 20:29:07 -0400
+The EdgeRouter wipes out EVERYTHING except `/config` upon a firmware update, so if you&#8217;re putting the DNS entries into `/etc/dnsmasq.d`, they will be wiped out upon a firmware update (unless your script recreates the entries after an upgrade). You should put the entries into your `/config/config.boot` file.
+
+### Comment by Dwayne on 2019-04-02 03:00:51 -0400
+Hi Logan managed to fix my issue.  
+There was a stray host-record in /etc/dnsmasq.conf, once deleted my code ran correctly.
+
+### Comment by Dwayne on 2019-04-02 03:05:21 -0400
+Only just saqw your reply, thanks for your reply and letting me know what is preserved during the firmware update process. Losing scripts and debian packages with firmware updates is a bugbear of mine. So, so grateful for your comment.
+
+My script is in /config/scripts and it creates a file in /etc/dnsmasq.d/.

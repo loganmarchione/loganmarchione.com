@@ -1,0 +1,7 @@
+## Comments
+
+### Comment by Patrick on 2020-04-21 07:37:34 -0400
+This is awesome. I&#8217;m getting ready to start learning Ansible and intend on integrating it with my Gitea+Drone ci/cd setup. Linting is a very important step in the ci/cd process and thanks to this post, I think I&#8217;ll easily be able to integrate it into my setup.
+
+### Comment by Logan Marchione on 2020-04-21 12:36:58 -0400
+Glad to help!

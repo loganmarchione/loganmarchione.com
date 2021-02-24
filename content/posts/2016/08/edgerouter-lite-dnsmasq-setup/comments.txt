@@ -1,0 +1,207 @@
+## Comments
+
+### Comment by jwns on 2016-08-30 23:02:14 -0400
+Logan, this post was a life-saver. I spent the last two evenings trying to get my EdgeRouterLite to provide simple local dynamic dns service for devices on my network using bind9 on the 1.8 firmware. I learned of the 1.9 firmware today, upgraded, and your guides helped me get it working in no-time.
+
+### Comment by Logan on 2016-08-31 08:34:40 -0400
+Awesome, glad to help!
+
+### Comment by Taubin on 2016-09-07 17:51:55 -0400
+Thank you very much for this, your guides have been extremely helpful.
+
+### Comment by Logan on 2016-09-08 08:37:08 -0400
+Glad to help!
+
+### Comment by Godwin on 2016-09-08 09:49:35 -0400
+Thanks for this. Got this link from a video post of Ben Pin on Youtube. You guys rock!
+
+### Comment by Logan on 2016-09-08 12:47:47 -0400
+Glad to help!
+
+### Comment by Tom on 2016-09-09 03:34:09 -0400
+Thanks for this. I had an issue as I had a domain name specified for the LAN. Once i removed this and relied on the system domain name dnsmasq was able to start.
+
+### Comment by Logan on 2016-09-09 09:25:32 -0400
+Glad to help!
+
+### Comment by Semi on 2016-10-06 09:39:48 -0400
+Thank you for this guide, trying this tonight.
+
+I have the edgerouter x spf with 5 ports. eth0 is my wan and eth1/4 is switch0.
+
+Do i need to (set service dns forwarding listen-on eth1) change this to set service dns forwarding listen-on switch0 ?
+
+### Comment by Semi on 2016-10-06 15:11:03 -0400
+If i already have DHCP have configured do i only need to configure dnsmasq of do i need to configure the other guide as well ?
+
+Also i am using the 192.168.1.1 range, can you help me on my way.
+
+### Comment by Logan on 2016-10-06 18:39:03 -0400
+Hmmm, I&#8217;ve never used the EdgeRouter X, so I&#8217;m not sure. I&#8217;d think you&#8217;d need to set listening to switch0, but you may want to ask on the <a href="https://community.ubnt.com/t5/EdgeMAX/bd-p/EdgeMAX" target="_blank" rel="nofollow">Ubiquiti forums</a>. When you type the command &#8220;set service dns forwarding listen-on&#8221; then hit tab a couple times, what options are there?
+
+### Comment by Ambrose on 2016-10-30 15:41:18 -0400
+Thanks, this was useful. I used the Config Tree UI to set this up, FWIW.
+
+### Comment by Logan on 2016-10-31 08:56:29 -0400
+Good idea, I always forget that&#8217;s an option too!
+
+### Comment by David on 2016-11-07 15:02:37 -0500
+Thanks!
+
+This should be an option in the GUI.
+
+### Comment by Logan on 2016-11-07 15:05:55 -0500
+Agreed! Hopefully in a future release it will be!
+
+### Comment by Anders on 2016-11-09 13:09:39 -0500
+Hi
+
+I already had a DHCP server running with 192.168.1.0/24 and after fiddling around i found out that i just needed the &#8220;set service dhcp-server use-dnsmasq enable&#8221; for it to work. But now i cant see any leases from the DHCP server, my laptop gets an IP and all the static leases i set earlier are still there. Neither from the GUI or from the CLI with &#8220;show dhcp leases&#8221; nothing shows up. Any idea why that could be?
+
+Br
+
+Anders
+
+### Comment by Logan on 2016-11-10 08:43:07 -0500
+Anders, 
+
+Dumb question, but did you commit/save/reboot? Also, do you have similar settings to these already set?  
+`set service dhcp-server shared-network-name LAN subnet 10.10.2.1/24 dns-server 10.10.2.1<br />
+set service dns forwarding listen-on eth1<br />
+set service dns forwarding cache-size 400<br />
+set system name-server 127.0.0.1<br />
+set service dns forwarding name-server 50.116.40.226<br />
+set service dns forwarding name-server 107.170.95.180`
+
+### Comment by Anders on 2016-11-14 15:29:21 -0500
+My LAN subnet and name-serves used are different but i found out that the DHCP lease part of the gui in 1.9 dosnt work with dnsmasq
+
+<a href="https://community.ubnt.com/t5/EdgeMAX-Beta/DHCP-DNSmasq-Question/m-p/1638717/highlight/true#M17889" rel="nofollow ugc">https://community.ubnt.com/t5/EdgeMAX-Beta/DHCP-DNSmasq-Question/m-p/1638717/highlight/true#M17889</a>
+
+### Comment by Logan on 2016-11-14 21:37:43 -0500
+Good to know! I&#8217;m hoping it&#8217;s coming in a newer release.
+
+### Comment by Anders on 2016-11-27 13:33:55 -0500
+Also it seems that using dnsmasq &#8220;broke&#8221; traffic analysis since it only shows the IP&#8217;s of the devices not having a static mapping. Any work arounds for this?
+
+### Comment by Logan on 2016-11-27 21:56:27 -0500
+Honestly, I&#8217;m not sure. I would try asking on the <a href="https://community.ubnt.com/t5/EdgeMAX/bd-p/EdgeMAX" target="_blank" rel="nofollow">EdgeMax forums</a> and hope a Ubiquiti employee sees it.
+
+### Comment by Travus on 2017-04-08 09:17:56 -0400
+dnsmasq.local?
+
+would I be able to add this to a edgerouter ?
+
+dhcp-option=66,,192.168.30.2  
+dhcp-match=x86PC, option:client-arch, 0  
+dhcp-match=BC_EFI, option:client-arch, 7  
+dhcp-boot=tag:x86PC,pxelinux.0,TFTP\_Server\_Name,192.168.30.2  
+dhcp-boot=tag:BC\_EFI,\diagefi\QTSBPC.efi,TFTP\_Server_Name,192.168.30.2
+
+and how would I do it? 
+
+is there a direct file for this I can insert this code into ?
+
+### Comment by Logan on 2017-04-09 20:56:14 -0400
+I don&#8217;t know how to do it myself, but a quick Google show it is possible.  
+<a href="https://community.ubnt.com/t5/EdgeMAX/DHCP-Options-66-67-not-working/m-p/1351964" rel="nofollow ugc">https://community.ubnt.com/t5/EdgeMAX/DHCP-Options-66-67-not-working/m-p/1351964</a>  
+<a href="https://community.ubnt.com/t5/EdgeMAX/Mitel-VoIP-Phones-with-EdgeOS-working-DHCP-options-config/m-p/1346922" rel="nofollow ugc">https://community.ubnt.com/t5/EdgeMAX/Mitel-VoIP-Phones-with-EdgeOS-working-DHCP-options-config/m-p/1346922</a>
+
+### Comment by Cristian on 2017-07-04 14:00:06 -0400
+I&#8217;m trying to setup an L2TP VPN server so I can remotely access shares on my local LAN. In the EdgeMax forums one of the users suggested I try dnsmasq because I was having issues accessing these shares remotely, but local access worked flawlessly.
+
+My subnet as seen in the details of DHCP server for LAN 1 is 192.168.1.0/24, my EdgeRouter is at 192.168.1.1.  
+I also use a service called SmartDNSProxy that spoofs my location (I live in Costa Rica and these services are not available here) to services such as Netflix, Hulu and Amazon, and those DNS addresses are set to 169.53.235.15 and 23.21.43.50. So would these commands be correct?
+
+configure  
+set service dhcp-server shared-network-name LAN subnet 192.168.1.0/24 dns-server 192.168.1.1  
+set service dns forwarding listen-on eth1  
+set service dns forwarding cache-size 400  
+set system name-server 127.0.0.1  
+set service dns forwarding name-server 169.53.235.15  
+set service dns forwarding name-server 23.21.43.50
+
+Does the domain name have to be home.lan or can we change that to something of our choosing?
+
+### Comment by Logan Marchione on 2017-07-06 10:53:43 -0400
+That looks correct. Your devices will ask 192.168.1.1 for DNS, and if it can&#8217;t answer them, it will forward the requests onto 169.53.235.15 and 23.21.43.50.
+
+You can try it with &#8220;commit&#8221;. If it works, type &#8220;save&#8221;.
+
+If it doesn&#8217;t work, just reboot the router and it will roll back those commands.
+
+### Comment by Sam on 2018-01-14 16:04:09 -0500
+Hello, it works fine for all my other devices, but I can&#8217;t connect to the router itself by hostname!
+
+### Comment by Logan Marchione on 2018-01-15 16:00:21 -0500
+Can you ping or nslookup the name from any machine, or just certain machines? Is the domain name set to a two-word name (e.g. home.lan)?  
+`ping erl.home.lan<br />
+nslookup erl.home.lan`
+
+### Comment by Emiel on 2018-01-28 05:51:32 -0500
+Tried your tutorial, but when enabling DNSMasq the DNS lookup doesn&#8217;t work anymore.  
+my dns servers look like this  
+show dns forwarding nameservers  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+Nameservers configured for DNS forwarding  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+8.8.8.8 available via &#8216;statically configured&#8217;  
+8.8.4.4 available via &#8216;statically configured&#8217;
+
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+Nameservers NOT configured for DNS forwarding  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+127.0.0.1 available via &#8216;system&#8217;
+
+### Comment by Logan Marchione on 2018-01-29 11:28:17 -0500
+My nameserver setup looks the same. What do you mean by &#8220;DNS lookup doesn&#8217;t work anymore&#8221;?
+
+### Comment by Pora on 2018-03-26 19:32:30 -0400
+Nice article. There are lots of other forum posts but they all point to the old way of doing without dnsmaq. This worked like a charm
+
+### Comment by Logan Marchione on 2018-03-26 20:47:01 -0400
+Glad to help!
+
+### Comment by Seneca on 2018-03-31 16:13:48 -0400
+Nessus scan shows the following: (I have dnsmasq setup the same)
+
+&#8220;The remote DNS server responds to queries for third-party domains that do not have the recursion bit set.&#8221;
+
+Any ideas on how to prevent? I looked into Interface Exceptions but that&#8217;s a no-go..
+
+Thanks for your time.
+
+### Comment by Logan Marchione on 2018-04-02 09:43:55 -0400
+Sorry, not sure how to prevent that. Some quick Google-ing says it&#8217;s caused by the DNS software (i.e, DNSMasq), so I&#8217;d try asking on the <a href="https://community.ubnt.com/t5/EdgeRouter/bd-p/EdgeMAX" target="_blank" rel="noopener nofollow">EdgeMax</a> forums to start.
+
+### Comment by Marcelo Troitino on 2019-01-26 17:54:36 -0500
+Excellent post. I did it in my EdgeRouter 4 v1.10.8  
+I suggest that to avoid overwriting configurations previously done from the web interface that are already working, first do the following commands&#8230; 
+
+configure  
+show service dhcp-server  
+show service dns  
+show system name-server  
+show system domain-name
+
+&#8230; and then verify which of the commands in the tutorial are needed and which are already set. In my case, as I had already configured many things from the web interface, I only needed to do the following:
+
+set system name-server 127.0.0.1  
+set system domain-name home.lan  
+set service dns forwarding name-server 66.187.76.168 (this is optional)  
+set service dns forwarding name-server 128.31.0.72 (this is optional)  
+set service dhcp-server use-dnsmasq enable  
+commit  
+save  
+exit  
+reboot
+
+I started using the EdgeRouter today, (coming from years of dd-wrt) so this gave me an understanding of how the configuration is structured.
+
+Enjoy!
+
+### Comment by marlo on 2020-12-18 17:47:48 -0500
+Thanks for the guide. It&#8217;s worth noting that the ICS DHCP server bypasses the Edgerouter firewall, while the dnsmasq DHCP server does not. Therefore, if you&#8217;re like me and have restrictive policies setup on the LAN side, DHCP won&#8217;t work with dnsmasq unless you open up the DHCP ports (UDP 67 into the router, 68 out). Spent quite a bit of time debugging before figuring this out, and I hope this post helps someone else 🙂
+
+### Comment by Logan Marchione on 2020-12-21 11:31:34 -0500
+I don&#8217;t use the ERL anymore, but I didn&#8217;t have restrictive LAN policies, so I probably never saw this. Thanks for sharing!

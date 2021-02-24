@@ -1,0 +1,109 @@
+## Comments
+
+### Comment by Ben on 2015-01-25 05:08:59 -0500
+Hi Logan, I think it is better to set the custom dns on the wan interface rather than the lan interface to avoid dns leaks. To activate these settings go to the advance tab and deselect &#8220;use dns servers advertised by peer&#8221;. Once this is deselected, the &#8220;use custom dns servers&#8221; option will be revealed.
+
+### Comment by Logan on 2015-01-25 19:17:55 -0500
+I have mine set on the LAN interface but I&#8217;m not having any leaks. What is the difference of setting on the WAN interface vs the LAN interface?
+
+### Comment by Ben on 2015-01-26 06:50:34 -0500
+For me, if I set it on the LAN interface I get a leak, whereas if I set it on the WAN interface I don&#8217;t. Just posting my observation in case it helps someone.
+
+### Comment by Logan on 2015-01-26 14:57:26 -0500
+Thanks! I&#8217;ve updated my post with your suggestion.
+
+### Comment by Ron on 2015-02-05 11:58:56 -0500
+This is a really helpful tutorial, Logan. Thanks!
+
+The problem with setting DNS on the interfaces is that those settings apply whether or not the vpn connection is up. An alternative is to set the DNS server in your vpnup script, using the address supplied by PIA. For example, add these lines to vpnup:  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;  
+mv /tmp/resolv.conf.auto /tmp/resolv.conf.auto.hold  
+echo $foreign\_option\_1 | sed -e &#8216;s/dhcp-option DOMAIN/domain/g&#8217; -e &#8216;s/dhcp-option DNS/nameserver/g&#8217; > /tmp/resolv.conf.auto  
+echo $foreign\_option\_2 | sed -e &#8216;s/dhcp-option DOMAIN/domain/g&#8217; -e &#8216;s/dhcp-option DNS/nameserver/g&#8217; >> /tmp/resolv.conf.auto  
+echo $foreign\_option\_3 | sed -e &#8216;s/dhcp-option DOMAIN/domain/g&#8217; -e &#8216;s/dhcp-option DNS/nameserver/g&#8217; >> /tmp/resolv.conf.auto  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+
+This takes the DNS options pushed by PIA and updates your resolv.conf accordingly. You can add a line to vpndown like &#8216;mv /tmp/resolv.conf.auto.hold /tmp/resolv.conf.auto&#8217; to restore your settings to a pre-vpn state, but I found that killing openvpn causes them to be reset anyways (at least on openwrt BB).
+
+This approach has two advantages: 1) you&#8217;re using PIA&#8217;s current DNS settings; 2) the settings are only in force while the VPN is up.
+
+### Comment by Logan on 2015-02-09 19:42:06 -0500
+Thanks Ron! I may add this to a future version of this post. You say that those settings apply whether or not the VPN connection is up. Do you see any disadvantage in using PIA&#8217;s DNS servers all the time, instead of just when the tunnel is up?
+
+### Comment by Will on 2015-02-11 15:57:49 -0500
+I haven&#8217;t run the install yet, but just out of curiosity, will the wireless modem still run with this config or does the external drive always need to be in place? Another option may be to have duplicate code on an SD card in the modem if that code always needs to be there?
+
+### Comment by Logan on 2015-02-12 11:16:31 -0500
+The external USB drive needs to be in place. If the external drive dies, OpenWrt still boots from the internal root filesystem (without all your configs)
+
+### Comment by Will on 2015-02-12 11:28:05 -0500
+Thanks Logan, so my other option, if I&#8217;ve read your threads correctly, is to revert to the PPTP config where everything is resident on the internal memory. I&#8217;m primarily interested in using this to access US TV when overseas without tying up my laptop. And yes, I&#8217;m getting ready to tinker and experiment, but I tend to get sucked in to these projects! Thanks!
+
+### Comment by Logan on 2015-02-12 12:22:16 -0500
+Are you saying use OpenVPN while the drive is in, but use PPTP while the drive is removed?
+
+### Comment by Will on 2015-02-13 10:23:47 -0500
+Finally got OpenWRT running after tearing my hair out and figuring out my computer was hung and wouldn&#8217;t refresh the wireless network list! In any case, what I was saying was, I would like to build the logic to recognize my 3g/4g usb stick plus run a VPN. I&#8217;m concerned there is not enough internal memory on the 3020 for the stick plus OpenVPN but maybe for the more compact PPTP. I&#8217;m honestly doubtful, though, that there is enough room at all for any VPN plus the stick without external memory. My next solution would be to configure the SD card that rides in the USB stick as the external drive as well as have duplicate VPN code on a flash drive for when I&#8217;m not using the 3g/4g stick.
+
+### Comment by Logan on 2015-02-13 15:43:24 -0500
+Will, I&#8217;m still confused. What are you using the USB stick for? Is it just a USB flash drive for storage space, or is it a 3G/4G radio that you&#8217;re going to use for network connectivity? If it&#8217;s just for storage, I don&#8217;t think you&#8217;ll need SAMBA unless you&#8217;re going to share it out to users. As long as it&#8217;s just for storage local to the router, you should be good.
+
+### Comment by Mark on 2015-05-03 08:06:25 -0400
+This was a great tutorial Logan, thanks. I reckon it saved me days of messing about&#8230;  
+If you ever get around to expanding this, I would really like to know how to utilize an external wireless WAN in this setup, so that in a hotel room that has no ethernet, I could join their wireless and share that connection. I&#8217;ve tinkered myself, but the system alway becomes unavailable, and I start again!
+
+Thanks Again
+
+Mark
+
+### Comment by Logan on 2015-05-03 22:38:40 -0400
+Thanks! Always glad to help!
+
+I&#8217;ve all-but given up on using it at a hotel, since most use captive portals now. There is some <a href="https://loganmarchione.com/2014/10/openwrt-with-openvpn-client-on-tp-link-tl-mr3020/#comment-13" target="_blank" rel="nofollow">discussion</a> on an older post about using a wireless network on the WAN, it might be of some help.
+
+### Comment by Mark on 2015-05-04 03:35:43 -0400
+Thanks for the reply anyway Logan.
+
+### Comment by Ron on 2015-05-12 16:18:13 -0400
+Sorry I missed this reply earlier!
+
+In the case of PIA specifically, using their DNS servers all the time is probably not an issue. However, for other vpn situations, the DNS server might only be accessible when the VPN is up. For example, I run an openvpn server on my router at home, and use the MR3020 as a client when traveling. When connected on my home vpn, I use my home router&#8217;s internal DNS so I can resolve hosts on my home net. When the VPN is down however, I can&#8217;t reach it.
+
+### Comment by GainfulShrimp on 2015-06-24 04:15:12 -0400
+I use a Netgear PR2000 Trek N300 device to share &#8216;pay-per-device&#8217; wifi as found in some nasty hotels etc. I tried to get things working with my MR3020 but could never get it to work stably. The Netgear seems to work flawlessly and has a hardware switch to choose between wired/wireless WAN sharing. The only problem is the firmware is closed source, but it seems to work for the basic functions that are available. (Just plug your MR3020 into a LAN port on the PR2000 and you still get the VPN privacy benefits&#8230;)
+
+### Comment by GainfulShrimp on 2015-06-24 04:17:48 -0400
+Forgot to say, it works fine with captive portals too. Just connect the PR2000 to the (usually open security) hotel wifi, then connect your client device to the PR2000 (using wifi or one of its LAN ports). When you browse somewhere and get redirected by the captive portal, enter your voucher/code/whatever and the hotel network will register the PR2000&#8217;s mac address (not your client), so you can then proceed to connect other devices via the PR2000. 😉
+
+### Comment by Kuzi on 2015-12-28 21:13:14 -0500
+I followed your guide, but afterwards only few websites can be opened. Apparently only http sites, and not https. I would be grateful if you could shed some light. thanks.
+
+### Comment by Logan on 2015-12-28 21:15:42 -0500
+Hmmm, that&#8217;s strange. I don&#8217;t have my MR3020 anymore to test, but it sounds like a possible DNS issue? Any kind of traffic (on any port) should be able to pass over the VPN&#8230;
+
+### Comment by Howard on 2016-02-08 11:49:55 -0500
+Hi Logan,  
+Will your tutorial work with Chaos Calmer?
+
+### Comment by Logan on 2016-02-08 12:05:16 -0500
+I haven&#8217;t tested it, but it should. If you try it out, let me know how it goes!
+
+### Comment by Jeremy on 2016-08-13 16:06:57 -0400
+I got to the part when you changed the IP for the device to 10.80.1.1, I changed it to one of my own. I clicked Save and Apply as instructed, but the device wouldn&#8217;t save. It kept saying it was applying changes. Like an idiot, I panicked, then did a reboot of the device in the GUI; I can&#8217;t log into the device with either the new ip, 10.80.1.1, as the address or the stock 192.168.1.1 from the root. Any help?!?!
+
+### Comment by Logan on 2016-08-15 11:50:25 -0400
+This has happened to me before. Sounds like you&#8217;ll need to check out <a href="https://loganmarchione.com/2015/02/openwrt-with-openvpn-client-on-tp-link-tl-mr3020-3/#Failsafe_mode" target="_blank" rel="nofollow">failsafe mode</a>.
+
+### Comment by bill on 2016-10-18 18:45:11 -0400
+I wanted my device to be a dedicated always on VPN box. I used it to plug in devices that I want never to work without a VPN, for example my phone ATA using SIP. The alerts idea is nice, but I wanted it just to stop.
+
+Turns out this is really easy, just do the setup you have described, then remove the forwarding from the lan to the wan interface. You can do this be removing the forward from the /etc/config/firewall, or using Luci just untick the forwarding box in the firewall page.
+
+I nice project for someone to tackle would be to use the device indicator light to show the vpn status, maybe solid on if the VPN is running and flashing on/off as a alert if it is not.
+
+Then test it by turning the VPN on and off from the command line with a computer plugged in. You will have access when the VPN is running, and no access if it isn&#8217;t. This makes a nice headless solution.
+
+BTW, thanks for the nice write up, I am familiar with this stuff but it is great to have it collected in one place. The unbridging for the single connector on the MR3020 was a time saver!
+
+### Comment by Logan on 2016-10-19 13:24:46 -0400
+Sounds like an interesting idea! There have been a few people that have posted about the lights, check the comments to see.

@@ -1,0 +1,123 @@
+## Comments
+
+### Comment by Radu on 2016-07-16 11:01:58 -0400
+Thank you, Logan!
+
+After reading the entire upgrade page on OpenWrt which was too extensive for me I luckily came across your guide which explained a lot better what the steps are and what should be taken care of.
+
+The upgrade process from BB 14.07 to CC 15.05.1 was straightforward on my Archer C7 thanks to your guide, I spent some time though trying to backup all settings and remember all packages installed and why I installed some of them 2 years ago :). 
+
+A few notes that got my attention in your guide and a few hints I came across while upgrading:
+
+-your URL ends in -factory.bin while you clearly state that we should use the one ending in sysupgrade.bin. I chose the latter and it worked fine: <a href="https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/openwrt-15.05.1-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin" rel="nofollow ugc">https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/openwrt-15.05.1-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin</a>
+
+-the default wget cannot download files via https so you need to install the real wget: opkg install wget (suppose you already updated the lists with opkg update)
+
+-after installing wget, you will still have trouble getting files via https because of missing certificates. The steps are:  
+mkdir -p /etc/ssl/certs  
+export SSL\_CERT\_DIR=/etc/ssl/certs  
+source /etc/profile  
+opkg install ca-certificates
+
+-one will probably encounter the TRX error but it&#8217;s ok: The &#8220;TRX header not found&#8221; and &#8220;Error fixing up TRX header&#8221; errors are not a problem as per OpenWrt developer jow&#8217;s post at <a href="https://dev.openwrt.org/ticket/8623" rel="nofollow ugc">https://dev.openwrt.org/ticket/8623</a> (from their page)
+
+-if your 5GHz radio still cannot start you should simply delete the &#8220;option txpower &#8216;xx'&#8221; from /etc/config/wireless and restart the network service: &#8220;/etc/init.d/network restart&#8221;
+
+-one might always look for the least used channel around house/office in order to get the most out of the WiFi connection (look for some tools that check which channels are most used and pick the last one. Macs have a built-in tool for that)
+
+-don&#8217;t forget to secure your router: allow login only via SSH with keys, disable password login, install luci-ssl for https access, etc
+
+Thanks again for the simple guide, looking forward for other useful posts. 
+
+Bosch
+
+### Comment by Logan on 2016-07-18 09:24:13 -0400
+Bosch,
+
+Thanks for pointing out the incorrect link, I&#8217;ve updated it! Also, I&#8217;m using the BusyBox version of wget and it&#8217;s working with HTTPS&#8230;  
+`root@c7:~# wget -v<br />
+wget: invalid option -- v<br />
+BusyBox v1.23.2 (2016-01-02 18:01:44 CET) multi-call binary.</p>
+<p>Usage: wget [-c|--continue] [-s|--spider] [-q|--quiet] [-O|--output-document FILE]<br />
+        [--header 'header: value'] [-Y|--proxy on/off] [-P DIR]<br />
+        [-U|--user-agent AGENT] URL...</p>
+<p>Retrieve files via HTTP or FTP</p>
+<p>        -s      Spider mode - only check file existence<br />
+        -c      Continue retrieval of aborted transfer<br />
+        -q      Quiet<br />
+        -P DIR  Save to DIR (default .)<br />
+        -O FILE Save to FILE ('-' for stdout)<br />
+        -U STR  Use STR for User-Agent header<br />
+        -Y      Use proxy ('on' or 'off')`
+
+### Comment by HEAD KANGAROO on 2016-11-19 12:23:45 -0500
+Very helpful guide. Easy to follow, and to the point. 
+
+Thank you very much Logan.
+
+### Comment by kenshin on 2017-02-25 20:06:36 -0500
+I just removed the &#8216;s&#8217; character from &#8220;https&#8221; in the image download link and I was able to use wget like normal. This was done from the Chaos Calmer 15.05 version using what I believe was the default (unmodified) version of wget.
+
+Happy Hacking
+
+### Comment by Patrick on 2017-10-10 13:30:42 -0400
+Hi, 
+
+Many thanks for this great article.
+
+At my home, I use an Archer C7 v2 (which I initially flashed with Barrier Breaker and upgraded to Chaos Calmer 15.05 some time ago) as gateway in my LAN. As I found out lately that there is a new version of Chaos Calmer (15.05.1), your article was very welcome and I decided to follow it.
+
+I added a step before sysupgrade where a list of the custom packages I installed (see <a href="https://wiki.openwrt.org/doc/howto/generic.sysupgrade" rel="nofollow ugc">https://wiki.openwrt.org/doc/howto/generic.sysupgrade</a> -> listuserpackages.sh) was generated, though.
+
+The upgrade was successful and my C7 is up and running w/o problems so far I could see by now. 
+
+Here are some of the issues I ran into, maybe this is helpful for others.
+
+1. After reboot, login worked, but no internet connection was possible.  
+&#8220;netstat -r&#8221; (route) was okay, &#8220;ping 8.8.8.8&#8221; was possible, so DNS was apparently not working  
+=> The problem was that the dhcp lease file was configured to be on external USB drive but as the USB drive could not be mounted (yet.. due to yet-to-be-installed packages) dnsmasq was not working
+
+2. The custom user packages list I created contained every package in one line. To be able to install all of them at once via &#8220;opkg install pkg1 pkg2 pkg3 &#8230;&#8221;:  
+=> sed &#8216;:a;N;$!ba;s/\n/ /g&#8217; user\_installed\_pkgs.txt > user\_installed\_pkgs\_one\_line.txt  
+=> opkg install \`cat user\_installed\_pkgs\_one\_line.txt\`  
+For already installed packages thats also working (was the case, my file listed many already installed packages), opkg then tells e.g. &#8220;kmod-usb2 (3.18.23-1) installed in root is up to date.&#8221;
+
+3. Some errors were printed out during opkg install: 
+
+3.1 &#8220;Configuring dbus.  
+Unknown group &#8220;netdev&#8221; in message bus configuration file&#8221;  
+=> I ignored it, because regarding <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=385495" rel="nofollow ugc">https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=385495</a>, it seems a non-critical bug in avahi 
+
+3.2 &#8220;Configuring block-mount.  
+this file has been obseleted. please call &#8220;/sbin/block mount&#8221; directly  
+block: mounting /dev/mtdblock2 (squashfs) as /mnt/mtdblock2 failed (-1) &#8211; Unknown error -1  
+block: /dev/mtdblock3 is already mounted  
+block: mounting /dev/sda1 (vfat) as /mnt/sda1 failed (-1) &#8211; Unknown error -1&#8243;  
+=> This was caused by dependency problems (e.g. &#8220;Configuring kmod-fs-vfat.&#8221; came later, &#8220;already mounted&#8221; is not really a problem and squashfs was fine after reboot
+
+3.3 &#8220;Collected errors:  
+* resolve_conffiles: Existing conffile /etc/vnstat.conf is different from the conffile in the new package. The new conffile will be placed at /etc/vnstat.conf-opkg.  
+* resolve_conffiles: Existing conffile /etc/config/vnstat is different from the conffile in the new package. The new conffile will be placed at /etc/config/vnstat-opkg.  
+* resolve_conffiles: Existing conffile /etc/avahi/avahi-daemon.conf is different from the conffile in the new package. The new conffile will be placed at /etc/avahi/avahi-daemon.conf-opkg.&#8221;  
+=> This was resolved by diff&#8217;ing and adjusting the files manually
+
+4. Luci auth/login appears for each page  
+After the initial login, I only could see the Status page. No matter what I clicked in Luci afterwards lead me to the login page again (in Firefox).  
+=> It turned out to be that rpcd was not running, with &#8220;/etc/init.d/rpcd start&#8221; (+  
+enable) the problem was gone (found the solution here: <a href="https://github.com/openwrt/luci/issues/547" rel="nofollow ugc">https://github.com/openwrt/luci/issues/547</a>)
+
+Thanks  
+Patrick
+
+### Comment by Logan Marchione on 2017-10-11 09:21:10 -0400
+Patrick, thanks for sharing! I haven&#8217;t used OpenWrt in some time (I&#8217;m currently using Ubiquiti gear). Have you considered switching to <a href="https://lede-project.org/supported_devices" target="_blank" rel="noopener nofollow">LEDE</a>? I heard OpenWrt development was stopping.
+
+### Comment by Patrick on 2018-01-22 07:13:03 -0500
+Yesterday, I switched to LEDE from CC and so far I didn&#8217;t encounter any problems. I did it like an OpenWrt upgrade. 
+
+After checking OpenWrt Website yesterday I read that LEDE and OpenWrt will unify again 🙂
+
+### Comment by Logan Marchione on 2018-01-22 08:51:03 -0500
+Nice, thanks for the reply!
+
+Yes, I read that as well. Glad the two are finally on friendly terms again.

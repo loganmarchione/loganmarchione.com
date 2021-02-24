@@ -1,0 +1,1065 @@
+## Comments
+
+### Comment by Ryan on 2017-04-28 11:53:07 -0400
+Logan, this is awesome. And though I know you&#8217;re not tech support, I can&#8217;t get it to work completely. The test emails work, sudo upsc works and shows me what I need, and I get the wall messages. However, the system won&#8217;t email me the alerts.
+
+Thoughts?
+
+### Comment by Logan on 2017-04-30 00:44:34 -0400
+What action are you performing to get the wall alerts? Are you unplugging the UPS from the wall power?
+
+Did you add the EXEC to /etc/nut/upsmon.conf and make sure your script is executable?
+
+What if you just run the script itself from the command line? You should get a blank template email to prove that the script and your SMTP server work.
+
+### Comment by Steve on 2017-05-04 08:51:05 -0400
+Hi,
+
+Great guide, one of the best I have been able to find. 
+
+One issue thought that I can&#8217;t seem to get around, is that emails are sent correctly, and are being received, however I cannot get a meaningful from name. All the emails come up as from &#8220;derived from envelope by postmaster@\***. 
+
+I also note that there is no name in the To field. 
+
+Any ideas?
+
+Thanks!
+
+### Comment by Logan on 2017-05-08 09:53:34 -0400
+Are you relaying them through Gmail? Mine come from from my extra account name.
+
+### Comment by Kyle on 2017-07-06 22:20:21 -0400
+Could you explain a little more on exactly how to edit the NGINX config file please? I&#8217;m having issues accessing the UPS via a webpage.
+
+### Comment by Logan Marchione on 2017-07-07 14:05:27 -0400
+Sorry, I was assuming a familiarity with Nginx. The configuration files for Nginx are generally located in _/etc/nginx/sites-available_ and you&#8217;ll need to use some sort of text editor (e.g., emacs, vi, <a href="https://askubuntu.com/a/54222" target="_blank" rel="nofollow">nano</a>, etc&#8230;) to edit the files.
+
+This is a rough outline, but a basic config with NUT would look something like this.  
+`server {<br />
+  listen 80;<br />
+  server_name domain.com;<br />
+  root /var/www/html;<br />
+  index index.php index.html;<br />
+  location / {<br />
+    try_files $uri $uri/ =404;<br />
+  }<br />
+  location /nut {<br />
+    alias /usr/share/nut/www/;<br />
+    try_files $uri $uri/ /index.html;<br />
+  }<br />
+  location /cgi-bin/ {<br />
+    gzip off;<br />
+    root /usr/lib;<br />
+    include fastcgi_params;<br />
+    fastcgi_pass unix:/var/run/fcgiwrap.socket;<br />
+    fastcgi_param SCRIPT_FILENAME  $document_root$fastcgi_script_name;<br />
+  }<br />
+  location ~* \.php$ {<br />
+    try_files $uri =404;<br />
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;<br />
+    fastcgi_pass unix:/var/run/php5-fpm.sock;<br />
+    fastcgi_param SCRIPT_FILENAME $request_filename;<br />
+    fastcgi_index index.php;<br />
+    include fastcgi_params;<br />
+  }<br />
+}<br />
+`
+
+### Comment by Dale on 2017-11-17 21:50:47 -0500
+Hi Logan,  
+Thanks for posting this guide. I just purchased a CyberPower CP1500PFCLCD UPS for my home ESXi server and originally wanted to use use the CyberPower PowerPanel Business Edition for Virtual Machines, but my ESXi server does not support DirectPath IO so I searched for another solution. I came across your guide and was able to set up the NUT suite on an old Raspberry PI B+ and get it working, however is seems that after a few hours of running the pi starts reporting &#8220;Broadcast message from nut@rp1 (somewhere) (Sat Nov 18 01:38:54 2017): UPS cyberpower1@localhost is unavailable&#8221; and upsc reports &#8220;Error: Data stale&#8221;. Rebooting the pi solves it for a bit but then it starts failing again. I am thinking that setting this up on a new pi3 might be the answer but wonder if you have any thoughts on this and appreciate any input you may have.
+
+Thanks,  
+Dale
+
+### Comment by Logan Marchione on 2017-11-17 22:36:37 -0500
+Dale, I don&#8217;t ever think I received that error, but did you try the <a href="https://loganmarchione.com/2017/02/raspberry-pi-ups-monitor-with-nginx-web-monitoring/#Tweaks" rel="noopener" target="_blank">tweaks</a> section of my post? It helped to clear up a lot of the issues I was having. Also, did you try a new USB cable?
+
+### Comment by Dale on 2017-11-18 20:08:26 -0500
+Hi Logan,  
+Thanks for the reply. I noticed that sometimes when I get this, the nut-driver is reporting correctly and restarting the nut-server works, yet other times I need to restart both. I will try the tweaks section and a new cable too.
+
+### Comment by Dale on 2017-11-19 22:13:50 -0500
+HI Logan,  
+Your tweaks did the trick and this is now working great for me including the web page and alerting. Thanks again for posting this guide; not only do I have alerting now for my new UPS but I learned a lot in the process!
+
+### Comment by Logan Marchione on 2017-11-20 10:53:46 -0500
+Glad it worked, but I can&#8217;t take credit. I searched high and low until I found the fix in <a href="https://nmaggioni.xyz/2017/03/14/NUT-CyberPower-UPS/#NUT-Settings" target="_blank" rel="noopener nofollow">this</a> article.
+
+### Comment by Cody Brian on 2018-01-21 23:15:30 -0500
+Hello Logan, I recently set this up and it is working perfect, but I ran into an issue. When rebooting the pi the UPS reboots as well&#8230; This is not optimal as the UPS is running a server and my entire network..
+
+I have the exact same UPS model as you and was wondering if you had a fix for this.
+
+Thanks,  
+&#8211;Cody.
+
+### Comment by Logan Marchione on 2018-01-22 09:39:35 -0500
+That&#8217;s really weird. Mine does not do that (I&#8217;m not running on a Raspberry Pi anymore, but when I was, it didn&#8217;t do that either).
+
+Are you running NUT from the packages installed via apt?  
+What distro are you running?  
+What command are you running with the reboot? Have you tried running just a shutdown instead of a reboot?
+
+<a href="https://serverfault.com/questions/858267/network-ups-tools-nut-causing-ups-to-reboot" target="_blank" rel="noopener nofollow">This person</a> is having the same issue, but there&#8217;s no replies here yet.
+
+I can send you a copy of my configs, but they should be identical to what I have on the site.
+
+In the meantime, I&#8217;d try asking on the <a href="https://lists.alioth.debian.org/mailman/listinfo/nut-upsuser" target="_blank" rel="noopener nofollow">NUT mailing list</a>.
+
+### Comment by Martin on 2018-01-23 10:16:22 -0500
+Logan,  
+Thanks for documenting this setup. This is excellent. I just followed your steps to configure Raspberry as a UPS monitor for my Ubiquiti network.
+
+### Comment by Logan Marchione on 2018-01-23 15:36:03 -0500
+Glad to help!
+
+### Comment by Cody Brian on 2018-01-23 15:59:25 -0500
+I am using the NUT packages via apt on Raspbian GNU/Linux 9 (stretch). To preform the reboot I have tried shutdown -r 0, reboot and poweroff with a replug afterwards. All result in the same behavior.
+
+I would ask for your configs, but like you say they should be the same. I followed your site to the point.
+
+Thanks for the quick reply by the way!  
+-Cody.
+
+### Comment by Logan Marchione on 2018-01-24 09:57:42 -0500
+Is the Raspberry Pi power plugged into the UPS (battery side)?
+
+I&#8217;d still suggest asking on ServerFault or the NUT mailing list.
+
+### Comment by Nathan on 2018-05-25 16:20:46 -0400
+This is a great guide, I have it all working on my pi/ups combo. But one thing I cannot figure out is how to get NUT to start automatically when the pi restarts. I read all kinds of conflicting tips on this. Any advice?
+
+### Comment by Logan Marchione on 2018-05-27 11:21:39 -0400
+NUT runs a systemd service, so you should be able to enable everything using standard systemctl commands.  
+`sudo systemctl enable nut-driver<br />
+sudo systemctl enable nut-server<br />
+sudo systemctl enable nut-monitor`
+
+### Comment by Drew on 2018-07-04 23:38:41 -0400
+Awesome guide! Was up in running in minutes. Thanks!
+
+### Comment by Logan Marchione on 2018-07-05 09:16:08 -0400
+Glad to help!
+
+### Comment by Craig Henderson on 2018-08-03 19:19:00 -0400
+Great Instructions!!!!! I do not have Nginx installed, I have gnome, how can I go about setting up the rest of this with it?
+
+Thank You in advance!
+
+### Comment by Logan Marchione on 2018-08-03 23:36:48 -0400
+Nginx is a web server (needed to serve web pages). Gnome is a desktop environment (gives you your toolbars, start menu, etc&#8230;). They are not the same thing.
+
+If want you web monitoring, you&#8217;ll need a web server of some sort (Nginx, Apache, etc&#8230;).
+
+### Comment by Craig Henderson on 2018-08-04 09:34:39 -0400
+Thank you for your reply, I have this setup in my Pi with Octopi and Octoprint, I will have to check up on the Nginx server I had seen there might be a conflict with the new ver of Octoprint and Nginx…..
+
+### Comment by Ben on 2018-08-11 08:44:38 -0400
+Thanks for the article, helped me set it up on a rpi that was already running pi-hole.
+
+To use lighttpd that&#8217;s installed along with pi-hole instead of ngnix; edit /etc/lighttpd/external.conf with:
+
+server.modules += ( &#8220;mod\_cgi&#8221;, &#8220;mod\_alias&#8221; )  
+$HTTP[&#8220;url&#8221;] =~ &#8220;/cgi-bin/&#8221; {  
+dir-listing = &#8220;enable&#8221;  
+alias.url += ( &#8220;/cgi-bin/&#8221; => &#8220;/usr/lib/cgi-bin/&#8221; )  
+cgi.assign = ( &#8220;&#8221; => &#8220;&#8221; )  
+}  
+alias.url += ( &#8220;/nut&#8221; => &#8220;/usr/share/nut/www&#8221; )
+
+And restart lighttpd:
+
+sudo systemctl restart lighttpd
+
+### Comment by Logan Marchione on 2018-08-12 12:33:58 -0400
+I&#8217;ve never used lighttpd before, thanks for sharing!
+
+### Comment by heyman on 2018-09-25 03:47:58 -0400
+great info thx
+
+### Comment by Eli on 2018-12-08 21:18:00 -0500
+Hi Logan,
+
+Thank you for the tutorial, I have gotten everything to function properly except the Nginx server. I&#8217;m new to Nginx and not sure if I have set it up properly. I am able to start the server and get the Nginx welcome page when I visit the ip address, but I cant get to the ip address/nut I get a 404. 
+
+Here is my .conf for the server does any stick out as improperly written?
+
+user root;  
+worker_processes auto;  
+pid /run/nginx.pid;  
+include /etc/nginx/modules-enabled/*.conf;
+
+events {  
+worker_connections 1024;  
+}
+
+http {  
+tcp_nodelay on;  
+keepalive_timeout 65;  
+types\_hash\_max_size 2048;
+
+server\_names\_hash\_bucket\_size 128 ;
+
+include /etc/nginx/mime.types;  
+default_type application/octet-stream;
+
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE  
+ssl\_prefer\_server_ciphers on;
+
+##  
+\# Logging Settings  
+##
+
+access_log /var/log/nginx/access.log;  
+error_log /var/log/nginx/error.log;
+
+##  
+\# Gzip Settings  
+##
+
+gzip on;  
+gzip_disable &#8220;msie6&#8221;;
+
+include /etc/nginx/conf.d/*.conf;  
+include /etc/nginx/sites-enabled/*;
+
+server {  
+listen 80;  
+server_name localhost;  
+root /var/www/html;  
+index index.php eli.html;  
+location / {  
+try_files $uri $uri/ =404;  
+}
+
+location /nut {  
+alias /usr/share/nut/www/;  
+try_files $uri $uri/ /index.html;
+
+} 
+
+location /cgi-bin/ {  
+gzip off;  
+root /usr/lib;  
+include fastcgi_params;  
+fastcgi_pass unix:/var/run/fcgiwrap.socket;  
+fastcgi\_param SCRIPT\_FILENAME $document\_root$fastcgi\_script_name;  
+}
+
+location ~* \.php$ {  
+try_files $uri =404;  
+fastcgi\_split\_path_info ^(.+\.php)(/.+)$;  
+fastcgi_pass unix:/var/run/php5-fpm.sock;  
+fastcgi\_param SCRIPT\_FILENAME $request_filename;  
+fastcgi_index index.php;  
+include fastcgi_params;  
+}  
+}  
+}
+
+### Comment by Logan Marchione on 2018-12-09 22:08:25 -0500
+First thing, the nginx.conf and your website configs should be two separate files, not mixed into one file like here.
+
+If you run `sudo nginx -t`, what happens?
+
+Second, does `/var/log/nginx/error.log` show anything? What about `/var/log/nginx/access.log`?
+
+Also, I would change `server_name localhost;` to `server_name XX.XX.XX.XX;` (where XX.XX.XX.XX is the IP of your RPi). Unless you&#8217;re visiting the webpage directly from the RPi, localhost won&#8217;t work anywhere on your network.
+
+One more thing, are you using PHP5 or PHP7? This line is different for PHP7, Google it for the syntax.  
+`fastcgi_pass unix:/var/run/php5-fpm.sock;`
+
+### Comment by Eli on 2018-12-12 18:34:13 -0500
+Thanks for the quick reply and all the help Logan! its working perfectly now.
+
+-Eli
+
+### Comment by Lucas on 2018-12-30 16:48:29 -0500
+Tried hundred times without success&#8230; lighttpd will not restart
+
+### Comment by Logan Marchione on 2018-12-31 17:14:16 -0500
+Do the logs show anything?  
+`sudo journalctl -u lighttpd`
+
+### Comment by Blair on 2019-02-13 04:32:10 -0500
+This config doesn&#8217;t work. The error in journalctl is:
+
+Feb 13 09:29:52 raspberrypi lighttpd[1205]: 2019-02-13 09:29:52: (configfile.c.1094) source: cat external.conf 2>/dev/null line: 1 pos: 18 invalid character in variable name  
+Feb 13 09:29:52 raspberrypi lighttpd[1205]: 2019-02-13 09:29:52: (configfile.c.1151) configfile parser failed at: (  
+Feb 13 09:29:52 raspberrypi lighttpd[1205]: 2019-02-13 09:29:52: (configfile.c.1154) source: /etc/lighttpd/lighttpd.conf line: 77 pos: 1 parser failed somehow near here: (EOL)  
+Feb 13 09:29:52 raspberrypi systemd[1]: lighttpd.service: Control process exited, code=exited status=255
+
+Line 1 position 18 is a space, so I tried removing that and no go, it says line 17 is a syntax error.
+
+### Comment by Tom on 2019-02-21 17:23:32 -0500
+Try replacing the fancy citation marks (don&#8217;t know the proper English words) with the ones you get when typing them on your keyboard. I did that and it works like magic: <a href="http://pi.hole/nut" rel="nofollow ugc">http://pi.hole/nut</a>  
+Don&#8217;t forget to restart the web server. `sudo systemctl restart lighttpd`
+
+### Comment by Tom on 2019-02-21 17:33:45 -0500
+I forgot something: When I installed nut-cgi, the cgi-bin directory was installed in /var/www. I had to move it into /var/www/html.
+
+### Comment by Enrique on 2019-02-23 13:53:39 -0500
+Hello dear friend, creator of the post,
+
+Could you indicate what type of raspberrry pi you are using to monitor a UPS with the USB HID communication protocol?
+
+I have a raspberry pi 3b + and previously I had a UPS salicru sps 900 with usb 2.0 and NUT worked perfectly with my pi 3b +. Now I have purchased a UPS Salicru SOHO + 1600 but the USB is not USB 2.0 normal, the specifications indicate that it is a USB HID. My raspberry pi 3b + is not able to detect HID devices since they are connected and disconnected continuously and changing device. Since I can not find a solution, I would like to know what exact model of raspberry pi you use to monitor your UPS with HID usb. I am waiting for your news or any possible solution or HUB converter. I would be very grateful for your help. a cordial greeting
+
+### Comment by Logan Marchione on 2019-02-24 17:23:12 -0500
+At the time, I was using a RPi3 B+, however, I&#8217;ve since switched an x86 virtual machine.
+
+If the UPS is showing up as a HID device, that sounds like a keyboard/mouse. I don&#8217;t believe a new RPi would fix your issue, since it seems to be something with the USB ports on the UPS itself. This post makes it sound like the USB ports are only for charging devices, not for sending data&#8230;  
+<a href="https://cofme.com/salicru-renews-sps-soho-series/" rel="nofollow ugc">https://cofme.com/salicru-renews-sps-soho-series/</a>
+
+In addition, I don&#8217;t even see a supported driver on this page&#8230;  
+<a href="https://networkupstools.org/stable-hcl.html" rel="nofollow ugc">https://networkupstools.org/stable-hcl.html</a>
+
+### Comment by Enrique on 2019-02-24 17:55:04 -0500
+Thank you very much for the post, in the end I managed to get almost everything to work.  
+In case some person is interested my ups were disconnected every 20 seconds through the usb. Instead of the usb driver blazer I put the usbhid-ups. As I read if NUT communicates with my UPS within the first 20 seconds the raspberry disconnects the USB device and this is due to the port of my UPS. It is a 1.0 HID and has this problem. Before I had another UPS with USB 2.0 port and never disconnected from my raspberry even if I had no installed nut.
+
+Would you be so kind as to be able to answer 2 questions please?
+
+1) how can I access from outside the network to the ip of my raspberry to be able to view the web created with nginx? I have a host created but I can not access the information of the ups. I try it in the following way:
+
+10.180.12.47/nut &#8220;space&#8221; my host name
+
+but I get a message &#8220;not found ngninx&#8221;
+
+2) Is there any way to create an alert through nut or through nginx to be able to receive an alert when the battery is charged 100% or when it reaches 25%?
+
+Be kind by your work and by answering all the questions. Have a good night
+
+### Comment by Logan Marchione on 2019-02-26 14:35:47 -0500
+Glad you got it working, thanks for sharing!
+
+1) Did you open a port in your firewall (either 80 or preferably 443)? You&#8217;ll also need to forward requests on that port to the IP of your Nginx server.
+
+2) I&#8217;m not sure if NUT supports <a href="https://networkupstools.org/docs/user-manual.chunked/ar01s07.html" target="_blank" rel="noopener noreferrer nofollow">those types of alerts</a> out of the box, but you could easily write a script to check for that data.
+
+### Comment by Steve on 2019-04-05 11:31:09 -0400
+Thanks for a great tutorial. I got my RPI 3 B+ (Stretch) working with NUT. My only issue is that if I reboot the Pi, which I admit isn&#8217;t very often, NUT doesn&#8217;t auto-start because the nut-driver complains it can&#8217;t find the UPS, even though it is listed in the USB ports.
+
+Typically, unplugging and plugging back in the UPS to a different USB port will allow the driver to start and everything works again.
+
+Same configuration as the post, same driver, just a Tripp-Lite instead of a CyberPower.
+
+Anyone have any tips as to what might be happening?
+
+### Comment by Logan Marchione on 2019-04-05 14:55:03 -0400
+That&#8217;s weird. When you restart the Pi, can you run `lsusb` and see the UPS?  
+Do the logs say anything about why it&#8217;s not connecting? Check `/var/log/syslog` as well as `dmesg`.
+
+### Comment by Steve on 2019-04-06 10:48:45 -0400
+Thanks! I&#8217;ll check that out in the next week or so when I have time.
+
+lsusb detects it no problem every time. I&#8217;m almost wondering if I should try introducing a startup delay in the startup scripts.
+
+### Comment by Tristan on 2019-04-21 09:23:38 -0400
+Hi Logan,
+
+Thank you for the amazing guide!
+
+This is my first Pi project so please excuse my ignorance.
+
+I have gotten everything to work until the email step.
+
+&#8220;Next, we’re going to edit the configuration file at /etc/msmtprc to include our information. Substitute your new Gmail username and password below.&#8221;
+
+I install msmtp with no issues via terminal using the install and update command you give.
+
+However, when I go to the /etc/ directory, there is no msmtprc file for me to find the configuration file.
+
+Where am I going wrong?
+
+Thank you
+
+### Comment by Logan Marchione on 2019-04-21 11:07:20 -0400
+I’m 97% positive that you need to create the file, I seem to remember running into the same issue. Use a text editor like nano, vim, or emacs.
+
+### Comment by Tristan Thompson on 2019-04-23 13:34:44 -0400
+Hi Logan,
+
+I have done so and mimicked the systemconf example in the help docs of msmtp, but now get a &#8220;msmtp: /etc/msmtprc: input error&#8221; whenever I try and use your test printf command above (or any other for that matter).
+
+Any thoughts?
+
+### Comment by Logan Marchione on 2019-04-24 08:37:03 -0400
+It sounds like a syntax error in your file. Did you check your /etc/msmtprc file against mine (below)? I&#8217;m assuming you&#8217;re using Gmail as your SMTP relay?  
+`# Accounts will inherit settings from this section<br />
+defaults<br />
+auth            on<br />
+tls             on<br />
+tls_certcheck   on<br />
+tls_trust_file  /etc/ssl/certs/ca-certificates.crt</p>
+<p>account   default<br />
+host      smtp.gmail.com<br />
+protocol  smtp<br />
+port      587<br />
+from      your_email@gmail.com<br />
+user      your_email@gmail.com<br />
+password  your_app_password`
+
+### Comment by Tristan on 2019-05-04 11:41:17 -0400
+Hi Logan,
+
+Yes I have done so.
+
+Same error unfortunately.
+
+Could I email you directly with my config file and you can have a look?
+
+Thank you
+
+### Comment by Logan Marchione on 2019-05-06 14:14:45 -0400
+Yep that&#8217;s fine (my email is <a href="https://loganmarchione.com/contact/" rel="noopener noreferrer" target="_blank">here</a>). You can omit your username/password and I&#8217;ll use mine.
+
+What are the permissions on the file? Mine are 644.
+
+I think <a href="https://git.marlam.de/gitweb/?p=msmtp.git;a=blob;f=src/conf.c;hb=bc93013d99d9d756d67da28e3851e79b7cee594e#l941" target="_blank" rel="noopener noreferrer nofollow">this</a> is the source that&#8217;s generating the error, but I don&#8217;t know C. It seems like this code parses your config file, so I&#8217;m still thinking it&#8217;s something syntax-related&#8230;
+
+### Comment by Tristan on 2019-05-08 05:05:45 -0400
+Hi Logan,
+
+Have emailed you.
+
+Thank you
+
+### Comment by Tim Delac on 2019-10-04 18:36:19 -0400
+Hi Logan,
+
+I am trying your instructions on a Rock64 running DietPi.  
+I am running in to the following issue:
+
+Oct 04 18:14:50 rock64 systemd[1]: Starting Network UPS Tools &#8211; power devices information server&#8230;  
+Oct 04 18:14:50 rock64 upsd[799]: fopen /var/run/nut/upsd.pid: No such file or directory  
+Oct 04 18:14:50 rock64 upsd[799]: listening on 127.0.0.1 port 3493  
+Oct 04 18:14:50 rock64 upsd[799]: listening on 127.0.0.1 port 3493  
+Oct 04 18:14:50 rock64 upsd[799]: Connected to UPS [cyberpower1]: usbhid-ups-cyberpower1  
+Oct 04 18:14:50 rock64 upsd[799]: Connected to UPS [cyberpower1]: usbhid-ups-cyberpower1  
+Oct 04 18:14:50 rock64 upsd[814]: Startup successful  
+Oct 04 18:14:50 rock64 systemd[1]: Started Network UPS Tools &#8211; power devices information server.  
+Oct 04 18:14:50 rock64 upsd[814]: User upsmon_local@127.0.0.1 logged into UPS [cyberpower1]
+
+Fopen does not find the file even do the directory exists and why am I getting double entries???  
+I dabble with Linux so after going a bit through some searches I figured it might be quicker to ask a question here 🙂  
+Funny enough I have the same UPS as you.
+
+### Comment by Logan Marchione on 2019-10-10 15:32:52 -0400
+Is that directory writable by the user running nut? Also, is there a log in `/var/log` you can check?
+
+### Comment by Daniel Gonzalez on 2019-10-19 22:42:39 -0400
+Hello Logan,
+
+Thanks for the post, I managed to use an orange pi zero to monitor an Winpower UPS. Have only one questions, how can I automatically refresh the statistics page, it seem I have to click on the statistics link to refresh data.
+
+Thanks again for the por, been very helpful for me.
+
+Regars,
+
+Daniel
+
+### Comment by Logan Marchione on 2019-10-21 08:23:23 -0400
+Unfortunately, I don&#8217;t know how to do that, sorry! You may need to ask around on some forums.
+
+### Comment by Joel Cano on 2019-11-07 17:33:56 -0500
+Hello
+
+Excellent tutorial, I was able to make it work in a raspberry pie 4 with no issues,.However, my goal for this project is to be able to control/monitor 3 UPS cyberpower via USB, i&#8217;m able to see them connected with I connect one by one( driver works ).
+
+Any idea if is possible to monitor 3 ups via usb on the same device (Pi4)? I tried but it looks the driver only works with 1 usb device at the time.  
+lsubs:
+
+Bus 001 Device 005: ID 0764:0501 Cyber Power System, Inc. CP1500 AVR UPS  
+Bus 001 Device 004: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS  
+Bus 001 Device 003: ID 0764:0501 Cyber Power System, Inc. CP1500 AVR UPS
+
+Thanks in advance
+
+### Comment by Logan Marchione on 2019-11-08 09:37:16 -0500
+I&#8217;ve never tried it, but it depends on the driver you&#8217;re using. If you&#8217;re using the usbhid-ups driver, it should work (according to <a href="https://networkupstools.org/docs/man/usbhid-ups.html#_implementation" target="_blank" rel="noopener noreferrer nofollow">this</a>).
+
+### Comment by Joel Cano on 2019-11-08 12:39:20 -0500
+Hello
+
+Thanks for you reply, I was able to make work (finally). 
+
+I found another comment in a mail-list saying:
+
+If you want to monitor multiple UPSes through usbhid-ups, you \*must\* make sure that each one can be uniquely identified through the  
+&#8220;vendor&#8221;, &#8220;product&#8221;, &#8220;serial&#8221;, &#8220;vendorid&#8221;, &#8220;productid&#8221; and &#8220;bus&#8221; regular expressions (see &#8216;man 8 usbhid-ups&#8217; for an explanation how to  
+use these).
+
+Below my configuration: /etc/nut/ups.conf
+
+[cyberpower1]  
+driver = usbhid-ups  
+product = &#8220;UPS OR500&#8221;  
+port = auto  
+pollinterval = 15
+
+[cyberpower2]  
+driver = usbhid-ups  
+product = &#8220;CP1500AVRLCDa&#8221;  
+port = auto  
+pollinterval = 15
+
+[cyberpower3]  
+driver = usbhid-ups  
+product = &#8220;CP 1500C&#8221;  
+port = auto  
+pollinterval = 15
+
+I added the &#8220;Product&#8221; information that is the only one different value from each UPS.I hope this help to someone else
+
+Thanks!!!
+
+### Comment by Logan Marchione on 2019-11-08 15:21:56 -0500
+Glad you got it working, thanks for sharing!
+
+### Comment by Brad on 2020-01-09 19:17:59 -0500
+Logan, thanks for these tutorials, they were really helpful.
+
+For those having trouble with NUT not starting reliably on boot, I ran into the same problem using the Pi as a master for a couple of external clients. In my case, NUT was starting up at boot and attempting to listen on the Pi&#8217;s LAN IP before the DHCP server had actually assigned it, causing NUT to fail and quit out. Setting the Pi to a static IP fixed the problem.
+
+### Comment by Logan Marchione on 2020-01-09 19:48:27 -0500
+Good idea! I also believe you can tweak the systemd unit file for NUT to wait for the network, but I&#8217;ve never done that personally.
+
+### Comment by Lishen on 2020-01-09 21:43:22 -0500
+Hi there. Your blog was the one thing that helped me all week! I am so glad I found this blog post. Working like a charm. Your explanations are great for a newbie to RaspberryPi.
+
+### Comment by Logan Marchione on 2020-01-10 10:34:59 -0500
+Glad it helped you!
+
+### Comment by John on 2020-02-16 09:56:17 -0500
+This post is incredibly helpful. Thanks, Logan!
+
+### Comment by Martin on 2020-04-08 11:20:26 -0400
+Hi,  
+Nice post, helped me a lot, however, I am experiencing some connections issues with the Raspberry pi, any idea why that could be? It frequently (couple of times a day, some times per hour) it broadcasts &#8220;Communications with UPS powerwalker@localhost lost&#8221;
+
+The UPS is a Powerwalker 650 LCD
+
+lsusb output:  
+Bus 001 Device 039: ID 06da:ffff Phoenixtec Power Co., Ltd
+
+syslog:  
+Apr 8 17:18:45 pihome kernel: [ 396.947072] usb 1-1.3: New USB device found, idVendor=06da, idProduct=ffff, bcdDevice= 0.03  
+Apr 8 17:18:45 pihome kernel: [ 396.947089] usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=4  
+Apr 8 17:18:45 pihome kernel: [ 396.947099] usb 1-1.3: Product: Offline UPS  
+Apr 8 17:18:45 pihome kernel: [ 396.947108] usb 1-1.3: Manufacturer: PPC  
+Apr 8 17:18:45 pihome kernel: [ 396.947120] usb 1-1.3: SerialNumber: 000000000  
+Apr 8 17:18:45 pihome kernel: [ 397.053030] hid-generic 0003:06DA:FFFF.0025: hiddev96,hidraw0: USB HID v1.00 Device [PPC Offline UPS] on usb-3f980000.usb-1.3/input0  
+Apr 8 17:18:45 pihome mtp-probe: checking bus 1, device 42: &#8220;/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.3&#8221;  
+Apr 8 17:18:45 pihome mtp-probe: bus: 1, device: 42 was not an MTP device  
+Apr 8 17:18:45 pihome mtp-probe: checking bus 1, device 42: &#8220;/sys/devices/platform/soc/3f980000.usb/usb1/1-1/1-1.3&#8221;  
+Apr 8 17:18:45 pihome mtp-probe: bus: 1, device: 42 was not an MTP device
+
+### Comment by Logan Marchione on 2020-04-09 13:11:20 -0400
+When it says communication lost, and you run `lsusb`, is it still showing connected? That would rule out a bad USB cable.
+
+Otherwise, you may have to play with the settings in the [Tweaks][1] section. Mine would go online/offline constantly until I adjusted those settings.
+
+ [1]: https://loganmarchione.com/2017/02/raspberry-pi-ups-monitor-with-nginx-web-monitoring/#Tweaks
+
+### Comment by Shailendrra Guptaa on 2020-05-08 21:18:50 -0400
+Logan
+
+I have been able to get things setup as shared by you. All aspects are working with an exception or my lack of knowledge. I have a 1-UPS connected to 1-Raspberry setup.
+
+I have read a lot on NUT etc but keep getting more and more lost.
+
+I am lost on:  
+1. how to make the shutdown command execute? SHUTDOWNCMD &#8220;/sbin/shutdown -h +0&#8221; when I do not see /sbin/shutdown file in my system. Do I have to create this file and if yes then how do I do it?  
+2. upsmon.conf notifies me. Do I need to do anything additional in notifycmd.sh besides it sending me email messages. Do I need something in here to execute shutdown?
+
+Will sincerely appreciate any guidance.
+
+### Comment by Shailendrra Guptaa on 2020-05-08 21:27:33 -0400
+Logan,
+
+In addition how do I give my devices connected to the UPS a graceful shutdown? I am lost so seeking your advice.
+
+### Comment by Logan Marchione on 2020-05-08 21:40:50 -0400
+What operating system are you running on the Pi? I&#8217;m assuming Raspbian or some form of Debian/Ubuntu&#8230;  
+1) From the command line, type `which shutdown` to see where your shutdown command is. It could be at `/sbin/shutdown` or `/usr/sbin/shutdown`.  
+2) My setup purposely does not shutdown anything, it only emails when the power state changes. I did this because there are too many ways to shutdown systems and I can&#8217;t cover them all here.
+
+When `upsmon.conf` fires, it in turn runs the `notifycmd.sh` script. That script is where you can put the logic to shutdown your other systems (how you do that is up to you). For example, you could:  
+1) Install the NUT client on each device and have it shutdown said device when the NUT server (connected to the UPS) tells the client to shutdown. In my guide, I&#8217;m doing client and server on the same machine, but the client can be on any machine on the network.  
+2) Setup SSH keys and have `notifycmd.sh` SSH into other Linux boxes and basically run `/sbin/shutdown -h +0`.  
+3) If your UPS supports it, have it just kill the power after a specific amount of time.
+
+### Comment by Shailendrra Guptaa on 2020-05-09 07:53:41 -0400
+Logan,
+
+Thank you very much. Now I know what I need to do and how I can test it. 
+
+You are wonderful. Stay healthy and take care.
+
+### Comment by John Doe on 2020-07-11 19:22:57 -0400
+The nut-server.service was not starting after reboot, started OK manually.
+
+Fixed it by setting the option &#8220;Wait for Network at Boot&#8221; in the &#8220;Boot Options&#8221; in the raspi-config utility
+
+Hopes this helps others with the same problem.
+
+### Comment by Logan Marchione on 2020-07-14 11:10:22 -0400
+Good tip, thanks for sharing!
+
+### Comment by Steve on 2020-07-30 10:11:21 -0400
+Here are some additional settings in case anyone is wanting to shutdown some VM&#8217;s and a QNAPP NAS. Note you additionally will need to install SSHPASS via sudo apt install sshpass -y
+
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+Everything up to this point will send you a notification on power and communication events; however, if you are wanting to additionally turn off computers or systems there is a different approach that needs to occur. Nut has the ability to schedule a controlled shutdown and actions surrounding it.
+
+Edit the configuration file at /etc/nut/upsmon.conf commenting out the previoulsly used notifycmd.sh file
+
+#NOTIFYCMD /etc/nut/notifycmd.sh  
+NOTIFYCMD /sbin/upssched
+
+Now we are going to tell nut what actions to take when events occur. Edit the configuration file at /etc/nut/upssched.conf
+
+\# Network UPS Tools &#8211; upssched.conf sample file  
+\# CMDSCRIPT  
+CMDSCRIPT /bin/upssched-cmd  
+\# ============================================================================  
+\# PIPEFN  
+PIPEFN /etc/nut/upssched/upssched.pipe  
+\# ============================================================================  
+\# LOCKFN  
+LOCKFN /etc/nut/upssched/upssched.lock  
+\# ============================================================================  
+\# AT  
+AT ONBATT * START-TIMER BATTERYPOWER 120  
+AT ONLINE * cyberpower1@localhost CANCEL-TIMER BATTERYPOWER  
+AT COMMBAD * EXECUTE COMMOFFLINE  
+AT ONLINE * EXECUTE POWERRESTORED  
+AT COMMOK * EXECUTE COMMONLINE
+
+The abovoe lines will start a watch timer for 120 seconds so that in the event the power comes back on within 2 minutes, the shutdown process will cancel. The other lines state that if a event occurs to execute a specific section of the /bin/upssched-cmd file.
+
+In order for the entire process to work, you will need to edit the /bin/upssched-cmd file with your specific instructions. An example file is listed below and we will walk thru the details.
+
+Edit the script at /bin/upssched-cmd.
+
+#! /bin/sh
+
+set +e
+
+LOG_FILE=&#8221;/etc/nut/logs/upssched.log&#8221;
+
+exec 1>>$LOG_FILE  
+exec 2>&1  
+echo &#8220;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8221;  
+echo &#8220;##### UPSSCHED STARTED: $(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) #####&#8221;  
+echo &#8220;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8221;
+
+#sudo adduser apc  
+#sudo nano /etc/sudoers  
+#ADD apc ALL = NOPASSWD: /sbin/shutdown
+
+#NOTIFICATION EMAIL  
+EMAIL=&#8217;7658881234@mms.att.net&#8217;
+
+VMPASSWD=password  
+VMUSER=apc  
+VMS=10.10.10.10,10.10.10.11,10.10.10.12,10.10.10.13
+
+NASUSER=admin  
+NASPASSWD=010203040506  
+NASIP=192.168.86.x  
+NASMACADDRESS=01:02:03:04:05:06
+
+ESXIUSER=root  
+ESXIPASSWD=password  
+ESXIIP=192.168.86.x  
+ESXIMACADDRESS=12:34:AB:Cd:56:Ef
+
+case $1 in  
+COMMOFFLINE)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; COMMOFFLINE &#8211; USB COMMUNICATIONS LOST&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nCOMMUNICATION LOST&#8221; | msmtp $EMAIL  
+;;  
+COMMONLINE)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; COMMONLINE &#8211; USB COMMUNICATIONS RESTORED&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nCOMMUNICATIONS RESTORED&#8221; | msmtp $EMAIL  
+;;  
+BATTERYPOWER)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; BATTERYPOWER &#8211; UPS ENABLED BATTERY POWER&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nUPS ON BATTERY POWER&#8221; | msmtp $EMAIL
+
+#SHUTDOWN VMS  
+for i in $(echo $VMS | sed &#8220;s/,/ /g&#8221;)  
+do  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting Down &#8221; $i  
+sshpass -p $VMPASSWD ssh -oStrictHostKeyChecking=no $VMUSER@$i &#8216;sudo shutdown -h now&#8217;  
+done
+
+#ESXi Host Shutdown  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Enabling ESXi Maintenance Mode Sleeping for 2 Minutes.&#8221;  
+sleep 2m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting down ESXi Host.&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system maintenanceMode set &#8211;enable true&#8217;  
+#vim-cmd /hostsvc/hostsummary | grep inMaintenanceMode  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting Down ESXi Host&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system shutdown poweroff -r &#8220;UPS INITIATED SHUTDOWN&#8221;&#8216;
+
+#NAS Shutdown  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waiting to shutdown NAS. Sleeping for 4 Minutes.&#8221;  
+sleep 2m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting down NAS.&#8221;  
+sshpass -p $NASPASSWD ssh -oStrictHostKeyChecking=no $NASUSER@$NASIP &#8216;/sbin/poweroff&#8217;
+
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+echo &#8220;END OF SHUTDOWN COMMANDS $(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;)&#8221;  
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+;;  
+POWERRESTORED)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; POWERRESTORED &#8211; POWER RESTORED&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nUPS POWER RESTORED&#8221; | msmtp $EMAIL
+
+#NAS WAKEUP  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waking up NAS&#8221;  
+wakeonlan $NASMACADDRESS
+
+#ESXi HOST WAKEUP  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Sleeping for 10 minutes before waking ESXi&#8221;  
+sleep 10m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waking ESXi Host&#8221;  
+wakeonlan $ESXIMACADDRESS  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waiting for ESXi Host to be ready. Sleeping for 5 Minutes.&#8221;  
+sleep 5m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Disabling ESXi Maintenance Mode&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system maintenanceMode set &#8211;enable false&#8217;  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Starting ESXi Autostart VM process&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;vim-cmd hostsvc/autostartmanager/autostart&#8217;
+
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+echo &#8220;END OF STARTUP COMMANDS $(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;)&#8221;  
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+;;  
+*)  
+logger -t upssched-cmd &#8220;Unrecognized command: $1&#8221;  
+;;  
+esac
+
+The above example will create a log file located at /etc/nut/logs so lets create that folder
+
+sudo mkdir /etc/nut/logs
+
+Now fill in your variable details for your requirements including the phone number for receiveing text notifications based upon your phone carrier. The example uses AT&T therefore you will need to determine the correcgt address for your carrier.
+
+If you are turning off linux machines, populate the user name, password, and IP addresses of each system separated only by a comma. For convience we have added a single user account to each machine and assigned the rights to that user to shutdown via ssh supressing the need for a password entered when that command is issued. To do the same for each Linux client, not the NUT system, execute the following.
+
+sudo adduser apc  
+sudo nano /etc/sudoers
+
+Add the following line at the end of the file
+
+apc ALL = NOPASSWD: /sbin/shutdown  
+save and exit
+
+As we are using VM&#8217;s in this example, there is additionally commands to shudown the VM host and wake it up once the power is restored. This is done by sending a magic packet to your VM host so you will need to ensure WOL is enabled on that device. The configuration of WOL on your VM host is out of scope for this documentation. One note of consideration is that you will need to enable ssh on your VM host to always be on, and in order for the shutdown/startup procedures to work on an ESXi host environment, the user &#8216;root&#8217; must be utilizd.
+
+A section has also been added for a QNAPP NAS sytem. Much like the ESXi enviroment, at the time of this writing only the &#8216;admin&#8217; account has the ability to run shutdown/startup procedures via the ssh command. Ensure that you utilize the admin account and the default password is the MAC address of the #1 network port in all CAPS. Additionally ensure that SSH is enabled on the QNAPP device.
+
+Now lets make the upssched-cmd file executable
+
+sudo chmod u+x /bin/upssched-cmd
+
+\## Additional Testing
+
+Now that you have your configurations set, you can begin testing. We recommend that for testing purposes you change the configuration of the /bin/upssched-cmd file so that you are not utilizing the actual battery power of the UPC, rather it is triggered by disconnecting and reconnecting the USB communication cable. Make sure you revert any changes made post testing to return back to normal. To facilitate this test make the following modifications to your /bin/upssched-cmd file
+
+case $1 in  
+\# COMMOFFLINE)  
+\# echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; COMMOFFLINE &#8211; USB COMMUNICATIONS LOST&#8221;  
+\# printf &#8220;Subject: UPS ALERT\r\n\r\nCOMMUNICATION LOST&#8221; | msmtp $EMAIL  
+\# ;;  
+\# COMMONLINE)  
+\# echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; COMMONLINE &#8211; USB COMMUNICATIONS RESTORED&#8221;  
+\# printf &#8220;Subject: UPS ALERT\r\n\r\nCOMMUNICATIONS RESTORED&#8221; | msmtp $EMAIL  
+\# ;;  
+\# BATTERYPOWER)  
+COMMOFFLINE)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; BATTERYPOWER &#8211; UPS ENABLED BATTERY POWER&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nUPS ON BATTERY POWER&#8221; | msmtp $EMAIL
+
+#SHUTDOWN VMS  
+for i in $(echo $VMS | sed &#8220;s/,/ /g&#8221;)  
+do  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting Down &#8221; $i  
+sshpass -p $VMPASSWD ssh -oStrictHostKeyChecking=no $VMUSER@$i &#8216;sudo shutdown -h now&#8217;  
+done
+
+#ESXi Host Shutdown  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Enabling ESXi Maintenance Mode Sleeping for 2 Minutes.&#8221;  
+sleep 2m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting down ESXi Host.&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system maintenanceMode set &#8211;enable true&#8217;  
+#vim-cmd /hostsvc/hostsummary | grep inMaintenanceMode  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting Down ESXi Host&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system shutdown poweroff -r &#8220;UPS INITIATED SHUTDOWN&#8221;&#8216;
+
+#NAS Shutdown  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waiting to shutdown NAS. Sleeping for 4 Minutes.&#8221;  
+sleep 2m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Shutting down NAS.&#8221;  
+sshpass -p $NASPASSWD ssh -oStrictHostKeyChecking=no $NASUSER@$NASIP &#8216;/sbin/poweroff&#8217;
+
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+echo &#8220;END OF SHUTDOWN COMMANDS $(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;)&#8221;  
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+;;  
+\# POWERRESTORED)  
+COMMONLINE)  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; POWERRESTORED &#8211; POWER RESTORED&#8221;  
+printf &#8220;Subject: UPS ALERT\r\n\r\nUPS POWER RESTORED&#8221; | msmtp $EMAIL
+
+#NAS WAKEUP  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waking up NAS&#8221;  
+wakeonlan $NASMACADDRESS
+
+#ESXi HOST WAKEUP  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Sleeping for 10 minutes before waking ESXi&#8221;  
+sleep 10m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waking ESXi Host&#8221;  
+wakeonlan $ESXIMACADDRESS  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Waiting for ESXi Host to be ready. Sleeping for 5 Minutes.&#8221;  
+sleep 5m  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Disabling ESXi Maintenance Mode&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;esxcli system maintenanceMode set &#8211;enable false&#8217;  
+echo &#8220;$(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;) &#8212; Starting ESXi Autostart VM process&#8221;  
+sshpass -p $ESXIPASSWD ssh -oStrictHostKeyChecking=no $ESXIUSER@$ESXIIP &#8216;vim-cmd hostsvc/autostartmanager/autostart&#8217;
+
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+echo &#8220;END OF STARTUP COMMANDS $(date +&#8217;%Y-%m-%d %H:%M:%S&#8217;)&#8221;  
+echo &#8220;\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***\***&#8221;  
+;;  
+*)  
+logger -t upssched-cmd &#8220;Unrecognized command: $1&#8221;  
+;;  
+esac
+
+Edit the configuration file at /etc/nut/upsmon.conf to change your timer to something less than 120 second or else you will have to wait 2 minutes for the system to trigger the event. We have elected to use 12 seconds here.
+
+AT ONBATT * START-TIMER BATTERYPOWER 12
+
+Finally cycle the services and then start testing
+
+sudo systemctl restart nut-driver  
+sudo systemctl restart nut-server  
+sudo systemctl restart nut-monitor
+
+Remove the USB cable and observe. If things do not work properly, check the log file located at /etc/nut/logs
+
+sudo cat /etc/nut/logs/upssched.log
+
+### Comment by Nathan D on 2020-08-05 19:18:49 -0400
+how do i get the smtp email to include the NOTIFYMSG text automaticallys far it just has the NOTIFYFLAG type and thats it.
+
+i need it to include the messages so i dont have to keep lookking up what each flag means later on.
+
+### Comment by Nathan D on 2020-08-05 19:29:54 -0400
+here is my exec CMD:
+
+printf &#8220;Subject: CyberPower UPS ALERT: $NOTIFYTYPE: $NOTIFYMSG\n\nUPS: $UPSNAME\r\nAlert type: $NOTIFYTYPE\r\nAlert Message: $NOTIFYMSG&#8221; | msmtp 
+
+now the email shows: &#8220;Alert Message:&#8221; but nothing afterwards.
+
+### Comment by Logan Marchione on 2020-08-07 15:45:27 -0400
+Thanks for sharing this! I still don&#8217;t have NUT setup to shutdown my systems, only alert on power failure, maybe now is the time to look into this!
+
+### Comment by Logan Marchione on 2020-08-07 16:00:10 -0400
+To be honest, I&#8217;m not sure. I would also assume it&#8217;s $NOTIFYMSG, but apparently that doesn&#8217;t work. <a href="https://networkupstools.org/docs/user-manual.pdf" target="_blank" rel="noopener noreferrer nofollow ugc">This</a> document only mentions it one time. You may need to try their <a href="https://networkupstools.org/support.html" target="_blank" rel="noopener noreferrer nofollow ugc">mailing list</a>.
+
+### Comment by James on 2020-08-15 23:16:34 -0400
+I&#8217;m actually having the same problem. Did you ever find a solution to this?
+
+### Comment by Lucian Vittori on 2020-08-20 13:51:08 -0400
+To get the NOTIFYMSG included in the email.
+
+printf &#8220;Subject: NUT ALERT: $NOTIFYTYPE\n\nUPS: $UPSNAME\r\nAlert type: $NOTIFYTYPE ($*)&#8221; | msmtp $EMAIL
+
+Original Email Body:  
+UPS: cyberpower1@localhost  
+Alert type: ONBATT
+
+UPS: cyberpower1@localhost  
+Alert type: ONLINE
+
+New Email Body:  
+UPS: cyberpower1@localhost  
+Alert type: ONBATT (UPS cyberpower1@localhost on battery)
+
+UPS: cyberpower1@localhost  
+Alert type: ONLINE (UPS cyberpower1@localhost on line power)
+
+### Comment by Lucian Vittori on 2020-08-20 13:51:44 -0400
+Thanks for the nice set of instuctions!
+
+### Comment by Logan Marchione on 2020-09-04 08:35:46 -0400
+Thanks for sharing!
+
+### Comment by Titi on 2020-10-02 04:38:00 -0400
+Hello,
+
+I plug the UPS USB on a USB HUB on my Rpi. The lsusb says :  
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter  
+Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp. SMC9512/9514 USB Hub  
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+The dmesg | tail sais :  
+[ 29.671923] Adding 2097148k swap on /var/swap. Priority:-2 extents:13 across:3653628k SSFS  
+[ 31.095031] smsc95xx 1-1.1:1.0 eth0: link up, 100Mbps, full-duplex, lpa 0xC5E1  
+[ 106.924193] usb 1-1.2: new low-speed USB device number 4 using dwc_otg  
+[ 107.102811] usb 1-1.2: New USB device found, idVendor=051d, idProduct=0002, bcdDevice= 1.06  
+[ 107.102842] usb 1-1.2: New USB device strings: Mfr=3, Product=1, SerialNumber=2  
+[ 107.102861] usb 1-1.2: Product: Back-UPS XS 950U FW:925.T2 .I USB FW:T2  
+[ 107.102878] usb 1-1.2: Manufacturer: American Power Conversion  
+[ 107.102897] usb 1-1.2: SerialNumber: 4B1951P02203  
+[ 107.324874] hid-generic 0003:051D:0002.0001: hiddev96,hidraw0: USB HID v1.10 Device [American Power Conversion Back-UPS XS 950U FW:925.T2 .I USB FW:T2 ] on usb-20980000.usb-1.2/input0  
+[ 153.221782] usb 1-1.2: USB disconnect, device number 4
+
+And the systemctl status nut-driver.service says :  
+● nut-driver.service &#8211; Network UPS Tools &#8211; power device driver controller  
+Loaded: loaded (/lib/systemd/system/nut-driver.service; static; vendor preset: enabled)  
+Active: failed (Result: exit-code) since Fri 2020-10-02 10:29:16 CEST; 7min ago  
+Process: 1280 ExecStart=/sbin/upsdrvctl start (code=exited, status=1/FAILURE)
+
+oct. 02 10:29:11 rpiAPC upsdrvctl[1280]: No matching HID UPS found  
+oct. 02 10:29:11 rpiAPC upsdrvctl[1280]: Driver failed to start (exit status=1)  
+oct. 02 10:29:16 rpiAPC upsdrvctl[1280]: Network UPS Tools &#8211; Generic HID driver 0.41 (2.7.4)  
+oct. 02 10:29:16 rpiAPC upsdrvctl[1280]: USB communication driver 0.33  
+oct. 02 10:29:16 rpiAPC upsdrvctl[1280]: No matching HID UPS found  
+oct. 02 10:29:16 rpiAPC systemd[1]: nut-driver.service: Control process exited, code=exited, status  
+oct. 02 10:29:16 rpiAPC upsdrvctl[1280]: Driver failed to start (exit status=1)  
+oct. 02 10:29:16 rpiAPC upsdrvctl[1280]: Network UPS Tools &#8211; UPS driver controller 2.7.4  
+oct. 02 10:29:16 rpiAPC systemd[1]: nut-driver.service: Failed with result &#8216;exit-code&#8217;.  
+oct. 02 10:29:16 rpiAPC systemd[1]: Failed to start Network UPS Tools &#8211; power device driver control  
+~
+
+Do you knwo why ?
+
+As I connect directly the USB PAS cable, the command systemctl start nut-driver is OK.
+
+Regards
+
+### Comment by Logan Marchione on 2020-10-02 08:48:35 -0400
+I don&#8217;t see the UPS when you run `lsusb`. When you directly connect the UPS to the RPi, does `lsusb` list the UPS? I know that NUT won&#8217;t work unless `lsusb` shows the UPS. I would try a different hub or different cable, something is wrong there. Not sure why `dmesg` is showing it, but nowhere else&#8230;
+
+### Comment by Richard on 2020-10-09 06:33:01 -0400
+Wow &#8230; Any chance of a copy of your SD card saving me hours of work? I have the same UPS and would like to monitor it from a Pi. Thanks
+
+### Comment by Logan Marchione on 2020-10-09 08:51:28 -0400
+Unfortunately I don&#8217;t, I switched to a virtual machine years ago. The install isn&#8217;t that bad, I promise!
+
+### Comment by MrRonfo on 2020-11-28 13:46:23 -0500
+Hi Logan, great tutorial !
+
+I have a Cyber Power PR1500LCDRT2U connected to my RPi 4 B+ and I was trying to follow your guide:
+
+Connecting the UPS to RPi USB port, with dmesg I get:  
+[14601.843899] hid-generic 0003:0764:0601.0002: hiddev96,hidraw0: USB HID v1.11 Device [1 850] on usb-0000:01:00.0-1.1/input0
+
+With lsusb I get the following, so suppose the UPS to be correctly visible:  
+Bus 001 Device 006: ID 0764:0601 Cyber Power System, Inc. PR1500LCDRT2U UPS
+
+Added the following config for my UPS to /etc/nut/ups.conf :  
+[cyberpowerups]  
+driver = powerpanel  
+port = /dev/usb/hiddev0  
+desc = &#8220;Cyber Power PR1500LCDRT2U&#8221;
+
+Then, unfortunately I get an error when starting the NUT driver (also after a reboot):  
+[19:20:20] $ sudo systemctl start nut-driver  
+[19:20:36] $ sudo systemctl status nut-driver  
+● nut-driver.service &#8211; Network UPS Tools &#8211; power device driver controller  
+Loaded: loaded (/lib/systemd/system/nut-driver.service; static; vendor preset: enabled)  
+Active: failed (Result: exit-code) since Sat 2020-11-28 15:56:32 CET; 3h 24min ago  
+Process: 5673 ExecStart=/sbin/upsdrvctl start (code=exited, status=1/FAILURE)
+
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: Things to try:  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: &#8211; Use another port (with the right permissions)  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: &#8211; Fix the port owner/group or permissions on this port  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: &#8211; Run this driver as another user (upsdrvctl -u or &#8216;user=&#8230;&#8217; in ups.conf).  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: See upsdrvctl(8) and ups.conf(5).  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: Driver failed to start (exit status=1)  
+Nov 28 15:56:32 rmHomeServer upsdrvctl[5673]: Network UPS Tools &#8211; UPS driver controller 2.7.4  
+Nov 28 15:56:32 rmHomeServer systemd[1]: nut-driver.service: Control process exited, code=exited, status=1/FAILURE  
+Nov 28 15:56:32 rmHomeServer systemd[1]: nut-driver.service: Failed with result &#8216;exit-code&#8217;.  
+Nov 28 15:56:32 rmHomeServer systemd[1]: Failed to start Network UPS Tools &#8211; power device driver controller.
+
+Any suggestion?
+
+Thanks,
+
+### Comment by Logan Marchione on 2020-11-29 12:21:26 -0500
+Did you try using the `usbhid-ups` driver instead? But I&#8217;m more leaning towards a permissions issue. Unfortunately NUT is kind of cryptic in its error messages, but I&#8217;d bet a directory needs to be changed somewhere. Did you run these?  
+`sudo chown root:nut /etc/nut/*<br />
+sudo chmod 640 /etc/nut/*<br />
+sudo chown nut:nut /var/run/nut`
+
+### Comment by MrRonfo on 2020-12-05 07:05:13 -0500
+Thanks again Logan!
+
+To solve my issue I have:  
+&#8211; just ran the last one, as other permissions were already fine  
+&#8211; reassigned to &#8220;nut&#8221; user the usb device (/dev/bus/usb/00x/00y) nut-driver tries to connect to; otherwise, when running nut-server, I get access-denied error  
+&#8211; used the usbhid-ups driver (port=auto) in ups.conf
+
+Cheers,
+
+### Comment by Logan Marchione on 2020-12-10 09:29:48 -0500
+Glad you got it working!
+
+### Comment by kapee on 2020-12-30 15:11:21 -0500
+Hi Logan,  
+This is so AWESOME!!!.. great work.. i have it working at the first shot (as a newbie I can attest to every step.. very detailed and amazingly simple to set up)
+
+i have the following question though.. I have set up Prometheus + Grafana as the Dashboarding across my entire home network and would like to know if there is anyway we can export / poll the results to display in the grafana graphs..
+
+any help would be appreciated
+
+Regards,  
+K
+
+### Comment by George on 2020-12-30 20:10:14 -0500
+Hi Logan,
+
+Great guide and I&#8217;m almost there with it. My issue relates to this comment thread. The only thing not working is receiving the emails. I did everything you suggest and running the script by itself results in a blank template as you indicated.
+
+Thanks,  
+George
+
+### Comment by Logan Marchione on 2020-12-30 21:18:07 -0500
+Glad you have it working! I&#8217;m using <a href="https://github.com/loganmarchione/telegraf-nut-input" target="_blank" rel="noopener nofollow ugc">this python script</a> I wrote to get the NUT data into InfluxDB where I use Grafana to visualize it. A quick Google shows a few different options for Prometheus (<a href="https://github.com/DRuggeri/nut_exporter" target="_blank" rel="noopener nofollow ugc">one</a>, <a href="https://github.com/HON95/prometheus-nut-exporter" target="_blank" rel="noopener nofollow ugc">two</a>), but I don&#8217;t know anything about them personally.
+
+### Comment by Logan Marchione on 2020-12-30 21:20:43 -0500
+Does running msmtp as a test work?  
+`printf "Subject: Test Mail\n\nThis is a test mail" | msmtp email@domain.com`
+
+You may also want to try to tail any logs that NUT has while you run the script to see if it executes.
+
+### Comment by kapee on 2020-12-30 23:10:12 -0500
+Do you have any detail steps (getting spoilt btw you wrote the earlier one) which i could follow. i tried installing InfluxDB with Telegraf and for the love of \*** i cant seem to figure out the strings connections nor the input / output settings to get it work.
+
+### Comment by George on 2020-12-31 14:00:16 -0500
+The test had always worked but I think I found the issue in reading another of your replies below. You advised to check the file permissions on /etc/msmtprc and mine was 600, not 644. I&#8217;m new to linux but this kinda makes sense to me if the group and/or other users had no permissions to it&#8230; but then the file owner and group are both root? I dunno, perhaps you can verify that the problem was indeed the permissions. Either way, happy it&#8217;s working and thankful for your post and replies.
+
+### Comment by Logan Marchione on 2021-01-04 10:23:17 -0500
+I installed it in Docker. If you&#8217;re installing on bare metal, this would probably work.  
+<a href="https://www.howtoforge.com/tutorial/how-to-install-tig-stack-telegraf-influxdb-and-grafana-on-ubuntu-1804/" rel="nofollow ugc">https://www.howtoforge.com/tutorial/how-to-install-tig-stack-telegraf-influxdb-and-grafana-on-ubuntu-1804/</a>
+
+Yes, the Telegraf config file is confusing at first, but once you get it working, it makes sense. The config file tells Telegraf what data to gather (inputs) and where to send it (outputs). What part specifically is not working?
+
+### Comment by Logan Marchione on 2021-01-04 10:41:03 -0500
+I get what you&#8217;re saying. 644 makes sense since other users need to be able to read the config file. But then limiting it to root:root would obviously restrict it to root only. Not sure why that matters, but glad it&#8217;s working now. I switched from msmtp to Mutt, so I can&#8217;t tell you what the correct permissions should be.
+
+### Comment by alex smith on 2021-01-05 00:24:37 -0500
+Finally got it working. Had some issues with the permissions and ports as i was having the Influxdb run on a different Raspi4 and the UPS was connected to a Raspi2. After Firewall updates and some minor tweaks to the Dashboard #10482 got it work beautifully. I have 3 Raspi2 connected to different UPS across the home giving status on a single dashboard. Love it&#8230; Great Job Logan&#8230; Thanks again
+
+### Comment by Logan Marchione on 2021-01-05 10:08:23 -0500
+Glad it&#8217;s working!

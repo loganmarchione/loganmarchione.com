@@ -1,0 +1,82 @@
+## Comments
+
+### Comment by Matt Lindsey on 2019-03-03 17:31:25 -0500
+Exactly what I was looking for! Thanks for putting this together. Like yourself, just looking for a single-drive backup solution. I will be adding NextCloud and Plex to this equation after following this guide. Also, great external links to support. I priced this out at several vendors and AmeriDroid seems to be the least expensive option, still. I will get started with this as soon as it arrives.
+
+### Comment by jessie on 2019-03-04 00:37:29 -0500
+This is a great tutorial! My HC2 is up and running. Thank you!
+
+### Comment by Logan Marchione on 2019-03-04 08:57:49 -0500
+Glad it&#8217;s working!
+
+### Comment by Logan Marchione on 2019-03-04 08:59:53 -0500
+Glad I was able to help!
+
+FYI &#8211; I don&#8217;t run Plex on the HC2 itself, I run Plex inside a VM on a different machine and only use the HC2 as storage for Plex. I&#8217;m not sure what kind of transcoding the HC2 would be capable of.
+
+### Comment by Dave on 2019-09-08 19:43:01 -0400
+Issue I have notice with HC2 and OMV is that if you remove the HDD (partitioned/formatted/ with data) and try to read it on another Linux desktop (e.g. Mint) none of the created partitions w/ data exist. Don&#8217;t understand why. SO if your HC2 with die there is no way to get the data.
+
+### Comment by Logan Marchione on 2019-09-09 13:52:47 -0400
+I&#8217;ll have to test this myself, but do you have a non-standard setup with your HC2? Not using RAID or anything weird? You&#8217;d think you&#8217;d able to just pull the drive and all the data should be on standard Linux partitions.
+
+### Comment by Tom Hinders on 2019-10-08 18:45:55 -0400
+Thanks for posting!!
+
+Interesting approach. 
+
+Couple of Qs; 
+
+Since posting, any updates or changes to approach / HW etc ?
+
+In your post you say&#8221;I chose the HC2, which is only a single-drive device, because I’m not looking for a 2-bay NAS with RAID support. &#8221; What option might you suggest for a 2 bay / RAID setup.
+
+Thanks again !!!
+
+### Comment by Logan Marchione on 2019-10-10 15:37:17 -0400
+Nope, been running OMV4 since this post, but I see that OMV5 is in beta. However, my 4TB drive is 93% full so I’m going to be upgrading.
+
+This time, I am going for a 2-bay NAS appliance. I’ll probably end up with the Synology DS718+. It has a decent CPU and upgradable RAM. Synology recently refreshed their product line, but the 2-bay NAS appliances didn’t get a refresh. QNAP, Buffalo, and Asus also make storage devices, but Synology is considered the “best”.
+
+### Comment by azhuko on 2019-10-17 08:37:34 -0400
+Hi!  
+Can you say temperature your HC2(HDD) in use?  
+You do something for vibration reduction and cooling your device?
+
+### Comment by Logan Marchione on 2019-10-17 09:08:07 -0400
+When it&#8217;s really running, it gets up to about 60 C, but when it&#8217;s idle it sits around 40-45 C. That&#8217;s the temperature as reported by Armbian (which I think is the CPU temperature, I don&#8217;t measure the temperature of the HDD itself).
+
+No, I don&#8217;t do anything for vibration or cooling. However, I considered getting one of <a href="https://www.amazon.com/ARCTIC-Breeze-Mobile-Flexible-Portable/dp/B003XN24GY" target="_blank" rel="noopener noreferrer nofollow">these</a>, but never got around to it.
+
+### Comment by Julianna on 2020-01-05 21:55:12 -0500
+Hi, how did you know how to access the web interface after you boot OMV for the first time?
+
+### Comment by Logan Marchione on 2020-01-06 10:38:04 -0500
+The web interface is at the IP of your device (e.g., <a href="http://192.168.1.10" rel="nofollow ugc">http://192.168.1.10</a>).  
+<a href="https://openmediavault.readthedocs.io/en/stable/installation/index.html" rel="nofollow ugc">https://openmediavault.readthedocs.io/en/stable/installation/index.html</a>
+
+### Comment by James Chacko on 2020-02-19 14:57:51 -0500
+Hi, I came across this post while doing my research on Odroid HC2, very detailed and a lot of information for somebody like me that is trying to decide on the product. 
+
+From their website I notice that, you can stack multiple boards and was wondering if you need to expand why don&#8217;t you add on a second board+drive and continue to expand as required in the future? Something like this &#8211; <a href="https://hackaday.com/2018/06/14/neat-odroid-glusterfs-build-stashes-data-sips-power/" rel="nofollow ugc">https://hackaday.com/2018/06/14/neat-odroid-glusterfs-build-stashes-data-sips-power/</a>
+
+I am trying to understand if there is a drawback to the device or something that you have observed that would make you want to move to Synology instead.
+
+Thank you
+
+### Comment by Logan Marchione on 2020-02-19 15:31:45 -0500
+Good question! Lots of people stack HC2 units (<a href="https://www.reddit.com/r/homelab/comments/f68qpb/meet_the_new_low_power_minilab/" target="_blank" rel="noopener noreferrer nofollow ugc">here&#8217;s a recent example</a>), but that wasn&#8217;t going to work long-term for me. I had a couple things pushing me towards a Synology (I ended up with a DS718+ with 2x8TB WD Reds).  
+1) Adding an additional HC2 would be another Linux distribution to setup/manage/patch. In addition, those MicroSD cards aren&#8217;t known to be super-durable in the long-term.  
+&#8212;Synology solves this by having their OS installed onto each drive of the device.  
+2) There is no (easy) way to expand storage. If I needed to replace a 4TB drive with an 8TB drive, it would require me to buy a new drive and manually copy all the contents to the new drive. I suppose I could use something like GlusterFS, but that would require buying another HC2 and drive, setting up an OS, setting up GlusterFS, etc&#8230;  
+&#8212;Synology solves this with RAID. If I want to upgrade a drive, I can hot-swap it and RAID will rebuild the new (empty) drive from the existing drive.
+
+For me, I realized I would spend more time managing/maintaining the HC2 units than actually using them, so I opted for an &#8220;appliance&#8221; like the Synology.
+
+### Comment by Anonymous on 2020-11-13 05:37:08 -0500
+Very helpful guide, just got my HC2 and set it up 🙂
+
+### Comment by Logan Marchione on 2020-11-13 09:26:05 -0500
+Glad to help! If you haven&#8217;t seen oDroid now has an HC4 which is a toaster-style two-drive unit.  
+<a href="https://www.hardkernel.com/shop/odroid-hc4/" rel="nofollow ugc">https://www.hardkernel.com/shop/odroid-hc4/</a>  
+<a href="https://cdn.hardkernel.com/wp-content/uploads/2020/10/ODROID-HC4_hdd-800x800.jpg" rel="nofollow ugc">https://cdn.hardkernel.com/wp-content/uploads/2020/10/ODROID-HC4_hdd-800&#215;800.jpg</a>

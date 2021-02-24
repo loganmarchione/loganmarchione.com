@@ -1,0 +1,1055 @@
+## Comments
+
+### Comment by Campbell on 2015-10-05 16:41:31 -0400
+Hello,  
+An excellent guide. I was able to configure the connection to my home router via internet without any problems.  
+Problem is, however, that I do not see my home PC connected to a router with &#8220;openwrt+openvpn server&#8221;. I can connect the tablet to the router but I would like to have access to files on my home computer. Kindly append notes and hints how to do it.  
+Thanks.
+
+### Comment by Logan on 2015-10-07 21:13:16 -0400
+Hi Campbell,
+
+So you&#8217;re able to startup the VPN and connect remotely? When you SSH in, can you see any connected clients?  
+`cat /tmp/dhcp.leases`  
+If you don&#8217;t see your PC getting a lease from the router, there is something else going on.  
+Is the PC wireless, like the tablet? or wired?
+
+Logan
+
+### Comment by Mike on 2015-10-12 22:46:58 -0400
+Does openwrt have a client control page to make it easy to turn off and on or only a server page?
+
+### Comment by Logan on 2015-10-13 08:49:57 -0400
+Sorry, I&#8217;m confused what you&#8217;re asking. You mean to start and stop the OpenVPN service in the web interface?
+
+### Comment by Mike on 2015-10-13 14:51:51 -0400
+I&#8217;m looking to be able to turn the OpenVPN client service on and off without having to ssh in.
+
+### Comment by Logan on 2015-10-15 08:25:17 -0400
+This build is actually a VPN server, not a VPN client, but yes, this setup has a control for that.  
+<a href="https://loganmarchione.com/wp-content/uploads/2015/10/20151015_001.png" rel="nofollow ugc">https://loganmarchione.com/wp-content/uploads/2015/10/20151015_001.png</a>
+
+### Comment by Mike on 2015-10-17 12:16:16 -0400
+There doesn&#8217;t seem to be a full configuration there for a client connection. Or does it look for a specific ovpn file?
+
+### Comment by Logan on 2015-10-18 20:09:25 -0400
+Again, since this a VPN server (not a client), you can only control the start/stop status of the server through the web interface. I don&#8217;t have a VPN client to setup on OpenWrt to test, but I&#8217;d imagine the client service has a LuCI option as well.
+
+### Comment by ZXc on 2015-12-06 05:54:01 -0500
+Does openwrt affect the quality of the wi-fi signal? With my last router, I thought stock firmware was better than ddwrt, because I had a more stable signal in the far corner of my house.
+
+### Comment by Logan on 2015-12-06 20:34:12 -0500
+OpenWrt should not affect wireless signal quality, but it depends on a couple things:
+
+  1. OpenWrt does allow you to <a href="https://wiki.openwrt.org/doc/faq/faq.wireless#can_i_adjust_the_transmit_power" target="_blank" rel="nofollow">adjust the transmit power</a>, which most stock firmwares will not allow. This can be a good and bad thing.
+  2. Some custom firmwares (e.g., <a href="http://asuswrt.lostrealm.ca/" target="_blank" rel="nofollow">Asuswrt-Merlin</a>) perform much better than OpenWrt or DD-WRT, as they only contain small changes, and still allow special vendor-specific functions (e.g., hardware acceleration).
+
+So yes, you may have had better wireless signal on your stock firmware than OpenWrt. I think your signal quality depends more so on your antenna setup and the positioning of the router, than anything. Most people who use a custom firmware don&#8217;t use it to increase wireless signal, they use it for features that you can&#8217;t get in stock firmware (e.g., OpenVPN, proxy, packages, etc&#8230;).
+
+### Comment by Csabi on 2015-12-28 16:25:42 -0500
+Hi!  
+First of all, thank you, this guide is very-very cool!  
+I setted my router and the vpn server working good on my android and iphone devices, but I tried setting up the openvpn &#8220;offically&#8221; windows client&#8230; not working 🙁 connected and the ips good but the gateway is emtpy and not ping anything, I tried to set ip manually, but same 🙁  
+Do you have any idea whats wrong?
+
+### Comment by Logan on 2015-12-28 21:32:25 -0500
+You&#8217;re welcome, glad to help!
+
+I don&#8217;t have a Windows machine to test on, but here are a few suggestions:
+
+  * Are you using the <a href="https://openvpn.net/index.php/open-source/downloads.html" target="_blank" rel="nofollow">newest version</a> of the client?
+  * So you do get connected to your server? Do you have log files specified in your server config you can look at while your client is connected? Mine were stored in `/tmp/openvpn.log` and `/var/log/openvpn_status.log`.
+  * What do you mean the gateway is empty? The field in the Windows OpenVPN client is not filled out?
+  * Are you running OpenVPN as an admin user?
+  * I could be wrong, but I&#8217;m not sure that Windows supports tun devices, only tap.
+  * Again, I could be wrong, but I don&#8217;t think Windows supports pushing certain options, such as `dhcp-option`, that I use specifically to set DNS servers.
+
+I wish I could be more help, but you may need to reach out to some users on the OpenVPN forums. I&#8217;ve done my build a few times without issue, but never used a Windows client.
+
+### Comment by juan on 2015-12-31 15:54:53 -0500
+Hi,
+
+I also have an Archer C7 (just bought it) and I will like to use my VPS as VPN.  
+I understand that what I need is to use the OpenWRT router as client and not as as server as it&#8217;s explained in this guide. Am I wrong?  
+Should I follow this guide instead; <a href="https://loganmarchione.com/2014/10/openwrt-with-openvpn-client-on-tp-link-tl-mr3020/" rel="nofollow ugc">https://loganmarchione.com/2014/10/openwrt-with-openvpn-client-on-tp-link-tl-mr3020/</a> ??
+
+thank you
+
+### Comment by Logan on 2015-12-31 18:06:29 -0500
+You are correct in that you want to setup a VPN client, not a server. But use <a href="https://loganmarchione.com/2015/02/openwrt-with-openvpn-client-on-tp-link-tl-mr3020-3/" target="_blank" rel="nofollow">this</a> guide, it is a newer version of the one you linked to.
+
+### Comment by Panos on 2016-01-02 11:32:36 -0500
+To connect from a Windows machine you have to add &#8220;comp-lzo yes&#8221; without quotation marks on the client.ovpn file. For some reason the server doesn&#8217;t push this option on Windows machines but does on android and ios(both tested and confirmed) resulting in an error ( I think error 122 on the command window of the connection) after a couple of secs.  
+I have another problem. I&#8217;ve installed on all devices and working great, except an oxygen modem router. This router supports client mode with native open on support. The problem is when I connect it to my server I only browse the Internet and cannot view the network. If I redirect all traffic through the vpn I can view the network but cannot access the Internet. Ideas?
+
+### Comment by Panos on 2016-01-02 12:23:34 -0500
+In addition to the Windows connection problems, you have to go to the opnvpn install folder, right click each one of the 3 executable files and select properties-compatibility and check run as administrator. If the open pen doesn&#8217;t run as administrator then Windows doesn&#8217;t allow it to create routes to the network adapter
+
+### Comment by Panos on 2016-01-02 12:26:33 -0500
+Hello!  
+Check my response on the bottom of the page!
+
+### Comment by Logan on 2016-01-03 20:22:41 -0500
+Thanks, I know there were some catches with the Windows client but haven&#8217;t used it myself. I see you also pointed that out to another reader, thanks!
+
+Did you push a route to your clients to allow access to the server&#8217;s network?  
+`#push a local route to your clients (allow your clients to access the server's network)<br />
+uci add_list openvpn.myvpn.push="route 10.10.1.0 255.255.255.0"`  
+Again, I&#8217;m not sure if Windows clients can accept certain pushed options.
+
+### Comment by Logan on 2016-01-03 20:23:16 -0500
+Gotta love Windows permissions 😉
+
+### Comment by Csabi on 2016-01-09 02:46:42 -0500
+Thank you guys! This &#8220;comp-lzo&#8221; was the problem. I write to the client config, then everything OK!  
+Thanks thanks 🙂
+
+### Comment by Logan on 2016-01-11 09:31:47 -0500
+Glad it worked out!
+
+### Comment by limpkin on 2016-01-16 18:04:39 -0500
+Thanks for the awesome tutorial!  
+As a side note, it may be better disabling compression when the CPU usage becomes the limiting factor for the DL/UL speed 😉
+
+### Comment by Logan on 2016-01-17 09:44:14 -0500
+Thanks! I considered it, but running htop, it didn&#8217;t seem to be maxed out on a consistent basis. However, I never tried it without compression, so I may be missing out on some speed benefits.
+
+### Comment by Panos on 2016-01-19 13:14:52 -0500
+Yes the route is pushed. Maybe the router doesnt like pushed routes and needs to be in the client.ovpn file. Nice tip I&#8217;ll try that!
+
+### Comment by Miles on 2016-01-31 22:50:24 -0500
+Thank you. Your instructions worked after I failed with the openwrt instructions. Two things that I think made the difference: 1) details about the ovpn files for the android app. 2) explanation on what&#8217;s in the openvpn file. Thank you for taking the time to share the information.
+
+### Comment by Logan on 2016-02-01 09:16:48 -0500
+Thanks, glad to help!
+
+### Comment by Tobias on 2016-02-08 18:36:17 -0500
+What transmission rates did you achieve on your archer c7 via openVPN? The cheaper WDR3600 seems to achieve about 15 mbit/s max. The archer c7 has a faster CPU, so maybe there is room for improvement over this?
+
+### Comment by Logan on 2016-02-09 08:34:41 -0500
+I&#8217;m getting 31Mbps/15Mbps over LTE on my phone, and 12Mbps/7Mbps while connected to the VPN. My CPU usage hovers around 50% on the server. I&#8217;d be curious why my speeds are slower if the C7 has a better CPU. Maybe my config?
+
+### Comment by Viktor on 2016-02-15 20:37:36 -0500
+Hello Logan and Panos,  
+I added “comp-lzo yes” (without quotation marks) to the very beginning of the client.ovpn file on windows.  
+Running OpenVPN client 2.3.10.0. It connects to the VPN server. I do receive IP address/mask, DNS1, DNS2 addresses, DHCP address from VPN server, but not receiving Default gateway.  
+In the log file of the VPN client see the following:  
+Tue Feb 16 02:22:25 2016 OpenVPN 2.3.10 x86_64-w64-mingw32 \[SSL (OpenSSL)\] \[LZO\] \[PKCS11\] \[IPv6\] built on Feb 1 2016  
+Tue Feb 16 02:22:25 2016 Windows version 6.1 (Windows 7)  
+Tue Feb 16 02:22:25 2016 library versions: OpenSSL 1.0.1r 28 Jan 2016, LZO 2.09  
+Tue Feb 16 02:22:27 2016 UDPv4 link local (bound): [undef]  
+Tue Feb 16 02:22:27 2016 UDPv4 link remote: [AF_INET]88.132.252.187:1194  
+Tue Feb 16 02:22:28 2016 [Sentinel] Peer Connection Initiated with [AF_INET]88.132.252.187:1194  
+Tue Feb 16 02:22:30 2016 Options error: option &#8216;user&#8217; cannot be used in this context ([PUSH-OPTIONS])  
+Tue Feb 16 02:22:30 2016 Options error: option &#8216;user&#8217; cannot be used in this context ([PUSH-OPTIONS])  
+Tue Feb 16 02:22:30 2016 do\_ifconfig, tt->ipv6=0, tt->did\_ifconfig\_ipv6\_setup=0  
+Tue Feb 16 02:22:30 2016 open_tun, tt->ipv6=0  
+Tue Feb 16 02:22:30 2016 TAP-WIN32 device [Local Area Connection 3] opened: \\.\Global\{67AFAB88-C5AB-4BD2-B9AB-759772BECE5E}.tap  
+Tue Feb 16 02:22:30 2016 Notified TAP-Windows driver to set a DHCP IP/netmask of 192.168.200.2/255.255.255.0 on interface {67AFAB88-C5AB-4BD2-B9AB-759772BECE5E} [DHCP-serv: 192.168.200.0, lease-time: 31536000]  
+Tue Feb 16 02:22:30 2016 Successful ARP Flush on interface [16] {67AFAB88-C5AB-4BD2-B9AB-759772BECE5E}  
+Tue Feb 16 02:22:35 2016 Initialization Sequence Completed
+
+Should I add “comp-lzo yes” into client.ovpn file on both locations (on the windows machine and on the router as well)?  
+Is it matters where do I insert it?  
+Thank you for your reply 
+
+Regards  
+Viktor
+
+### Comment by Logan on 2016-02-16 03:23:03 -0500
+Viktor,
+
+Yes, you should include `comp-lzo yes` in both the client and server configs. It shouldn&#8217;t matter where in the file it is.
+
+What option are you trying to push here?  
+`<br />
+Tue Feb 16 02:22:30 2016 Options error: option ‘user’ cannot be used in this context ([PUSH-OPTIONS])<br />
+Tue Feb 16 02:22:30 2016 Options error: option ‘user’ cannot be used in this context ([PUSH-OPTIONS])<br />
+`  
+If you&#8217;re setting the user/group, I don&#8217;t believe that&#8217;s required on Windows.  
+`<br />
+#set user and group to less-privileged account (UNIX/Linux only)<br />
+uci add_list openvpn.myvpn.push="user nobody"<br />
+uci add_list openvpn.myvpn.push="user nogroup"<br />
+` 
+
+In my config, I&#8217;m pushing the default gateway and setting it to DHCP.  
+`<br />
+uci add_list openvpn.myvpn.push="route-gateway dhcp"<br />
+`  
+I&#8217;m not sure if that push option is available on a Windows client. You might need to try to set that in the client .ovpn file.
+
+You can also use the option below to push a route. Again, not sure if that&#8217;s Windows compatible&#8230;  
+`<br />
+uci add_list openvpn.myvpn.push="route 10.10.1.0 255.255.255.0"<br />
+`
+
+### Comment by Viktor on 2016-02-17 18:27:47 -0500
+Dear Logan,
+
+Thank you for replying.
+
+I added the &#8220;comp-lzo yes&#8221; to both client.ovpn (on the router and on the PC as 
+
+well)  
+Removed the two linux client related push lines (pushing user nobody and pushing 
+
+user nogroup)  
+Now those two error messages are gone from the log of the VPN client and the 
+
+tunel is established:  
+Wed Feb 17 22:12:05 2016 OpenVPN 2.3.10 x86_64-w64-mingw32 \[SSL (OpenSSL)\] \[LZO\] 
+
+\[PKCS11\] \[IPv6\] built on Feb 1 2016  
+Wed Feb 17 22:12:05 2016 Windows version 6.1 (Windows 7)  
+Wed Feb 17 22:12:05 2016 library versions: OpenSSL 1.0.1r 28 Jan 2016, LZO 2.09  
+Enter Management Password:  
+Wed Feb 17 22:12:05 2016 UDPv4 link local (bound): [undef]  
+Wed Feb 17 22:12:05 2016 UDPv4 link remote: [AF_INET]89.132.252.181:1194  
+Wed Feb 17 22:12:07 2016 [Sentinel] Peer Connection Initiated with [AF_INET]
+
+89.132.252.181:1194  
+Wed Feb 17 22:12:09 2016 do\_ifconfig, tt->ipv6=0, tt->did\_ifconfig\_ipv6\_setup=0  
+Wed Feb 17 22:12:09 2016 open_tun, tt->ipv6=0  
+Wed Feb 17 22:12:09 2016 TAP-WIN32 device [Local Area Connection 3] opened: \\.
+
+\Global\{67AFAB88-C5AB-4BD2-B9AB-759772BECE5E}.tap  
+Wed Feb 17 22:12:09 2016 Notified TAP-Windows driver to set a DHCP IP/netmask of 
+
+192.168.150.2/255.255.255.0 on interface {67AFAB88-C5AB-4BD2-B9AB-759772BECE5E} 
+
+[DHCP-serv: 192.168.150.0, lease-time: 31536000]  
+Wed Feb 17 22:12:09 2016 Successful ARP Flush on interface [16] {67AFAB88-C5AB-
+
+4BD2-B9AB-759772BECE5E}  
+Wed Feb 17 22:12:14 2016 Initialization Sequence Completed
+
+&#8230;but still not receiving the default GW for the TAP adapter:  
+Ethernet adapter Local Area Connection 3:  
+Connection-specific DNS Suffix:  
+Description . . . . . . . . . : TAP-Windows Adapter V9  
+Physical Address. . . . . . . : 00-FF-67-AF-AB-88  
+DHCP Enabled. . . . . . . . . : Yes  
+Autoconfiguration Enabled . . : Yes  
+Link-local IPv6 Address . . . : fe80::2584:ba1:b35c:67ca%16(Preferred)  
+IPv4 Address. . . . . . . . . : 192.168.150.2(Preferred)  
+Subnet Mask . . . . . . . . . : 255.255.255.0  
+Lease Obtained. . . . . . . . : 17 February 2016 22:12:09  
+Lease Expires . . . . . . . . : 16 February 2017 22:12:09  
+Default Gateway . . . . . . . :  
+DHCP Server . . . . . . . . . : 192.168.150.0  
+DHCPv6 IAID . . . . . . . . . : 469827431  
+DHCPv6 Client DUID. . . . . . : 00-01-00-01-19-04-61-5D-00-17-31-25-A0-83  
+DNS Servers . . . . . . . . . : 213.46.246.53  
+213.46.246.54  
+NetBIOS over Tcpip. . . . . . : Enabled
+
+What is strange for me is that I never ever have seen DHCP server declared with 
+
+network address instead of a host address
+
+On the router I have got:  
+subnet for LAN: 192.168.140.0/24  
+default GW in LAN subnet is 192.168.140.254  
+subnet for VPN clients: 192.168.150.0/24
+
+IP config for physical NIC on PC (connected to an another hotspot to reach the 
+
+internet via mobile net):  
+Wireless LAN adapter Wireless Network Connection:  
+Connection-specific DNS Suffix:  
+Description . . . . . . . . . : D-Link AirPlus G DWL-G510 Wireless PCI Ad  
+apter(rev.C)  
+Physical Address. . . . . . . : F0-7D-68-6D-42-06  
+DHCP Enabled. . . . . . . . . : Yes  
+Autoconfiguration Enabled . . : Yes  
+IPv4 Address. . . . . . . . . : 192.168.43.139(Preferred)  
+Subnet Mask . . . . . . . . . : 255.255.255.0  
+Lease Obtained. . . . . . . . : 17 February 2016 23:12:44  
+Lease Expires . . . . . . . . : 18 February 2016 00:12:44  
+Default Gateway . . . . . . . : 192.168.43.1  
+DHCP Server . . . . . . . . . : 192.168.43.1  
+DNS Servers . . . . . . . . . : 192.168.43.1  
+NetBIOS over Tcpip. . . . . . : Enabled
+
+Have the following configuration on the router:  
+#######################  
+\### /etc/config/openvpn
+
+config openvpn &#8216;custom_config&#8217;  
+option enabled &#8216;0&#8217;  
+option config &#8216;/etc/openvpn/my-vpn.conf&#8217;
+
+config openvpn &#8216;myvpn&#8217;  
+option enabled &#8216;1&#8217;  
+option dev &#8216;tap&#8217;  
+option port &#8216;1194&#8217;  
+option proto &#8216;udp&#8217;  
+option comp_lzo &#8216;yes&#8217;  
+option status &#8216;/var/log/openvpn_status.log&#8217;  
+option log &#8216;/tmp/openvpn.log&#8217;  
+option verb &#8216;3&#8217;  
+option mute &#8216;5&#8217;  
+option keepalive &#8217;10 120&#8242;  
+option persist_key &#8216;1&#8217;  
+option persist_tun &#8216;1&#8217;  
+option user &#8216;nobody&#8217;  
+option group &#8216;nogroup&#8217;  
+option ca &#8216;/etc/easy-rsa/keys/ca.crt&#8217;  
+option cert &#8216;/etc/easy-rsa/keys/Sentinel.crt&#8217;  
+option key &#8216;/etc/easy-rsa/keys/Sentinel.key&#8217;  
+option dh &#8216;/etc/easy-rsa/keys/dh2048.pem&#8217;  
+option mode &#8216;server&#8217;  
+option tls_server &#8216;1&#8217;  
+option server &#8216;192.168.150.0 255.255.255.0&#8217;  
+option topology &#8216;subnet&#8217;  
+option route_gateway &#8216;dhcp&#8217;  
+option client\_to\_client &#8216;1&#8217;  
+list push &#8216;comp-lzo yes&#8217;  
+list push &#8216;persist-key&#8217;  
+list push &#8216;persist-tun&#8217;  
+list push &#8216;topology subnet&#8217;  
+list push &#8216;route-gateway dhcp&#8217;  
+list push &#8216;redirect-gateway def1&#8217;  
+list push &#8216;route 192.168.140.0 255.255.255.0&#8217;  
+list push &#8216;dhcp-option DNS 213.46.246.53&#8217;  
+list push &#8216;dhcp-option DNS 213.46.246.54&#8217;
+
+#########################################  
+###/etc/config/openvpn-config/client.ovpn
+
+comp-lzo yes  
+#specify TUN vs. TAP (if you&#8217;re not sure, you want TUN)  
+dev tap
+
+#specify protocol to use (default is UDP)  
+proto udp
+
+#Certificate information  
+ca ca.crt  
+cert User1.crt  
+key User1.key
+
+#client settings  
+client  
+remote-cert-tls server  
+remote 89.132.252.181 1194  
+route-gateway dhcp  
+#the line above added as you suggested
+
+Even if in the IP config of the TAP interface on the PC does not show the default 
+
+GW, I noticed that I have got route for the TAP interface (192.168.150.2/24) to 
+
+the LAN subnet (192.168.140.0/24) in the routing table of the PC 🙂 :
+
+Routing table on PC  
+IPv4 Route Table  
+===========================================================================  
+Active Routes:  
+Network Destination Netmask Gateway Interface Metric  
+0.0.0.0 0.0.0.0 192.168.43.1 192.168.43.139 25  
+0.0.0.0 128.0.0.0 192.168.150.1 192.168.150.2 20  
+89.132.252.181 255.255.255.255 192.168.43.1 192.168.43.139 25  
+127.0.0.0 255.0.0.0 On-link 127.0.0.1 306  
+127.0.0.1 255.255.255.255 On-link 127.0.0.1 306  
+127.255.255.255 255.255.255.255 On-link 127.0.0.1 306  
+128.0.0.0 128.0.0.0 192.168.150.1 192.168.150.2 20  
+192.168.140.0 255.255.255.0 192.168.150.1 192.168.150.2 20  
+192.168.43.0 255.255.255.0 On-link 192.168.43.139 281  
+192.168.43.139 255.255.255.255 On-link 192.168.43.139 281  
+192.168.43.255 255.255.255.255 On-link 192.168.43.139 281  
+192.168.150.0 255.255.255.0 On-link 192.168.150.2 276  
+192.168.150.2 255.255.255.255 On-link 192.168.150.2 276  
+192.168.150.255 255.255.255.255 On-link 192.168.150.2 276  
+224.0.0.0 240.0.0.0 On-link 127.0.0.1 306  
+224.0.0.0 240.0.0.0 On-link 192.168.150.2 276  
+224.0.0.0 240.0.0.0 On-link 192.168.43.139 281  
+255.255.255.255 255.255.255.255 On-link 127.0.0.1 306  
+255.255.255.255 255.255.255.255 On-link 192.168.150.2 276  
+255.255.255.255 255.255.255.255 On-link 192.168.43.139 281  
+===========================================================================  
+Persistent Routes:  
+None
+
+I am able to ping the IP address of the router on the LAN side 
+
+(192.168.140.254/24) and even login through the luci web interface 🙂 , but when 
+
+I ping an another host in the LAN subnet (192.168.140/24) I receive dectination 
+
+PORT unreachable. Moreover I unable to open any website on the internet. 🙁
+
+C:\Users\Vik>ping 192.168.140.131
+
+Pinging 192.168.5.131 with 32 bytes of data:  
+Reply from 192.168.150.1: Destination port unreachable.  
+Reply from 192.168.150.1: Destination port unreachable.  
+Reply from 192.168.150.1: Destination port unreachable.  
+Reply from 192.168.150.1: Destination port unreachable.
+
+Ping statistics for 192.168.140.131:  
+Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+
+I also tried the DNS name resolution when I connected through VPN, but does not 
+
+work.
+
+So, for me sounds like one, or more firewall rules might missing.  
+For first sight I think all things are set in FW as it is in your guide.  
+Top of the settings in guide I also enabled the WAN and LAN in &#8220;Allow forward 
+
+from source zones:&#8221; section of the FW, but didnt make difference 🙁  
+Please tell me if you need more details.
+
+Thank you for your time and effort you have done so far.
+
+BR  
+Viktor
+
+### Comment by Logan on 2016-02-25 11:04:48 -0500
+Viktor,
+
+Sorry for the delay. I&#8217;ve tried replicating this on a Windows device (with different IPs) and it&#8217;s not working. However, my Windows device is a work laptop, so now I&#8217;m wondering if it&#8217;s a permission setting on my machine.
+
+As for your case, it could be a firewall rule, but the fact that you&#8217;re not getting a default gateway makes me think there&#8217;s a setting missing somewhere. In addition, Windows uses TAP devices instead of TUN devices, so I&#8217;m not sure what else needs to change besides `dev tap` in your config files. At this point, I&#8217;d say you need to find a specific guide online for setting this up on a Windows machine. Sorry I&#8217;m unable to be of any help.
+
+Logan
+
+### Comment by Nawab Asghar on 2016-02-25 11:15:12 -0500
+Hi Victor,
+
+Hope you&#8217;ve already sorted the issue; if not please try the following:
+
+Instead of  
+&#8220;list push ‘redirect-gateway def1’  
+try using  
+option push ‘redirect-gateway def1’
+
+Remove the following ones, mentioned twice in your config:  
+list push ‘route-gateway dhcp’
+
+### Comment by Flo on 2016-02-28 13:07:40 -0500
+Hey 
+
+its a really great article.  
+My DynDNS is running, an my openVPN to&#8230;  
+So every test you make, is ok on my OpenWRT.
+
+But if i want to connect my Smartphone to the VPN via the same app, you used too, i always stuck at &#8220;Waiting for server&#8221;&#8230;  
+i can ping my dyndns adress and get an answer and all services are running :-/
+
+Hope you can help me
+
+### Comment by Logan on 2016-02-29 13:49:21 -0500
+Is your firewall open to allow port 1194? Also, sounds silly, but make sure your DNS name is spelled correctly.
+
+### Comment by Nato on 2016-03-03 17:53:04 -0500
+Hi, thank you so much for this post&#8230; i worked out setting mine up although i&#8217;d got a bit confused about DNS and my DNS leak test says it might be leaking&#8230; could you help on how can i do better job in this point?  
+Again, thank you. Very good post.
+
+### Comment by Logan on 2016-03-03 19:24:39 -0500
+What kind of client are you using? Windows, Android, etc&#8230;
+
+Basically, with the correct config, your client should be using your VPN server (your router) for DNS queries. If it&#8217;s leaking, it means your client is using something else in place of, or in addition to, your router. This is a small security risk because even though all your traffic is encrypted and flows back to your router, the query that changes <a href="http://www.google.com" rel="nofollow ugc">http://www.google.com</a> to 1.2.3.4 is not. This means even though an attacker can&#8217;t see your traffic, they can see the sites you visit.
+
+### Comment by Nato on 2016-03-23 06:22:18 -0400
+hi Logan.  
+I&#8217;m experiencing a 5 min delay until the connection start join the exterior (internet). Do you know what may be causing this? Thank you so much.
+
+### Comment by Logan on 2016-03-23 13:19:25 -0400
+Not sure. Do you mean the a delay on your device (e.g., laptop, phone) from when you connect to the server to when you can browse?
+
+### Comment by Nato on 2016-03-23 13:46:04 -0400
+yes&#8230; i connect instantly to my vpn (on tplink C7), but i only be able to surf the internet after approximately 5 min. This is a pattern i noticed&#8230; thanks for replying.
+
+### Comment by Logan on 2016-03-23 14:13:43 -0400
+Hmm, weird. The only thing I can think (just guessing) is that DNS isn&#8217;t working right, and it goes through a series of timeouts until it gets a working DNS server. But even then, that should be a few seconds, not 5 minutes&#8230; I&#8217;m assuming you&#8217;re using your router (the VPN server) for DNS? What are its DNS servers?
+
+### Comment by Nato on 2016-03-23 15:13:45 -0400
+i&#8217;m using the router for DNS. I setup noip account hoping to access it from outside, but still not tested&#8230; the router, uses the ISP provider DNS (187.108.48.3)&#8230; i think you point to something it worth i take closer look&#8230; All role of DNS make me a bit confused.  
+thank you.
+
+### Comment by Kiran on 2016-03-31 00:33:52 -0400
+When I try to upgrade the firmware I get the following:
+
+Error code: 18005 Upgrade unsuccessfully because the version of the upgraded file was incorrect. Please check the file name.
+
+This is my build:  
+3.14.3 Build 151014 Rel.49676n
+
+I flashed it back to a previous firmware version with the TP-Link GUI version and loaded openwrt binary, and it loaded and restarted, After that the router is completely unresponsive, for all intents and purposes bricked. Not quite sure what to do now. I did buy it in march and supposedly something changed in november/december in the hardware version.
+
+As of now Im using an older router and trying to load the stock firmware back on the archer. 
+
+The threads I was using:
+
+<a href="https://forum.openwrt.org/viewtopic.php?id=61389" rel="nofollow ugc">https://forum.openwrt.org/viewtopic.php?id=61389</a>
+
+<a href="https://forum.openwrt.org/viewtopic.php?pid=315588#p315588" rel="nofollow ugc">https://forum.openwrt.org/viewtopic.php?pid=315588#p315588</a>
+
+any help would be wonderful. Im on mac osx.
+
+Kiran
+
+### Comment by Logan on 2016-03-31 08:52:35 -0400
+Are you flashing from stock to OpenWrt, or upgrading OpenWrt versions?
+
+TP-Link recently introduced changes (I believe both hardware and software) that make OpenWrt incompatible with their products. Is your C7 a recent purchase? Wondering if it&#8217;s a newer version and is incompatible&#8230;
+
+Did you try the instructions for entering <a href="https://wiki.openwrt.org/toh/tp-link/tl-wdr7500#entering_failsafe_mode_on_archer_c5" target="_blank" rel="nofollow">failsafe mode</a> and <a href="https://wiki.openwrt.org/toh/tp-link/tl-wdr7500#tftp_recovery_de-bricking" target="_blank" rel="nofollow">unbricking</a>? I&#8217;ve never had to do either of these, so I can&#8217;t speak to the process&#8230;
+
+### Comment by Kiran on 2016-04-01 01:08:50 -0400
+I reset the c7 to factory defaults and then tried to flash the most recent chaos calmer open wrt factory firmware, in doing so I got the error. Then I found an earlier version of the firmware and flashed that one, to roll the firmware back. After that I flashed the chaos calmer image and it took. Then the router was unresponsive completely. I tried the de-bricking with no joy and failsafe mode also with no joy&#8230;.
+
+I did buy it in march so it maybe the problem, it appears others had a similar issue. 
+
+not sure what to do now&#8230;.
+
+### Comment by Logan on 2016-04-03 18:35:59 -0400
+Sorry to say, but you may be SOL on that router. It sounds like it&#8217;s bricked. I&#8217;d suggest asking for help on the OpenWrt forums (looks like you already did), as this is out of my league&#8230;
+
+### Comment by Daniel Holm on 2016-04-15 18:49:14 -0400
+Love the guide. After some head scratching with the VPN connecting but no Internet or networking &#8211; &#8220;connectivity&#8221; &#8211; at all I got it working with enabling the lzo compression (Network manager, Ubuntu 15.10). However I only have connectivity for a few seconds, then it drops completely. Any ideas? Running OpenWRT 15.05.1 on a TP-Link wr1043nd.
+
+### Comment by Daniel Holm on 2016-04-15 19:03:02 -0400
+Actually, I commented out the rows in /etc/config/openvpn:  
+list push &#8216;route 192.168.1.0 255.255.255.0&#8217;  
+list push &#8216;dhcp-option DNS 8.8.8.8&#8217;  
+list push &#8216;dhcp-option DNS 107.170.95.180&#8217;  
+Then I reconnected and now that works at least. However, of course, now I can&#8217;t access the other devices on the server network.
+
+### Comment by Daniel Holm on 2016-04-17 07:49:51 -0400
+I generated a new cert for this client and put everything back into the configs &#8211; now it works. However &#8220;.local&#8221; domain does not. Keep searching.
+
+### Comment by Logan on 2016-04-18 10:31:06 -0400
+Glad you got it working. Did you put the local route back? `list push 'route 192.168.1.0 255.255.255.0'`. That&#8217;s the only thing I can think of for the &#8220;.local&#8221; domains.
+
+### Comment by Tobias Diendorfer on 2016-05-08 08:53:03 -0400
+Thanks for this guide.  
+Tried latest ddwrt and openwrt builds on my archer c7 v2 but having wifi stability issues. Clients seems to be connected but can&#8217;t communicate with Lan clients. 
+
+Anyone else having these issues?  
+Any recommended build? 
+
+Thx
+
+### Comment by Logan on 2016-05-09 09:25:16 -0400
+Questions:  
+1) Did you install OpenWrt from stock or an upgrade? Did you use the correct image?
+
+2) You say you&#8217;re having stability issues. Is there no communication between LAN and WLAN clients at all, or just sometimes? From your wording, it sounds like it&#8217;s intermittent.
+
+3) Did you double check that the LAN and WLAN interfaces are bridged?
+
+### Comment by Computerking on 2016-05-11 14:24:54 -0400
+Thanks for the excellent instructions, that are working for me &#8230; mostly &#8230; Using windows and openvpn client connects quickly and i get an ip right away. However i cannot access the remote vpn right away, then after a few minutes i get automagically disconnected and reconnected, and things start working correctly 
+
+below is a snippit of the connection log 
+
+Wed May 11 18:16:16 2016 user1/184.69.209.234:62141 TLS: new session incoming connection from [AF_INET]184.69.209.234:62141  
+Wed May 11 18:16:17 2016 user1/184.69.209.234:62141 VERIFY OK: depth=1, C=CA, ST=AB, L=Calgary, O=ComputerKing, OU=computerking.ca, CN=925.redwingshoes.ca, name=EasyRSA,  
+emailAddress=admin@computerking.ca  
+Wed May 11 18:16:17 2016 user1/184.69.209.234:62141 VERIFY OK: depth=0, C=CA, ST=AB, L=Calgary, O=ComputerKing, OU=computerking.ca, CN=user1, name=EasyRSA, emailAddress=a  
+<dmin@computerking.ca>  
+Wed May 11 18:16:18 2016 user1/184.69.209.234:62141 Data Channel Encrypt: Cipher &#8216;BF-CBC&#8217; initialized with 128 bit key  
+Wed May 11 18:16:18 2016 user1/184.69.209.234:62141 Data Channel Encrypt: Using 160 bit message hash &#8216;SHA1&#8217; for HMAC authentication  
+Wed May 11 18:16:18 2016 user1/184.69.209.234:62141 NOTE: &#8211;mute triggered&#8230;  
+Wed May 11 18:16:20 2016 user1/184.69.209.234:62141 5 variation(s) on previous 5 message(s) suppressed by &#8211;mute  
+Wed May 11 18:16:20 2016 user1/184.69.209.234:62141 PUSH: Received control message: &#8216;PUSH_REQUEST&#8217;  
+Wed May 11 18:16:20 2016 user1/184.69.209.234:62141 send\_push\_reply(): safe_cap=940  
+Wed May 11 18:16:20 2016 user1/184.69.209.234:62141 SENT CONTROL [user1]: &#8216;PUSH_REPLY,comp-lzo yes,persist-key,persist-tun,user nobody,user nogroup,topology subnet,route-  
+gateway dhcp,redirect-gateway def1,route 10.22.1.0 255.255.255.0,dhcp-option DNS 8.8.8.8,dhcp-option DNS 8.8.4.4,route-gateway 10.8.0.1,topology subnet,ping 10,ping-resta  
+rt 120,ifconfig 10.8.0.2 255.255.255.0&#8217; (status=1)
+
+### Comment by Logan on 2016-05-16 09:34:52 -0400
+Are you running the windows client as an administrator? Unfortunately, I don&#8217;t use Windows, so check for a couple Windows comments from users <a href="https://loganmarchione.com/2015/08/openwrt-with-openvpn-server-on-tp-link-archer-c7/#comment-9396" target="_blank">here</a> and <a href="https://loganmarchione.com/2015/08/openwrt-with-openvpn-server-on-tp-link-archer-c7/#comment-9397" target="_blank">here</a>.
+
+### Comment by Martin on 2016-05-18 19:30:12 -0400
+These are great instructions! I have an issue though, I run OpenWRT on an Archer C7 configured as ab Access Point \_behind\_ a different router. Can you help me with how to forward the ports properly so the OpenVPN server is accessible from the „outside“ (Internet)? Sincerely, Martin
+
+### Comment by Logan on 2016-05-19 09:24:51 -0400
+So you have this setup? Router1&#8212;->Archer C7&#8212;->OpenVPN server
+
+If that is the case, only router1 should have DHCP/DNS/firewall setup. The Archer C7 should be acting as a switch/AP only. In that case, you&#8217;d need to forward your OpenVPN port (e.g., 1194/UDP) from router1 to the IP of the OpenVPN server (assuming it&#8217;s a different device like a Raspberry Pi). There would be no configuration on the Archer C7 needed.
+
+Is the Archer C7 running it&#8217;s own DHCP/DNS/firewall? In that case, you&#8217;re double-NATed and you&#8217;ll need to forward your port (e.g., 1194/UDP) from router1 to the Archer C7, then forward that from the Archer C7 to your device IP. I can&#8217;t provide instructions for router1, since I&#8217;m not sure of the make/model. I&#8217;m sure you could Google it though.
+
+### Comment by buzcuz35 on 2016-05-25 21:11:40 -0400
+Hi Logan,
+
+Thx for this how to . After many nights i got my vpn working with your instructions. I have openvpn running on a wdr4900 with Chaos Calmer. I can surf the internet with out any problems, but the only problem i have is that can not ping any other pc our server on my local network. I have no problems with pinging of the vpnserver ( 192.168.0.1) and my router (192.168.40.1).  
+I am connecting with Ubuntu and an Iphone.
+
+I push the route 192.168.40.0 255.255.255.0
+
+Can you help out? I want to be able to connect to my server our workstations.
+
+Here is my server config
+
+config openvpn &#8216;myvpn&#8217;  
+option enabled &#8216;1&#8217;  
+option dev &#8216;tun&#8217;  
+option port &#8216;1194&#8217;  
+option proto &#8216;udp&#8217;  
+option comp_lzo &#8216;yes&#8217;  
+option status &#8216;/var/log/openvpn_status.log&#8217;  
+option log &#8216;/tmp/openvpn.log&#8217;  
+option verb &#8216;3&#8217;  
+option mute &#8216;5&#8217;  
+option keepalive &#8217;10 120&#8242;  
+option persist_key &#8216;1&#8217;  
+option persist_tun &#8216;1&#8217;  
+option user &#8216;nobody&#8217;  
+option group &#8216;nogroup&#8217;  
+option ca &#8216;/etc/easy-rsa/keys/ca.crt&#8217;  
+option cert &#8216;/etc/easy-rsa/keys/server.crt&#8217;  
+option key &#8216;/etc/easy-rsa/keys/server.key&#8217;  
+option dh &#8216;/etc/easy-rsa/keys/dh2048.pem&#8217;  
+option mode &#8216;server&#8217;  
+option tls_server &#8216;1&#8217;  
+option server &#8216;192.168.0.0 255.255.255.0&#8217;  
+option topology &#8216;subnet&#8217;  
+option route_gateway &#8216;dhcp&#8217;  
+option client\_to\_client &#8216;1&#8217;  
+list push &#8216;comp-lzo yes&#8217;  
+list push &#8216;persist-key&#8217;  
+list push &#8216;persist-tun&#8217;  
+list push &#8216;user nobody&#8217;  
+list push &#8216;user nogroup&#8217;  
+list push &#8216;topology subnet&#8217;  
+list push &#8216;route-gateway dhcp&#8217;  
+list push &#8216;redirect-gateway def1&#8217;  
+list push &#8216;route 192.168.40.0 255.255.255.0&#8217;  
+list push &#8216;dhcp-option DNS 8.8.8.8&#8217;  
+list push &#8216;dhcp-option DNS 8.8.4.4&#8217;
+
+### Comment by Logan on 2016-05-31 11:32:30 -0400
+Unfortunately, I don&#8217;t have the Archer C7 anymore, so I can&#8217;t test your config. I can&#8217;t recall if my pings used to work or not (I assume they did). Possibly a firewall issue? Sorry I can&#8217;t be of more help.
+
+### Comment by Pete S. on 2016-06-23 03:23:52 -0400
+@Buzcuz35 &#8212; how is your VPN connected to your network? I have the following configuration that allows me to access all devices on my local network:  
+Internet > main router WAN; main router LAN > VPN server &#8211; router w/ OpenWRT, using WAN port; main router LAN > all other devices on the internal network.
+
+Obviously the internet connects to the main router WAN port and uses an internet routable IP. The router sets up the LAN subnet of 10.0.1.0/24 (all devices in my network exist on this subnet). The VPN server lives on an OpenWRT router, the WAN port has a 10.0.1.x IP address. That VPN router is configured with a LAN 10.0.2.0/24 (I don&#8217;t have any physical devices on that subnet &#8212; they would be double-NAT&#8217;d and not reachable from the rest of the .1 LAN).
+
+The VPN server is configured with 10.0.2.176 255.255.255.240 (that is a /28 subnet) and topology subnet. This makes the server IP 10.0.2.177 and the VPN clients get 10.0.2.178-191. I then push the route 10.0.1.0 255.255.255.0.
+
+This setup works because the OpenWRT VPN router &#8216;knows&#8217; how to route from the OpenVPN subnet up to the main subnet of my normal network using NAT through the WAN port. This provides access to resources on the 10.0.1.0/24 network but also can get to the internet via the main router&#8217;s NAT. This will fail to work properly if my VPN client connection is initiated from a remote network that also operates on the 10.0.1.0/24 subnet (in your case, 192.168.40.0/24). Devices on my main network cannot initiate connections to VPN clients, as they are essentially behind another NAT&#8230; but this isn&#8217;t an issue in my case. Also, remember that you need to use IP addresses, not mDNS type names (&#8220;.local&#8221; will not work through the tunnel, and likely other internal DNS type configurations will also fail).
+
+FWIW, I do not push the other things (&#8216;route-gateway dhcp&#8217;, &#8216;dhcp option DNS&#8217;, and &#8216;redirect-gateway def1&#8217;). I actually have the redirect-gateway defined on my client side configs &#8212; this way I can easily have a config that gives me access to my LAN from outside but doesn&#8217;t push all traffic through it (useful if I&#8217;m doing tech-support) or alternately I can use the redirect-gateway def1 on the client to send all traffic through the tunnel.
+
+Finally, I&#8217;d remove most of the push directives. Some of those lines would be better suited on the client config file, and you can always add them back to the server side one at a time to see what is required and what breaks things. I recommend the following:
+
+Server:
+
+config openvpn ‘myvpn’  
+option enabled ‘1’  
+option dev ‘tun’  
+option port ‘1194’  
+option proto ‘udp’  
+option comp_lzo ‘yes’  
+option status ‘/var/log/openvpn_status.log’  
+option log ‘/tmp/openvpn.log’  
+option verb ‘3’  
+option mute ‘5’  
+option keepalive ’10 120′  
+option persist_key ‘1’  
+option persist_tun ‘1’  
+option user ‘nobody’  
+option group ‘nogroup’  
+option ca ‘/etc/easy-rsa/keys/ca.crt’  
+option cert ‘/etc/easy-rsa/keys/server.crt’  
+option key ‘/etc/easy-rsa/keys/server.key’  
+option dh ‘/etc/easy-rsa/keys/dh2048.pem’  
+option mode ‘server’  
+option tls_server ‘1’  
+option server ‘192.168.0.0 255.255.255.0’  
+option topology ‘subnet’  
+option client\_to\_client ‘1’  
+list push ‘route 192.168.40.0 255.255.255.0’
+
+Client (the syntax may vary depending on the specific client config environment)  
+&#8230; normal preamble with the server address, port, protocol, crypto keys, etc&#8230;  
+option comp-lzo &#8216;1’  
+option persist-key &#8216;1’  
+option persist-tun &#8216;1’  
+option ‘redirect-gateway def1’
+
+Good luck! Let us know if it works.
+
+### Comment by Anton on 2016-07-10 14:58:17 -0400
+Excellent guide &#8211; great work! I&#8217;m just curious about the download and upload speeds with the VPN running on the Archer C7?
+
+### Comment by Pete S. on 2016-07-10 16:09:45 -0400
+Anton &#8211; I don&#8217;t have a C7, so can&#8217;t comment on that system, but with my Linksys E3000, my bandwidth limitation is actually my ISP upload speed (6 Mb/s).
+
+### Comment by Logan on 2016-07-13 08:34:55 -0400
+I don&#8217;t use the C7 as a router/VPN server anymore, only a wireless AP, sorry.
+
+A quick Google found this&#8230;  
+<a href="https://forum.openwrt.org/viewtopic.php?id=61950" rel="nofollow ugc">https://forum.openwrt.org/viewtopic.php?id=61950</a>
+
+### Comment by Anton on 2016-07-15 16:57:38 -0400
+thanks for the answers!
+
+### Comment by Brian on 2016-07-18 14:14:30 -0400
+Peter, are you using tap or tun device on your client? And it is a Windows client?  
+I&#8217;m using Windows and tap. But I cannot ping hosts on the local lan network (e.g. 192.168.1.10)  
+I can ping the VPN interface on the VPN server (in my case 192.168.2.1) and the router&#8217;s LAN interface (192.168.1.1)  
+Maybe it will only work if you use bridging&#8230;
+
+### Comment by Pete S. on 2016-07-19 01:58:32 -0400
+Brian &#8211;  
+I am using TUN on both sides (they must be the same) with topology subnet.
+
+As I mentioned in my earlier response, the VPN is physically running on a 2nd router (internet > main router > VPN router @ WAN port). The IP address that the VPN router gets at its WAN port is in the same subnet as my regular LAN (10.0.1.x). The &#8220;LAN&#8221; IP address of the VPN router is set to 10.0.2.1 (subnet mask 255.255.255.0), and the OpenVPN server network is set to 10.0.2.192/28 (subnet mask 255.255.255.240; this makes the server @ 10.0.2.193, clients from .194-.206, broadcast .207). Note that the OpenVPN network technically overlaps the IP space of the VPN router&#8217;s &#8220;LAN&#8221; network. Also note the server-side OpenVPN configuration of the push route directive (push route 10.0.1.0 255.255.255.0) and I&#8217;ve also pushed the DNS for my main router (push dhcp-option DNS 10.0.1.1).
+
+I&#8217;ve put the VPN router&#8217;s &#8220;LAN&#8221; in quotes because nothing uses that [double-NAT&#8217;d] network, it is a configuration detail &#8212; I think it may be part of the reason this setup actually works, though. Many people also setup custom &#8216;static routes&#8217; on their main router, but I did not need to do that (which is fortunate since I use an Apple Time Capsule and it is not possible to configure it in this way &#8212; there are obviously routing tables internally, but that functionality is entirely hidden from the user and there is absolutely no way to add custom routes to Apple&#8217;s wifi devices). 
+
+With this configuration, I can ping and connect to all the devices on my network as if I was locally connected.
+
+### Comment by Pete S. on 2016-07-19 02:57:20 -0400
+Also make sure your firewall is configured to pass the VPN traffic. 
+
+config zone  
+option name &#8216;vpn&#8217;  
+option input &#8216;ACCEPT&#8217;  
+option output &#8216;ACCEPT&#8217;  
+option forward &#8216;REJECT&#8217;  
+option network &#8216;vpn0&#8217;
+
+config forwarding  
+option src &#8216;vpn&#8217;  
+option dest &#8216;wan&#8217;
+
+### Comment by Pete S. on 2016-07-19 11:03:31 -0400
+And just for completeness&#8230; my network config file includes:
+
+config interface &#8216;vpn0&#8217;  
+option ifname &#8216;tun0&#8217;  
+option proto &#8216;none&#8217;  
+option auto &#8216;1&#8217;
+
+and the OpenVPN server config file has tun0 defined like this:  
+option dev &#8216;tun0&#8217;
+
+### Comment by Brian on 2016-07-19 14:14:36 -0400
+Can you build the Diffie Hellman on a faster PC to save time or must it be done on the router?
+
+### Comment by Brian on 2016-07-19 14:17:49 -0400
+But it seems if you use Windows as a client you have to use tap, which is different than tun.  
+I got it working but only by bridging tap0 and LAN on the server.
+
+### Comment by Logan on 2016-07-19 16:26:16 -0400
+You could build it on a different PC, just transfer it to the router securely.
+
+### Comment by Pete S. on 2016-07-19 18:58:28 -0400
+Glad you got it working.
+
+I guess that is one of the limitations of Windows clients, although ironically I had originally thought that TAP interfaces would work better for my application (ultimately TUN has worked flawlessly).
+
+I did forget to mention that I am using everything but Windows based client systems (iOS which supports TUN only; MacOS with TunnelBlick; Linux &#8211; OpenWRT on an MR3020 configured as an OpenVPN client).
+
+### Comment by yabrembre on 2016-08-07 14:22:01 -0400
+Great guide. Thank you very much!
+
+### Comment by Logan on 2016-08-07 18:41:37 -0400
+Thanks, glad to help!
+
+### Comment by saulius on 2016-10-18 14:08:14 -0400
+Thank you for good manual.  
+But what about connecting with password? I can&#8217;t find any settings about this.
+
+### Comment by Logan on 2016-10-19 09:42:55 -0400
+I would not recommend using just username/password, you should really be using certificates. However, it can be done (see example <a href="https://networklessons.com/linux/openvpn-server-usernamepassword-authentication/" target="_blank" rel="nofollow">here</a>). Looks like it is using PAM, so I&#8217;m assuming the username/password you need are required to be local accounts on the server&#8230;  
+`# Username and Password authentication.<br />
+client-cert-not-required<br />
+plugin /usr/lib/openvpn/openvpn-auth-pam.so login`
+
+### Comment by saulius on 2016-11-04 15:17:57 -0400
+I want to use certificates and username/password. By this manual I need to have just certificate on my phone and connection works. But if I lose my phone, my network will be in danger.
+
+### Comment by Logan on 2016-11-04 16:36:25 -0400
+Unfortunately, I don&#8217;t know how to do username/password in addition to certificates. However, if you control the server, you could revoke that certificate if you lose your phone.
+
+### Comment by Vasya on 2017-03-21 08:57:58 -0400
+Hi thank you for the tutorial.
+
+I have one question please. I have just purchased an AC1750 Wireless Dual Band Gigabit Router  
+Model No. Archer C7  
+Hardware Version:Archer C7 v2 00000000
+
+If I will flush Archer C7 with openwrt will I be able to use third party VPN server .ovpn 
+
+Thank you  
+Vasya
+
+### Comment by Logan on 2017-03-21 10:47:12 -0400
+No, in this tutorial, I&#8217;m turning the C7 into a VPN server. If you want to use a third party .ovpn file, you probably want the C7 to be a VPN client.
+
+### Comment by Chris on 2017-04-08 17:05:28 -0400
+Thank you for this great guide, Logan!
+
+I was able to successfully set up an OpenVPN Server using OpenWRT on an Archer C7 and confirmed that the server is up by obtaining the &#8216;Initialization Sequence Completed&#8217; prompt when looking at the logfile.
+
+However, I am unable to successfully connect the OpenVPN Server to the outside internet because, similarly to @Martin, I have the Archer C7 connected behind/to another router provided by my ISP:
+
+Router 1 > Archer C7 [on which OpenVPN Server is running];
+
+although, unlike @Martin, the OpenVPN Server is internal to the Archer C7 and not as [presumably] in @Martin&#8217;s situation on a separate device behind the Archer C7.
+
+On Router 1, whose internal IP Address is the standard 192.168.1.1, I set up DynamicDNS [which seems to be successfully updating my DynamicDNS Provider] and am forwarding Port 1194 to a Static IP Address that I set up for the Archer C7 that is within the subnet of Router 1 [192.168.1.x].
+
+On the Archer C7, whose internal IP Address, as suggested in your guide, I set up to be 10.10.1.1, I set up the IP Address of the OpenVPN Server, also as suggested in your guide, to be 10.8.0.0.
+
+How do I get the OpenVPN Server on the Archer C7 to successfully connect to the outside internet?
+
+I&#8217;ve attempted to Forward Port 1194 the WAN of the Archer C7 to [the &#8216;vpn&#8217; Internal Zone of] both [one at a time] the IP Address of the OpenVPN Server, 10.8.0.0, as well as the the IP Address of the &#8216;VPN0/tun0&#8217; Network, 10.8.0.1, but receive a &#8216;Port 1194 is not open&#8217; prompt on my DynamicDNS Provider&#8217;s website.
+
+I&#8217;m able to confirm that the OpenVPN Server is unable to connect to the outside internet by navigating to the Network > Interface page of the OpenWRT LuCI and noticing that the Status of the &#8216;VPN0/tun0&#8217; Network contains neither an IP Address, MAC-Address, nor any Received/Transmitted Packets.
+
+I also noticed that the &#8216;Allow-OpenVPN-Inbound&#8217; Firewall Traffic Rule [visible when navigating to the Network > Firewall > Traffic Rules page of the OpenWRT LuCI] that you suggested in your guide be set up to &#8216;Accept [&#8216;Any udp&#8217;] input&#8217; &#8216;From any host in wan&#8217; &#8216;To any router IP at port 1194 \_on this device\_.&#8217;
+
+Do I need to Forward Port 1194 on the Archer C7 in order for the OpenVPN Server to connect to the outside internet or does the OpenVPN Server obtain its&#8217; connection directly from the WAN of the Archer C7?
+
+If so, to which IP Address should I Port Forward; to which IP Address is the OpenVPN Server supposed to connect to the outside internet?
+
+Thank you again for a great guide and in advance for your advice!
+
+### Comment by Chris on 2017-04-09 12:06:47 -0400
+Thank you for this great guide, Logan!
+
+I posted this in response to your Reply to @Martin, but wasn&#8217;t sure if you would be notified of it, so here it is again:
+
+I was able to successfully set up an OpenVPN Server using OpenWRT on an Archer C7 and confirmed that the server is up by obtaining the ‘Initialization Sequence Completed’ prompt when looking at the logfile.
+
+However, I am unable to successfully connect the OpenVPN Server to the outside internet because, similarly to @Martin, I have the Archer C7 connected behind/to another router provided by my ISP:
+
+Router 1 > Archer C7 [on which OpenVPN Server is running];
+
+although, unlike @Martin, the OpenVPN Server is internal to the Archer C7 and not as [presumably] in @Martin’s situation on a separate device behind the Archer C7.
+
+On Router 1, whose internal IP Address is the standard 192.168.1.1, I set up DynamicDNS [which seems to be successfully updating my DynamicDNS Provider] and am forwarding Port 1194 to a Static IP Address that I set up for the Archer C7 that is within the subnet of Router 1 [192.168.1.x].
+
+On the Archer C7, whose internal IP Address, as suggested in your guide, I set up to be 10.10.1.1, I set up the IP Address of the OpenVPN Server, also as suggested in your guide, to be 10.8.0.0.
+
+How do I get the OpenVPN Server on the Archer C7 to successfully connect to the outside internet?
+
+I’ve attempted to Forward Port 1194 the WAN of the Archer C7 to [the ‘vpn’ Internal Zone of] both [one at a time] the IP Address of the OpenVPN Server, 10.8.0.0, as well as the the IP Address of the ‘VPN0/tun0’ Network, 10.8.0.1, but receive a ‘Port 1194 is not open’ prompt on my DynamicDNS Provider’s website.
+
+I’m able to confirm that the OpenVPN Server is unable to connect to the outside internet by navigating to the Network > Interface page of the OpenWRT LuCI and noticing that the Status of the ‘VPN0/tun0’ Network contains neither an IP Address, MAC-Address, nor any Received/Transmitted Packets.
+
+I also noticed that the ‘Allow-OpenVPN-Inbound’ Firewall Traffic Rule [visible when navigating to the Network > Firewall > Traffic Rules page of the OpenWRT LuCI] that you suggested in your guide be set up to ‘Accept [‘Any udp’] input’ ‘From any host in wan’ ‘To any router IP at port 1194 \_on this device\_.’
+
+Do I need to Forward Port 1194 on the Archer C7 in order for the OpenVPN Server to connect to the outside internet or does the OpenVPN Server obtain its’ connection directly from the WAN of the Archer C7?
+
+If so, to which IP Address should I Port Forward; to which IP Address is the OpenVPN Server supposed to connect to the outside internet?
+
+Thank you again for a great guide and in advance for your advice!
+
+### Comment by Logan on 2017-04-11 22:42:46 -0400
+Hey Chris,
+
+Unfortunately, I switched to Ubiquiti gear, so I no longer have my OpenWrt VPN server. I would have guessed that forwarding 1194 from Router1 to Archer C7 would have done the trick. I&#8217;d advise you to ask on the <a href="https://forum.openwrt.org/viewforum.php?id=10" target="_blank" rel="nofollow">OpenWrt forums</a>, they&#8217;d probably be able to help you better than I could.
+
+### Comment by Chris on 2017-04-12 08:21:40 -0400
+Thank you for your response, Logan!
+
+I&#8217;ll ask on the OpenWrt forums.
+
+Thanks again!
+
+### Comment by Pete S. on 2017-04-20 00:57:19 -0400
+@ Logan &#8212; maybe you could alert Chris to this reply, just in case they aren&#8217;t checking back frequently. Also, you can offer to connect us offline if Chris would like. Thanks
+
+Chris &#8211;
+
+Sounds like you may have a number of different issues, but let&#8217;s start from the outside->in. I&#8217;ll describe it in terms of the LuCI interface, although you could just as easily do this via the command line.
+
+1) On your ISP router (the one connecting to the internet), be sure that the port forward is setup properly, in your case UDP 1194 > static ip in the 192.168.1.0/24 subnet. Keep in mind that some routers will not work for a &#8220;u-turn&#8221; connection (and may not expose the control to change this)&#8230; so even when everything else is configured properly, you might need to be on an outside network to properly connect or even see that the port is open (if this is the case, it should work on a cellular network or from any other network (assuming no firewalls are blocking the outbound traffic), and an external site that can at test for open ports should have visibility).
+
+2) Connect the C7 WAN port to one of the LAN ports on your main (ISP provided) router. In order to administer the OpenWRT C7 in this configuration, you&#8217;ll probably need to plug a computer into the C7 LAN port. Alternatively, I recommend opening web (80) and/or ssh (22) ports on the C7&#8217;s OpenWRT firewall &#8212; more on this in a sec. When this is done, you can access your C7 via the static IP on the 192.168.1.0/24 network. DO NOT forward these ports from the internet (ISP router) to the C7 &#8212; you really only need these services available on your main LAN.
+
+3) Open the relevant ports in the OpenVPN firewall (on the C7). If you have setup port-forwards, delete those. You want to do this under Network > Firewall > Traffic Rules. Create a new rule under the &#8220;Open ports on router&#8221; section (name it, select UDP and click &#8216;Add&#8217;, then in the next page select Source zone = Any zone, Destination zone = Device (input), and Destination port = 1194. Click &#8216;Save & Apply&#8217;. Same thing for port 80 and 22 (but use TCP + UDP) if you want to access the C7 via its WAN port on your internal network (LAN) ad described previously.
+
+3a) While you&#8217;re in the firewall settings, make sure you have a defined firewall zone for the VPN and that it is set to accept/accept/reject (input/output/forward), and that the inter-zone forwarding &#8220;Allow forward to destination zones&#8221; has your wan zone selected.
+
+4) The way I configure the LAN and VPN subnets on the VPN device (in this case, your C7) is possibly a bit odd and is contrary to what they will tell you in the OpenVPN documentation, but it works perfectly and I&#8217;ve done this many times&#8230; Use the overlapping subnets for C7-LAN and VPN, but make sure it is different than your main LAN. You can use different network/subnet values, but follow the same logic. Your main LAN (from the ISP provided router) is 192.168.1.0/24, the WAN port of the C7 has an address in this subnet. On the C7, set Network > Interfaces > LAN to 192.168.2.1 255.255.255.0 (192.168.2.0/24).
+
+4a) Now, in your OpenVPN config, set the network to 192.168.2.192 255.255.255.240 (192.168.2.192/28 &#8211;> OpenVPN server will take 192.168.2.193, and up to 12 client IPs can be assigned). You can use a subnet calculator to select other ranges or mask bits, but it is critical that the OpenVPN server does not collide with the C7&#8217;s LAN IP (there are a bunch of possible combinations that could cause this conflict, but the calculators will help you here &#8212; key thing is that the first host in the network/mask defined must not be 192.168.2.1).
+
+5) Presumably you have the OpenVPN config to setup dev tun0. From there, make sure your Network > Interfaces is setup properly. The name is not critical, but I use VPN0. Protocol should be &#8216;Unmanaged&#8217;; under Physical Settings should be a radio button for &#8216;Ethernet Adapter: &#8216;tun0&#8217;; and finally in the Firewall Settings, it should be assigned to the firewall zone that represents your VPN (in my case it is &#8216;vpn&#8217;).
+
+At this point, you may want to reboot your router to ensure that everything has taken effect. There are still OpenVPN config things you might need to check if you want to be able to access devices on your main LAN (192.168.1.0/24 network) or access the internet through your VPN (i.e. when you&#8217;re out of the house and want to connect through for privacy on a public network, or to tunnel through your home to the internet to bypass geographical restrictions or certain types of firewalls, etc.). But if everything is configured properly for the basic connections, you should have the appropriate ports open and you should at least be able to connect to the VPN from the internet.
+
+Let me know how this works.
+
+### Comment by Chris on 2017-04-22 14:34:48 -0400
+Thank you for your response, Logan!
+
+I will give your suggestions a try and let you know how they work!
+
+Thanks again!
+
+### Comment by Brad on 2017-05-06 23:30:58 -0400
+Hi Logan. Thank you for the great guide!
+
+I&#8217;ve worked through all of the steps and have a partially functioning VPN. I am able to successfully establish a VPN connection from my client (Android phone&#8217;s cellular connection) to the OpenVPN server on my home network&#8217;s Archer C7. Once established, I can ping my home router from an Android terminal app and can even login via Luci in a web browser. 
+
+But I cannot access any web pages or ping other devices on my home network. Interestingly, Facebook Messenger works fine.
+
+Any idea what could be causing this?
+
+### Comment by Logan on 2017-05-12 12:54:02 -0400
+Brad, unfortunately, I don&#8217;t use the Archer C7 anymore, so I won&#8217;t be much help to you.
+
+Did you make sure this was set?  
+#push a local route to your clients (allow your clients to access the server&#8217;s network)  
+uci add_list openvpn.myvpn.push=&#8221;route 10.10.1.0 255.255.255.0&#8243;
+
+### Comment by Aviral on 2017-08-13 08:48:52 -0400
+Hi Logan,
+
+My ISP uses double NAT. Like my public IP is in range of 139.5.XXX.XXX and then assign my router in range of 10.2.XXX.XXX. Both are dynamic in nature. So what do you think will your method work for me?
+
+### Comment by Logan Marchione on 2017-08-14 08:43:30 -0400
+That&#8217;s a good question. Do you have access to both routers? If so, you can forward the port on both.
+
+If not, you may need to setup a VPS and tunnel your traffic to the VPS (letting the VPS be the OpenVPN server). Unfortunately, I don&#8217;t know how to set that up.
+
+I would recommend you do some <a href="https://www.google.com/search?&#038;q=openvpn+behind+double+nat" target="_blank" rel="nofollow">Google-ing</a> and also post to <a href="https://www.reddit.com/r/OpenVPN" target="_blank" rel="nofollow">r/OpenVPN</a>.
+
+### Comment by Jeff on 2017-12-16 08:20:32 -0500
+Thanks Logan! Great guide.
+
+I followed the OpenVPN section loosely to get an OpenVPN server setup on my own Archer C7 a few weeks ago.
+
+I&#8217;m also happy to report that the config basically survives a firmware upgrade with the keep my config checkbox checked. The only step I had to do post-firmware upgrade to make my server work again is recreating the link between the openvpn-config directory and easy-rsa dir, then restarting the OpenVPN service.
+
+ln -s /etc/config/openvpn-config/ /etc/easy-rsa
+
+### Comment by Logan Marchione on 2017-12-17 17:26:17 -0500
+Glad to help!
+
+Just curious, are you running OpenWRT or <a href="https://lede-project.org/" target="_blank" rel="noopener nofollow">LEDE</a>? I haven&#8217;t used the C7 in a while, but heard development pretty much stopped on OpenWRT and moved to LEDE.
+
+### Comment by Jeff on 2018-01-12 16:38:49 -0500
+sorry for the long delay in replying.
+
+I&#8217;m actually using LEDE. This build specifically: <a href="https://forum.lede-project.org/t/gcc-7-2-build-optimized-tp-link-archer-c7-v2-ac1750-lede-firmware/1382/642" rel="nofollow ugc">https://forum.lede-project.org/t/gcc-7-2-build-optimized-tp-link-archer-c7-v2-ac1750-lede-firmware/1382/642</a> 
+
+The steps listed above to get OpenVPN configured all basically work, but the EasyRSA commands had to be tweaked slightly.
+
+### Comment by Logan Marchione on 2018-01-13 16:12:16 -0500
+No worries, just wondered. Apparently OpenWrt and LEDE kissed and made up, and now LEDE is rolling into OpenWrt.  
+<a href="https://forum.lede-project.org/t/announcing-the-openwrt-lede-merge/10217" rel="nofollow ugc">https://forum.lede-project.org/t/announcing-the-openwrt-lede-merge/10217</a>
+
+### Comment by James2k on 2018-01-17 05:24:05 -0500
+Hey great Tutorial!
+
+Bute i got a little Problem. I can Connect from my iPhone to my VPNServer with no problems, but i dont get a internet connection on it. I also tryed to add 2 other Traffic rules for the VPN:
+
+Allow-OpenVPN-Inbound  
+Any udp  
+From any host in wan  
+To any router IP at port 1194 on this device  
+Accept input 
+
+VPN-HTTPS  
+Any traffic  
+From any host in vpn with source port 443  
+To any host, port 443 in wan  
+Accept forward 
+
+VPN-HTTP  
+Any traffic  
+From any host in vpn with source port 80  
+To any host, port 80 in wan
+
+But it doenst Work. 
+
+Can anyone help me out here?
+
+### Comment by James2k on 2018-01-17 05:53:50 -0500
+Its also weired that Apps like What&#8217;s App and Facebook can use Internet, but the Browsers dont work..
+
+### Comment by Logan Marchione on 2018-01-26 12:19:15 -0500
+Unfortunately, I don&#8217;t use OpenWrt anymore, so I won&#8217;t be of much help. Hopefully someone here will be able to assist.
+
+### Comment by Mark Preston on 2018-02-21 12:06:52 -0500
+I have only today (21Feb18) realized that the post is for those who want the TP-Link as a server. I want a client. That is, the C7 sits behind the modem and handles all net traffic, with OpenVPN.
+
+With router&#8217;s admin page showing both CS & provider&#8221; in &#8220;off&#8221; state. Clicking radio button for &#8220;Start&#8221; shows CS & provider do not start. Below is last part of syslog.
+
+code]Wed Feb 21 08:51:40 2018 daemon.notice openvpn(CRYPTOSTORM)\[1637]: OpenVPN 2.4.4 mips-openwrt-linux-gnu [SSL (OpenSSL)\] \[LZO\] \[LZ4\] \[EPOLL\] \[MH/PKTINFO\] \[AEAD\]  
+Wed Feb 21 08:51:40 2018 daemon.notice openvpn(CRYPTOSTORM)[1637]: library versions: OpenSSL 1.0.2n 7 Dec 2017, LZO 2.10  
+Wed Feb 21 08:51:40 2018 daemon.err openvpn(CRYPTOSTORM)[1637]: neither stdin nor stderr are a tty device and you have neither a controlling tty nor systemd &#8211; can&#8217;t ask for &#8216;Enter Auth Username:&#8217;. If you used &#8211;daemon, you need to use &#8211;askpass to make passphrase-protected keys work, and you can not use &#8211;auth-nocache.  
+Wed Feb 21 08:51:40 2018 daemon.notice openvpn(CRYPTOSTORM)[1637]: Exiting due to fatal error  
+Wed Feb 21 08:51:45 2018 daemon.err openvpn(provider)[1638]: Options error: In [CMD-LINE]:1: Error opening configuration file: openvpn-provider.conf  
+Wed Feb 21 08:51:45 2018 daemon.warn openvpn(provider)[1638]: Use &#8211;help for more information.[/code]
+
+### Comment by Logan Marchione on 2018-02-22 16:21:31 -0500
+I don&#8217;t run the client on my router, but I&#8217;m assuming you&#8217;re trying to use a username/password to authenticate and the client isn&#8217;t liking that.
+
+### Comment by Mark Preston on 2018-04-12 13:27:24 -0400
+I&#8217;ve used four different posts by gearheads to get an OpenVPN tunnel up and running. I want to finalize the work by securing the ca certificates. As it is now, when I login to the router&#8217;s webUI I&#8217;m asked to click Continue as the certificate is untrusted. I&#8217;m desperate to not blow up the running device and have to start all over. (I&#8217;m in my 70s). Would chaning the easy-rsa stuff above matter other than to the cert check?
+
+### Comment by Logan Marchione on 2018-04-15 20:00:52 -0400
+Glad you got it working! The error you&#8217;re seeing in your browser is because the certificate is self-signed by the router (as opposed to a CA your browser trusts). You could try to setup a valid certificate (e.g., from Let&#8217;s Encrypt), however, I just proceed through the warnings.
+
+### Comment by Loguti on 2018-06-01 01:02:01 -0400
+Hello,  
+This is a very good guide. I got my server to run, i can see the start sequence complete. Also I am able to get the client files and load the profile in my client openvpn.  
+There is a problem i cannot get passed. I am getting a &#8220;Server poll timeout&#8221; message and then my connection is not established. Is there any reason why this is happening. I have checked my files and I dont know where else to check to get it connected.
+
+### Comment by Logan Marchione on 2018-06-01 11:00:27 -0400
+I don&#8217;t use my C7 anymore, so I probably won&#8217;t be much help. However, that means that your client (e.g., phone, laptop, etc&#8230;) can&#8217;t reach the server. Are you sure your IP didn&#8217;t change, or are you using dynamic DNS? Are you sure your firewall is allowing traffic?
+
+### Comment by Loguti on 2018-06-06 00:43:37 -0400
+Thank you for the help. It turned out being an issue with the firewall, I managed to fix it and now the connection is working pretty good. Just have a couple or more questions that maybe you can help me with. 
+
+1. Is there a way to auto start the OpenVpn service in a power lose event?, I need to manually start the service when that happens.  
+2. Once the connection is established, I do not have web access (e.g. Navigate the internet when connected, in case of cell phone apps some of them not working); I am probably missing something but not able to find the issue.
+
+Thanks,
+
+### Comment by Logan Marchione on 2018-06-06 10:00:36 -0400
+Glad you got it figured out!
+
+1) You need to enable the service.  
+`/etc/init.d/openvpn enable`  
+2) You may need to push a route. Did you add this to your server config?  
+`#specify gateway to use<br />
+uci add_list openvpn.myvpn.push="route-gateway dhcp"<br />
+#redirect ALL traffic through the VPN server (this is IMPORTANT if you don't trust your local network)<br />
+uci add_list openvpn.myvpn.push="redirect-gateway def1"`
+
+### Comment by Crl on 2019-01-09 14:22:34 -0500
+Hi, would you mind to update the guide for OpenWrt 18.06 please
+
+### Comment by Logan Marchione on 2019-01-10 08:46:35 -0500
+Sorry, I don&#8217;t use that router anymore, so I won&#8217;t be maintaining these guides anymore.
+
+### Comment by DunkSlam on 2019-02-08 19:59:20 -0500
+&#8220;I’m going to assume you’re running the factory firmware and want to install OpenWrt. If you haven’t already, make sure you check the MD5 hash of the file you downloaded.&#8221;
+
+No, check the sha256 hash. That&#8217;s the minimum considered secure. The lesser (sha1, md5) have been broken and thus can be spoofed. This is why OpenWRT offers sha256 checksums (in 2019, and has done for some time, now).
+
+This guide is pretty useful, as not too much has changed. Thanks. Please update the md5 advice and replace with sha256 if you can be bothered.
+
+I&#8217;d also suggest using the Let&#8217;s Encrypt certificate service, considering all the hard work they put in offering such a free service, and the security implications of self-signed certificates (take a copy of the sha256sum of the certificate for reference, at least, to see if it has been changed any time).
+
+### Comment by Logan Marchione on 2019-02-11 13:26:23 -0500
+First, just so you know, I don’t use OpenWRT anymore.
+
+You are correct, users should be using the SHA256 hash, not MD5. In fact, OpenWRT doesn&#8217;t provide MD5 hashes anymore, so that&#8217;s not even an option.
+
+### Comment by Bill on 2020-02-25 09:21:44 -0500
+Thanks for that, getting the hash right solved my problem!
+
+### Comment by J on 2020-12-09 09:55:36 -0500
+OMG thank you! I&#8217;ve spent hours trying to get OpenVPN server to work on my router (also a C7). I&#8217;m switching from an old DDWRT router that I previously got OpenVPN to work on and just having no luck. I followed your instructions, changing a few minor things along the way, and it worked the first time! So happy.
+
+### Comment by Logan Marchione on 2020-12-10 09:30:09 -0500
+Glad to help!

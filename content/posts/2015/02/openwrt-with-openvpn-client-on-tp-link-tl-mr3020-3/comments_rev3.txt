@@ -1,0 +1,617 @@
+## Comments
+
+### Comment by Alex on 2015-04-27 13:56:24 -0400
+_> Start by enabling wireless. At this point, you should be able to see the default OpenWrt network from a device._
+
+I found that the two commands shown (_uci delete wireless.radio0.disabled_, _uci commit wireless_) weren&#8217;t enough on their own to bring up the wireless interface. The wireless interface only became active &#8211; and visible to my other devices &#8211; after I restarted the network stack (_/etc/init.d/network restart_).
+
+### Comment by Logan on 2015-04-28 21:29:33 -0400
+Thanks, Alex! I&#8217;ve updated the post with your change!
+
+### Comment by GainfulShrimp on 2015-04-29 13:23:48 -0400
+Thanks for the excellent tutorial Logan. My mr3020 is now working _almost_ how I want&#8230; I&#8217;m just having trouble ironing out the last couple of things: getting DNS to work 100% reliably and also I&#8217;m trying to configure the (otherwise useless to me) WPS button to connect/disconnect to my default OpenVPN profile, when it&#8217;s pushed.  
+One tip for you and your readers: I&#8217;ve configured the (otherwise always-on) WPS LED to show when the VPN is up/active by using the following commands:
+
+<pre>uci set system.led_vpn=led
+uci set system.led_vpn.name=VPN
+uci set system.led_vpn.sysfs=tp-link:green:wps
+uci set system.led_vpn.trigger=netdev
+uci set system.led_vpn.dev=tun0
+uci set system.led_vpn.mode='link tx rx'
+uci set system.led_vpn.default=0
+uci commit system
+/etc/init.d/led restart
+</pre>
+
+I think it&#8217;s useful to have a simple LED for whether the VPN link is working or not. 🙂
+
+### Comment by Alex on 2015-04-29 17:08:54 -0400
+Hot damn, but that&#8217;s a useful suggestion! I&#8217;ve turned my MR3020 into a VPN server, but the LED performs the same function either way.
+
+### Comment by Alex on 2015-04-29 17:16:03 -0400
+Just a brief note for anyone considering doing what I did and adapting these instructions to create a VPN **server** on the TL-MR3020: do not, for the love of all that is holy, run **build-dh** directly on the router. Use your computer instead to generate the DH file and copy it to the router.
+
+The script says, &#8220;This will take a long time,&#8221; and it ain&#8217;t kidding. I let it run for two hours on the router before killing the process. In contrast, my computer spewed out a DH file in under ten minutes.
+
+### Comment by GainfulShrimp on 2015-04-30 02:45:53 -0400
+I&#8217;m glad you found the LED suggestion useful. 🙂
+
+I know what you mean re: Diffie Hellman, too. I&#8217;m using my mr3020 to connect to my OpenVPN servers that I&#8217;ve set up on my main router at home (a Ubiquiti Edgerouter Lite). It took just over an hour for **./build-dh** to complete on there, for a 2048 bit strength. (It only took about 5 minutes for 1024 bit, but I figured it was a one-off activity so I was prepared to wait.)
+
+### Comment by Randy on 2015-04-30 21:44:55 -0400
+hello Logan-
+
+just wanted to let you know, your instructions were very helpful and translated easily to the TL-MR10U router, which is a similar model to the 3020. The MR10U is available from a few sources on ebay and elsewhere with a h/w mod to increase onboard flash memory and RAM, which negates the need for the external USB drive. I have mine providing VPN over a wireless bridge for non-wifi devices.
+
+### Comment by Logan on 2015-05-01 09:10:52 -0400
+Glad to help and that&#8217;s good to know! Thanks!
+
+### Comment by Logan on 2015-05-01 09:12:44 -0400
+Glad to help! Also, thanks for the WPS LED config, I&#8217;ll incorporate it into my next build. What DNS issues are you having?
+
+### Comment by Logan on 2015-05-01 09:14:42 -0400
+Hadn&#8217;t thought about that, good call. I recently built DH parameters for my <a href="https://loganmarchione.com/2015/04/https-support/" target="_blank" rel="nofollow">SSL certificate</a> and it took a while on my VPS, I would imagine it would drag on the little MR3020.
+
+### Comment by Logan on 2015-05-01 09:17:02 -0400
+How do you like the Edgerouter Lite? I have a pair of <a href="https://www.dd-wrt.com/wiki/index.php/Linksys_E2000" target="_blank" rel="nofollow">E2000&#8217;s</a> running DD-WRT that I&#8217;d like to replace. I was thinking about getting the Edgerouter Lite and a wireless AP or two. I&#8217;ve heard the web interface has been overhauled and is much more robust now.
+
+### Comment by GainfulShrimp on 2015-05-01 11:11:10 -0400
+The client devices all behaved OK (with the exception of my MacBook, which has intermittent DNS issues of its own, seemingly due to the new-in-Yosemite discoveryd service). But I couldn&#8217;t do &#8216;okpg update&#8217; or install anything, because it seemed the mr3020 itself couldn&#8217;t resolve any addresses. I&#8217;m still not sure exactly how I fixed it tbh &#8211; a reboot probably helped &#8211; but I got it working eventually.  
+I now have the wps button configured how I&#8217;d like too: a short press (<2sec) toggles the VPN on/off. And a longer press (3-10sec) does a 'poweroff' command, so I can safely pull the power without risky corrupting the filesystem. It all seems to be working rather nicely, although I've not tested it extensively, I admit&#8230; 🙂
+
+### Comment by GainfulShrimp on 2015-05-01 11:18:27 -0400
+I \*love\* my Edgerouter Lite! (As far as you can ever love a router, that is.) It&#8217;s what got me looking into similar tiny linux-based boxes, including the mr3020&#8230;  
+It&#8217;s true that the GUI has improved a lot, from what I read about the older versions, but tbh if you want to do anything &#8216;advanced&#8217; &#8211; which means a lot of stuff &#8211; you still need to use the CLI.  
+The CLI syntax is a little bit similar to the OpenWRT UCI syntax though. If you&#8217;re comfortable with that &#8211; and SSHing to Debian command line &#8211; you&#8217;ll be fine.  
+Their forms are very helpful too and frequented by ubnt staff as well as other customers, so you&#8217;ll get answers pretty quickly if you get stuck.  
+I&#8217;ve got their UAP-AC v2 too, and it seems to be great, although the 5GHz range isn&#8217;t fantastic (it&#8217;s my first 5GHz-capable AP, so I can&#8217;t make a comparison with other routers/APs). It&#8217;s certainly solid, and the guest network feature is well implemented.  
+I&#8217;m thinking of buying a Raspberry Pi v2 to put the Unifi controller on (at the moment it&#8217;s running on my always-on PC, but I&#8217;d prefer it on its own low-power box)&#8230; it&#8217;s fair to say I&#8217;m getting hooked on playing with little linux-based devices. 😉
+
+### Comment by Alex on 2015-05-01 23:23:42 -0400
+How did you get the WPS button to report its $SEEN value accurately?
+
+I&#8217;ve been testing **/etc/rc.button/wps** with a simple script to write the value of $SEEN to the system log before I do anything more fancy, but the times recorded are ludicrous. A simple press and release (less than a second) records a $SEEN value of 20 seconds. Holding the button down for 4 seconds returns a $SEEN value of 42,949,500 seconds, which is obviously way out (I didn&#8217;t hold the button down for 494 days!).
+
+### Comment by GainfulShrimp on 2015-05-05 02:39:52 -0400
+I used the **hotplug.d** method rather than procd, as the OpenWRT BB build for the MR3020 seems to have everything for hotplug.d already setup (and I couldn&#8217;t find much info on getting procd to work well, unlike hotplug.d).  
+See the second section on this page:  
+<a href="http://wiki.openwrt.org/doc/howto/hardware.button" rel="nofollow">http://wiki.openwrt.org/doc/howto/hardware.button</a>  
+I also found this article very helpful:  
+<a href="http://www.linux-magazine.com/Online/Features/The-One-Watt-Server" rel="nofollow">http://www.linux-magazine.com/Online/Features/The-One-Watt-Server</a>
+
+### Comment by Logan on 2015-05-05 04:19:06 -0400
+Guess I&#8217;ll have to pull the trigger and pick one up. Thanks for the insight!
+
+### Comment by Alex on 2015-05-05 14:31:11 -0400
+Ah, I&#8217;ll give hotplug.d a go; I&#8217;d been using &#8211; or trying to use &#8211; procd.
+
+Thanks for the suggestion.
+
+### Comment by Alex on 2015-05-05 14:55:00 -0400
+Yup, hotplug.d is the key. That works as imagined.
+
+I just need to check the &#8220;released&#8221; $ACTION and act on the consequent $SEEN value.
+
+Thanks for the pointer.
+
+### Comment by John Doe on 2015-05-13 07:36:12 -0400
+Hi. Would it be possible to post the contents of /etc/config/firewall and /etc/config/network here ?
+
+### Comment by Logan on 2015-05-14 09:11:45 -0400
+I&#8217;m not at home now, but I can post it later when I get home.
+
+### Comment by Logan on 2015-05-14 22:22:55 -0400
+`root@mr3020_home:~# cat /etc/config/firewall </p>
+<p>config defaults<br />
+	option syn_flood '1'<br />
+	option input 'ACCEPT'<br />
+	option output 'ACCEPT'<br />
+	option forward 'REJECT'</p>
+<p>config zone<br />
+	option name 'lan'<br />
+	list network 'lan'<br />
+	option input 'ACCEPT'<br />
+	option output 'ACCEPT'<br />
+	option forward 'ACCEPT'</p>
+<p>config zone<br />
+	option name 'wan'<br />
+	option input 'REJECT'<br />
+	option output 'ACCEPT'<br />
+	option forward 'REJECT'<br />
+	option masq '1'<br />
+	option mtu_fix '1'<br />
+	option network 'wan wan6 WAN'</p>
+<p>config forwarding<br />
+	option src 'lan'<br />
+	option dest 'wan'</p>
+<p>config rule<br />
+	option name 'Allow-DHCP-Renew'<br />
+	option src 'wan'<br />
+	option proto 'udp'<br />
+	option dest_port '68'<br />
+	option target 'ACCEPT'<br />
+	option family 'ipv4'</p>
+<p>config rule<br />
+	option name 'Allow-Ping'<br />
+	option src 'wan'<br />
+	option proto 'icmp'<br />
+	option icmp_type 'echo-request'<br />
+	option family 'ipv4'<br />
+	option target 'ACCEPT'</p>
+<p>config rule<br />
+	option name 'Allow-DHCPv6'<br />
+	option src 'wan'<br />
+	option proto 'udp'<br />
+	option src_ip 'fe80::/10'<br />
+	option src_port '547'<br />
+	option dest_ip 'fe80::/10'<br />
+	option dest_port '546'<br />
+	option family 'ipv6'<br />
+	option target 'ACCEPT'</p>
+<p>config rule<br />
+	option name 'Allow-ICMPv6-Input'<br />
+	option src 'wan'<br />
+	option proto 'icmp'<br />
+	list icmp_type 'echo-request'<br />
+	list icmp_type 'echo-reply'<br />
+	list icmp_type 'destination-unreachable'<br />
+	list icmp_type 'packet-too-big'<br />
+	list icmp_type 'time-exceeded'<br />
+	list icmp_type 'bad-header'<br />
+	list icmp_type 'unknown-header-type'<br />
+	list icmp_type 'router-solicitation'<br />
+	list icmp_type 'neighbour-solicitation'<br />
+	list icmp_type 'router-advertisement'<br />
+	list icmp_type 'neighbour-advertisement'<br />
+	option limit '1000/sec'<br />
+	option family 'ipv6'<br />
+	option target 'ACCEPT'</p>
+<p>config rule<br />
+	option name 'Allow-ICMPv6-Forward'<br />
+	option src 'wan'<br />
+	option dest '*'<br />
+	option proto 'icmp'<br />
+	list icmp_type 'echo-request'<br />
+	list icmp_type 'echo-reply'<br />
+	list icmp_type 'destination-unreachable'<br />
+	list icmp_type 'packet-too-big'<br />
+	list icmp_type 'time-exceeded'<br />
+	list icmp_type 'bad-header'<br />
+	list icmp_type 'unknown-header-type'<br />
+	option limit '1000/sec'<br />
+	option family 'ipv6'<br />
+	option target 'ACCEPT'</p>
+<p>config include<br />
+	option path '/etc/firewall.user'</p>
+<p>root@mr3020_home:~# cat /etc/config/network </p>
+<p>config interface 'loopback'<br />
+	option ifname 'lo'<br />
+	option proto 'static'<br />
+	option ipaddr '127.0.0.1'<br />
+	option netmask '255.0.0.0'</p>
+<p>config globals 'globals'<br />
+	option ula_prefix 'fd1f:8e7f:5520::/48'</p>
+<p>config interface 'lan'<br />
+	option force_link '1'<br />
+	option proto 'static'<br />
+	option netmask '255.255.255.0'<br />
+	option ip6assign '60'<br />
+	option ipaddr '10.80.1.1'</p>
+<p>config interface 'WAN'<br />
+	option proto 'dhcp'<br />
+	option ifname 'eth0'`
+
+### Comment by John Doe on 2015-05-15 05:07:42 -0400
+Hi, thanks for posting this. I&#8217;m a bit stumped now, as there is no section for VPN neither in network nor in firewall settings ? What happened to them?  
+What I&#8217;m trying to do is have an MR3040 act as a mobile VPN client that connects to my home network using an HSDPA stick. Except for the VPN connection, I&#8217;ve got everything else working. VPN connects, but as soon as it does I no longer have a connection. My setup is a bit different than yours, eth0 is still in LAN, wlan0 is currently WAN. I plan to disable wlan0 as soon as I have a working setup&#8230;
+
+### Comment by Anon on 2015-05-16 17:42:47 -0400
+Hello John,  
+I also was very confused, but I found the solution. He never pasted the full configuration. There were too parts that needed changed. 
+
+1) The command: uci set firewall.@zone[1].network=&#8217;wan wan6 WAN&#8217; &#8211;> Should be &#8220;WAN&#8221; only. I have no idea what the others are in there for, but they aren&#8217;t defined anywhere else.
+
+2) You need to add parts mentioned in the &#8220;Setup VPN&#8221; section.
+
+Complete working configs with some notes:  
+<a href="http://pastebin.com/C0d4pudk" rel="nofollow ugc">http://pastebin.com/C0d4pudk</a>
+
+Thanks so much Logan for putting this together!
+
+### Comment by Matt on 2015-05-17 15:54:06 -0400
+I really appreciate the time and effort you put into creating this page. It seems to be thoroughly explained and detailed and I&#8217;ll definitely be following it if I decide to go with the TL-MR3020 as my travel router! Like you my goal for a travel router will be to ultimately have it act as a VPN client. Are you able to enable the VPN client feature both while on an outside wireless (WISP) and wired network? And I&#8217;m assuming that if my TL-MR3020 has factory stock firmware on it, I can use the Barrier Breaker (BB) factory firmware when I install OpenWRT on it rather then first installing Attitude Adjustment (AA), right? Or do you recommend I install AA first to then better follow along your BB instructions verbatim?
+
+### Comment by Logan on 2015-05-18 13:56:55 -0400
+Wow guys, just looked at my config and noticed that I&#8217;m missing the VPN section. Did some digging and found out my flash drive wasn&#8217;t mounted. Not sure what happened, but it appears the drive is dead. Guess I&#8217;m going to have to rebuild my system.
+
+### Comment by Logan on 2015-05-20 15:41:10 -0400
+Thanks, Matt. Glad to help!
+
+I&#8217;m sure you could enable it with a wireless and wired network, but that&#8217;s not how I have it setup here. Just thinking out loud, what if you created two wireless interfaces and one wired interface, then bridged a wired and wireless as client on the VPN? Not sure, just something to look into.
+
+And yes, you can install BB directly from factory firmware. There are two options for the BB download: a file for the <a href="http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-mr3020-v1-squashfs-factory.bin" target="_blank" rel="nofollow">factory</a> firmware, and a file for <a href="http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-mr3020-v1-squashfs-sysupgrade.bin" target="_blank" rel="nofollow">upgrading</a> from AA.
+
+### Comment by Bob Ross on 2015-06-23 16:30:34 -0400
+Hi,  
+tutorial worked like a charm.  
+One small addition: VPN didnt connect for me at startup even with changing rc.local.  
+I had to go to Luci / System / Startup and set the initscript &#8220;openvpn&#8221; to enabled additionally. Now it works. Maybe this helps someone.
+
+### Comment by Logan on 2015-06-26 08:55:44 -0400
+Good tip, thanks!
+
+### Comment by pyro on 2015-07-03 17:16:28 -0400
+Thanks for your effort Logan, Worked like a charm.
+
+### Comment by Logan on 2015-07-04 20:06:25 -0400
+Good to hear!
+
+### Comment by Newton Foster on 2015-09-08 17:01:16 -0400
+Extremely well done How-To article. Thank you. The detail level is fantastic, and I now have a whole-house VPN client working on a Xaiomi router running PandoraBox. Thank you. I am struggling how to create a Kill Switch type rule so that there is no internet access should the VPN drop. I know that this is a rule-based setup, but the syntax is confusing. I looked over than OpenVPN instructions, but they&#8217;re rather terse. Does anyone have suggestions on where I can look to find this?
+
+Thank you.
+
+### Comment by Logan on 2015-09-10 09:23:14 -0400
+Thanks! The killswitch will involve running two scripts: one when the VPN goes up, and another when the VPN goes down. Each script will have to edit the iptables firewall rules. See <a href="https://www.reddit.com/r/VPN/comments/1ec79r/ubuntu_openvpn_kill_switch_using_pia/" target="_blank" rel="nofollow">here</a>, <a href="https://www.privateinternetaccess.com/forum/discussion/3193/looking-for-linux-kill-switch-script" target="_blank" rel="nofollow">here</a>, and <a href="https://www.reddit.com/r/VPN/comments/2805zd/pia_iptables_killswitch_for_pia_and_other_vpns/" target="_blank" rel="nofollow">here</a> for an example.
+
+### Comment by Adam on 2015-09-24 08:27:49 -0400
+Hi There,
+
+I&#8217;m not great with openwrt setups, any chance you could give details of how you got the wps button working to start and stop VPN connections?
+
+Thank you in advance
+
+### Comment by Max on 2015-10-07 08:38:58 -0400
+Hi,
+
+Followed this guide but was never able to complete the networking, maybe because I have a custom built image.
+
+I&#8217;ve opened a post in official OpenWRT forums describing the issue in detail, will appreciate getting any hint here!  
+<a href="https://forum.openwrt.org/viewtopic.php?pid=295099#p295099" rel="nofollow ugc">https://forum.openwrt.org/viewtopic.php?pid=295099#p295099</a>
+
+By the way, I also tried the full config posted here, still no luck:  
+<a href="http://pastebin.com/C0d4pudk" rel="nofollow ugc">http://pastebin.com/C0d4pudk</a>
+
+### Comment by Max on 2015-10-07 14:34:37 -0400
+This is my wireless configuration:
+
+config wifi-iface  
+option device &#8216;radio0&#8217;  
+option network &#8216;lan&#8217;  
+option mode &#8216;ap&#8217;  
+option ssid &#8216;VPNAP&#8217;  
+option encryption &#8216;psk2+ccmp&#8217;  
+option key &#8216;XXXXXXXXXXX&#8217;
+
+Perhaps the &#8220;option network &#8216;lan'&#8221; should be changed to option network &#8216;WAN'&#8221;?
+
+### Comment by Logan on 2015-10-07 21:54:09 -0400
+Max,
+
+It looks (from your forum post) that you&#8217;re ok up until you delete the bridge, correct? I&#8217;ve done this build almost a dozen times without issue, so you may just be missing a step somewhere. From your pastie.org posts, it looks like you might be missing an interface name on the LAN interface.  
+**Before**  
+`config interface 'lan'<br />
+        option ifname 'eth0'<br />
+        option force_link '1'<br />
+        option type 'bridge'<br />
+        option proto 'static'<br />
+        option 'ipaddr' '10.0.0.139'<br />
+        option 'netmask' '255.255.255.0'<br />
+        option ip6assign '60'<br />
+`  
+**After**  
+`config interface 'lan'<br />
+        option force_link '1'<br />
+        option proto 'static'<br />
+        option 'ipaddr' '10.0.0.139'<br />
+        option 'netmask' '255.255.255.0'<br />
+        option ip6assign '60'<br />
+`  
+Something about deleting the bridge deleted the interface name as well (it shouldn&#8217;t have). You might need to add a line for `option ifname 'eth0'` into the section above.
+
+That would also explain why you&#8217;re receiving the firewall errors, since the firewall can&#8217;t find `eth0`, as it&#8217;s not defined.  
+`Warning: Section @zone[1] (wan) cannot resolve device of network 'wan'<br />
+Warning: Section @zone[1] (wan) cannot resolve device of network 'wan6'`
+
+### Comment by Max on 2015-10-08 03:24:46 -0400
+Hi,
+
+Your step &#8220;Unbridge LAN interfaces&#8221; actually has this very action:  
+uci delete network.lan.ifname
+
+Also, same in the posted config here:  
+<a href="http://pastebin.com/C0d4pudk" rel="nofollow ugc">http://pastebin.com/C0d4pudk</a>
+
+The &#8220;ifname&#8221; migrated to the &#8216;WAN&#8217; section:
+
+config interface &#8216;WAN&#8217;  
+option proto &#8216;dhcp&#8217;  
+option ifname &#8216;eth0&#8217; ##give the wifi hotspot dhcp of it&#8217;s own##
+
+Can you posted your following configs:  
+&#8211; network  
+&#8211; firewall  
+&#8211; wireless  
+?
+
+Thanks!
+
+### Comment by Logan on 2015-10-12 12:03:59 -0400
+Unfortunately, I don&#8217;t have the device anymore, so I can&#8217;t replicate my build. Hopefully someone here can help you, or you can get some help on your forum post.
+
+### Comment by Richard on 2015-10-22 08:18:42 -0400
+Hi Logan,
+
+Thanks for the completely clear walkthrough. I&#8217;ve managed to successfully run it up till the up/down script , it&#8217;s always showing failed to execute.
+
+Any pointers?
+
+### Comment by Logan on 2015-10-22 10:24:14 -0400
+Can you run the scripts manually from the commandline? Also, did you make sure to change the permissions?  
+`chmod 700 /etc/openvpn/vpndown.sh<br />
+chmod 700 /etc/openvpn/vpnup.sh<br />
+chmod 700 /etc/openvpn/vpncheck.sh`
+
+### Comment by Richard on 2015-10-22 12:15:35 -0400
+It gave me this from the command line
+
+Options error: Unrecognized option or missing parameter(s) in /etc/openvpn/vpncheck.sh:5: RESULT=\`ifconfig (2.3.6)  
+Use &#8211;help for more information.  
+root@MR3020:~# openvpn &#8211;cd /etc/openvpn &#8211;config /etc/openvpn/vpnup.sh  
+Options error: Unrecognized option or missing parameter(s) in /etc/openvpn/vpnup.sh:5: STATUS=UP (2.3.6)  
+Use &#8211;help for more information.
+
+### Comment by Logan on 2015-10-22 12:19:10 -0400
+On the second command, you&#8217;re passing the vpnup.sh script to OpenVPN as a config file, which is incorrect and throwing an error. The -config option needs to use a .ovpn file (shown below).  
+`openvpn --cd /etc/openvpn --config /etc/openvpn/piageneric.ovpn --remote us-east.privateinternetaccess.com 1194 &#038;`
+
+### Comment by Richard on 2015-10-22 12:49:02 -0400
+everytime I include this line in the .ovpn file
+
+up vpnup.sh  
+down vpndown.sh  
+script-security 2
+
+the config file failed:
+
+Thu Oct 22 23:47:02 2015 TUN/TAP device tun0 opened  
+Thu Oct 22 23:47:02 2015 do\_ifconfig, tt->ipv6=0, tt->did\_ifconfig\_ipv6\_setup=0  
+Thu Oct 22 23:47:02 2015 /sbin/ifconfig tun0 10.8.0.6 pointopoint 10.8.0.5 mtu 1500  
+Thu Oct 22 23:47:02 2015 vpnup.sh tun0 1500 1542 10.8.0.6 10.8.0.5 init  
+Thu Oct 22 23:47:02 2015 WARNING: Failed running command (&#8211;up/&#8211;down): could not execute external program  
+Thu Oct 22 23:47:02 2015 Exiting due to fatal error
+
+### Comment by Richard on 2015-10-22 12:51:11 -0400
+root@MR3020:~# cd /etc/openvpn  
+root@MR3020:/etc/openvpn# vpncheck.sh  
+-ash: vpncheck.sh: not found  
+root@MR3020:/etc/openvpn#
+
+### Comment by Logan on 2015-10-22 12:58:42 -0400
+Can you show me the permissions on the scripts?  
+`ls -la /etc/openvpn`
+
+Also, when you run the script, you need to run it with &#8220;./&#8221; in front of it.  
+`./vpncheck.sh`
+
+### Comment by Richard on 2015-10-22 13:05:24 -0400
+root@MR3020:~# ls -la /etc/openvpn  
+drwxr-xr-x 2 root root 1024 Oct 22 19:10 .  
+drwxr-xr-x 14 root root 1024 Oct 22 18:06 ..  
+-rw-r&#8211;r&#8211; 1 root root 15 Oct 22 02:25 auth  
+-rw-r&#8211;r&#8211; 1 root root 3629 Oct 22 23:59 client.ovpn  
+-rw-r&#8211;r&#8211; 1 root root 0 Oct 22 23:10 vpncheck.log?  
+-rwx&#8212;&#8212; 1 root root 371 Oct 22 23:21 vpncheck.sh  
+-rwx&#8212;&#8212; 1 root root 397 Oct 22 23:41 vpndown.sh  
+-rwx&#8212;&#8212; 1 root root 396 Oct 22 23:54 vpnup.sh  
+root@MR3020:~#
+
+root@MR3020:/etc/openvpn# ./vpncheck.sh  
+-ash: ./vpncheck.sh: not found
+
+### Comment by Logan on 2015-10-22 13:21:12 -0400
+Something weird is going on there. That file is definitely there and has the correct permissions. I assume all your scripts start with `#!/bin/ash`?
+
+### Comment by Logan on 2015-10-22 13:24:46 -0400
+Are you editing/creating these scripts directly on the router with the commandline and vi, or are you doing it in Windows then uploading it?
+
+### Comment by Richard on 2015-10-22 14:38:39 -0400
+I upload it usinmg windows, should I try using vi instead?
+
+### Comment by Richard on 2015-10-22 15:26:11 -0400
+Still not working.. do you think its about permissions?
+
+### Comment by Logan on 2015-10-22 16:08:53 -0400
+I would try. I think when you edit files in Notepad, Windows puts different newline characters in the file that Linux can&#8217;t understand.  
+<a href="https://stackoverflow.com/questions/27275118/linux-shell-script-not-found-but-it-does-exist" rel="nofollow ugc">https://stackoverflow.com/questions/27275118/linux-shell-script-not-found-but-it-does-exist</a>
+
+### Comment by Richard on 2015-10-23 02:04:11 -0400
+I recreated all the scripts from scratch now everything works!  
+Thanks Logan
+
+### Comment by Logan on 2015-10-23 08:06:51 -0400
+Sounds good!
+
+### Comment by dsadwdas on 2015-12-07 16:22:57 -0500
+Smartphone is getting the host-ip instead of VPN IP. Other devices work great. Do you have a conclusion for that?
+
+### Comment by Logan on 2015-12-09 13:58:49 -0500
+Are all the other clients connected via WiFi? Do you have a static lease set for the phone&#8217;s MAC address in OpenWrt already?
+
+### Comment by Alex on 2015-12-21 06:53:01 -0500
+Last week I bought a TL-WR710N, hoping I&#8217;d get the 8MB v2.1 model, but no such luck. I got the 4MB v2.0 model.
+
+Pros: two Ethernet ports, perfect for a pocket-sized wired firewall in addition to wireless.  
+Cons: mains powered only, not USB powered (but can be modded for USB power, if you&#8217;re careful), and a bit bigger than the MR3020.
+
+Chaos Calmer is supported on this device, even the 4MB model, although it doesn&#8217;t leave enough room to install block-mount, kmod-usb-storage, and kmod-fs-ext4. However, <a href="https://www.reddit.com/r/openwrt/comments/3sfalj/not_enough_space_to_install_packages_required_for/" rel="nofollow ugc">https://www.reddit.com/r/openwrt/comments/3sfalj/not_enough_space_to_install_packages_required_for/</a> came to the rescue, and pointed me in the direction of making my own OpenWRT firmware image. I was able to install Chaos Calmer without luci, add extroot support, then reinstall luci and all the rest of the stuff on this page, including OpenVPN.
+
+I mention this because the MR3020 has 4MB storage. I&#8217;ve not yet tried Chaos Calmer on my MR3020, so I don&#8217;t know if the MR3020 also suffers from insufficient space to add the extroot packages on a standard OpenWRT installation.
+
+### Comment by Logan on 2015-12-21 10:32:41 -0500
+Thanks! I had this same issue with my MR3020. I was unable to extroot because LuCI took up too much space and I couldn&#8217;t install block-mount, kmod-usb-storage, and kmod-fs-ext4. However, I ended up not keeping my MR3020, but this would have been a perfect solution. Have you had any issues running extroot on the WR710N?
+
+### Comment by Alex on 2015-12-21 13:37:14 -0500
+No issues so far. It seems to be working exactly as it did on the MR3020, as far as I can tell.
+
+### Comment by Logan on 2015-12-22 12:14:10 -0500
+Good to know! I may need to pick one up myself!
+
+### Comment by teodor on 2015-12-27 07:19:18 -0500
+with this configuration can i still use 3g usb stick for internet access? Cause i think i saw you used usb for external storage at some point .
+
+### Comment by Logan on 2015-12-27 21:02:22 -0500
+You would need to get a <a href="http://www.amazon.com/Sabrent-4-Port-Rotatable-Degree-HB-UMN4/dp/B00LRYUJQS" target="_blank" rel="nofollow">USB hub</a> to split the single USB port into more than one.
+
+### Comment by maslick on 2016-01-16 13:51:29 -0500
+Hi! Thanks for the tutorial. I cannot however move on starting from &#8220;Unbridge LAN interfaces&#8221;. I can either have bridged internet connection or once the wan cabel is detached &#8211; just the internal network connection (10.80.1.xxx), no internet. Can anyone provide their config files, please (network, wireless, dhcp, firewall)?  
+I have created a ticket <a href="https://dev.openwrt.org/ticket/21623" rel="nofollow ugc">https://dev.openwrt.org/ticket/21623</a>.
+
+### Comment by Logan on 2016-01-17 09:46:52 -0500
+Did you commit your changes and restart networking? Also, you may want to reboot the device.
+
+### Comment by c!co on 2016-01-19 20:26:49 -0500
+Put #!/bin/bash to the beginning of the script. Read somewhere that openvpn needs to know what to call to execute a script.
+
+### Comment by Alex on 2016-02-01 08:55:25 -0500
+I&#8217;ve acquired a new toy, and returned to this page as a reference while I configure it.
+
+The HooToo TripMate Nano (model TM02) is incredibly tiny. It makes the TP-Link MR3020 look gargantuan in comparison. Like the MR3020 it&#8217;s powered by a regular USB cable, has a single Ethernet socket, and a single USB host socket.
+
+It runs OpenWRT (I put Chaos Calmer on mine this afternoon) and it has 8MB of flash storage, so no need to mess about with extroot!
+
+### Comment by Logan on 2016-02-01 09:48:50 -0500
+Very cool, thanks for sharing! I had heard a few good things about the HooToo devices, but never tried one out. I didn&#8217;t know it had 8MB flash, which is awesome! I retired my MR3020, so I&#8217;ll have to pick up one of these!
+
+### Comment by Matt on 2016-02-21 03:13:19 -0500
+Hello, Thank you once again for your article!
+
+I have a slightly related question:  
+If you have MR3020 as a travel router + one more router at home with VPN. How to avoid VPN provider limitation on device count? My VPN provider limits 1 router, 1 computer, 1 phone. Can I setup MR3020 as my phone by overriding MAC address?
+
+### Comment by Logan on 2016-02-22 09:31:21 -0500
+There really isn&#8217;t a good way to avoid that. My provider (PIA) allows 5 devices, but doesn&#8217;t limit the type of device (router, phone, etc&#8230;). 
+
+I would assume that they are determining the device type by the MAC address, but that&#8217;s not a 100% fool-proof way. Consider companies that make computer and phones (Samsung, LG, etc&#8230;). I would think cloning your MAC would be the best way around that limitation.
+
+### Comment by Ini on 2016-02-28 03:27:42 -0500
+Hello,
+
+I have WR740N. I&#8217;m trying to use VPN both for LAN ports and WiFI, how to do it?
+
+### Comment by Logan on 2016-02-28 14:34:46 -0500
+You&#8217;ll need to bridge the wired and wireless interfaces.
+
+### Comment by Ini on 2016-02-29 00:10:26 -0500
+Wired and wireless interfaces are bridged by default. Also apparently I didn&#8217;t even need to create WAN interface, since it is already there. So I just configured VPN as you described and it worked! Thank you!
+
+Also do you think mr3020 or wr740n can handle 30 and more clients working through the VPN? Can we switch off some services, if we are sure that modem is handling them?
+
+### Comment by Logan on 2016-02-29 08:44:01 -0500
+Glad it worked!
+
+To be honest, I couldn&#8217;t tell you the number of clients it could handle. It depends on the CPU specs, and I know neither of those devices have great CPUs. I&#8217;m sure it _would_ work with 30 clients, but I&#8217;m sure it would be painfully slow. Yes, I&#8217;m sure you could disable some unnecessary services (LuCI, Samba, PPTP, etc&#8230;), but again, I don&#8217;t think it would make much difference. The CPU will be the bottleneck.
+
+### Comment by Nicki on 2016-05-18 02:25:03 -0400
+Hello Logan! Thank you for this great article! How can I bridged the interfaces? Is there a way to bridge the wireless interface with TUN? That is my solution in Windows. I need full access over VPN to clients that connected on MR3020.
+
+### Comment by Logan on 2016-05-19 09:31:34 -0400
+What do you mean by &#8220;full access&#8221;? I don&#8217;t have a MR3020 anymore, but I think you can go the interface, then the physical tab, and check the necessary boxes to bridge the tunnel and wireless interfaces.
+
+### Comment by Nicki on 2016-05-19 15:15:45 -0400
+Hi Logan. Thanks for your reply. I need to access a Server behind the OpenWRT from Clients connected to OpenVPN-Server. I need full access to all services an ports. I have installed package &#8220;relayd&#8221; and try to bridge the LAN / TAP. But I can&#8217;t connect to server-webinterface.  
+Here you can find my full Config:  
+<a href="https://drive.google.com/open?id=0ByHou1lJfZMmZ0dtWloyQjdaZmM" rel="nofollow ugc">https://drive.google.com/open?id=0ByHou1lJfZMmZ0dtWloyQjdaZmM</a>
+
+Thanks
+
+### Comment by Logan on 2016-05-20 11:05:13 -0400
+Which box is acting as the OpenVPN client? The fact that you have two OpenVPN servers in your diagram, and not a client, is throwing me off.
+
+### Comment by Nicki on 2016-05-23 04:41:46 -0400
+I have updated the diagram. Now it is correct. The OpenWRT-Router and Clients are connected to OpenVPN-Server. This Server is behind a FritzBox 7490. Clients are connected to OpenVPN-Server. On Server behind the OpenWRT-Router run a Service on Port 4500. This Service is not avaible for the Clients. This is the Service that I need.  
+Thank you
+
+### Comment by Pete S. on 2016-05-27 01:53:41 -0400
+Nicki &#8211; Can you describe in more detail what you&#8217;re trying to achieve? Are the 2 clients on the 10.0.0.0/24 network trying to access services on the server @ 10.80.1.19? Does the server ever need to initiate connections to the clients, or is it always client initiated? Is this across 3 or more physical locations?
+
+Can you show the internet in the drawing so that we can understand the natural physical segmentation of your network (and therefore the publicly routable vs un-routable IP address distinctions)?
+
+Is this a business grade network with proper routing tables? Or are some things double-NAT&#8217;d (and if so, is it intentional and necessary &#8211; why double-NAT)? 
+
+There are a lot of different subnets in that diagram which makes it confusing. For example, the clients are on a different subnet than the router which is unusual. This theme repeats behind each router, where the IP address of the router (LAN, I assume, since those are un-routable IPs) are totally different subnets than the stuff behind them. And you have 2 routers that appear to be on the same IP address &#8212; presumably the internet lies between these two routers. On the server side, is it necessary for it to be behind the OpenWRT router (thus double-NAT&#8217;d)?
+
+I have successfully managed to get full network service availability across the VPN tunnel by having 2 distinct subnets, one on each side of the tunnel. 
+
+If this is a SOHO type setup that you can fully control, I&#8217;d start by simplifying the subnets and eliminating the extra NAT stages so that you don&#8217;t have quite as many complex routes to deal with. The fact that the OpenVPN server is running through some other router as compared to the client machines is likely to be a routing nightmare. Instead of connecting the server through the OpenWRT router, you could connect both the OpenWRT router and the server to the same internet router. The same thing on the client side &#8212; eliminate the 192.168.2.1 router and connect the OVPN Server and client machines to the same router. Then, as long as you have the right routes pushed in the OVPN config, it should be possible to communicate across the tunnel.
+
+### Comment by Nicki on 2016-06-14 05:15:20 -0400
+Thanks for your reply. Here is my full diagram. I need TAP because I need broadcast.  
+<a href="https://drive.google.com/file/d/0ByHou1lJfZMmMHFhRU5JZTlBVjA/view?usp=sharing" rel="nofollow ugc">https://drive.google.com/file/d/0ByHou1lJfZMmMHFhRU5JZTlBVjA/view?usp=sharing</a>
+
+### Comment by Pete S. on 2016-06-14 19:05:50 -0400
+Nicki &#8211; Thanks for the updated diagram. I think I understand what you&#8217;re aiming to do, but I&#8217;m not quite sure if I have any ideas that will help. That said, a few thoughts&#8230;
+
+1) do you have the &#8220;client-to-client&#8221; directive enabled on the OVPN server? This may be required. In fact, if it is enabled, it may be possible to do establish the connection via TUN (instead of TAP) and get the desired results.  
+2) Is there any reason that you need to connect via the 3rd location (OVPN server)? Instead, could you possibly put an OpenVPN Server configuration on the router that is currently the OpenVPN client? This way you could connect from the client computers directly to the physical location with the server of interest, entirely eliminating the 3rd location. This would simplify the situation dramatically, removing any client-to-client considerations and would probably be the most effective and provide faster, more efficient performance.
+
+### Comment by Erniman on 2016-07-20 21:21:01 -0400
+Hello, I have a problem when I try to start the VPN. I have this on terminal:  
+root@mr3020_home:/etc# openvpn &#8211;cd /etc/openvpn &#8211;config /etc/openvpn/piageneric.ovpn &#8211;remote us-siliconvalley.privateinterne  
+taccess.com 1194  
+Wed Jul 20 21:16:30 2016 OpenVPN 2.3.6 mips-openwrt-linux-gnu \[SSL (OpenSSL)\] \[LZO\] \[EPOLL\] \[MH\] [IPv6] built on Jan 6 2015  
+Wed Jul 20 21:16:30 2016 library versions: OpenSSL 1.0.2f 28 Jan 2016, LZO 2.08  
+Wed Jul 20 21:16:30 2016 WARNING: file &#8216;authuser&#8217; is group or others accessible  
+Wed Jul 20 21:16:30 2016 Cannot load CA certificate file ca.crt (no entries were read): error:02001002:lib(2):func(1):reason(2): error:2006D080:lib(32):func(109):reason(128)  
+Wed Jul 20 21:16:30 2016 Exiting due to fatal error
+
+I´ve done all as you did it. Can you help me with this?  
+Thanks!
+
+### Comment by Logan on 2016-07-21 09:20:43 -0400
+It seems like you&#8217;re missing the ca.crt file. Did you download it from PIA? Are you sure it&#8217;s in the right place?
+
+### Comment by Erniman on 2016-07-22 23:25:46 -0400
+Hi Logan, thanks for your reply. I´m not sure if ca.crt is in the right place. Also, I didn´t find where, in your tutorial, i´ve downloaded that file. I´m a little lost in this setup!! I appreciate any help.
+
+### Comment by Logan on 2016-07-24 21:01:55 -0400
+If you&#8217;re using my config file, ca.crt needs to be in the same directory as the .ovpn file you&#8217;re using. The ca.crt file comes in the <a href="https://www.privateinternetaccess.com/openvpn/openvpn.zip" target="_blank" rel="nofollow">this</a> .zip file, along with all the other .ovpn files.
+
+### Comment by Mogens on 2017-01-15 04:01:04 -0500
+Would have loved to make my own travel router, but gave up as I could not solve the technicalities due to lacking RAM. Is there another router with more RAM &#8211; size doesn&#8217;t matter &#8211; where your guide could be used? I intend to connect to my home network where I have an ASUS router running a VPN-server.
+
+### Comment by Logan on 2017-01-15 14:24:17 -0500
+I assume by RAM you mean flash, or do you mean actual RAM? If flash, then check out HooToo and specifically <a href="https://loganmarchione.com/2015/02/openwrt-with-openvpn-client-on-tp-link-tl-mr3020-3/#comment-9654" target="_blank">this comment</a>. I haven&#8217;t tried it personally, but I&#8217;ve heard good things about it.
+
+### Comment by Alexander on 2017-01-17 00:50:45 -0500
+Thank you for this outstanding tutorial!
+
+My router has:  
+1) ISP WAN PPoE connection with DHCP address assignment.  
+2) VPN(tun0) connection as openvpn client (setup as described in this article)  
+3) LAN network 192.168.10.1/255.255.255.0
+
+In my LAN network I have PC(192.168.10.2) and SmartTV (192.168.10.3). 
+
+So the question is how to bypass all traffic from 192.168.10.3 to ISP WAN without VPN tunnelling and traffic from PC 192.168.10.2 with VPN tunneling. I need it &#8217;cause SmartTV traffic is too large for my VPN conection.
+
+I think I need to modify OpenWRT firewall rules but not sure how to do it correctly!
+
+Thank you!
+
+### Comment by Logan on 2017-01-17 10:44:20 -0500
+Alex, I don&#8217;t have my MR3020 anymore, so I won&#8217;t be much help to you. However, I think you can either make firewall rules, or create a 2nd LAN and only use the VPN on that LAN (might be easier).
+
+### Comment by turyono on 2017-03-26 06:54:13 -0400
+Thank you , for your article, 🙂
+
+### Comment by Jesse on 2017-09-28 20:33:34 -0400
+Hello, I&#8217;m a bit late to the party but i just got the TL-MR3020 in hope of making a mobile network in my car. I was following you pretty well (i&#8217;m useless in programming so i&#8217;m trying my best) now i made it to the extroot bit&#8230;. and here&#8217;s my problem&#8230; I plan on using this router in &#8220;3G/4G&#8221; mode and having a USB Modem in the usb slot&#8230; Literally the only reason for this entire project was simply because i wanted a VPN on my android radio in my car&#8230;. but apparently for reasons unknown i cannot get a VPN working on the radio(tried 3 different VPN methods, they all seem to &#8216;connect&#8217; but dont mask my IP) , so i have resorted to putting a VPN at the source. but from what i am understanding here&#8230; i need to use the USB slot to house extra space for the actual VPN rather than the modem which will be my source of internet.. so this sorta screws up my plans&#8230; I&#8217;ve noticed most modems come with an SD card slot.. could i maybe install whatever information is required to finish this build on there? and if so, how would i do this this ???
+
+Thanks for the advice,  
+Jesse
+
+### Comment by Logan Marchione on 2017-09-29 08:43:14 -0400
+You can do one of two things:  
+1) Get a different mini-router than has more storage (this is the better solution)  
+2) Use an unpowered USB hub to turn that single USB port into 2 or more

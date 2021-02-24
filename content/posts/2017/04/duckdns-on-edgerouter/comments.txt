@@ -1,0 +1,276 @@
+## Comments
+
+### Comment by Adam York on 2017-10-24 09:30:40 -0400
+This is very, very nice. Do you know if this will also work for the Edgerouter-X? This is the one I&#8217;m thinking of &#8211; <a href="https://www.amazon.com/Ubiquiti-EdgeRouter-Advanced-Gigabit-Ethernet/dp/B00YFJT29C/ref=sr_1_2?ie=UTF8&#038;qid=1508851796&#038;sr=8-2&#038;keywords=edgerouter+x" rel="nofollow ugc">https://www.amazon.com/Ubiquiti-EdgeRouter-Advanced-Gigabit-Ethernet/dp/B00YFJT29C/ref=sr_1_2?ie=UTF8&qid=1508851796&sr=8-2&keywords=edgerouter+x</a>
+
+### Comment by Logan Marchione on 2017-10-24 12:42:58 -0400
+I would think it would work on any EdgeMax device, since they all run the same OS.
+
+### Comment by Adam York on 2017-10-26 08:34:15 -0400
+Ok. Thanks. I will give it a try. Again, great guide!
+
+### Comment by Logan Marchione on 2017-10-26 08:38:56 -0400
+Thanks, and good luck!
+
+### Comment by Gunnar on 2017-11-16 09:01:06 -0500
+Thanks, worked fine.
+
+### Comment by Logan Marchione on 2017-11-16 13:33:26 -0500
+Glad it worked!
+
+### Comment by Jon on 2018-01-06 11:30:46 -0500
+Thanks! This worked for me with one tweak. If you are using a DSL (and maybe cable?) modem in bridge mode, the interface you want to use is pppoe0. Other than that it went very smoothly. Thanks for the article.
+
+### Comment by Logan Marchione on 2018-01-08 11:00:51 -0500
+Good to know! Who is your ISP?
+
+### Comment by Bruce0 on 2018-02-04 20:19:26 -0500
+ER-X can work fine, however if you get &#8220;noconnect&#8221; instead of &#8220;good&#8221; when doing the command:  
+show dns dynamic status
+
+then you have a known problem, resolution is to re-apply the current firmware (currently 1.9.7H4)(even if you already have it) which will populate a missing file &#8211; google &#8220;ER-X noconnect&#8221;, there are several posts about it.
+
+### Comment by Bruce0 on 2018-02-04 20:20:07 -0500
+And thank you for this fantastic guide.
+
+### Comment by Logan Marchione on 2018-02-05 11:26:35 -0500
+Good to know, thanks!
+
+### Comment by KiZD on 2018-03-10 22:22:17 -0500
+Hello! thanks for the guide.
+
+I&#8217;m trying to setup, but when I run:  
+&#8220;set service dns dynamic interface eth0 service&#8221; (or the other similar &#8220;set service&#8230;&#8221;
+
+The answer is always the same:  
+Invalid command
+
+With the other &#8220;set service&#8230;&#8221; the answer is the same.
+
+Any idea?
+
+Thanks in advance.
+
+### Comment by Logan Marchione on 2018-03-10 22:58:36 -0500
+Are you in configure mode?
+
+### Comment by Jodie Cunningham on 2018-03-26 20:35:42 -0400
+This worked great! Thank you. 
+
+I found that I didn&#8217;t have to run an update, it was already updated after the commit.
+
+### Comment by Logan Marchione on 2018-03-26 20:47:12 -0400
+Good to know, thanks!
+
+### Comment by Juha on 2018-03-27 14:53:05 -0400
+Thanks for a good guide
+
+### Comment by Logan Marchione on 2018-04-02 09:41:30 -0400
+Glad to help!
+
+### Comment by peng on 2018-05-24 03:28:47 -0400
+Hi, many thanks for this guide! Work!  
+So, I have a question. How do create a .ovpn file for client with DuckDNS?
+
+Many thanks.
+
+### Comment by Logan Marchione on 2018-05-24 15:19:44 -0400
+What are you referring to? This guide is not about OpenVPN, just DDNS.
+
+### Comment by Jay Patel on 2018-06-12 20:20:14 -0400
+Hi I set up everything like you stated, but when i go to type the address into my browser, it does not load!
+
+What could be the cause for this? Ubiquiti&#8217;s CLI is different than what I&#8217;m used to with my rPi haha
+
+### Comment by Logan Marchione on 2018-06-12 21:23:14 -0400
+Address of what? Did you set the ERL to listen on the WAN interface? FYI &#8211; I would highly suggest against this, since it puts your router&#8217;s interface directly on the internet.
+
+### Comment by Jay Patel on 2018-06-13 11:00:42 -0400
+The &#8220;website&#8221; address I had set up to connect me to my router address is not loading the router log in. What would be a more secure method to route to my router do you think instead of making it a webpage accessible site via WAN?
+
+### Comment by Logan Marchione on 2018-06-13 11:36:09 -0400
+You should setup a VPN server inside your network that you can connect to over that website address. Then, you will activate your VPN to get &#8220;inside&#8221; your network, then connect to your router over your router&#8217;s local IP (e.g., 192.168.1.1).
+
+If you \*really\* want to connect to your router&#8217;s interface website over the internet, you&#8217;ll need to make sure you have the firewall set to allow that on the ERL.
+
+### Comment by Paulo on 2018-08-27 17:11:15 -0400
+Hi,  
+If the edge is behind isp router on DMZ mode, will he get the local ip or the wan ip?
+
+### Comment by Logan Marchione on 2018-08-27 19:44:24 -0400
+Run this from the ERL command line and see.  
+`curl https://canihazip.com/s`
+
+### Comment by Daniel Fransson on 2018-09-07 07:13:42 -0400
+Hello
+
+This is how my dashboard looks like. <a href="https://1drv.ms/u/s!AlanozL3drB-gfkCfsZg8mFijq8zzw" rel="nofollow ugc">https://1drv.ms/u/s!AlanozL3drB-gfkCfsZg8mFijq8zzw</a>
+
+I have tried to follow your guide and tried to set it up on both interface eth0 and switch0.1. But when I enter:  
+show dns dynamic status  
+I get some wierd time and date in repy.  
+<a href="https://1drv.ms/u/s!AlanozL3drB-gfkDOrC0Xhdgs0wTbg" rel="nofollow ugc">https://1drv.ms/u/s!AlanozL3drB-gfkDOrC0Xhdgs0wTbg</a>
+
+can you please give me some advice on how to fix this?
+
+### Comment by Logan Marchione on 2018-09-07 09:39:35 -0400
+Those links aren&#8217;t working for me.
+
+### Comment by Daniel Fransson on 2018-09-07 12:23:43 -0400
+Sorry, try these:
+
+<a href="https://1drv.ms/u/s!AlanozL3drB-gfkOmE7JY4p0S0q_BQ" rel="nofollow ugc">https://1drv.ms/u/s!AlanozL3drB-gfkOmE7JY4p0S0q_BQ</a>  
+<a href="https://1drv.ms/u/s!AlanozL3drB-gfkQ5vYjI3RCJYrIbw" rel="nofollow ugc">https://1drv.ms/u/s!AlanozL3drB-gfkQ5vYjI3RCJYrIbw</a>
+
+### Comment by Logan Marchione on 2018-09-07 12:33:15 -0400
+The date and time is weird because Unix/Linux starts counting from 1/1/1970 (see <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank" rel="noopener nofollow">this</a>) and it has probably never updated successfully, so it&#8217;s counting from &#8220;zero&#8221;. What is the output of `date` on your EdgeRouter from the command line? Does it show the correct date/time?
+
+Which interface is your WAN interface? eth0? If so, you should have the DNS client setup on that interface, not switch0.1. 
+
+What is the output of `show service dns dynamic` when in `configure` mode? Be sure to obfuscate any personal information. It should look similar to this.
+
+<pre>interface eth0 {
+     service custom-duckdns {
+         host-name yourhostname
+         login nouser
+         password your123account123token123
+         protocol dyndns2
+         server www.duckdns.org
+     }
+ }</pre>
+
+### Comment by Daniel Fransson on 2018-09-07 13:38:21 -0400
+Sorry for troubling you, I did a reset of my router and now it works! Thanks for the effort! And thanks for the great guide!
+
+### Comment by Logan Marchione on 2018-09-07 14:24:50 -0400
+No worries, glad it&#8217;s working!
+
+### Comment by David Levine on 2018-12-03 22:24:03 -0500
+Your the best!
+
+### Comment by Logan Marchione on 2018-12-06 10:35:29 -0500
+Thanks!
+
+### Comment by Chris on 2018-12-12 20:55:27 -0500
+Logan, same issue for me. When I run the curl command, I do get the proper &#8216;outside&#8217; IP. But in DuckDNS, I get my DMZ IP as does show dns dynamic status. I&#8217;m using eth0 for my wan.
+
+### Comment by Logan Marchione on 2018-12-13 11:33:37 -0500
+You must be behind NAT or something. Basically, right now, you&#8217;re telling DuckDNS to use the IP of eth0 as your DDNS IP. However, we need to tell DuckDNS to use the IP provided from an external website as your IP.
+
+I don&#8217;t have it setup in my guide, but you need to use the &#8220;web&#8221; parameter in the web UI to set it up. Google something like &#8220;edgerouter dynamic dns web url&#8221; to get you started.
+
+<a href="https://www.dynu.com/DynamicDNS/IPUpdateClient/Ubiquiti-EdgeRouter" rel="nofollow ugc">https://www.dynu.com/DynamicDNS/IPUpdateClient/Ubiquiti-EdgeRouter</a>  
+<a href="https://community.ubnt.com/t5/UniFi-Routing-Switching/Dynamic-DNS-behind-double-NAT/m-p/1785564/highlight/true#M31450" rel="nofollow ugc">https://community.ubnt.com/t5/UniFi-Routing-Switching/Dynamic-DNS-behind-double-NAT/m-p/1785564/highlight/true#M31450</a>
+
+### Comment by Cory Elliott on 2019-01-05 22:56:08 -0500
+Logan,
+
+Poking around with my new Edgerouter Lite and your guides have been invaluable. I thank you for that! 
+
+Thought you would like to know that DuckDNS actually links to your page for a guide on how to setup DuckDNS on the Edgerouter. How neat is that? Looks like you appreciate each other more than you know.
+
+Anyhow, thanks!
+
+### Comment by Logan Marchione on 2019-01-06 21:40:22 -0500
+Glad to help!
+
+And yep, I noticed an uptick in traffic from there. Always good to share the knowledge!
+
+### Comment by Tamadite on 2019-02-10 17:41:01 -0500
+If you have defined a WAN_LOCAL firewall ruleset with drop policy, do not forget to create an accept rule for &#8220;established/related&#8221;
+
+### Comment by wim on 2019-04-19 10:07:25 -0400
+Hello Logan,
+
+I am trying to set this up, however I am using a USG-Pro that is running Unify in a controller setup. Do you (or anyone else looking at this) got this working with USG-Pro?
+
+Other small question, in the config, how important is the &#8220;host-name&#8221;? because I have set that to what my router responds to internally.
+
+When setting all up using your very clear instructions I do not get an error, and config seems to be accepted, but when i do:  
+admin@:~$ show dns dynamic status  
+interface : eth2 <&#8211; this is my WAN facing interface set to DHCP so it gets the providers IP, no double NAT  
+ip address : <&#8211; this stays empty  
+host-name :  
+last update : Thu Jan 1 01:00:00 1970 <&#8211; this stays at "the beginning of time" from a Unix perspective  
+update-status: bad <&#8211; yep, this is what it is.
+
+I did reset my router as I did see a "date related issue" earlier, but that did not help.
+
+Many thanks for your thoughts,
+
+Wim,
+
+### Comment by Logan Marchione on 2019-04-19 10:30:46 -0400
+I don&#8217;t have a USG, but a quick Google came up with <a href="https://community.ubnt.com/t5/UniFi-Wireless/DuckDNS-configuration-on-USG/m-p/1609888/highlight/true#M169826" target="_blank" rel="noopener noreferrer nofollow">this</a>.
+
+The &#8220;hostname&#8221; is the name you will use to reach your router from the outside. For example, it could be &#8220;wim.duckdns.org&#8221;. It does not need to be your router&#8217;s hostname, it can be anything.
+
+### Comment by Alex R on 2019-05-04 16:37:05 -0400
+Thanks Logan this worked amazing
+
+### Comment by Logan Marchione on 2019-05-06 13:59:56 -0400
+Glad to help!
+
+### Comment by Robert on 2019-08-28 17:51:05 -0400
+How often will the IP get updated? Will the update happen automatically? Does a cron job need to run every few minutes? Thank you.
+
+### Comment by Logan Marchione on 2019-08-29 08:23:00 -0400
+According to the EdgeRouter <a href="https://help.ubnt.com/hc/en-us/articles/204952234-EdgeRouter-Built-in-Dynamic-DNS" target="_blank" rel="noopener noreferrer nofollow">documentation</a>:
+
+> By default, EdgeOS will only update Dynamic DNS when the IP address actually changes.
+
+I&#8217;m assuming it runs a cronjob or something similar in the background, but you don&#8217;t need to set it up yourself. Just setting up dynamic DNS will trigger these events.
+
+### Comment by kHz on 2020-04-11 14:29:42 -0400
+I know this is dated but hope I can glean some nuggets from anyone still following this.
+
+I had this setup CPE&#8211;>(Static-ClassA-IP)WAN/eth0 [ edgemaxlite ] &#8212;>eth1-LAN 
+
+Now I&#8217;m trying MiFi Router&#8211;>(Dynamic class B/C)WAN/eth0&#8211;> [edgemaxlite ] &#8211;>eth1-LAN
+
+My problem is the MiFi Router is essentially looked at (from my ISP perspective) as a cellphone , so IP is dynamic,  
+also on it&#8217;s LAN interface, it will dynamically shift between 10&#8230;. and 192&#8230;. IPs on it&#8217;s DHCP server randomly everytime you toggle between bridgemode and the regular mode. This means my edgemaxlite needs to have it&#8217;s WAN/eth0 set to dhcp.
+
+I would like to set up a VPN server on the edgemaxlite and I think I would need duck dns(or other similar free service).  
+Do you know if this is doable?
+
+If yes, what else would I need to configure as the vpn tab on my edge os interface seems to only mention peers(I assume these would be other similar devices forming a point to point link between two sites).
+
+If not, does anyone know how to set up a vpn server on a unifi app (the 1U unifi appliance, which I believe runs debian or ubuntu) as I have one in my LAN. 
+
+Many thanks in advance.
+
+### Comment by Logan Marchione on 2020-04-12 15:11:53 -0400
+I don&#8217;t use an EdgeRouter anymore, so I really can&#8217;t be of much help. I would try asking on the Ubiquiti <a href="https://www.reddit.com/r/Ubiquiti/" target="_blank" rel="noopener noreferrer nofollow ugc">subreddit</a> or the <a href="https://community.ui.com/tags/edgemax" target="_blank" rel="noopener noreferrer nofollow ugc">forums</a>.
+
+### Comment by Fredrik on 2020-10-10 08:00:45 -0400
+Brilliant! worked like a charm on ER-X (on v2.0.3)
+
+### Comment by Logan Marchione on 2020-10-12 11:19:34 -0400
+Glad it worked! I haven&#8217;t used an EdgeRouter in a while, so I&#8217;m glad this guide still holds up!
+
+### Comment by AK on 2020-12-20 17:31:37 -0500
+For double NAT folks, add the following two lines&#8230;
+
+set service dns dynamic interface eth0 web dyndns  
+set service dns dynamic interface eth0 web-skip 
+
+<a href="https://www.duckdns.org/install.jsp?tab=dyndns" rel="nofollow ugc">https://www.duckdns.org/install.jsp?tab=dyndns</a>  
+Will look something like this&#8230;  
+<a href="http://nouser:TOKEN-PASSWORD-HERE@www.duckdns.org/v3/update?hostname=DUCKDNS-HOSTNAME&#038;myip=1.1.1.1" rel="nofollow ugc">http://nouser:TOKEN-PASSWORD-HERE@www.duckdns.org/v3/update?hostname=DUCKDNS-HOSTNAME&myip=1.1.1.1</a>
+
+### Comment by Logan Marchione on 2020-12-21 11:30:14 -0500
+Thanks for adding this!
+
+### Comment by Jean-François Schmitz on 2021-02-07 07:01:29 -0500
+Hi,  
+I rencently swapped my Netgear R7000 for an EdgeRouter ER12P and an Orbi mesh system. So I am relatively awarecof consumer-grade routers but new to these more pro products. Please bear with me !  
+Where am i supposed to enter these commands? I tried both the CLI and directly in the shell but I the error message &#8220;Invalid command&#8221;.  
+This happens as soon as when you put in the &#8220;dns&#8221; parameter.  
+Any suggestions?
+
+### Comment by Jean-François Schmitz on 2021-02-07 08:17:17 -0500
+OK, got it&#8230; Wasn&#8217;t aware you first need to go into configure mode. Now it worked, thnx!
+
+### Comment by Logan Marchione on 2021-02-08 11:44:56 -0500
+Glad you got it working! May be worth it to check out <a href="https://loganmarchione.com/2016/04/ubiquiti-edgerouter-lite-setup/#Software" rel="noopener" target="_blank">this Software section</a> just to learn how the CLI works.

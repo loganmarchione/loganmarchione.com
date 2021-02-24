@@ -1,0 +1,15 @@
+## Comments
+
+### Comment by buzz on 2017-09-30 14:39:21 -0400
+Hi Logan,
+
+I&#8217;ve been enjoying your posts. Thank you for taking the time to help folks like me!
+
+One note on this post that I discovered while trying to copy what you did at HE: the first and third Type &#8216;CAA Record&#8221; screenshots all duplicates. The third should be (I think) the ioref screenshot.
+
+I could not have done this without your help. Thank you again!
+
+buzz
+
+### Comment by Logan Marchione on 2017-09-30 17:36:29 -0400
+Yep, nice catch, thanks! I corrected this.

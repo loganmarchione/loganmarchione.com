@@ -1,0 +1,403 @@
+## Comments
+
+### Comment by Mike on 2017-08-20 00:03:13 -0400
+thank you for the tutorial, i am trying to replicate this on freebsd
+
+### Comment by Mike on 2017-08-20 00:04:25 -0400
+curious what cron configuration do you use for your backup, thanks?
+
+### Comment by Logan Marchione on 2017-08-20 01:23:09 -0400
+Good luck, I would like to know how it goes!
+
+### Comment by Logan Marchione on 2017-08-20 01:24:04 -0400
+None yet, I&#8217;m still looking to get a NAS to run this on. However, I plan on doing once a week when I do get it setup.
+
+### Comment by Mike on 2017-08-20 03:49:05 -0400
+reviewing the script, I generated PGP keys unsing gnupg. I located the keys and know the passphrase i used when making them. I am unsure which field i input the public key, do I input the passphrase I used to create the keys? Not exactly sure about the fields below. I know you mentioned you created 2 sets of keys. I only created 1 set (pub/priv). Thanks for the help
+
+ENC\_KEY, SGN\_KEY, PASSPHRASE, SIGN_PASSPHRASE
+
+### Comment by Logan Marchione on 2017-08-20 10:10:21 -0400
+Sorry for the confusion.
+
+ENC\_KEY=&#8221;EEEEEEEE&#8221; and SGN\_KEY=&#8221;FFFFFFFF&#8221; are the last eight digits of the public fingerprint of your keys (in your case, it&#8217;s the same key).
+
+export PASSPHRASE=&#8221;GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG&#8221; and export SIGN_PASSPHRASE=&#8221;HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH&#8221; are the passwords to your keys (in your case, it&#8217;s the same password because it&#8217;s the same key)
+
+### Comment by Mike on 2017-08-20 12:59:54 -0400
+Thanks for the clarification.
+
+Where does the public key need to be located for this script to work? or does it pull the key from MIT&#8217;s servers? thank you!
+
+### Comment by Logan Marchione on 2017-08-21 10:36:56 -0400
+Keep the public key in your ~/.gnupg directory (the default location). Duplicity knows to look in that directory (assuming you&#8217;re running the script as you).
+
+### Comment by Skip Chang on 2017-08-30 00:47:14 -0400
+Hi,  
+When I followed your script and execute, I get the following error:  
+UnsupportedBackendScheme: scheme not supported in url: b2://<>:<>@B2 Bucket/B2 Dir.  
+(I&#8217;ve removed my info from the error).  
+Thanks.
+
+### Comment by Domenic on 2017-08-30 09:26:56 -0400
+Specifically, what GPG files would you need to have store elsewhere in order to restore files from an encrypted B2? Do you have a sample restore script?
+
+### Comment by Logan Marchione on 2017-08-30 12:43:28 -0400
+You would need to keep your private key (since your files are encrypted with your public key), but I would backup all your public and private keys from ~/.gnupg (and store the backup somewhere secure).  
+`cd<br />
+tar -czf gpg.tgz ./.gnupg`
+
+You can use the command below as an example, but I haven&#8217;t tested it.  
+`duplicity --sign-key $SGN_KEY --encrypt-key $ENC_KEY restore --file-to-restore ${B2_DIR} b2://${B2_ACCOUNT}:${B2_KEY}@{B2_BUCKET} <restore_location></restore_location>`
+
+### Comment by Logan Marchione on 2017-08-30 13:55:40 -0400
+Did you remove the brackets, or is that part of your command?
+
+Are you running this on Linux? If so, what distro? Also, I see there is a <a href="https://bugs.launchpad.net/duplicity/+bug/1632475" target="_blank" rel="nofollow">bug open</a> for this too.
+
+### Comment by Michael on 2017-09-01 04:22:20 -0400
+i generated the keys on my desktop then copied the entire dir into my remote comp running the script (where the data is located) when i execute the script i keep running into the below (seems that it doesnt think i have keys already there, which they are).
+
+root@Backblaze # ./test.sh  
+Local and Remote metadata are synchronized, no sync needed.  
+Last full backup date: none  
+No old backup sets found, nothing deleted.  
+Local and Remote metadata are synchronized, no sync needed.  
+Last full backup date: none  
+Last full backup is too old, forcing full backup  
+GPGError: GPG Failed, see log below:  
+===== Begin GnuPG log =====  
+gpg: keyring \`/root/.gnupg/secring.gpg&#8217; created  
+gpg: keyring \`/root/.gnupg/pubring.gpg&#8217; created  
+gpg: no default secret key: secret key not available  
+gpg: [stdin]: sign+encrypt failed: secret key not available  
+===== End GnuPG log =====
+
+Local and Remote metadata are synchronized, no sync needed.  
+Last full backup date: none  
+No extraneous files found, nothing deleted in cleanup.  
+Local and Remote metadata are synchronized, no sync needed.  
+Last full backup date: none  
+Collection Status  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+Connecting with backend: BackendWrapper  
+Archive dir: /root/.cache/duplicity/3c1c4445206909a752edc39362f0fef7
+
+### Comment by Michael on 2017-09-01 04:24:02 -0400
+keys are located in the /.gnupg dir
+
+also this is on FreeBSD but shouldn&#8217;t matter.  
+I wasn&#8217;t able to generate enough entropy which is why I needed to create then move the /.gnupg dir over to the server.
+
+### Comment by Michael on 2017-09-01 04:28:40 -0400
+root@Backblaze:~/.gnupg # ls -l
+
+total 41  
+drwxr-xr-x 2 root wheel 3 Sep 1 01:13 crls.d  
+-rwxr&#8211;r&#8211; 1 root wheel 2912 Sep 1 01:13 dirmngr.conf  
+-rwxr&#8211;r&#8211; 1 root wheel 5191 Sep 1 01:13 gpg.conf  
+drwxr-xr-x 2 root wheel 3 Sep 1 01:13 openpgp-revocs.d  
+drwxr-xr-x 2 root wheel 4 Sep 1 01:13 private-keys-v1.d  
+-rw&#8212;&#8212;- 1 root wheel 0 Sep 1 01:15 pubring.gpg  
+-rwxr&#8211;r&#8211; 1 root wheel 1390 Sep 1 01:13 pubring.kbx  
+-rwxr&#8211;r&#8211; 1 root wheel 32 Sep 1 01:13 pubring.kbx~  
+-rw&#8212;&#8212;- 1 root wheel 0 Sep 1 01:15 secring.gpg  
+-rwxr&#8211;r&#8211; 1 root wheel 1280 Sep 1 01:13 trustdb.gpg
+
+I had an idea that maybe the permissions were incorrect since I had copied the files from my desktop to the server (3 files were created at 01:15 as a result of the script not detecting the keys already in there). What do you think? thanks!
+
+### Comment by Logan Marchione on 2017-09-02 10:16:59 -0400
+Can you try going an export/import with the GPG command line, instead of copying the directory?  
+<a href="http://www.koozie.org/blog/2014/07/migrating-gnupg-keys-from-one-computer-to-another/" rel="nofollow ugc">http://www.koozie.org/blog/2014/07/migrating-gnupg-keys-from-one-computer-to-another/</a>  
+<a href="https://www.phildev.net/pgp/gpg_moving_keys.html" rel="nofollow ugc">https://www.phildev.net/pgp/gpg_moving_keys.html</a>
+
+When you did the copy, did you preserve permissions?
+
+Also, you said you created them on your desktop. Is your desktop Linux or FreeBSD?
+
+### Comment by Stephen on 2017-09-03 16:35:08 -0400
+I spent an hour or so bashing my head on a wall because of this error:
+
+gpg: no default secret key: bad passphrase  
+gpg: [stdin]: sign+encrypt failed: bad passphrase
+
+Turns out my passphrase had a few characters that bash didn&#8217;t like and using single quotes, instead of double, for the passphrase variables in the backup script solved my issue.
+
+Thanks for the guide
+
+### Comment by Logan Marchione on 2017-09-04 22:17:52 -0400
+Ah, good catch! Thanks for sharing!
+
+### Comment by Jeff G on 2017-09-06 18:54:09 -0400
+I&#8217;ve found today that adding these two parameters increases the likelihood of a successful backup to B2:
+
+&#8211;timeout 90 \  
+&#8211;tempdir /big-fast-file-system/temp \  
+&#8230;.
+
+The default temp file system on my machine was too small and my backups would repeatedly fail with error:
+
+Attempt 1 failed. SSLError: (&#8216;The read operation timed out&#8217;,)
+
+After changing the temp directory location, I would still get the above error, but less often. That&#8217;s when I tried adding the timeout parameter as 90 seconds. Without the parameter, it takes a default of 30 seconds.
+
+With these two additions, my 4+GB backups started completing successfully.
+
+Thanks for the leg-up!
+
+### Comment by Jeff G on 2017-09-06 19:04:34 -0400
+Another suggestion for the script is to not delete old backups &#8212; even those older than 90 days &#8212; until you know that you have a new, good backup. 
+
+It would be a shame if your last good backup was heartlessly deleted before getting a new, good backup.
+
+My $0.02..
+
+### Comment by Matt on 2017-09-06 19:46:50 -0400
+Thanks for the script. Had to do some homework on gpg to get that part working, but good to go now.
+
+### Comment by Matt on 2017-09-06 19:47:26 -0400
+Should say I found your blog from the B2 website.
+
+### Comment by Logan Marchione on 2017-09-07 08:28:15 -0400
+Yes, I saw their referrer links on my analytics site, it was a nice surprise!
+
+### Comment by Logan Marchione on 2017-09-07 08:28:27 -0400
+Glad it&#8217;s working!
+
+### Comment by Logan Marchione on 2017-09-07 09:15:38 -0400
+Thanks for the info! I&#8217;m planning a large backup of 100GB, so if it fails I&#8217;ll edit my script to include your recommendations.
+
+### Comment by Logan Marchione on 2017-09-07 09:16:40 -0400
+I agree with you there. I&#8217;m only doing the delete before the backup to free up space, but you could easily swap those two portions around.
+
+### Comment by Matt on 2017-09-07 12:23:54 -0400
+How did it go?
+
+### Comment by Simon on 2017-09-18 11:55:10 -0400
+Since I&#8217;ve been struggling with it for a while I thought I’d share my experiences trying to restore a directory from B2 that I made with your script. I’ve backed up to a bucket with 3 directories a,b and c using a small quantity of test data. So on the backend I have:
+
+Bucket-name  
+/a  
+/b  
+/c
+
+The command that successfully restored directory b is this:
+
+duplicity \  
+restore \  
+&#8211;sign-key $FULL_KEY \  
+&#8211;encrypt-key $FULL_KEY \  
+&#8211;file-to-restore ${B2_RESTORE} \  
+b2://${B2\_ACCOUNT}:${B2\_KEY}@${B2\_BUCKET}/${B2\_DIR} ${LOCAL_DIR} 
+
+Where:
+
+B2_DIR=”/b”  
+B2_RESTORE=”/”  
+LOCAL_DIR=”/backup/restore”
+
+This isn’t how the man page suggests it should work but if I didn’t include the bucket directory I found that I’d get an error “No backup chains with active signatures found”.
+
+### Comment by Simon on 2017-09-18 11:57:08 -0400
+Sorry &#8211; I should have also mentioned that I&#8217;m on Debian 9 running Duplicity 0.7.14 (installed manually from the website tar.gz)
+
+### Comment by Logan Marchione on 2017-09-18 12:04:49 -0400
+Much appreciated, thanks for sharing!
+
+### Comment by Skip Chang on 2017-10-05 09:18:38 -0400
+Logan,  
+Thanks for the reply. When I couldn&#8217;t get this to work on my CentOS 6.9 server, I moved on to rclone.  
+I saw the open bug and it&#8217;s the same issue I&#8217;m running into with my CentOS setup. I&#8217;ve been holding off on upgrading to CentOS7.x. I guess I need to start planning the migration.  
+Thanks.
+
+### Comment by Logan Marchione on 2017-10-05 09:21:52 -0400
+Glad it wasn&#8217;t a misconfiguration. Hopefully your upgrade goes smoothly!
+
+### Comment by Dan Survivale on 2017-10-30 15:56:43 -0400
+Great article, but two questions: do I need a stage dir?
+
+In other words, if I have 1TB to backup, is duplicity going to create a temporary compressed copy of that 1TB in /tmp (or wherever) before it uploads?
+
+Also, what if I&#8217;m restoring 1 file from that 1TB full? Can it extract one file out of the .tar.gz on b2?
+
+### Comment by Shon Vella on 2017-11-25 11:10:32 -0500
+FYI &#8211; there is no need to for all of the unset&#8217;s at the end of the script since variables are local to the script (unlike .bat/.cmd scripts from DOS/Windows.)
+
+### Comment by Logan Marchione on 2017-11-27 09:21:57 -0500
+Didn&#8217;t know that, thanks for the tip!
+
+### Comment by Jeff on 2017-12-16 08:32:28 -0500
+Hey Logan,
+
+Just wanted to say great blog! I stumbled upon it googling something like &#8220;Archer C7 OpenWRT OpenVPN server&#8221; and am finding all your articles awesome. I&#8217;m going through and bookmarking weekend projects.
+
+I&#8217;ve been kicking myself for quite some time to setup some offsite backups, and this seems like a fun project for this weekend. I&#8217;ll report back how things go.
+
+Spoilers &#8211; I&#8217;ll probably just sign up for Backblaze B2 and sync from my Synology NAS. I&#8217;m impressed that they&#8217;ve made it so simple.
+
+### Comment by Logan Marchione on 2017-12-17 17:28:33 -0500
+Thanks, always happy to help out!
+
+Let me know how it goes! I&#8217;m looking at a Synology myself. Which model do you have? Would you recommend it?
+
+### Comment by Jeff on 2017-12-18 19:08:03 -0500
+Hi Logan &#8211; I have a Synology DS213J.
+
+I&#8217;m happy with it, and I&#8217;m glad it lasted me from the start of 2013, all the way out to now. Synology have been great at releasing regular updates. It&#8217;s a great NAS for general users who want access to their files, and access to community packages (torrent clients, music servers, couchpotato/sonarr, nzbget/sabnzbd). 
+
+If you purchase a more recent model, you can even run Docker containers.
+
+I&#8217;d say Synology are the best out of those prebuilt NAS devices. If my main purpose for buying it was to tinker, I may have preferred my own FreeNAS/unRAID box. 
+
+I also like that support for the different backup targets is built right into the device. I did a proof of concept, syncing a few GB of data to Backblaze. The encryption / consistency checks added less overhead than I expected.
+
+I&#8217;m going to do a bit more research before uploading everything though.
+
+### Comment by Logan Marchione on 2017-12-19 18:49:57 -0500
+Very cool! I&#8217;m looking at the DS216J.
+
+Let me know how Backblaze works out for you on a large upload.
+
+### Comment by Gergo on 2018-01-18 06:53:22 -0500
+hi Logan,  
+first of all thank you for your fantastic guide! I used it, working perfectly. 
+
+I uploaded ~15GB so far and I used ~5000 transactions. (total amount will be ~400GB)  
+I just realized that Backblaze B2 is charging for Class B and Class C transactions.  
+&#8211; storage cost is $0.005/GB  
+&#8211; Class B transaction $0.004/10000 calls (first 2500 is free every day)  
+&#8211; Class C transaction $0.004/1000 calls (first 2500 is free every day)
+
+Technical question:  
+is there any difference in number of transactions for the following two methods?  
+1, your script  
+2, duplicity to local drive first then simply upload to cloud
+
+(reason for asking is that I see the following transaction types/numbers when using your method:  
+&#8211; delete file / 1063 <- why is it deleting?  
+&#8211; get upload URL / 1065  
+&#8211; list file names / 2126  
+&#8211; upload file / 1058 )
+
+the cost of transactions are quite low, so it is a theoretical question only 🙂  
+thank you  
+Gergo
+
+### Comment by Logan Marchione on 2018-01-18 11:25:36 -0500
+I&#8217;ll admit, I haven&#8217;t looked much the transaction differences yet. As you mentioned, the costs are so low, it&#8217;s a negligible amount, especially once you get past the first large upload.
+
+As for your question, I don&#8217;t think there would be a difference, unless you uploaded your files as one large compressed file.
+
+Also, to save some transactions, you could:  
+-remove the deletion of old files, but your required B2 storage would never stop growing  
+-remove the collection status, since you&#8217;re basically just listing files out
+
+### Comment by Gergo on 2018-01-19 04:21:13 -0500
+thank you for your quick response !
+
+### Comment by Tim on 2018-04-09 21:06:50 -0400
+Logan, thanks for the incredibly helpful guide. With your help, I was able to get some backups moving off to B2. However, I ran into a hiccup, and I&#8217;m wondering if you or others have had this issue:
+
+I&#8217;m doing a backup of about 800 GB, but 24 hours in (give or take a little bit), the backup failed after only pushing 60 GB. The initial command was set to run a full backup, and your script was set up in a &#8220;nohup &#8230; &&#8221; command in terminal. Is there a way to resume a failed backup?
+
+For what it&#8217;s worth, the backup failed on this error:  
+Writing duplicity-full.20180407T234349Z.vol2091.difftar.gpg  
+Giving up after 5 attempts. HTTPError: HTTP Error 401: Unauthorized
+
+Thanks for any help or insight you can offer!
+
+### Comment by Logan Marchione on 2018-04-10 13:10:54 -0400
+I haven&#8217;t run that large of a backup yet, but another <a href="https://loganmarchione.com/2017/07/backblaze-b2-backup-setup/#comment-148894" rel="noopener">commenter</a> added a few flags to assist with large backups. Might be worth checking out.
+
+### Comment by Tim on 2018-04-10 20:14:32 -0400
+Thanks, and I did see that. I did a little more digging, and did discover that Duplicity will fail after 24 hours of being connected to B2. This was solved in version 7.08 (<a href="https://bugs.launchpad.net/duplicity/+bug/1588503" rel="nofollow ugc">https://bugs.launchpad.net/duplicity/+bug/1588503</a>), but the update seems to not have been pushed out to the repositories for Ubuntu 16.04. I will run a manual install and test it out.
+
+### Comment by Logan Marchione on 2018-04-11 21:18:21 -0400
+Nice find! Let me know if it works. It seems they also have a <a href="https://launchpad.net/~duplicity-team/+archive/ubuntu/ppa" target="_blank" rel="noopener nofollow">PPA</a> if you want to try that.
+
+### Comment by Tim on 2018-04-19 09:47:16 -0400
+That did work! And thanks for the recommendation with the PPA. 
+
+For anyone interested, I ran the same backup script again, and Duplicity was able to check what was already backed up. It just picked up where it left off, and it&#8217;s been uploading like a charm.
+
+### Comment by Logan Marchione on 2018-04-19 11:09:25 -0400
+Glad it&#8217;s working!
+
+### Comment by John on 2018-06-12 17:45:49 -0400
+Hey,
+
+Ive run into a couple of issues. If I run as root I get a GPG key not found error. Where would I call this in the script for root?
+
+When I run it as my normal user I get 
+
+Traceback (most recent call last):  
+File &#8220;/usr/bin/duplicity&#8221;, line 1532, in  
+with_tempdir(main)  
+File &#8220;/usr/bin/duplicity&#8221;, line 1526, in with_tempdir  
+fn()  
+File &#8220;/usr/bin/duplicity&#8221;, line 1377, in main  
+globals.lockfile.acquire(timeout=0)  
+File &#8220;/usr/lib/python2.7/dist-packages/lockfile/linklockfile.py&#8221;, line 21, in acquire  
+raise LockFailed(&#8220;failed to create %s&#8221; % self.unique_name)  
+LockFailed: failed to create /home/johndoe/.cache/duplicity/xxxxxxxxxxx/xxxxxxxxx
+
+### Comment by john on 2018-06-12 17:46:27 -0400
+p.s works just fine when run in terminal
+
+### Comment by Logan Marchione on 2018-06-19 09:57:20 -0400
+Are you trying to create the GPG key as yourself, or root? Whichever user account creates the key is the user account that needs to run duplicity.
+
+### Comment by Tristan on 2018-10-21 09:12:36 -0400
+I followed this tutorial and completed a full backup of my machine. It took ~54 hours and was ~500GB. The output showed 0 errors. However when I try any commands such as collection-status or list-current-files, duplicity finds no backups at all. When I browse the bucket I can see that it contains ~500GB of files. There are a lot of files of 209.8MB, with different timestamps and volume numbers, like &#8216;pc/duplicity-full.20181016T214816Z.vol1.difftar.gpg &#8216; or &#8216;pc/duplicity-full.20181018T114323Z.vol1221.difftar.gpg&#8217;. The &#8216;pc/&#8217; is because I used the filepath [bucket name]/pc, I thought this would create a directory called &#8216;pc&#8217; in the bucket and place the files there. When looking at the info for the bucket, under &#8216;Unfinished Large Files&#8217; there is one file, &#8216;pc%2Fduplicity-full.20181016T214816Z.vol541.difftar.gpg&#8217;. Could this be the reason Duplicity can&#8217;t find any backups? i wonder if I tried to back up to much at once and the uploads being on different days is an issue. I can&#8217;t find much information elsewhere online, any help would be much appreciated.
+
+### Comment by Logan Marchione on 2018-10-22 08:22:22 -0400
+Tristan, I switched from Duplicity to rclone, so I can&#8217;t be much help here unfortunately. Yes, it&#8217;s possible that Duplicity can&#8217;t create a list of all your files if it isn&#8217;t done uploading them. Did you check the log files?
+
+### Comment by Tristan on 2018-10-28 09:43:28 -0400
+I haven&#8217;t checked the log files yet, I didn&#8217;t specify a log file when I ran the command and I&#8217;m having some trouble finding if and where default logs are stored. I am going to try to run another full backup with &#8211;log-file. Why did you decide to use rclone instead?
+
+### Comment by Logan Marchione on 2018-10-30 14:55:51 -0400
+Check out <a href="https://loganmarchione.com/2018/06/rclone-on-odroid-hc2/" rel="noopener" target="_blank">this</a> post.
+
+> I ended up choosing rclone for this task, instead of Duplicity. Duplicity is great, but it requires a good bit of memory to run, and it writes temporary files to local storage while it encrypts and uploads them. Because the ODROID-HC2 has limited hardware, I didn’t want this to become a problem. As far as I can tell, rclone doesn’t have these problems or limitations. In addition, this backup is really a backup of a backup, so I’m just interested in pushing large amounts of data offsite as quickly as possible, which rclone seems to be suited for.
+
+### Comment by Tristan on 2018-10-30 21:42:11 -0400
+I will give it a read. I ran a full backup again with a log file and Info level verbosity. I guess . I should have used Debug. I grepped the logs for errors but only found matches within file names. Both runs have had this output:  
+NOTICE 1  
+. &#8212;&#8212;&#8212;&#8212;&#8211;[ Backup Statistics ]&#8212;&#8212;&#8212;&#8212;&#8211;  
+. StartTime 1540735365.25 (Sun Oct 28 10:02:45 2018)  
+. EndTime 1540865521.74 (Mon Oct 29 22:12:01 2018)  
+. ElapsedTime 130156.49 (36 hours 9 minutes 16.49 seconds)  
+. SourceFiles 449398  
+. SourceFileSize 440723528263 (410 GB)  
+. NewFiles 449398  
+. NewFileSize 440723528195 (410 GB)  
+. DeletedFiles 0  
+. ChangedFiles 0  
+. ChangedFileSize 0 (0 bytes)  
+. ChangedDeltaSize 0 (0 bytes)  
+. DeltaEntries 449398  
+. RawDeltaSize 440522009128 (410 GB)  
+. TotalDestinationSizeChange 386360735399 (360 GB)  
+. Errors 0  
+. &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-  
+. 
+
+But when using list-current-files b2://[my info] I get this output:  
+Last full backup date: none  
+Collection Status  
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;  
+Connecting with backend: BackendWrapper  
+Archive dir: /home/tristan/.cache/duplicity/fbbf2e8111dd8bbf8168bbe9c17fd6fe
+
+Found 0 secondary backup chains.  
+No backup chains with active signatures found  
+No orphaned or incomplete backup sets found.
+
+Maybe it would be easier to switch to rclone anyway.
+
+### Comment by Logan Marchione on 2018-11-02 15:55:40 -0400
+Ya sorry, I&#8217;m probably not going to be much help here. You could try to search/open a bug on Launchpad if you&#8217;re using Ubuntu.  
+<a href="https://bugs.launchpad.net/duplicity" rel="nofollow ugc">https://bugs.launchpad.net/duplicity</a>
+
+I think Duplicity provides more secure encryption with GPG (as compared to rclone), but to me, it seemed that overhead was too much.

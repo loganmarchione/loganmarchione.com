@@ -1,0 +1,36 @@
+## Comments
+
+### Comment by Michael Sartain on 2018-01-30 16:35:38 -0500
+This is fantastic. Your entire series on Ubiquiti EdgeRouters is really helpful. Thank you!
+
+### Comment by Logan Marchione on 2018-01-31 10:52:27 -0500
+Thanks! Glad to help!
+
+### Comment by Jim on 2018-05-03 09:41:11 -0400
+Thanks for your help Logan!
+
+### Comment by Logan Marchione on 2018-05-03 11:09:25 -0400
+Anytime!
+
+### Comment by Pierre Marceau on 2018-05-18 06:16:12 -0400
+Excellent! Thank you ver much.
+
+### Comment by KevinR. on 2018-08-16 09:32:53 -0400
+Hey Logan,
+
+Thank you for your clear guides!  
+I&#8217;m trying to configure a pptp vpn on an Edgerouter X with dyndns. Basically what I&#8217;m trying to do is connect to a vpn using my dyndns hostname. Unfortunately I have not successfully done this. If I try to connect directly from the LAN to the router&#8217;s IP, the connection is successfully, but if I try from the outside, the connection refuses.
+
+Any orientation or guide you can give me to this?
+
+Thank you, in advance.
+
+Kind regards.
+
+Kevin
+
+### Comment by Logan Marchione on 2018-08-16 10:36:45 -0400
+I would not recommend PPTP, it&#8217;s known to be easy to break.
+
+Did you open the correct ports for PPTP to access your router?  
+<a href="https://help.ubnt.com/hc/en-us/articles/205220840-EdgeRouter-PPTP-VPN-Server" rel="nofollow ugc">https://help.ubnt.com/hc/en-us/articles/205220840-EdgeRouter-PPTP-VPN-Server</a>

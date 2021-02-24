@@ -1,0 +1,37 @@
+## Comments
+
+### Comment by krbradley on 2017-05-09 09:50:15 -0400
+I don&#8217;t agree:  
+<a href="http://www.paralint.com/blog/2008/11/06/full-disk-encryption-single-sing-on-and-secure-backup/" rel="nofollow ugc">http://www.paralint.com/blog/2008/11/06/full-disk-encryption-single-sing-on-and-secure-backup/</a>  
+Best regards, Kaitlin
+
+### Comment by Anonymous on 2017-05-24 09:58:53 -0400
+Leaving the LUKS header on the disk is not necesary and is also a risk.
+
+Better use a two-factor&#8230; internal or external HDD encrypted with LUKS without headers, then another USB stick to hold the mount&#8230; so you plug the HDD (if external) and connect the USB stick, mount it, disconnect the USB stick and put it on a safe place.
+
+If an attacker come to you, just pull out power and the disk is safe&#8230; master key of LUKS is not on the disk&#8230; is on the USB that is on a safe place.
+
+But ensure not to have with you such USB stick after LUKS opened.
+
+Search for: How to mount LUKS without header.
+
+And also seach how to create a LUKS without header using 100% RAW disk space.
+
+It is much more complicated, but much more secure.
+
+And, of course, never ever on your live use only one LUKS layer.
+
+And never ever use AES, specially if you have Intel CPU with AES hardware instructions&#8230; i had worked on a project to break AES based on Hardware versus Software AES instructions, INTEL chips has some BUGS (i preffer to call them Back Doors) that let decode encrypted data by hardware AES&#8230; also software AES encrypted is broken, but that takes just a little more time.
+
+AMD and ARM has better hardware AES (or better said, less Back Door exploit).
+
+I am not allowed to tell exactly how it goes, but think it is based on comparing what hardware does versus software, detecting differences, etc.; i can not tell more, i risk my live for telling this.
+
+US military and Goverment are in plan to migrate to another way of cyphring and do not allow anyone involved to talk about theese &#8216;back door&#8217;.
+
+### Comment by Hi on 2019-01-05 18:58:47 -0500
+That Anonymous comment is ridiculous. AES is a deterministic algorithm. If you encrypt foo.txt with a key X, you will always get the same bit-to-bit identical encrypted output no matter if you use Intel AES instructions, AMD AES instructions or non-hardware accelerated AES (aka software AES). So no matter what you use, your AES output would be the same, there can&#8217;t be any bugs in AES operation, it can&#8217;t be backdoored. What can be backdoored, however, is the CPU itself, e.g. it could be that it stores arguments you pass to AES instructions in some hidden registers and allows them to be retrieved with some undocumented CPU instruction.
+
+### Comment by anon on 2019-05-02 00:47:40 -0400
+I SPOT A FED!!!!

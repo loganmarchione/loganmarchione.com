@@ -1,0 +1,46 @@
+## Comments
+
+### Comment by Churk on 2016-10-26 00:28:11 -0400
+Its almost a month from the 9/26/16 date, and I checked my verizon bill and did not see a $2.80 support charge yet. I am using ActionTec MI424WR-GEN3I, when they first started shipping those. I called verizon complaining about the wireless G performance and they replaced the old silver band version with this one for free. So I guess I got lucked out.
+
+### Comment by Logan on 2016-10-26 12:11:17 -0400
+Nice! Sounds like it worked out!
+
+### Comment by Martin on 2016-12-07 15:53:07 -0500
+I have Verizon FIOS and I want to buy my own router. I was told by the technician it needs to have a Coaxial input. Is this true? Also, can anyone recommend which router to buy that will work well with Fios and allow me to use my phone with it as well as provide G-wifi speeds? Thanks
+
+### Comment by Logan on 2016-12-08 08:48:53 -0500
+No, it&#8217;s not true (assuming you can run a Cat5 or Cat6 cable from your ONT to where your router is AND you are an internet-only customer). You definitely don&#8217;t want 802.11g speeds, they&#8217;re really slow. I would recommend something that is 802.11n or 802.11ac, which would still be backward-compatible with 802.11g.  
+<a href="https://www.amazon.com/TP-Link-Archer-C7-Wireless-Gigabit/dp/B00BUSDVBQ" rel="nofollow ugc">https://www.amazon.com/TP-Link-Archer-C7-Wireless-Gigabit/dp/B00BUSDVBQ</a>  
+<a href="https://www.amazon.com/NETGEAR-Nighthawk-AC1900-Gigabit-Support/dp/B00F0DD0I6" rel="nofollow ugc">https://www.amazon.com/NETGEAR-Nighthawk-AC1900-Gigabit-Support/dp/B00F0DD0I6</a>  
+<a href="https://www.amazon.com/RT-N66U-Dual-Band-Wireless-N900-Gigabit-Router/dp/B006QB1RPY" rel="nofollow ugc">https://www.amazon.com/RT-N66U-Dual-Band-Wireless-N900-Gigabit-Router/dp/B006QB1RPY</a>
+
+### Comment by m. alexander (sandy) stiffman on 2017-01-05 20:57:31 -0500
+From reading your site, I get the impression that if you purchase / install your own router, it can be ONLY for internet service. Conversely, if you subscribe to a FIOS bundle (internet, TV(s) and telephone), your own router will not provide the most (all?) functions for these other services. Is my understanding correct?
+
+Further, does the $2.80 monthly charge cover updating or other such service? If it does not, then it seems that the charge is a rip off.
+
+Finally, I have had FIOS for many years. Verizon installed the initial router and they have replaced it twice when it went on the fritz (due to &#8220;weather&#8221; events). My bill has never included a separate charge for the router (although it does show separate charges for the STBs). It was always my impression that the &#8220;rent&#8217; for the router was include the charge for my bundle. SO &#8212; at this time, who &#8220;owns&#8221; my router? If I must replace his one, can I use it as an object d&#8217;arte in my den, or must I give it back to Verizon?
+
+### Comment by Logan on 2017-01-06 10:57:42 -0500
+That is partially correct. If you have FiOS TV, you are required to have their router **on your network** (but not necessarily make it your primary router). Check out options 4-7 <a href="http://www.dslreports.com/faq/16077" target="_blank" rel="nofollow">here</a>, specifically options 6 or 8. Keep in mind, while this will let you use your own router as the primary, and still get TV, not all TV functions are guaranteed to work.
+
+As far as I know, the charge is only to have Verizon keep supporting your old hardware. The charge **is** a rip off, it&#8217;s meant to get you to purchase a new router from them 😉
+
+Double-check your first few bills (from when you signed the contract). They may have just split the cost of the router across the first bill or two, instead of charging you a small amount every month for the length of the contract. If that is the case, you &#8220;own&#8221; the router, instead of renting it from Verizon (but IANAL, you may want to call Verizon to ask).
+
+### Comment by m. alexander (sandy) stiffman on 2017-01-06 22:44:40 -0500
+Thanks for the reply. Have not yet gone to the link suggested in your first paragraph. Do not have the first few bills &#8212; they were tossed a while ago as they were over 5 years old.
+
+I called Verizon and was told that my model is not retired. They identify a router by its color(s) &#8212; the model numbers are sort of, but not exactly the same. (This is like way the Apple store personnel identifies you when you are waiting for help: &#8220;guy in white hat holding a Picasso print,&#8221; or other such defining look.) I asked them the same question about needing the Verizon router to get TV, and they said &#8220;yes,&#8221; as you did. But they did not expand their reply as you did.
+
+Their reply about the $2.80 charge: allows you to return you current router and get a new one, should the current one go on the fritz. If you decline to accept the charge, you must purchase a replacement out of pocket. IMHO, the charge is not a total rip off &#8212; you do get something for it. Of course this charge doesn&#8217;t apply to me since my router is not retired.
+
+I am not familiar with the &#8220;message speak&#8221; abbreviation &#8220;IANAL.&#8221; Please enlighten me. My favorite is &#8220;YMMV&#8221; &#8212; &#8220;your mileage may vary&#8221; &#8212; which qualifies someone&#8217;s advice which may not exactly apply in a particular case.
+
+Thanks again.
+
+### Comment by Logan on 2017-01-08 20:28:34 -0500
+Sounds like you&#8217;re all set then. Do you still plan on replacing the router with your own? When I called them, they also identified the model based on color, not number.
+
+I&#8217;ve heard of YMMV, but IANAL means &#8220;I Am Not A Lawyer&#8221;.

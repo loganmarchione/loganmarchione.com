@@ -1,0 +1,262 @@
+## Comments
+
+### Comment by DJ on 2016-12-06 15:11:00 -0500
+Controller alternatives:
+
+5. Run the controller on an always-on PC server on your local network. Use dynamic DNS to access your controller from anywhere.
+
+Also, both your screenshots look like they&#8217;re on 2.4GHz.
+
+### Comment by Logan on 2016-12-06 15:25:54 -0500
+Yep, that works just as well! Thanks for that, I updated the screenshots.
+
+### Comment by battlechop on 2017-01-14 17:05:30 -0500
+Great walk-through, thanks for taking the time. For anyone looking to get going with UniFi v5, simply change the first line from stable to unifi 5:
+
+echo &#8220;deb <a href="http://www.ubnt.com/downloads/unifi/debian" rel="nofollow ugc">http://www.ubnt.com/downloads/unifi/debian</a> unifi5 ubiquiti&#8221; | sudo tee /etc/apt/sources.list.d/100-ubnt.list
+
+### Comment by Logan on 2017-01-15 14:22:42 -0500
+Thanks for this tip, I updated the post!
+
+### Comment by JR on 2017-01-16 18:43:36 -0500
+I&#8217;d like to mention that this worked for a RPi 2 setup as well.
+
+### Comment by Logan on 2017-01-17 08:25:44 -0500
+Good to know, thanks!
+
+### Comment by Fernando on 2017-03-08 07:55:54 -0500
+I have sucessfully built this using a RPi3 and it works great. However, everytime the Pi reboots I have to login on the browser in order to have Cloud Access. Is there a way I can have automatic login? This device won&#8217;t have any ports open to WAN except for the black magic Cloud Key uses.
+
+### Comment by Amit on 2017-03-11 07:56:42 -0500
+Is there a way to install the controller&#8217;s .deb file from a local folder or a server that I own and not from Ubiquity&#8217;s server?  
+I will download the .deb file from Ubiquity prior to the installation.
+
+### Comment by Logan on 2017-03-12 18:46:10 -0400
+I&#8217;m confused on what you&#8217;re asking. Are you trying to setup your own repo? Or `wget` the file and then `dpkg -i` it?
+
+### Comment by Logan on 2017-03-12 19:01:28 -0400
+Sorry, I don&#8217;t have cloud access setup. I&#8217;d ask on <a href="https://www.reddit.com/r/Ubiquiti/" target="_blank" rel="nofollow">r/Ubiquiti</a> or the <a href="https://community.ubnt.com/t5/EdgeMAX/bd-p/EdgeMAX" target="_blank" rel="nofollow">EdgeMax forums</a>.
+
+### Comment by Jordan on 2017-03-19 02:41:36 -0400
+Hey Folks,
+
+I&#8217;m a long ways away from Linux/Debian guru status, and ran into a problem when I ran apt-get update . . . 
+
+Anyone have any idea as to what would cause this error?  
+Given that its worked for everyone else, I&#8217;m guessing the repo is fine . . . 
+
+_  
+W: Failed to fetch <a href="http://www.ubnt.com/downloads/unifi/debian/dists/unifi5/Release" rel="nofollow ugc">http://www.ubnt.com/downloads/unifi/debian/dists/unifi5/Release</a> Unable to find expected entry &#8216;ubiquiti/binary-arm64/Packages&#8217; in Release file (Wrong sources.list entry or malformed file)</p> 
+
+E: Some index files failed to download. They have been ignored, or old ones used instead.  
+</i>
+
+Note: I&#8217;ve tried both stable and unifi5.
+
+### Comment by Robert on 2017-03-19 05:09:09 -0400
+Hi Logan,
+
+tried your guide an lowefamily.com.au guide on a Pi3. Everything installs fine. But unifi server won&#8217;t start. With netstat I can see there&#8217;s no open port 8443 and with ps aux | grep uni I couldn&#8217;t find a process like unifi. Any idea?
+
+Robert
+
+### Comment by Logan on 2017-03-20 14:27:19 -0400
+Did you start the Unifi service?  
+`sudo systemctl enable unifi<br />
+sudo systemctl start unifi`
+
+What does the status tell you?  
+`sudo systemctl status unifi`
+
+### Comment by Logan on 2017-03-20 14:30:30 -0400
+What does your repo file look like? Mine looks like this&#8230;  
+`deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti`
+
+### Comment by Jordan on 2017-03-20 16:02:36 -0400
+Hi Logan,
+
+Thanks for getting back to me.  
+Think we&#8217;re about in sync. Mine came from a direct copy/paste from your notes.
+
+deb <a href="http://www.ubnt.com/downloads/unifi/debian" rel="nofollow ugc">http://www.ubnt.com/downloads/unifi/debian</a> stable ubiquiti
+
+I&#8217;m not sure how to view what the response looks like and I get a 404 when trying to traverse to the file in my browser.
+
+### Comment by Jordan on 2017-03-20 16:06:51 -0400
+Just in case it matters:
+
+This is a Pine64 (AllWinner 4xA53) running DietPi (light weight Debian Jessie distribution). Not an rpi3, but same instruction set, and I (mistakenly?) thought Jessie is Jessie.
+
+### Comment by Logan on 2017-03-20 16:09:26 -0400
+Are you running this on a Raspberry Pi 3 running Raspbian? It&#8217;s looking for `arm64` packages, when it should only be using `arm`.
+
+### Comment by Logan on 2017-03-20 16:13:55 -0400
+Just saw this. I believe the RPi3 and Raspbian are 32bit OSes, not 64. I think you need either a 64bit package, or to compile Unifi from source&#8230;
+
+### Comment by Jordan on 2017-03-21 01:12:09 -0400
+Hey Logan,
+
+Did some checking and found a number of successful aarch64 installs.  
+Which isn&#8217;t to say that something hasn&#8217;t gone sideways with the 64bit release. 
+
+For anyone else they may be running into this, I created an entry at the ubiquity forum:  
+<a href="https://community.ubnt.com/t5/UniFi-Wireless/apt-get-Unable-to-find-expected-entry-ubiquiti-binary-arm64/m-p/1871093#U1871093" rel="nofollow ugc">https://community.ubnt.com/t5/UniFi-Wireless/apt-get-Unable-to-find-expected-entry-ubiquiti-binary-arm64/m-p/1871093#U1871093</a>
+
+x64 examples:  
+This guy on ubuntu xenial  
+<a href="https://community.ubnt.com/t5/UniFi-Wireless/Unifi-on-Pine64-aarch64-Was-Proper-procedure-for-switching-UniFi/td-p/1533836" rel="nofollow ugc">https://community.ubnt.com/t5/UniFi-Wireless/Unifi-on-Pine64-aarch64-Was-Proper-procedure-for-switching-UniFi/td-p/1533836</a>
+
+And here with DietPi:  
+<a href="https://community.ubnt.com/t5/UniFi-Routing-Switching/Installing-UniFi-Controller-5-0-0-alpha-2-on-Raspberry-Pi-3/td-p/1543885" rel="nofollow ugc">https://community.ubnt.com/t5/UniFi-Routing-Switching/Installing-UniFi-Controller-5-0-0-alpha-2-on-Raspberry-Pi-3/td-p/1543885</a>
+
+### Comment by Logan on 2017-03-21 10:55:20 -0400
+Because I don&#8217;t have the hardware to test, I&#8217;d say the best place to ask is on the EdgeMax forums, which you already did.
+
+The first link seems to be what you&#8217;re looking for. There is a tutorial at the end (<a href="https://ishwestscriptwault.wordpress.com/2016/12/29/running-unifi-controller-5-on-pine64-en/" target="_blank" rel="nofollow">here</a>) that might be worth looking at.  
+The second link (DietPi) works because he&#8217;s running it on a Raspberry Pi, which is 32bit.
+
+### Comment by Jordan on 2017-03-23 23:05:40 -0400
+Hi Logan,
+
+Just a helpful bit for your readers . . . 
+
+64bit is definitely unsupported.
+
+If you don&#8217;t mind including the link, Ubiquiti&#8217;s official response / explination here:  
+<a href="https://community.ubnt.com/t5/UniFi-Wireless/apt-get-Unable-to-find-expected-entry-ubiquiti-binary-arm64/m-p/1875673#M219083" rel="nofollow ugc">https://community.ubnt.com/t5/UniFi-Wireless/apt-get-Unable-to-find-expected-entry-ubiquiti-binary-arm64/m-p/1875673#M219083</a>
+
+### Comment by Adam on 2017-04-18 19:41:20 -0400
+Great article.  
+I&#8217;ve already got an always on RPi 2 running an OSMC media centre.  
+I&#8217;ve successfully installed it on that &#8211; I&#8217;ve not tried watching anything yet though, so yet to see how well they (osmc and the controller) really get on together. The UniFi web site seems to run OK though.
+
+### Comment by Logan on 2017-04-21 12:55:35 -0400
+Thanks, good to hear! Let me know how it performs!
+
+### Comment by Matt on 2017-05-29 23:29:24 -0400
+Thanks for putting this together. And to make it future installs easier, I adapted your instructions into an Ansible playbook:
+
+<a href="https://gist.github.com/mattkaar/5a383395aed21e346f7721db9a11ed2e" rel="nofollow ugc">https://gist.github.com/mattkaar/5a383395aed21e346f7721db9a11ed2e</a>
+
+### Comment by Logan Marchione on 2017-05-30 08:20:29 -0400
+Thanks! I&#8217;ve been trying to use Ansible more, this is a great place to start!
+
+### Comment by Neil on 2017-08-17 06:37:43 -0400
+Hi thanks for this awsome how to.. got an RPI3 up and running in minutes!  
+One question though, I have connected to t with my browser and all looks good but its says it an&#8217;t find any devices.  
+On my test network I have a Unifi AC LR that is managed by another controller but shouldn&#8217;t it still show up?
+
+Cheers.
+
+### Comment by Logan Marchione on 2017-08-17 09:05:18 -0400
+To be honest, I&#8217;m not sure if an AP can be adopted by more than one controller. I would think you&#8217;re not seeing it because it&#8217;s already managed&#8230;
+
+### Comment by John Angelini on 2017-09-09 21:08:08 -0400
+sudo systemctl disable mongodb
+
+not 
+
+sudo service mongodb disable
+
+### Comment by Logan Marchione on 2017-09-09 22:20:42 -0400
+Corrected, thanks!
+
+### Comment by Eric on 2017-09-10 13:17:35 -0400
+Good article. This helped me get my RPi 3 running fast. Only issue I ran into and not part of your instructions. I moved a backup of my config from controller on Mac Laptop to the RPi. I needed to SSH into each of the APs and issue this command: set-inform <a href="http://10.100.0.100:8080/inform" rel="nofollow ugc">http://10.100.0.100:8080/inform</a>. 10.100.0.100 is the IP of the RPi. This was needed because all the AP&#8217;s detected as Detached.
+
+### Comment by Logan Marchione on 2017-09-11 19:41:14 -0400
+Didn&#8217;t know that was needed when migrating, thanks!
+
+### Comment by Maikel on 2017-09-24 10:10:56 -0400
+After trying multiple guides and reading a lot of positive comments here I tought this was really going to work, but unfortunately I cannot login to the webinterface.
+
+When I check the status it says its active (sudo systemctl status unifi)
+
+[code]  
+● unifi.service &#8211; unifi  
+Loaded: loaded (/etc/systemd/system/unifi.service; enabled)  
+Active: active (running) since Sun 2017-09-24 16:04:55 CEST; 2min 54s ago  
+Process: 14814 ExecStop=/usr/lib/unifi/bin/unifi.init stop (code=exited, status=0/SUCCESS)  
+Process: 14844 ExecStart=/usr/lib/unifi/bin/unifi.init start (code=exited, status=0/SUCCESS)  
+Main PID: 14857 (jsvc)  
+CGroup: /system.slice/unifi.service  
+├─14857 unifi -home /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt -cp /usr/share/java/commons-daemon.jar:/usr/lib/unifi/lib/ace.jar -pidfile /var/run/unifi/unifi.pid -procname unifi -outfile SYSLOG -errfile SYSLOG -Dunifi.datadi&#8230;  
+├─14858 unifi -home /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt -cp /usr/share/java/commons-daemon.jar:/usr/lib/unifi/lib/ace.jar -pidfile /var/run/unifi/unifi.pid -procname unifi -outfile SYSLOG -errfile SYSLOG -Dunifi.datadi&#8230;  
+├─14859 unifi -home /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt -cp /usr/share/java/commons-daemon.jar:/usr/lib/unifi/lib/ace.jar -pidfile /var/run/unifi/unifi.pid -procname unifi -outfile SYSLOG -errfile SYSLOG -Dunifi.datadi&#8230;  
+└─15192 /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre/bin/java -Xmx1024M -XX:ErrorFile=/usr/lib/unifi/logs/hs\_err\_pid%p.log -Dapple.awt.UIElement=true -jar /usr/lib/unifi/lib/ace.jar start
+
+Sep 24 16:04:55 raspberrypi unifi.init[14844]: Starting Ubiquiti UniFi Controller: unifi.  
+Sep 24 16:04:55 raspberrypi systemd[1]: Started unifi.  
+[/code]
+
+Any suggestions? I&#8217;m running this next to domoticz, which is on port 8080
+
+### Comment by Logan Marchione on 2017-09-24 21:18:07 -0400
+According to <a href="https://help.ubnt.com/hc/en-us/articles/218506997-UniFi-Ports-Used" target="_blank" rel="noopener nofollow">this</a>, UniFi needs port 8080. Try checking <a href="https://help.ubnt.com/hc/en-us/articles/204910084-UniFi-Change-Default-Ports-for-Controller-and-UAPs" target="_blank" rel="noopener nofollow">this</a> to change the default ports.
+
+Also, try to tail the UniFi logs out (as root).  
+`tail -f /usr/lib/unifi/logs/server.log`
+
+### Comment by Maikel on 2017-09-26 12:08:21 -0400
+After a few restarts, domotics was not working anymore and at that moment I tried to open the unifi site and it was working!. So this confirmed to me that there was a port conflict. I changed the domoticz ports and now both are working.
+
+### Comment by Logan Marchione on 2017-09-26 12:57:42 -0400
+Glad it was an easy fix!
+
+### Comment by Oz on 2017-10-04 09:04:36 -0400
+Hi.
+
+When I try the key, it says this: gpg: keyserver receive failed: No dirmngr
+
+What is wrong?  
+Thanks.
+
+### Comment by Logan Marchione on 2017-10-04 09:14:27 -0400
+I think you need to install the <a href="https://packages.debian.org/sid/dirmngr" target="_blank" rel="noopener nofollow">dirmngr</a> package  
+`sudo apt-get install dirmngr`
+
+### Comment by Oz on 2017-10-04 09:15:48 -0400
+Nevermind. 
+
+I just installed the dirmngr and it worked. Thanks.
+
+### Comment by Oz on 2017-10-04 09:16:17 -0400
+Thanks. I havent seen this. That fixed it.
+
+### Comment by Logan Marchione on 2017-10-04 09:20:27 -0400
+Glad it worked!
+
+### Comment by Oz on 2017-10-04 10:01:20 -0400
+Logan,
+
+If I turn the raspberry off, will I have to &#8220;systemctl start unifi&#8221; again? Is there any way to set it on startup?
+
+I&#8217;m a newbbie on Linux.  
+Thanks.
+
+### Comment by Logan Marchione on 2017-10-04 10:18:35 -0400
+This will start unifi once&#8230;  
+`sudo systemctl start unifi`
+
+This will start unifi at boot&#8230;  
+`sudo systemctl enable unifi`
+
+### Comment by poeske887 on 2018-05-26 08:05:48 -0400
+works exellent thx
+
+### Comment by weust on 2018-09-27 08:19:05 -0400
+Since this article is almost two years old, are the performance issues with Java still present?  
+As in, is it still better to use oracle-jdk instead of open-jdk?
+
+### Comment by Logan Marchione on 2018-09-27 09:35:50 -0400
+You&#8217;re probably better off asking on the <a href="https://community.ubnt.com/t5/UniFi-Wireless/bd-p/UniFi" target="_blank" rel="noopener nofollow">UniFi forums</a>. I&#8217;m now using OpenJDK, but the controller is running on an x86 machine now, not a RPi3.
+
+### Comment by Kevin D Boutelle on 2020-03-01 13:39:12 -0500
+I ran into an issue on a Raspberry Pi 4 where I could not get Oracle java 8 installed (using the latest version of Raspbian as I write this). The error was that there was no installation candidate. So I used this site (<a href="https://openjdk.java.net/install/" rel="nofollow ugc">https://openjdk.java.net/install/</a>) and installed version 8. Then I used your tip on changing the version (alternates) to change to the openjdk 8 version of Java. This worked and my controller is now installed and running fine. 
+
+Thank you for this writeup it was immensely helpful in getting me started.
+
+### Comment by Logan Marchione on 2020-03-02 10:58:58 -0500
+Glad you&#8217;re using OpenJDK. I don&#8217;t typically update my articles when things change (otherwise, this entire site would need to be rewritten), but I went back and removed my recommendation for Oracle Java.
+
+Oracle started charging for Oracle Java back in 2019, so I now recommend you stick with OpenJDK. It is open-source and performs much better than it used to.

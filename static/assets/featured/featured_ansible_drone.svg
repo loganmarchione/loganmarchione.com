@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2400"
+   height="1200"
+   viewBox="0 0 634.99999 317.50001"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="featured_ansible_drone.svg"
+   inkscape:export-filename="/home/logan/Documents/Miscellaneous/blog_featured_images/completed_files_png/featured_ansible_drone.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="1489.5889"
+     inkscape:cy="494.38417"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     units="px"
+     inkscape:snap-page="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1375"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-object-midpoints="true"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,20.50002)">
+    <rect
+       style="fill:#000000;stroke-width:0.264583"
+       id="rect10"
+       width="635"
+       height="317.5"
+       x="2.4999999e-06"
+       y="-20.500019" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer1">
+    <g
+       id="g899"
+       transform="translate(-3.0144218)">
+      <g
+         style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:0.901742"
+         transform="matrix(0.79375001,0,0,0.79375001,409.18432,79.375)"
+         id="Landing">
+        <g
+           style="fill:#ffffff;stroke-width:0.901742"
+           id="logos"
+           transform="translate(-300,-50)">
+          <path
+             inkscape:connector-curvature="0"
+             d="m 340.28822,69.379747 -0.85864,0.858639 35.04688,35.046874 c -4.95556,7.73718 -7.80979,17.23945 -7.80979,28.04807 0,30.04808 22.05882,50 50,50 10.44083,0 20.0603,-2.7859 28.0144,-7.84346 l 35.22561,35.22561 C 461.655,234.82239 432.65266,250 400,250 344.78022,250 300,206.59341 300,150 c 0,-33.65562 15.83689,-62.647624 40.28822,-80.620253 z m 16.67029,-9.896705 C 369.99535,53.379886 384.59123,50 400,50 c 55.21978,0 100,43.406593 100,100 0,15.56588 -3.38768,30.13417 -9.44848,43.07605 L 458.85687,161.3814 c 4.95556,-7.73718 7.8098,-17.23944 7.8098,-28.04807 0,-30.04807 -22.05883,-49.999997 -50,-49.999997 -10.44083,0 -20.06031,2.7859 -28.0144,7.843466 z m 59.70816,103.850288 c -16.76471,0 -30,-11.97115 -30,-30 0,-18.02884 13.23529,-30 30,-30 16.7647,0 30,11.97116 30,30 0,18.02885 -13.2353,30 -30,30 z"
+             id="drone-logo-vector-white"
+             style="stroke-width:0.901742" />
+        </g>
+      </g>
+      <path
+         id="text7752"
+         d="m 313.9074,128.32292 h 2.71068 c 0.25812,0.0861 0.64536,0.25822 1.16172,0.51631 1.20471,0.60245 2.10828,1.54904 2.7107,2.83976 0.43021,0.77456 0.64535,2.58169 0.64541,5.42137 -6e-5,0.25823 -6e-5,2.19443 0,5.80862 v 9.55193 h 9.42284 c 6.1958,5e-5 9.46582,0.0432 9.81011,0.12907 2.66758,0.51638 4.3026,2.02233 4.90504,4.51783 0.086,0.51635 0.129,1.03269 0.12907,1.54896 -7e-5,2.66769 -1.20481,4.51784 -3.61423,5.55045 -0.43035,0.25821 -0.90364,0.43031 -1.41988,0.51632 -0.34429,0.0861 -3.61431,0.12912 -9.81011,0.12908 h -9.42284 v 9.55194 c -6e-5,6.7122 -0.2152,10.45553 -0.64541,11.22996 -0.60242,1.29084 -1.50599,2.23744 -2.7107,2.83977 -1.20478,0.60242 -2.36649,0.81753 -3.48515,0.64542 -0.43031,-0.086 -0.90362,-0.21511 -1.41989,-0.38723 -0.77452,-0.25817 -1.50597,-0.73145 -2.19435,-1.41991 -0.68848,-0.68839 -1.16178,-1.41984 -1.4199,-2.19435 -0.25818,-0.77447 -0.38727,-4.43173 -0.38724,-10.97182 v -9.29378 h -9.68102 l -9.55194,-0.12908 -0.5163,-0.12909 c -2.83979,-0.86048 -4.34573,-2.83971 -4.51782,-5.93768 -1e-5,-2.92577 1.50592,-4.90501 4.51782,-5.93769 l 0.5163,-0.25817 h 9.55194 9.68102 v -9.29377 c -3e-5,-6.54 0.12906,-10.19727 0.38724,-10.97181 0.25812,-0.68836 0.73142,-1.41982 1.4199,-2.19438 0.94653,-0.86046 2.02221,-1.41981 3.22699,-1.67803"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1000px;font-family:OCRA;-inkscape-font-specification:OCRA;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.12908px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+      <g
+         transform="matrix(0.74327202,0,0,0.74327202,38.747763,45.089989)"
+         id="g406"
+         style="stroke-width:0.901742">
+        <polygon
+           style="fill:#ffffff;stroke-width:0.901742"
+           points="154.799,112.893 140.692,148.221 182.438,181.102 "
+           id="polygon393" />
+        <path
+           style="fill:#ffffff;stroke-width:0.901742"
+           inkscape:connector-curvature="0"
+           d="M 153,46.12714 A 106.79132,106.79132 0 1 0 259.79286,152.92 106.79751,106.79751 0 0 0 153,46.12714 Z m 43.82007,161.46533 c -2.08093,0 -3.67822,-0.81091 -5.89673,-2.60413 l -55.1178,-44.52991 -18.46741,46.268 h -15.9613 L 148.03346,94.51422 a 7.08784,7.08784 0 0 1 6.76587,-4.51355 6.85643,6.85643 0 0 1 6.58521,4.51355 l 42.51025,102.30072 a 10.11133,10.11133 0 0 1 0.72827,3.1488 7.62408,7.62408 0 0 1 -7.80298,7.62873 z"
+           id="path395" />
+      </g>
+    </g>
+  </g>
+</svg>

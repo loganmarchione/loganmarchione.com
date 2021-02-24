@@ -1,0 +1,20 @@
+## Comments
+
+### Comment by julien on 2020-10-09 17:13:25 -0400
+your code didn&#8217;t work for me.
+
+I copied the armv7 file in /usr/bingrafana-kiosk and replaced the line below
+
+/usr/bin/grafana-kiosk &#8211;URL <a href="http://[yourIP]/playlists/play/1" rel="nofollow ugc">http://[yourIP]/playlists/play/1</a> &#8211;login-method local -username kiosk -password [redacted] &#8211;kiosk-mode full
+
+that worked for me ! hope that else someone else
+
+### Comment by Logan Marchione on 2020-10-12 11:24:34 -0400
+Thanks for sharing!
+
+### Comment by Jorge on 2020-11-29 17:50:30 -0500
+I copied the armv7 file in /usr/bingrafana-kiosk???  
+Sorry where is this file
+
+### Comment by Logan Marchione on 2020-11-30 10:12:41 -0500
+I think that user mis-typed that path. They probably meant they copied it from the unzip location to `/usr/bin/grafana-kiosk`.

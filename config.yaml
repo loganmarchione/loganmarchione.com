@@ -1,0 +1,113 @@
+baseURL: "https://loganmarchione.com"
+languageCode: "en-us"
+title: Logan Marchione
+paginate: 10
+theme: PaperMod
+
+permalinks:
+  posts: /:year/:month/:title/
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+minify:
+    disableXML: true
+    minifyOutput: false
+
+imaging:
+  AutoOrientation: true
+
+params:
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    title: 
+    description: "Logan Marchione"
+    author: Me
+    # author: ["Me", "You"] # multiple authors
+    #images: ["<link or path of image for opengraph, twitter-cards>"]
+
+    defaultTheme: auto # dark, light
+    disableThemeToggle: false
+
+    ShowReadingTime: true
+    ShowShareButtons: true
+    disableSpecial1stPost: false
+    comments: false
+    hidemeta: false
+    ShowToc: true
+    TocOpen: false
+
+    assets:
+        disableHLJS: true # to disable highlight.js
+        # disableFingerprinting: true
+        favicon: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        favicon16x16: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        favicon32x32: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        apple_touch_icon: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        safari_pinned_tab: "/assets/favicon/favicon_loganmarchione_logo.svg"
+
+    label:
+        text: "Logan Marchione"
+        icon: /assets/favicon/favicon_loganmarchione_logo.svg
+        iconHeight: 35
+
+    # home-info mode
+    homeInfoParams:
+        Title: "Hi there \U0001F44B"
+        Content: >
+            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto, Linux, hosting, code, etc...
+            
+            - I also use this space to share and document ideas for future reference.
+            
+            - I hope you find something of value here! Enjoy!
+
+    socialIcons:
+        - name: RSS
+          url: "index.xml"
+
+
+    #analytics:
+    #    google:
+    #        SiteVerificationTag: "XYZabc"
+
+    cover:
+        hidden: false # hide everywhere but not in structured data
+        hiddenInList: false # hide on list pages and home
+        hiddenInSingle: false # hide on single page
+        linkFullImages: false
+
+    # for search
+    # https://fusejs.io/api/options.html
+    fuseOpts:
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 1000
+        threshold: 0.4
+        minMatchCharLength: 0
+        keys: ["title", "permalink", "summary", "content"]
+menu:
+    main:
+        - identifier: contact
+          name: Contact
+          url: /contact
+          weight: 30
+        - identifier: privacy
+          name: Privacy
+          url: /privacy
+          weight: 30
+        - identifier: search
+          name: Search
+          url: /search
+          weight: 30
+        - identifier: categories
+          name: Categories
+          url: /categories/
+          weight: 50

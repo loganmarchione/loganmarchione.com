@@ -1,0 +1,7 @@
+## Comments
+
+### Comment by Chad on 2019-04-25 17:15:12 -0400
+How did you get around the fusermount error (Value too large for defined data type)? From what I have been able to piece together it has something to do with a 32-bit OS and files larger than 2GB.
+
+### Comment by Logan Marchione on 2019-04-26 08:31:32 -0400
+I eventually ran into an issue uploading large files (I&#8217;m not sure if it was that exact error) and had to upgrade a different piece of x86 hardware.
