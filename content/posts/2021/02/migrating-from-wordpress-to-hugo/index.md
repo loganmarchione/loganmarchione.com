@@ -91,7 +91,7 @@ This was the worst part and took about 10-12 hours total. Each post needed a ton
 - Make sure the new URL slug matched the old slug (e.g., DEV site vs PRD site)
 - Remove WordPress shortcodes and replace with Hugo shortcodes
 - Find/replace images from the URL path (e.g., `loganmarchione.com/wp-contents/uploads`) to the relative path (e.g., `/wp-content/uploads`)
-- Later realize that was dumb and I should have used [Page Bundles](https://gohugo.io/content-management/page-bundles/) from the start 
+- Later realize that was dumb and I should have used [Page Bundles](https://gohugo.io/content-management/page-bundles/) from the start. Spend hours redoing the images.
 - Correcting code snippets created with `<pre>` tags
 - Find/replace random character strings created by escape characters (e.g., `\_`, `\*`, `\[`, `\-`, ``\` ``, `<_`, `._`)
 - Use a ton of regexes to search for inter-blog links, bold text, underlined text, strikethrough text, etc...
@@ -115,18 +115,16 @@ I still need to work on:
 
 # Speedtest
 
-Here the PageSpeed Insights scores for my [latest post](/2021/01/homelab-10-mini-rack) while on WordPress (mobile then desktop):
+Here are the PageSpeed Insights scores for my [latest post](/2021/01/homelab-10-mini-rack) while on WordPress (mobile then desktop):
 
-![wordpress_mobile](/2021/02/migrating-from-wordpress-to-hugo/wordpress_mobile.png)
+{{< img src="20210222_001.png" alt="screenshot" >}}
 
-![wordpress_desktop](/2021/02/migrating-from-wordpress-to-hugo/wordpress_desktop.png)
+{{< img src="20210222_002.png" alt="screenshot" >}}
 
 And again on Hugo (mobile then desktop):
 
-![hugo_mobile](/2021/02/migrating-from-wordpress-to-hugo/hugo_mobile.png)
+{{< img src="20210222_003.png" alt="screenshot" >}}
 
-![hugo_desktop](/2021/02/migrating-from-wordpress-to-hugo/hugo_desktop.png)
-
-{{< img src="hugo_desktop.png" alt="this is a newertest" >}}
+{{< img src="20210222_004.png" alt="screenshot" >}}
 
 \-Logan
