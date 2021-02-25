@@ -1,5 +1,7 @@
 /* Needed for my ASCII art drawings so they don't wrap on small screens  */
-.post-content pre {
-    overflow-wrap: normal !important;
-    max-width: 100% !important;
+.post-content pre code {
+	white-space: pre;
+	overflow: hidden;
+	overflow-x: scroll;
+	word-break: normal;
 }
