@@ -1,7 +1,7 @@
 /* Needed for my ASCII art drawings so they don't wrap on small screens  */
 .post-content pre code {
 	white-space: pre;
-	overflow: hidden;
-	overflow-x: scroll;
+	overflow: auto;
+	overflow-x: auto;
 	word-break: normal;
 }
