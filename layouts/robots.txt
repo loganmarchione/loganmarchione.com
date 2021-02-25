@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /resume/
+Disallow: /resume/*
+Disallow: /resumes/
+Disallow: /resumes/*
+Disallow: /*_resume.pdf$
+Sitemap: https://loganmarchione.dev/sitemap.xml
