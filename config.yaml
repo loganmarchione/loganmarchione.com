@@ -22,18 +22,14 @@ minify:
     disableXML: true
     minifyOutput: false
 
-imaging:
-  AutoOrientation: true
-
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    title: 
+    title: "Logan Marchione"
     description: "Logan Marchione"
     author: Me
-    # author: ["Me", "You"] # multiple authors
     #images: ["<link or path of image for opengraph, twitter-cards>"]
 
-    defaultTheme: auto # dark, light
+    defaultTheme: auto
     disableThemeToggle: false
 
     ShowReadingTime: true
@@ -45,8 +41,8 @@ params:
     TocOpen: false
 
     assets:
-        disableHLJS: true # to disable highlight.js
-        # disableFingerprinting: true
+        disableHLJS: true
+        disableFingerprinting: false
         favicon: "/assets/favicon/favicon_loganmarchione_logo.svg"
         favicon16x16: "/assets/favicon/favicon_loganmarchione_logo.svg"
         favicon32x32: "/assets/favicon/favicon_loganmarchione_logo.svg"
@@ -72,15 +68,10 @@ params:
         - name: RSS
           url: "index.xml"
 
-
-    #analytics:
-    #    google:
-    #        SiteVerificationTag: "XYZabc"
-
     cover:
-        hidden: false # hide everywhere but not in structured data
-        hiddenInList: false # hide on list pages and home
-        hiddenInSingle: false # hide on single page
+        hidden: false
+        hiddenInList: false
+        hiddenInSingle: false
         linkFullImages: false
 
     # for search
@@ -93,6 +84,7 @@ params:
         threshold: 0.4
         minMatchCharLength: 0
         keys: ["title", "permalink", "summary", "content"]
+
 menu:
     main:
         - identifier: contact
