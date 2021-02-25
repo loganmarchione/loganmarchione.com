@@ -50,7 +50,7 @@ params:
         favicon: "/assets/favicon/favicon_loganmarchione_logo.svg"
         favicon16x16: "/assets/favicon/favicon_loganmarchione_logo.svg"
         favicon32x32: "/assets/favicon/favicon_loganmarchione_logo.svg"
-        apple_touch_icon: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        apple_touch_icon: "/assets/favicon/apple-touch-icon.png"
         safari_pinned_tab: "/assets/favicon/favicon_loganmarchione_logo.svg"
 
     label:
