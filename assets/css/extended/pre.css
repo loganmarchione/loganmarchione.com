@@ -1,0 +1,5 @@
+/* Needed for my ASCII art drawings so they don't wrap on small screens  */
+.post-content pre {
+    overflow-wrap: normal !important;
+    max-width: 100% !important;
+}
