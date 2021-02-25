@@ -70,17 +70,17 @@ Connect the serial cable using the settings from the [manual](https://pcengines.
 
 These are the PuTTY settings I used (your COM port may be different).
 
-{{< img src="20190823_003.png" alt="putty settings" >}}
+{{< img src="20190823_003.png" alt="screenshot" >}}
 
 Press _F10_ at boot when connected via the console cable and you will see the boot menu.
 
-{{< img src="20190823_004.png" alt="boot menu" >}}
+{{< img src="20190823_004.png" alt="screenshot" >}}
 
 ## Memtest86
 
 I always test my memory before I use it, and I always recommend [Memtest86](https://www.memtest86.com/download.htm) (not to be confused with [Memtest86+](https://www.memtest.org/), which is no longer maintained). There is a build of Memtest86 built-in to the APU2 BIOS, just press _F10_ at boot when connected via the console cable and you can run a memory test with option _3_.
 
-{{< img src="20190823_005.png" alt="memtest" >}}
+{{< img src="20190823_005.png" alt="screenshot" >}}
 
 # Setup
 
@@ -88,7 +88,7 @@ I always test my memory before I use it, and I always recommend [Memtest86](http
 
 Installing pfSense was easy enough, especially if you're using the [amazing install guide](https://docs.netgate.com/pfsense/en/latest/install/index.html#installing) (seriously, use it). For my install, I chose the options below from the [download page](https://www.pfsense.org/download/). The APU2 does not have a VGA port, so you don't have any option other than to do an install over serial.
 
-{{< img src="20190823_006.png" alt="pfsense download options" >}}
+{{< img src="20190823_006.png" alt="screenshot" >}}
 
 ## Configuration
 

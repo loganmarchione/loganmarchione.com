@@ -147,9 +147,9 @@ Another commenter submitted a picture of his ONT (thanks, Brian!).
 
 I used to recommend cloning the MAC address of your FiOS router onto your new router. However, one commenter, Jeremy, had a pretty terrible time with this, and actually had his service cancelled. Instead, I recommend using your router with it's true MAC address. This will most likey involve a call to Verizon, but it's worth a few minutes on the phone.
 
-When I spoke with Verizon, they were able to switch the ONT over to ethernet without issue. The technician was able to see the MAC address of my C7, and I was able to verify a few packets were being sent/received, but I still wasn't pulling an IP from the ONT. When I switched my connection back to the FiOS router (this time, on ethernet), I was able to get online without issue. I assumed it was something specific to my C7, and decided to clone the MAC address of the FiOS router to the WAN interface of the C7. After I rebooted, I was able to get an IP and get online.
+~~When I spoke with Verizon, they were able to switch the ONT over to ethernet without issue. The technician was able to see the MAC address of my C7, and I was able to verify a few packets were being sent/received, but I still wasn't pulling an IP from the ONT. When I switched my connection back to the FiOS router (this time, on ethernet), I was able to get online without issue. I assumed it was something specific to my C7, and decided to clone the MAC address of the FiOS router to the WAN interface of the C7. After I rebooted, I was able to get an IP and get online.~~
 
-Strangely enough, after a few weeks, I removed the cloned MAC, rebooted, and still had service.
+~~Strangely enough, after a few weeks, I removed the cloned MAC, rebooted, and still had service.~~
 
 Did you switch the FiOS router out for your own? If so, let me know how it went!
 

@@ -120,10 +120,10 @@ Here is how everything is physically connected.
 
 # To-do
 
-- Replace side vent panels with metal bars (will require cutting and drilling)
-    - Cheaper
-    - Custom length
-- Add labels to patch panel
+- ~~Replace side vent panels with metal bars (will require cutting and drilling)~~
+    - ~~Cheaper~~
+    - ~~Custom length~~
+- ~~Add labels to patch panel~~
 - Try [Monoprice SlimRun Cat6 patch cables](https://www.monoprice.com/product?p_id=13527) (which should bend easier)
 - Find deeper shelves
     - https://commsonline.co.uk/products/1u-10-inch-mini-cabinet-shelf
