@@ -21,6 +21,8 @@ hugo server -D --ignoreCache
 
 # test in browser http://localhost:1313
 
-# create static copy
-hugo --gc
+# add, commit, push to kick off GitHub Actions
+git add .
+git commit -m "Update some stuff"
+git push
 ```
