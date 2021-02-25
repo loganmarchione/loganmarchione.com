@@ -98,7 +98,7 @@ This was the worst part and took about 10-12 hours total. Each post needed a ton
 
 ## Publish to webserver
 
-This was pretty easy, just run `hugo server` and you'll get a `/public` folder you can zip up and SFTP to the webserver.
+This was pretty easy, just run `hugo server` and you'll get a `/public` folder you can zip up and SFTP to the webserver. I also setup a GitHub Actions workflow based on [this post](https://zartman.xyz/blog/gh-static-deploy/) to build the site and rsync it to my webserver. 
 
 # Things I'm losing
 
@@ -109,7 +109,6 @@ This was pretty easy, just run `hugo server` and you'll get a `/public` folder y
 
 I still need to work on:
 
-- CI/CD workflow to auto-post new pages when I push to master
 - Git LFS for storing images
 - Find a spell-checker for VSCode
 

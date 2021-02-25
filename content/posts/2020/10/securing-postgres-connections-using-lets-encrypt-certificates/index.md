@@ -116,7 +116,8 @@ As long as the Docker image you're using has the `ca-certificates` package insta
 
 Now, back on the Postgres database, run the command below.
 
-```SELECT ssl.pid, usename, datname, ssl, ssl.version, ssl.cipher, ssl.bits, ssl.compression, client_addr
+```
+SELECT ssl.pid, usename, datname, ssl, ssl.version, ssl.cipher, ssl.bits, ssl.compression, client_addr
 FROM pg_catalog.pg_stat_ssl ssl, pg_catalog.pg_stat_activity activity
 WHERE ssl.pid = activity.pid;
 ```
