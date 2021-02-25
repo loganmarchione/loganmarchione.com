@@ -318,7 +318,6 @@ root@mr3020_home:~# block info
 /dev/mtdblock3: TYPE="jffs2"
 /dev/sda1: UUID="bf19ec66-8d6a-40d7-b366-f99f48cced33" NAME="EXT_JOURNAL" VERSION="1.0" TYPE="ext4"
 /dev/sda2: UUID="5ca298db-53d6-406c-9db3-344c2e5ebae8" NAME="EXT_JOURNAL" VERSION="1.0" TYPE="ext4"
-
 ```
 
 Create two directories and mount _/dev/sda1_ and _/dev/sda2_ on them.

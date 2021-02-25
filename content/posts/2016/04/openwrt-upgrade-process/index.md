@@ -94,7 +94,9 @@ md5sum -c md5sums 2> /dev/null | grep OK
 
 If the MD5 sum returns OK, you can proceed with the upgrade (the _-v_ flag tells sysupgrade to be verbose.).
 
+```
 sysupgrade -v /tmp/openwrt-15.05.1-ar71xx-generic-archer-c7-v2-squashfs-sysupgrade.bin
+```
 
 Expect the upgrade to take a few minutes. The router should reboot when completed.
 

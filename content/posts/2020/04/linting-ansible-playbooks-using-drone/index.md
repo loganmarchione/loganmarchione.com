@@ -114,7 +114,7 @@ volumes:
 
 Once you startup your containers and try to login to Drone (my instance is behind a reverse proxy), you should be greeted with your VCS provider's login page. Once you login, you should be able to click _Sync_ to sync your repositories to Drone.
 
-{{< img src="20200420_002.png" alt="drone screenshot" >}}
+{{< img src="20200420_001.png" alt="drone screenshot" >}}
 
 I'm going to assume you already have an _ansible_ repository, so click on it, and click _Activate_.
 

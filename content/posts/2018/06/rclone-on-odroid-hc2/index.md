@@ -66,7 +66,9 @@ Rclone uses a concept called _remotes_. Remotes are just remote storage location
 
 First, configure rclone. It's important to do this as the user that will be running rclone, so keep that in mind if you want to use a service account (more about this later).
 
+```
 rclone config
+```
 
 Press _n_ to create a new remote.
 
