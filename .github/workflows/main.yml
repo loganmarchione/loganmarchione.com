@@ -8,6 +8,7 @@ on:
 env:
   DEV_URL: loganmarchione.dev
   PRD_URL: loganmarchione.com
+  URL: ${{ env.PRD_URL }}
 
 jobs:
   deploy:
@@ -28,13 +29,13 @@ jobs:
           hugo-version: 'latest'
 
     - name: Build
-      run: hugo --gc --baseURL="https://${{ env.DEV_URL }}"
+      run: hugo --gc --baseURL="https://${{ env.URL }}"
 
     - name: SSH setup
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.DEV_URL }} > ~/.ssh/known_hosts
+        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.URL }} > ~/.ssh/known_hosts
         chmod -R 700 ~/.ssh
         chmod 600 ~/.ssh/deploy_key
 
@@ -42,4 +43,4 @@ jobs:
       run: |
         rsync -rltvz --delete --omit-dir-times \
           -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" public/ \
-          ${{ secrets.DEPLOY_USER }}@${{ env.DEV_URL }}:/var/www/${{ env.DEV_URL }}
+          ${{ secrets.DEPLOY_USER }}@${{ env.URL }}:/var/www/${{ env.URL }}
