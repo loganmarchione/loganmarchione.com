@@ -6,9 +6,7 @@ on:
       - master
 
 env:
-  DEV_URL: loganmarchione.dev
-  PRD_URL: loganmarchione.com
-  URL: ${{ env.PRD_URL }}
+  URL: loganmarchione.com
 
 jobs:
   deploy:
