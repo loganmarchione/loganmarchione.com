@@ -1,9 +1,10 @@
-{{/*    get file that matches src="" in shortcode           */}}
+{{/*    get file that matches src="" in shortcode                   */}}
 {{ $image := .Page.Resources.GetMatch (.Get "src") }}
-{{/* More filters here https://github.com/disintegration/imaging */}}
+
 {{- if gt $image.Width 1000 -}}
+  {{/*    More filters here https://github.com/disintegration/imaging */}}
   {{- $resize := $image.Resize "800x CatmullRom" -}}
-  <p><img src="{{ $resize.RelPermalink | safeURL }}" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{- end -}}></p>
+  <p><img src="{{ $resize.RelPermalink | safeURL }}" loading="lazy" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{- end -}}></p>
 {{- else -}}
-  <p><img src="{{ $image.RelPermalink | safeURL }}" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{- end -}}></p>
+  <p><img src="{{ $image.RelPermalink | safeURL }}" loading="lazy" {{ with .Get "alt" }}alt="{{.}}"{{ else }}alt=""{{- end -}}></p>
 {{- end -}}
