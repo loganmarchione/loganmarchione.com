@@ -9,7 +9,6 @@ cover:
     image: "/assets/featured/featured_generic_chart.svg"
     alt: "featured image"
     relative: false
-draft: true
 ---
 
 # Introduction
