@@ -103,7 +103,7 @@ This was pretty easy, just run `hugo server` and you'll get a `/public` folder y
 # Things I'm losing
 
 - Comments - This is the thing I will miss the most. I really liked the comments and interacting with my readers, but spam was a constant problem. I have archived the comments on the pages that had them, but won't be accepting new comments. I was considering Disqus, but heard bad things about privacy as well as speed.
-- Analytics - I was using a self-hosted instance of [Matomo](https://matomo.org/), but will probably remove that because I'm removing PHP and MariaDB from the server. I may switch to something privacy-respecting like [Plausible](https://plausible.io/) or [Fathom](https://usefathom.com/).
+- Analytics - ~~I was using a self-hosted instance of [Matomo](https://matomo.org/), but will probably remove that because I'm removing PHP and MariaDB from the server. I may switch to something privacy-respecting like [Plausible](https://plausible.io/) or [Fathom](https://usefathom.com/).~~ I setup Plausible, read about it [here](/2021/03/analytics-with-hugo/)!
 
 # To-do
 
