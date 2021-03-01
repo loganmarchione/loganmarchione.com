@@ -1,0 +1,5 @@
+<video autoplay loop muted playsinline style="width: 100%; height: auto;">
+    {{ with .Get "mp4" }}<source src="{{ . }}" type="video/mp4">{{ end }}
+    {{/*    {{ with .Get "webm" }}<source src="{{ . }}" type="video/webm">{{ end }}     */}}
+    <p> Your browser does not support video. </p>
+</video>

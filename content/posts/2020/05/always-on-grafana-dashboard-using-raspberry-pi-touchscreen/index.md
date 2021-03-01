@@ -81,7 +81,7 @@ sudo reboot
 
 Here is the boot process (ignore my bad GIF-making skills, the bright spot on the screen is a light in my kitchen).
 
-![](20200517_003.gif)
+{{< video mp4="20200517_003.mp4" >}}
 
 ## Desktop installation
 
@@ -195,7 +195,7 @@ journalctl -u grafana-kiosk
 
 Here is my completed display with my first dashboard loading (ignore my bad GIF-making skills, the bright spot on the screen is a light in my kitchen).
 
-![](20200517_004.gif)
+{{< video mp4="20200517_004.mp4" >}}
 
 ## Timed display control
 
