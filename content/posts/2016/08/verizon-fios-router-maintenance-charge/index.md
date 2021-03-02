@@ -11,7 +11,7 @@ cover:
     relative: false
 ---
 
-{{< series/fios >}}
+{{% series/s_fios %}}
 
 # Introduction
 

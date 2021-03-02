@@ -12,7 +12,7 @@ cover:
     relative: false
 ---
 
-{{< series/pfsense >}}
+{{% series/s_pfsense %}}
 
 # Introduction
 
