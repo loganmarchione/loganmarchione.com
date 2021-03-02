@@ -12,7 +12,7 @@ cover:
     relative: false
 ---
 
-{{< series/openwrt >}}
+{{% series/s_openwrt %}}
 
 # Introduction
 

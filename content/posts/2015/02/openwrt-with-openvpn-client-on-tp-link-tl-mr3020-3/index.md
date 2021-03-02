@@ -16,8 +16,7 @@ aliases:
     - /2014/10/openwrt-with-openvpn-client-on-tp-link-tl-mr3020
 ---
 
-{{< series/openwrt >}}
-
+{{% series/s_openwrt %}}
 
 # Update: Multiple posts
 
