@@ -29,7 +29,7 @@ I started to look for a self-hosted, privacy-respecting analytics solution. In t
 
 Hugo comes with [built-in support for Google Analytics](https://gohugo.io/templates/internal/#google-analytics), which I obviously didn't use. While I found quite a few quality analytics products, I only specifically looked at solutions that allowed self-hosting. My reasoning was: if they're confident enough in their product to open-source it and allow me to host it, I'm confident enough to pay them for it.
 
-{{< comparison/analytics >}}
+{{% comparison/analytics %}}
 
 In the end, I decided on Plausible analytics because:
 
