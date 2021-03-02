@@ -15,7 +15,7 @@ aliases:
     - /2017/10/dyn-ddns-edgerouter/
 ---
 
-{{< series/ubiquiti >}}
+{{% series/s_ubiquiti %}}
 
 # Introduction
 

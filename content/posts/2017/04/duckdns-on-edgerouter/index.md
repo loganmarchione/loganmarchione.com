@@ -14,7 +14,7 @@ cover:
     relative: false
 ---
 
-{{< series/ubiquiti >}}
+{{% series/s_ubiquiti %}}
 
 # Introduction
 

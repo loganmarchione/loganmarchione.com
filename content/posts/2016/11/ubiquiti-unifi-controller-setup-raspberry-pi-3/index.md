@@ -14,7 +14,7 @@ aliases:
     - /2016/11/ubiquiti-unifi-controller-setup-raspberry-pi-3
 ---
 
-{{< series/ubiquiti >}}
+{{% series/s_ubiquiti %}}
 
 # Introduction
 
