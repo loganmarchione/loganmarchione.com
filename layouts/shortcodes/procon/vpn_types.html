@@ -10,12 +10,12 @@
     <tbody>
       <tr>
         <th>PPTP</th>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Available in most operating systems by default</li>
           </ul>
         </td>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Uses IP protocol 47 (GRE) and UDP port 1723, making it easily detectable and blockable by a firewall</li>
             <li>Encryption is not strong</li>
@@ -25,14 +25,14 @@
       </tr>
       <tr>
         <th>L2TP/IPSec</th>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Available in most operating systems by default</li>
             <li>More secure than PPTP</li>
             <li>No known security flaws</li>
           </ul>
         </td>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Uses UDP ports 50, 500, 1701, and 4500, making it easily detectable and blockable by a firewall</li>
             <li>Slightly more overhead than OpenVPN, since traffic is passing through the tunnel and encryption in two separate steps</li>
@@ -41,7 +41,7 @@
       </tr>
       <tr>
         <th>OpenVPN</th>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Very configurable</li>
             <li>Uses open source software</li>
@@ -50,7 +50,7 @@
             <li>Can use any port, setting to TCP 443 makes it almost indistinguishable from HTTPS traffic</li>
           </ul>
         </td>
-        <td>
+        <td style="vertical-align:top">
           <ul>
             <li>Not available in most operating systems by default, requires a third-party application</li>
           </ul>
