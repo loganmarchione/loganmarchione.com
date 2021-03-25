@@ -44,16 +44,6 @@ Here is what I ended up buying and the prices I paid:
 *  2x Dell 32GB DDR4-3200 SODIMM ECC
 *  Intel SSD D3-S4610 (960GB)
 
-
-
-As you can see the DeskMini H470 build is the cheapest, as well the the most powerful, will run the coolest, and has the most expansion options. These are the prices I paid, including taxes and shipping:
-
-*   DeskMini H470
-*   Intel Core i5-10400
-*   Noctua NH-L9i chromax.black cooler
-*   Crucial 2x 32GB DDR4
-*   Samsung 970 Pro 512GB
-
 ## Build pics
 
 # Hardware-specific things
