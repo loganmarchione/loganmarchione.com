@@ -32,7 +32,7 @@ Normally, I would recommend AMD for almost any application, since the cores-per-
 
 ## Proposed hardware
 
-Here is a comparison of my original NUC and the final four devices I considered (all with relatively the same specs).
+Here is a comparison of my original NUC and the final four devices I considered (all with relatively similar specs).
 
 {{< comparison/hypervisors >}}
 
@@ -40,7 +40,16 @@ Even though the Dell Precision 3240 Compact was the most expensive build, it off
 
 Here is what I ended up buying and the prices I paid:
 
-*  Dell Precision 3240 Compact
+*  Dell Precision 3240 Compact (base price of $839, as configured $750)
+    * Intel Xeon W-1250 (6 Core, 12M cache, base 3.3GHz, up to 4.7GHz) +$132.64
+    * Ubuntu Linux 18.04 -$104.36
+    * C1 2.5 inch Boot HD $0.00
+    * 500GB 5400rpm SATA 2.5" HDD -$157.99
+    * Optional HDMI 2.0b Video Port +$13.47
+    * Keyboard not included -$4.71
+    * Power Cord (US) for 240W Adapter +$3.37
+    * Internal speaker $0.00
+    * 240W A/C Adapter +$32.99
 *  2x Dell 32GB DDR4-3200 SODIMM ECC
 *  Intel SSD D3-S4610 (960GB)
 
@@ -48,16 +57,16 @@ Here is what I ended up buying and the prices I paid:
 
 # Hardware-specific things
 
-## Thermal limits
+## Thermal performance
 
-If you read around, you'll find complaints about thermal problems ([one](https://www.reddit.com/r/Dell/comments/iy12iv/precision_3240_compact/), [two](https://forums.redflagdeals.com/dell-dell-precision-3240-compact-workstation-usff-2-3l-i3-10100-8g-279-313-i5-10500-8g-419-470-2403015/21/#p33901450)) on the 3240 Compact. Dell offers two different heatsinks depending on the CPU you choose. Of the reported thermal issues, they all seemed to be using the Core processors which have a smaller heatsink. If you look at Dell's documentation, you can see the differences on [pages 61 and 62](https://dl.dell.com/topicspdf/precision-3240-workstation_owners-manual_en-us.pdf#_OPENTOPIC_TOC_PROCESSING_d111e10824) of the service manual.
+If you read around, you'll find complaints about thermal problems ([one](https://www.reddit.com/r/Dell/comments/iy12iv/precision_3240_compact/), [two](https://forums.redflagdeals.com/dell-dell-precision-3240-compact-workstation-usff-2-3l-i3-10100-8g-279-313-i5-10500-8g-419-470-2403015/21/#p33901450), [three](https://www.reddit.com/r/Dell/comments/m6ao4k/does_anyone_use_a_dell_precision_3240_compact/gsbb4yc)) on the 3240 Compact. Dell offers two different heatsinks depending on the CPU you choose. Of the reported thermal issues, they all seemed to be using the Core processors which have a smaller heatsink. If you look at Dell's documentation, you can see the differences on [pages 61 and 62](https://dl.dell.com/topicspdf/precision-3240-workstation_owners-manual_en-us.pdf#_OPENTOPIC_TOC_PROCESSING_d111e10824) of the service manual.
 
 
 The Core processors are all 65W and use a smaller heatsink.
 
 {{< img src="20210501_001.jpg" alt="small heatsink" >}}
 
-The Xeon processors, however, are all 80W and use a larger heatsink and heatpipes.
+The Xeon processors, however, are only 15W more (80W) but use a larger heatsink and heatpipes.
 
 {{< img src="20210501_002.jpg" alt="large heatsink" >}}
 
@@ -74,7 +83,9 @@ The 3240 Compact has space for three storage drives:
 *  1x 2.5" HDD/SSD (SATA connector)
 *  2x 2230/2280 NVMe SSD (M.2 connector)
 
-Again, Dell charges 2-3x standard storage prices if you use their customizer. I decided to purchase an Intel data center 2.5" SSD, but will probably add an NVMe drive in the future as well.
+Again, Dell charges 2-3x standard storage prices if you use their customizer. I decided to purchase an Intel data center 2.5" SSD, but will probably add a NVMe drive in the future as well.
+
+Keep in mind, using a 2.5" HDD/SSD removes your ability to use any expansion cards, since the drive takes up the same physical space as the PCIe card.
 
 ## Extra customizer options
 
