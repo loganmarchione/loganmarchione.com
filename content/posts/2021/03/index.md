@@ -23,7 +23,7 @@ For a long time, I've hosted a Matomo instance on my server and proudly stated i
 
 I did this to protect my users and respect their privacy. Additionally, if a user didn't want to be tracked: I set Matomo to respect their browser's [Do Not Track ](https://en.wikipedia.org/wiki/Do_Not_Track) header, or they could install something like NoScript or uBlock Origin, or they could disable JavaScript completely.
 
-I started to look for a self-hosted, privacy-respecting analytics solution. In the end, however, the technical cost of installing, maintaining, and securing a self-hosted solution wasn't worth it (not to mention the techincal debt of PHP plus MySQL), so I decided to switch to SaaS.
+I started to look for a self-hosted, privacy-respecting analytics solution. In the end, however, the technical cost of installing, maintaining, and securing a self-hosted solution wasn't worth it (not to mention the technical debt of PHP plus MySQL), so I decided to switch to SaaS.
 
 # Comparison
 
