@@ -13,7 +13,7 @@ cover:
 
 # Introduction
 
-My hypervisor since 2017 has been an Intel [NUC7i3BNH](https://ark.intel.com/content/www/us/en/ark/products/95066/intel-nuc-kit-nuc7i3bnh.html). It has a 2c/4t 15W laptop CPU ([Core i3-7100U](https://ark.intel.com/content/www/us/en/ark/products/95442/intel-core-i3-7100u-processor-3m-cache-2-40-ghz.html)), with 2x 16GB Crucial DDR4, and a 512GB Samsung 860 Pro. While it served me well over these years, I've outgrown the CPU and cooling solution.
+My hypervisor since 2017 has been an Intel [NUC7i3BNH](https://ark.intel.com/content/www/us/en/ark/products/95066/intel-nuc-kit-nuc7i3bnh.html). It has a 2c/4t 15W laptop CPU (Core i3-7100U), with 2x 16GB Crucial DDR4, and a 512GB Samsung 860 Pro. While it served me well over these years, I've outgrown the CPU and cooling solution.
 
 # The search for a new hypervisor
 
@@ -34,7 +34,9 @@ Normally, I would recommend AMD for almost any application, since the cores-per-
 
 [This](https://www.reddit.com/r/HomeServer/comments/l2qsh4/my_first_homeserver_running_esxi_7_nothing_like/) Reddit post convinced me to go with the ASRock DeskMini H470, as it was almost exactly the same build as what I was looking for.
 
-Below is a comparison of my current NUC and the new hypervisor (it's obviously not a like-for-like comparison because of the CPU, CPU cooler, and RAM differences).
+{{< img src="20210621_004.png" alt="deskmini" >}}
+
+Below is a comparison of my current NUC and the new hypervisor (it's obviously not a like-for-like comparison because of the CPU, cooler, and RAM differences).
 
 {{< comparison/hypervisors >}}
 
@@ -91,7 +93,7 @@ Right now, I'm running Proxmox and the VM storage on the same NVMe SSD. However,
 
 ## Motherboard flex
 
-There is a little bit of motherboard flex from the CPU cooler because this cooler does not have a backplate. Not sure if that will be a problem, I guess we'll see.
+There is a little bit of motherboard flex from the cooler because this cooler does not have a backplate. Not sure if that will be a problem, I guess we'll see.
 
 {{< img src="20210622_004.jpg" alt="build pics" >}}
 
@@ -101,7 +103,7 @@ If you zoom in, the red line is drawn between the two motherboard screws, and yo
 
 ## Sensors and VRM temperatures
 
-According to [this post](https://www.reddit.com/r/HomeServer/comments/l2qsh4/my_first_homeserver_running_esxi_7_nothing_like/gkcn5dt), the temperature sensor kernel driver (nct6683) is not loaded by default and will need to be loaded manually. I confirmed this was the case.
+According to [this post](https://www.reddit.com/r/HomeServer/comments/l2qsh4/my_first_homeserver_running_esxi_7_nothing_like/gkcn5dt), the temperature sensor kernel driver (nct6683) is not loaded by default. I confirmed this was the case and loaded it manually.
 
 Both [KitGuru](https://www.kitguru.net/desktop-pc/leo-waldock/asrock-deskmini-h470w-review-100c-vrms/) and [AnandTech](https://www.anandtech.com/show/16335/asrock-deskmini-h470-review-a-nofrills-lga1200-minipc-platform/10) commented about the high VRM temperatures on the DeskMini H470. However, ASRock is known to produce motherboards with [fake sensors](https://www.reddit.com/r/ASRock/comments/fwfsl7/vrm_constantly_above_100_c/), so I'm not sure if this is related. I'm also not sure which of these (if any) are the VRM sensors.
 
@@ -147,5 +149,7 @@ Core 5:        +47.0°C  (high = +84.0°C, crit = +100.0°C)
 # Conclusion
 
 So far, I'm only a few days into this new hypervisor, but it's already leaps and bounds better than the NUC, especially under any sort of load.
+
+{{< img src="20210622_008.jpg" alt="mini-rack on shelf" >}}
 
 -Logan
