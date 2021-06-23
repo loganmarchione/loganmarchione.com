@@ -1,6 +1,6 @@
 ---
 title: "ASRock DeskMini H470 as a compact hypervisor"
-date: "2021-06-01"
+date: "2021-06-23"
 author: "Logan Marchione"
 categories: 
   - "oc"
