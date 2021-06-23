@@ -146,6 +146,57 @@ Core 4:        +42.0°C  (high = +84.0°C, crit = +100.0°C)
 Core 5:        +47.0°C  (high = +84.0°C, crit = +100.0°C)
 ```
 
+## Linux e1000e driver
+
+There is a known issue where the Intel NIC e1000e kernel driver can crash/hang when under heavy load. In my case, this happened when my VM for backups was pushing data up to the cloud. Below is what I saw in `dmesg` on the Proxmox host.
+
+```
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] e1000e 0000:00:1f.6 eno1: Detected Hardware Unit Hang:
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   TDH                  <a5>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   TDT                  <40>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   next_to_use          <40>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   next_to_clean        <a4>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] buffer_info[next_to_clean]:
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   time_stamp           <1008e50da>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   next_to_watch        <a5>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   jiffies              <1008e5848>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931]   next_to_watch.status <0>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] MAC Status             <40080083>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] PHY Status             <796d>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] PHY 1000BASE-T Status  <3c00>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] PHY Extended Status    <3000>
+Jun 22 21:40:32 proxmox02 kernel: [37615.515931] PCI Status             <10>
+```
+
+Below is the output from `lspci -v` on the Proxmox host. You can see I'm using the `e1000e` driver.
+
+```
+00:1f.6 Ethernet controller: Intel Corporation Device 0d4d
+        Subsystem: ASRock Incorporation Device 0d4d
+        Flags: bus master, fast devsel, latency 0, IRQ 137
+        Memory at b1200000 (32-bit, non-prefetchable) [size=128K]
+        Capabilities: [c8] Power Management version 3
+        Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+        Kernel driver in use: e1000e
+        Kernel modules: e1000e
+```
+
+This crash/hang happens because the NIC has hardware offload capabilities, but it can't keep up with the amount of data being pushed through. The fix (as documented in [this](https://forum.proxmox.com/threads/e1000-driver-hang.58284/) large Proxmox-specific thread) is to disable offloading and let everything be handled by the CPU. In my case, I only disabled tcp-segmentation-offload, generic-segmentation-offload, and generic-receive-offload.
+
+The following snippet is from my _/etc/network/interfaces_ file on the Proxmox host.
+
+```
+auto eno1
+iface eno1 inet manual
+    offload-tso off
+    offload-gso off
+    offload-gro off
+```
+
+After a reboot of the host, you can verify the settings using `ethtool -k eno1`. Again, this is not specific to ASRock or Proxmox, it seems to be any Linux distribution using the e1000e driver.
+
+
+
 # Conclusion
 
 So far, I'm only a few days into this new hypervisor, but it's already leaps and bounds better than the NUC, especially under any sort of load.
