@@ -58,15 +58,15 @@ params:
     homeInfoParams:
         Title: "Hi there \U0001F44B"
         Content: >
-            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto, Linux, hosting, code, etc...
+            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto{graphy,currency}, Linux, hosting, code, etc...
             
             - I also use this space to share and document ideas for future reference.
             
             - I hope you find something of value here! Enjoy!
 
-    socialIcons:
-        - name: RSS
-          url: "index.xml"
+#    socialIcons:
+#        - name: RSS
+#          url: "index.xml"
 
     cover:
         hidden: false
@@ -103,6 +103,14 @@ menu:
           name: Categories
           url: /categories/
           weight: 50
+        - identifier: rss
+          name: RSS
+          url: /index.xml
+          weight: 60
+#        - identifier: posts
+#          name: All posts
+#          url: posts
+#          weight: 70
 
 privacy:
   disqus:
