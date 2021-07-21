@@ -34,11 +34,12 @@ params:
 
     ShowReadingTime: true
     ShowShareButtons: true
-    disableSpecial1stPost: false
+    disableSpecial1stPost: true
     comments: false
     hidemeta: false
     ShowToc: true
     TocOpen: false
+    DateFormat: "2006-01-02"
 
     assets:
         disableHLJS: true
@@ -55,14 +56,14 @@ params:
         iconHeight: 35
 
     # home-info mode
-    homeInfoParams:
-        Title: "Hi there \U0001F44B"
-        Content: >
-            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto{graphy,currency}, Linux, hosting, code, etc...
-            
-            - I also use this space to share and document ideas for future reference.
-            
-            - I hope you find something of value here! Enjoy!
+#    homeInfoParams:
+#        Title: "Hi there \U0001F44B"
+#        Content: >
+#            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto{graphy,currency}, Linux, hosting, code, etc...
+#            
+#            - I also use this space to share and document ideas for future reference.
+#            
+#            - I hope you find something of value here! Enjoy!
 
 #    socialIcons:
 #        - name: RSS
@@ -87,10 +88,14 @@ params:
 
 menu:
     main:
-        - identifier: contact
-          name: Contact
-          url: /contact
-          weight: 30
+        - identifier: about
+          name: About
+          url: /about
+          weight: 20
+#        - identifier: contact
+#          name: Contact
+#          url: /contact
+#          weight: 30
         - identifier: privacy
           name: Privacy
           url: /privacy
@@ -99,10 +104,10 @@ menu:
           name: Search
           url: /search
           weight: 30
-        - identifier: categories
-          name: Categories
-          url: /categories/
-          weight: 50
+#        - identifier: categories
+#          name: Categories
+#          url: /categories/
+#          weight: 50
         - identifier: rss
           name: RSS
           url: /index.xml
