@@ -1,6 +1,5 @@
 ---
 title: "Privacy"
-date: "2014-08-09"
 author: "Logan Marchione"
 ---
 
