@@ -75,7 +75,7 @@ If you had a cluster of Raspberry Pi devices and wanted to see the GPU memory sp
 ansible host_or_group_name_here -a "raspi-config nonint get_config_var gpu_mem /boot/config.txt"
 ```
 
-Then, if you want to change the devices in that cluster to have a minimal memory split, you could use another ad-hoc command (this assumes you have SSH and sudo setup on the target device(s)).
+Then, if you wanted to change the devices in that cluster to have a minimal memory split, you could use another ad-hoc command (this assumes you have SSH and sudo setup on the target device(s)).
 
 ```
 ansible host_or_group_name_here -a "raspi-config nonint do_memory_split 16" --become --ask-become-pass
