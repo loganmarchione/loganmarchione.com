@@ -11,7 +11,7 @@ aliases:
 
 This is my sandbox on the web to learn about the internet, crypto{graphy,currency}, Linux, hosting, code, etc... I also use this space to share and document ideas for future reference.
 
-I'm passionate about [open-source software](https://en.wikipedia.org/wiki/Open-source_software), [Oxford commas](https://en.wikipedia.org/wiki/Serial_comma) and dates being in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format.
+I'm passionate about [open-source software](https://en.wikipedia.org/wiki/Open-source_software), [Oxford commas](https://en.wikipedia.org/wiki/Serial_comma), and dates being in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format.
 
 Shameless plug: I’m a fan of the [EFF](https://www.eff.org/) and the work they do to help protect freedom online. Consider [joining](https://www.eff.org/join)! I've been a member since 2014!
 
