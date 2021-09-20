@@ -2,7 +2,7 @@
 title: "Education"
 author: "Logan Marchione"
 aliases:
-    - /Education
+    - /education
 ShowToc: false
 ---
 
