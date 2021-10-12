@@ -130,3 +130,8 @@ privacy:
     disable: true
   youtube:
     disable: true
+
+deployment:
+  targets:
+    name: "loganmarchione.dev"
+    URL: "s3://loganmarchione-dev?region=us-east-2"
