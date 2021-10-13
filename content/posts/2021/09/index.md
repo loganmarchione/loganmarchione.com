@@ -1,5 +1,5 @@
 ---
-title: "Testing AWS Amplify"
+title: "Deploying Hugo with AWS Amplify"
 date: "2021-09-21"
 author: "Logan Marchione"
 categories: 
@@ -10,6 +10,8 @@ cover:
     alt: "featured image"
     relative: false
 ---
+
+{{% series/s_hugo %}}
 
 # Introduction
 
@@ -59,7 +61,6 @@ The site URL Amplify gives you is something like `https://branch-name.d1m7bkiki6
 * Custom HTTP headers - Amplify allows you to set custom HTTP headers, including [security headers](https://docs.aws.amazon.com/amplify/latest/userguide/custom-headers.html#example-security-headers) to prevent XSS attacks and clickjacking.
 * Separate TEST/PROD sites - Amplify can setup one URL for testing and one for production, based on the branches you specify.
 * Password protection - You can setup HTTP basic authentication to protect development or test sites so that the public can't access them.
-
 
 ## What I didn't like
 
