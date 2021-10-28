@@ -1,6 +1,6 @@
 # loganmarchione.com
 
-![CI/CD](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml/badge.svg)
+[![CI/CD (loganmarchione.com)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml/badge.svg)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml)
 
 ## Overview
 
