@@ -23,7 +23,6 @@ I hope you find something of value here! Enjoy!
 
 * [GitHub](https://github.com/loganmarchione)
 * [Twitter](https://twitter.com/loganmarchione)
-* [Keybase](https://keybase.io/loganmarchione)
 * [Docker Hub](https://hub.docker.com/u/loganmarchione)
 * [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)
 
