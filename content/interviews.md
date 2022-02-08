@@ -17,7 +17,7 @@ I end up referencing this materal often, so I thought I'd publish it here.
 * These questions are more geared towards tech/IT white-collar (i.e., cubicle) type jobs in the USA.
 
 ## Instructions
-* Print this out and bring it with you to an interview. 
+* Print this out and bring it with you to an interview.
 * Make sure you actually write down the answers you're given, don't just nod your head and say "Mmhmmm".
 * Comments and notes are _in italics_.
 
@@ -50,11 +50,11 @@ I end up referencing this materal often, so I thought I'd publish it here.
 
 ### About your (potential) manager
 
-* How long have you been with the company? 
+* How long have you been with the company?
 * How would you describe your management style? _If they use the words "hands-on" or "micro", run the other way._
 * What is your team's biggest challenge right now? _They'll probably say "Not enough staff", since they're hiring. Ask for their second biggest challenge._
-* Is there anything in particular that frustrates you? Anything from the culture, to a particular project. _Try to learn what frustrates them, because you need to show them how you can solve their problems._ 
-* What is the number one goal/project you'd like to achieve/complete in the next year or two? 
+* Is there anything in particular that frustrates you? Anything from the culture, to a particular project. _Try to learn what frustrates them, because you need to show them how you can solve their problems._
+* What is the number one goal/project you'd like to achieve/complete in the next year or two?
 * What do your employees do in their free time? _This not only shows that the employees have lives outside of work, but it shows that their manager knows them on a personal level._
 * What excites you personally about coming into work?
 
@@ -77,7 +77,7 @@ I end up referencing this materal often, so I thought I'd publish it here.
     3. When you hear the offer, repeat the top value, then be silent
     4. Counter the offer with a researched response
     5. Cinch the deal, then some more
-* Do you give formal performance reviews? If so, how often? 
+* Do you give formal performance reviews? If so, how often?
 * How do you reward tenure?
   * Do you give annual salary increases? If so, what was last year's median raise on your team (in percent)?
   * Do you give bonuses? If so, how often?
@@ -108,9 +108,9 @@ I end up referencing this materal often, so I thought I'd publish it here.
 ### Time off/PTO
 
 * How much PTO is offered? Is it give at once or accrued over time? If accrued, what is the accrual rate?
-* Are sick and vacation time separate or part of the same pool? 
-* What paid holidays are offered? 
-* Is there a roll-over policy for PTO? 
+* Are sick and vacation time separate or part of the same pool?
+* What paid holidays are offered?
+* Is there a roll-over policy for PTO?
 * Is there a sell-back policy for PTO?
 * Do you offer maternity/paternity leave?
 
