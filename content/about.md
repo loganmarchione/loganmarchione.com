@@ -3,6 +3,7 @@ title: "About"
 author: "Logan Marchione"
 aliases:
     - /contact
+ShowToc: true
 ---
 
 # Me

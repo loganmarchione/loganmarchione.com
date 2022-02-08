@@ -1,6 +1,9 @@
 ---
 title: "Privacy"
 author: "Logan Marchione"
+aliases:
+    - /privacy
+ShowToc: true
 ---
 
 # Introduction
