@@ -9,7 +9,7 @@
 
 [context.dev]
   environment = { BASE_URL = "loganmarchione.dev" }
- 
+
 [context.master]
   environment = { BASE_URL = "loganmarchione.com" }
 
