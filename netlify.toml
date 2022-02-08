@@ -22,3 +22,7 @@
   from = "/feed/"
   to = "/index.xml"
   status = 200
+[[redirects]]
+  from = "/resume"
+  to = "https://loganmarchione-com-resources.s3.us-east-2.amazonaws.com/resumes/LoganMarchione_Resume_2022-02-08.pdf"
+  status = 200
