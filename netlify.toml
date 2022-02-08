@@ -1,0 +1,14 @@
+# Config file overrides UI settings
+
+[build]
+  publish = "public/"
+  command = "hugo --gc --baseURL=https://${BASE_URL}"
+
+[build.environment]
+  HUGO_VERSION = "0.92.1"
+
+[context.dev]
+  environment = { BASE_URL = "loganmarchione.dev" }
+ 
+[context.master]
+  environment = { BASE_URL = "loganmarchione.com" }
