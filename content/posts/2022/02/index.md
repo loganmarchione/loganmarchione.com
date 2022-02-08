@@ -2,7 +2,7 @@
 title: "Deploying Hugo with Netlify"
 date: "2022-02-08"
 author: "Logan Marchione"
-categories: 
+categories:
   - "oc"
   - "cloud-internet"
 cover:
