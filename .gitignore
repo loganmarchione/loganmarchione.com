@@ -2,6 +2,7 @@
 /public
 public.zip
 /resources/_gen/
+/.hugo_build.lock
 
 ## OS Files
 # Windows
