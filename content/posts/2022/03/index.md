@@ -66,7 +66,7 @@ Also, if there is a firewall on your server, you'll need to open `6443/TCP` for 
 ```
 sudo ufw allow 6443/tcp
 sudo ufw reload
-``` 
+```
 
 # Setup kubectl (on your personal machine)
 
