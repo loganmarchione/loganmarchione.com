@@ -115,7 +115,7 @@ Congrats! You can now interact with your cluster remotely!
 
 # Deploy example application
 
-We're going to deploy three instances an example application called [traefik/whoami](https://hub.docker.com/r/traefik/whoami). This is a webserver written in Go that prints operating system information and HTTP request to output. This is a _very_ simplified setup of how traffic will flow from your client to the containers in the pods.
+We're going to deploy three instances of an example application called [traefik/whoami](https://hub.docker.com/r/traefik/whoami). This is a webserver written in Go that prints operating system information and HTTP request to output. This is a _very_ simplified setup of how traffic will flow from your client to the containers in the pods.
 
 ![traffic flow](20220312_003.svg)
 
