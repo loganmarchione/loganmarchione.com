@@ -5,6 +5,8 @@ author: "Logan Marchione"
 categories:
   - "oc"
   - "cloud-internet"
+  - "linux"
+  - "kubernetes"
 cover:
     image: "/assets/featured/featured_k3s.svg"
     alt: "featured image"
@@ -47,22 +49,26 @@ curl -sfL https://get.k3s.io | sh -
 ```
 
 Once it's done, check that K3s is running.
+
 ```
 sudo systemctl status k3s.service
 ```
 
 Verify your cluster and node info.
+
 ```
 sudo kubectl cluster-info
 sudo kubectl get node
 ```
 
 Congrats! Your single-node cluster is running! Now, view the contents of the `/etc/rancher/k3s/k3s.yaml` file, we'll need this later.
+
 ```
 sudo cat /etc/rancher/k3s/k3s.yaml
 ```
 
-Also, if there is a firewall on your server, you'll need to open `6443/TCP` for external cluster access.
+Also, if there is a firewall on your server, you'll need to open `6443/tcp` for external cluster access (I'm using UFW).
+
 ```
 sudo ufw allow 6443/tcp
 sudo ufw reload
@@ -75,16 +81,19 @@ These commands should be entered on the machine that will interact with your K3s
 The tool used to interact with a k8s (or K3s) cluster is called [kubectl](https://kubernetes.io/docs/tasks/tools/), which is included with K3s. However, you typically don't SSH to the server to interact with the cluster. Instead, you install kubectl on your personal machine (desktop, laptop, etc...) and connect to the cluster remotely.
 
 I'm running Arch, so I installed [kubectl](https://archlinux.org/packages/community/x86_64/kubectl/) with pacman.
+
 ```
 sudo pacman -S kubectl
 ```
 
 Run the command below to make sure kubectl works. For now, ignore the error about the connection to the server not working.
+
 ```
 kubectl version --output=yaml
 ```
 
 Next, create an empty directory to hold the configuration file for kubectl.
+
 ```
 mkdir -p ~/.kube
 touch ~/.kube/config
@@ -102,70 +111,125 @@ kubectl cluster-info
 kubectl get node
 ```
 
-Congrats! You can now interact with your cluster remotely.
+Congrats! You can now interact with your cluster remotely!
 
-# Web dashboard
+# Deploy example application
 
-Because K3s is upstream k8s (with some bits stripped out), let's go one step further and setup the [official k8s web dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/).
+We're going to deploy three instances an example application called [traefik/whoami](https://hub.docker.com/r/traefik/whoami). This is a webserver written in Go that prints operating system information and HTTP request to output. This is a _very_ simplified setup of how traffic will flow from your client to the containers in the pods.
 
-Kubernetes resources (pods, deployments, services, etc...) are written in plaintext JSON or YAML files called [manifests](https://kubernetes.io/docs/reference/glossary/?all=true#term-manifest). Think of manifests like `docker-compose` files.
+![traffic flow](20220312_003.svg)
 
-First, we need to apply the dashboard manifest to the cluster by running the command below on our personal machine (again, kubectl on our personal machine connects to the cluster).
-
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml
-```
-
-Next, we need to create a user and role to login to the dashboard. I recommend storing all of your manifests in a directory for easy management. You can copy/paste the commands below to create the directory and the manifest.
+Kubernetes resources (pods, deployments, services, etc...) are written in plaintext JSON or YAML files called [manifests](https://kubernetes.io/docs/reference/glossary/?all=true#term-manifest). Think of manifests like `docker-compose` files. I recommend storing all of your manifests in a directory for easy management and version control (again, like `docker-compose` files).
 
 ```
-mkdir -p ~/k8s/dashboard
-cat << EOF > ~/k8s/dashboard/admin.yml
+mkdir -p ~/k8s/whoami
+```
+
+We're going to create the following resources in one manifest file:
+
+1. Namespace - This is a best-practice way to segment the cluster (both in software and in administration)
+1. Deployment - This is where we define our container image and how many replicas we want. This is what creates the pods, which will have our containers in them.
+1. Service - This exposes our pods to eachother, as well as to the cluster itself. Remember, the pods can come and go, so their IP addresses might change over time. A service is a reliable address.
+1. Ingress - This exposes the services inside the cluster to the outside world. An ingress is a set of rules for traffic, while the ingress controller is the thing doing the work (e.g., nginx, Traefik, etc..).
+
+You can copy/paste the command below to create the manifest.
+
+```
+cat << EOF > ~/k8s/whoami/whoami.yml
 ---
 apiVersion: v1
-kind: ServiceAccount
+kind: Namespace
 metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
+  name: k3s-test
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
+  name: whoami-deploy
+  namespace: k3s-test
+  labels:
+    app: whoami
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        app: whoami
+    spec:
+      containers:
+        - name: whoami
+          image: traefik/whoami:v1.8.0
+          ports:
+            - name: whoami
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-svc
+  namespace: k3s-test
+  labels:
+    service: whoami
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+  selector:
+    app: whoami
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami-ingress
+  namespace: k3s-test
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /test
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami-svc
+                port:
+                  number: 80
 EOF
 ```
 
-Now, apply the manifest and get your token.
+Next, deploy the manifest (again, kubectl on our personal machine connects to the cluster).
+
 ```
-kubectl apply -f ~/k8s/dashboard/admin.yml
-kubectl -n kubernetes-dashboard describe secret admin-user-token | grep '^token' | awk '{print $2}'
+kubectl apply -f ~/k8s/whoami/whoami.yml
 ```
 
-By default, the web dashboard is only accessible from within the cluster, which isn't particularly useful because we're on a separate machine. We need to open a second terminal on our personal machine and run `kubectl proxy`, which will open a proxy to the K3s cluster.
+Using the commands below, you can see the namespace, pods, deployment, service, and ingress (as well as their respective IP addresses).
 
-With `kubectl proxy` still running in the background, click on this link.
+```
+kubectl get namespaces
+kubectl get pods --namespace k3s-test -o wide
+kubectl get deployments --namespace k3s-test -o wide
+kubectl get services --namespace k3s-test -o wide
+kubectl get ingress --namespace k3s-test -o wide
+```
 
-[http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)
+In a browser, visit `http://your_node_ip/test` (replace `your_node_ip` with your single-node cluster's IP, which should be the same IP from the `kubectl get ingress` command). Refresh this page, and you should see the IP changing (a total of three different addresses, since we specified three replicas and Traefik is load balancing between them).
 
-You'll be prompted to enter your token.
+When finished, delete the deployment.
 
-{{< img src="20220312_001.png" alt="k8s dashboard login screen" >}}
-
-Finally, you'll see the dashboard. Click around to explore your setup.
-
-{{< img src="20220312_002.png" alt="k8s dashboard login screen" >}}
+```
+kubectl delete -f ~/k8s/whoami/whoami.yml
+```
 
 # Conclusion
 
-Like I mentioned, this cluster is for learning. I have my homelab (more about that setup [here](/2021/01/homelab-10-mini-rack/)) running mostly on docker-compose. My plan is make this a multi-part series, then slowly start migrating applications to K3s. Before I do that, I'll need to investigate the following things:
+Like I mentioned, this cluster is for learning. I have my homelab (more about that setup [here](/2021/01/homelab-10-mini-rack/)) running mostly on docker-compose. My plan is to make this a multi-part series (learning K3s as I go), then slowly start migrating applications to K3s. Before I do that, I'll need to investigate the following things:
 
 - Persistent storage (i.e., volumes)
 - Secret storage (e.g., passwords, database connection strings, etc...)
