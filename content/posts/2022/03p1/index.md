@@ -13,6 +13,8 @@ cover:
     relative: false
 ---
 
+{{% series/s_k3s %}}
+
 # Introduction
 
 I'm starting a new job in the next few days that will require me to learn Kubernetes (often stylized as k8s). This post is not about what k8s is or why you want it (you can read about that [here](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)). My only objective for now is to have a single-node k8s cluster running in my homelab.
