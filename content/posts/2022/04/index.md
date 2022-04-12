@@ -11,6 +11,12 @@ cover:
     relative: false
 ---
 
+# Update: 2022-04-12
+
+I posted this article to [that orange site](https://news.ycombinator.com/item?id=30993350) and it blew up more than I expected. I reached #3 of the front page (screenshot below) and am officially on the top 10 list for [2022-04-11](https://news.ycombinator.com/front?day=2022-04-11). When I [migrated from WordPress to Hugo](/2021/02/migrating-from-wordpress-to-hugo/#things-im-losing), I lost comments on this blog, but the HackerNews post has some really good discussion and recommendations that I highly encourage you to check out.
+
+{{< img src="20220411_001.png" alt="hackernews" >}}
+
 # TL;DR
 
 ⚠️ Warning Apple fanboys: this is a rant ⚠️
