@@ -1,0 +1,11 @@
+{{ $scratch := newScratch }}
+{{ range (where .Site.RegularPages "Section" "==" "posts") }}
+    {{ $scratch.Add "wordcount" .WordCount }}
+{{ end }}
+{{ $wordCount := $scratch.Get "wordcount" }}
+
+{{ $postCount := len (where .Site.RegularPages "Section" "==" "posts") }}
+
+{{ $avgPostLength := div $wordCount $postCount }}
+
+{{ $avgPostLength | lang.NumFmt 0 }}

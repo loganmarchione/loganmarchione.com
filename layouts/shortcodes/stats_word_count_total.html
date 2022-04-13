@@ -1,0 +1,6 @@
+{{ $scratch := newScratch }}
+{{ range (where .Site.RegularPages "Section" "==" "posts") }}
+    {{ $scratch.Add "wordcount" .WordCount }}
+{{ end }}
+{{ $wordCount := $scratch.Get "wordcount" }}
+{{ $wordCount  | lang.NumFmt 0 }}
