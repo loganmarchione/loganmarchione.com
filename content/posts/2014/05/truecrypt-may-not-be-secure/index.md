@@ -4,7 +4,6 @@ date: "2014-05-28"
 author: "Logan Marchione"
 categories: 
   - "encryption-privacy"
-  - "linux"
 cover:
     image: "/assets/featured/featured_generic_lock_no_white.svg"
     alt: "featured image"

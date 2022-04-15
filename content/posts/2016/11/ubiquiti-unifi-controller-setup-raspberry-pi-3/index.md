@@ -6,6 +6,7 @@ categories:
   - "linux"
   - "oc"
   - "router"
+  - "raspberry"
 cover:
     image: "/assets/featured/featured_ubiquiti_unifi.svg"
     alt: "featured image"

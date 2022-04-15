@@ -5,6 +5,7 @@ author: "Logan Marchione"
 categories: 
   - "linux"
   - "oc"
+  - "raspberry"
 cover:
     image: "/assets/featured/featured_generic_thumb_up.svg"
     alt: "featured image"

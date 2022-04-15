@@ -5,7 +5,7 @@ author: "Logan Marchione"
 categories: 
   - "linux"
   - "oc"
-  - "pc-hardware"
+  - "raspberry"
 cover:
     image: "/assets/featured/featured_nut_logo.svg"
     alt: "featured image"
