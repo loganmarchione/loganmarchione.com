@@ -5,3 +5,13 @@
 	overflow-x: auto;
 	word-break: normal;
 }
+
+/* Needed for 512kb.club */
+.kb-club {
+  display: grid;
+  place-items: center;
+}
+
+.kb-club img {
+  transform: scale(.75,.75)
+}
