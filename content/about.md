@@ -26,6 +26,7 @@ I hope you find something of value here! Enjoy!
 * [Twitter](https://twitter.com/loganmarchione)
 * [Docker Hub](https://hub.docker.com/u/loganmarchione)
 * [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)
+* [GitLab](https://gitlab.com/loganmarchione)
 
 ## Contact info
 
