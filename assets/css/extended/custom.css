@@ -15,3 +15,13 @@
 .kb-club img {
   transform: scale(.75,.75)
 }
+
+
+/* Needed for Simple Icons */
+.simple-icons-inline {
+	vertical-align: text-top;
+}
+
+.simple-icons-inline svg {
+	height: 1em;
+}
