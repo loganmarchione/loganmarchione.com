@@ -1,0 +1,8 @@
+{{/*Get the parameters */}}
+{{ $path := (.Get "src") }}
+{{ $fill := (.Get "fill") }}
+
+{{/* Concat to create the correct path */}}
+{{- $icon := resources.Get (print "svg/simple-icons/" $path ".svg" ) -}}
+
+<span class="simple-icons-inline" style="fill:{{ $fill }}" >{{- $icon.Content | safeHTML -}}</span>
