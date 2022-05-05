@@ -18,13 +18,17 @@ jobs:
     - name: Check out the codebase
       uses: actions/checkout@v2
       with:
-          submodules: true
-          fetch-depth: 0
+        fetch-depth: 0
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.18'
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-          hugo-version: 'latest'
+        hugo-version: 'latest'
 
     - name: Build
       run: hugo --gc --baseURL="https://${{ env.URL }}"
