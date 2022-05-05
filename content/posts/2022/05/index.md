@@ -1,6 +1,6 @@
 ---
 title: "Darlings of the self-hosted, open-source world"
-date: "2022-05-11"
+date: "2022-05-05"
 author: "Logan Marchione"
 categories:
   - "oc"
