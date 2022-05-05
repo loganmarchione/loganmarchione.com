@@ -2,7 +2,6 @@ baseURL: "https://loganmarchione.com"
 languageCode: "en-us"
 title: Logan Marchione
 paginate: 10
-theme: PaperMod
 
 permalinks:
   posts: /:year/:month/:title/
@@ -22,6 +21,11 @@ outputs:
 minify:
     disableXML: true
     minifyOutput: false
+
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+    - path: github.com/foo-dogsquared/hugo-mod-simple-icons
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
