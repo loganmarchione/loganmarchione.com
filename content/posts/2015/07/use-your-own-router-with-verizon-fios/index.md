@@ -61,7 +61,7 @@ Also, you do not want a router that is advertised as a "DOCSIS modem" or a route
 
 # How-to
 
-Do this at your own risk, I'm not responsible for anything you break :)
+Do this at your own risk, I'm not responsible for anything you break. :upside_down_face:
 
 ## Run ethernet cable
 

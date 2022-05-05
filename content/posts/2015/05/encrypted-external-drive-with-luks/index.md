@@ -14,7 +14,7 @@ cover:
 
 # Update: LUKS2 is out, use it instead!
 
-[LUKS2 was released in 2018](https://gitlab.com/cryptsetup/cryptsetup/-/blob/master/docs/v2.0.0-ReleaseNotes), you should double-check the documentation for it before you blindly follow this guide :)
+[LUKS2 was released in 2018](https://gitlab.com/cryptsetup/cryptsetup/-/blob/master/docs/v2.0.0-ReleaseNotes), you should double-check the documentation for it before you blindly follow this guide. :upside_down_face:
 
 # Introduction
 
@@ -53,7 +53,7 @@ You should always wipe your disk before doing anything. Unfortunately, depending
 sudo dd if=/dev/zero of=/dev/sdb iflag=nocache oflag=direct bs=4096
 ```
 
-**Please don't copy/paste this command directly**, as you could risk destroying your current system. I'm not responsible for anything you break :)
+**Please don't copy/paste this command directly**, as you could risk destroying your current system. I'm not responsible for anything you break. :man_shrugging:
 
 ## Step 3 - Create partition
 

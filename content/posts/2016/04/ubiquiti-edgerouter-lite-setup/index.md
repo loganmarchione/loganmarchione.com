@@ -26,7 +26,7 @@ I plan on putting the ERL in front of the C7, and using the C7 as a switch and A
 
 {{< img src="20160501_002.png" alt="screenshot" >}}
 
-Also, I'm not a network engineer. Do this at your own risk, I'm not responsible for anything you break :)
+Also, I'm not a network engineer. Do this at your own risk, I'm not responsible for anything you break. :upside_down_face:
 
 # Hardware
 

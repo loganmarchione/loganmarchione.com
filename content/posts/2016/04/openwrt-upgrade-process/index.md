@@ -46,7 +46,7 @@ DISTRIB_TAINTS=''
 
 ## Backup
 
-I would highly recommend you make a backup of any necessary configuration files. Also, it's important to test your backups before you need them! :)
+I would highly recommend you make a backup of any necessary configuration files. Also, it's important to test your backups before you need them! :upside_down_face:
 
 ## Preservation
 

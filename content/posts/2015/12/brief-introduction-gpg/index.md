@@ -107,7 +107,7 @@ Second, specify the key size. The default is 2048 bits, but I'm going to specify
 
 Third, choose an expiration date. I'm going to choose a key that does not expire.
 
-Now, GPG will construct your identity. Enter your full name, email address, and a comment (optional). Verify your information, then create a password to protect your keys. It goes without saying, but PROTECT THIS PASSWORD AND KEYFILES :)
+Now, GPG will construct your identity. Enter your full name, email address, and a comment (optional). Verify your information, then create a password to protect your keys. It goes without saying, but PROTECT THIS PASSWORD AND KEYFILES!
 
 # Generate a revocation certificate
 

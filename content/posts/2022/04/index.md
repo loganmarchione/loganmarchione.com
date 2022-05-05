@@ -25,7 +25,7 @@ I posted this article to [that orange site](https://news.ycombinator.com/item?id
 
 # TL;DR
 
-⚠️ Warning Apple fanboys: this is a rant ⚠️
+:warning: Warning Apple fanboys: this is a rant :warning:
 
 Hardware = Good
 
