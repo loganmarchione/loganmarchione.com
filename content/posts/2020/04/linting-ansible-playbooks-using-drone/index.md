@@ -147,7 +147,7 @@ The configuration file above basically says:
 - Download an image called _geerlingguy/docker-ubuntu1804-ansible:testing_
 - Run the two commands for syntax checking and linting inside that container
     - If there are any errors (non-zero exit codes), throw an error
-- Based on the output (pass/fail), you'll see a symbol in your VCS provider's web interface (usually a ☑ or ❌ symbol)
+- Based on the output (pass/fail), you'll see a symbol in your VCS provider's web interface (usually a :white_check_mark: or :x: symbol).
 
 Now, every time I commit anything to my Ansible repository, it is automatically checked for syntax and linted. The only remaining step (which I have yet to setup) is alerting. Drone has plugins to notify you via [email](http://plugins.drone.io/drillster/drone-email/), [Slack](http://plugins.drone.io/drone-plugins/drone-slack/), [Telegram](http://plugins.drone.io/appleboy/drone-telegram/), etc...
 

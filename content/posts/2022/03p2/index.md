@@ -19,7 +19,7 @@ cover:
 
 In my [last post](/2022/03/k3s-single-node-cluster-for-noobs/), I setup a [K3s](https://k3s.io/) single-node cluster and an example application. While everything was done through the command-line, as a noob, it's nice to have a [graphical user interface](https://en.wikipedia.org/wiki/Graphical_user_interface) (GUI) of some kind. I'm not a fan of [ClickOps](https://www.lastweekinaws.com/blog/clickops/), but it's convenient to have a GUI to be able to quickly view status, instead of hunting for the right `kubectl` command.
 
-⚠️ WARNING ⚠️
+:warning: WARNING :warning:
 
 - I am not a Kubernetes expert!
 - This is solely for my own learning. If you get something useful out of my ramblings, that's great, but it's not my primary goal.
@@ -98,7 +98,7 @@ Finally, you'll see the dashboard. Click around to explore your setup.
 
 [Lens](https://k8slens.dev/) is probably the next-most popular k8s GUI. It is made by [Mirantis](https://www.mirantis.com/software/lens/), the same people who make [k0s](https://k0sproject.io/) and who recently [purchased](https://www.mirantis.com/blog/mirantis-acquires-docker-enterprise-platform-business/) Docker Enterprise. It is [open source](https://github.com/lensapp/lens), but also offers a paid cloud service called [Lens Spaces](https://k8slens.dev/spaces.html).
 
-Lens is Electron-based, which means it's available for a ton of platforms, but it's also Electron-based, so there's that slow memory leak to look forward to 🤷‍♂️.
+Lens is Electron-based, which means it's available for a ton of platforms, but it's also Electron-based, so there's that slow memory leak to look forward to. :man_shrugging:
 
 See the installation instructions [here](https://docs.k8slens.dev/main/getting-started/). I'm using Arch, btw, so I'm using the version from the [AUR](https://aur.archlinux.org/packages/lens-bin).
 
