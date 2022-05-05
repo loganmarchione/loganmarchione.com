@@ -12,7 +12,6 @@ This repo contains the source for https://loganmarchione.com, built via [Hugo](h
 # get a copy of the code
 git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
-git submodule update --init --recursive
 
 # make changes to the site
 
