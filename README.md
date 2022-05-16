@@ -13,10 +13,15 @@ This repo contains the source for https://loganmarchione.com, built via [Hugo](h
 git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 
-# make changes to the site
+# update hugo modules (optional)
+go get github.com/user_name/repo_name@commit_hash
+go get github.com/user_name/repo_name@commit_hash
+go mod tidy
+
+# make changes to the site (optional)
 
 # test changes locally
-hugo server -D --ignoreCache
+hugo server -DEF --ignoreCache
 
 # test in browser http://localhost:1313
 
