@@ -1,5 +1,5 @@
-github.com/adityatelange/hugo-PaperMod v0.0.0-20220501152415-d3084bee7981 h1:sQg/3MwBCqaP0TbiL5JkMCu87V8iP3SAru+KaoP2O5s=
-github.com/adityatelange/hugo-PaperMod v0.0.0-20220501152415-d3084bee7981/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
-github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220504232239-784b234c6922 h1:UjeHE2j+EtUJcPbVLSqkjN7JcJRXv7OAzhGUpeVcOfY=
-github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220504232239-784b234c6922/go.mod h1:J2cZMIzAeChdL4EEY67AOZJh8Gbbz3diqjrYQh5VInI=
-github.com/simple-icons/simple-icons v0.0.0-20220501014857-aa12fbea02cf/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20220514133704-cb9be55c78ef h1:X1vsK2auXkN0g3YmVj02ZsXcFuIEu0N9X2RWVMoH1lM=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20220514133704-cb9be55c78ef/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220511232340-30f8ba80c4d4 h1:yuk5lRZzIEjxI/FjZD8m0C12HMgpMQvL9/T7K10fqL8=
+github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220511232340-30f8ba80c4d4/go.mod h1:nGNKskjI5YjucdtajaMbfkBFv43MH8Z5ZmuGgonYAWY=
+github.com/simple-icons/simple-icons v0.0.0-20220508095940-fd48aea6f5ca/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
