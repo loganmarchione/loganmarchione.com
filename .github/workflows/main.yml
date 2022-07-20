@@ -47,6 +47,7 @@ jobs:
   deploy-production:
     name: Deploy (loganmarchione.com)
 
+    needs: deploy-development
     runs-on: ubuntu-latest
 
     steps:
