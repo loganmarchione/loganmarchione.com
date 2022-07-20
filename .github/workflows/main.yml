@@ -36,6 +36,12 @@ jobs:
     - name: Build
       run: hugo --gc --baseURL="https://${{ env.URL_DEV }}"
 
+    - name: Overwrite robots.txt (for search engines)
+      run: |
+        : > ./public/robots.txt
+        echo "User-agent: *" >> ./public/robots.txt
+        echo "Disallow: /" >> ./public/robots.txt
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
