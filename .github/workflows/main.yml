@@ -1,4 +1,4 @@
-name: CI/CD (loganmarchione.com)
+name: CI/CD
 
 on:
   push:
@@ -7,11 +7,12 @@ on:
   workflow_dispatch:
 
 env:
-  URL: loganmarchione.com
+  URL_DEV: loganmarchione.github.io
+  URL_PRD: loganmarchione.com
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-development:
+    name: Deploy (loganmarchione.github.io)
 
     runs-on: ubuntu-latest
 
@@ -33,13 +34,46 @@ jobs:
         extended: true
 
     - name: Build
-      run: hugo --gc --baseURL="https://${{ env.URL }}"
+      run: hugo --gc --baseURL="https://${{ env.URL_DEV }}"
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        external_repository: loganmarchione/loganmarchione.github.io
+        publish_branch: gh-pages
+        publish_dir: ./public
+
+  deploy-production:
+    name: Deploy (loganmarchione.com)
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the codebase
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.18'
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Build
+      run: hugo --gc --baseURL="https://${{ env.URL_PRD }}"
 
     - name: SSH setup
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.URL }} > ~/.ssh/known_hosts
+        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.URL_PRD }} > ~/.ssh/known_hosts
         chmod -R 700 ~/.ssh
         chmod 600 ~/.ssh/deploy_key
 
@@ -47,4 +81,4 @@ jobs:
       run: |
         rsync -rltvz --delete --omit-dir-times \
           -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" public/ \
-          ${{ secrets.DEPLOY_USER }}@${{ env.URL }}:/var/www/${{ env.URL }}
+          ${{ secrets.DEPLOY_USER }}@${{ env.URL_PRD }}:/var/www/${{ env.URL_PRD }}
