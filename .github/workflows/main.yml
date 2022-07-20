@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy-development:
-    name: Deploy (loganmarchione.github.io)
+    name: Deploy (${{ env.URL_DEV }})
 
     runs-on: ubuntu-latest
 
@@ -45,7 +45,7 @@ jobs:
         publish_dir: ./public
 
   deploy-production:
-    name: Deploy (loganmarchione.com)
+    name: Deploy (${{ env.URL_PRD }})
 
     needs: deploy-development
     runs-on: ubuntu-latest
