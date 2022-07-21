@@ -20,17 +20,18 @@ I hope you find something of value here! Enjoy!
 
 ## Presence on the web
 
-* [Twitter](https://twitter.com/loganmarchione)
-* [Docker Hub](https://hub.docker.com/u/loganmarchione)
-* [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)
-* Git-based things
-  * [GitHub](https://github.com/loganmarchione)
-  * [GitLab](https://gitlab.com/loganmarchione) (username squatting)
-  * [sourcehut](https://sr.ht/~loganmarchione) (username squatting)
+{{< simple-icons-inline src="twitter" fill="#1DA1F2" >}} [Twitter](https://twitter.com/loganmarchione)  
+{{< simple-icons-inline src="docker" fill="#2496ED" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
+{{< simple-icons-inline src="ycombinator" fill="#F0652F" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
+{{< simple-icons-inline src="github" fill="#181717" >}} [GitHub](https://github.com/loganmarchione)  
+{{< simple-icons-inline src="gitlab" fill="#FC6D26" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
+{{< raw_html >}}<span class="simple-icons-inline"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg></span>{{< /raw_html >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)
+
+
 
 ## Contact info
 
-* Email: **logan[at]loganmarchione[dot]com**
+:email: **logan[at]loganmarchione[dot]com**
 
 # Hugo stats
 This site is generated with [Hugo](https://gohugo.io/). These stats are heavily inspired by [Luke Harris](https://www.lkhrs.com/blog/2022/04/add-stats-to-hugo/).
