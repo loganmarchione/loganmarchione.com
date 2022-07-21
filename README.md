@@ -14,8 +14,7 @@ git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 
 # update hugo modules (optional)
-go get github.com/user_name/repo_name@commit_hash
-go get github.com/user_name/repo_name@commit_hash
+hugo mod get
 go mod tidy
 
 # make changes to the site (optional)
