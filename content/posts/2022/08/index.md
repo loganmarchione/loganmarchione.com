@@ -5,6 +5,7 @@ author: "Logan Marchione"
 categories:
   - "oc"
   - "cloud-internet"
+  - "external"
 cover:
     image: "/assets/featured/featured_firefox.svg"
     alt: "featured image"

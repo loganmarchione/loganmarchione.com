@@ -5,6 +5,7 @@ author: "Logan Marchione"
 categories:
   - "oc"
   - "linux"
+  - "external"
 cover:
     image: "/assets/featured/featured_generic_heart.svg"
     alt: "featured image"
