@@ -1,6 +1,6 @@
 ---
 title: "I tried to quit Firefox. I can't."
-date: "2022-08-08"
+date: "2022-08-03"
 author: "Logan Marchione"
 categories:
   - "oc"
