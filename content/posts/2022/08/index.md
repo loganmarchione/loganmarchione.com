@@ -25,7 +25,7 @@ I've been using Firefox since the single-digit release days, and I've been [publ
 
 # Firefox's rise...
 
-Firefox gained popularity at a time when smartphones were not a thing, Windows XP was still supported, and Internet Explorer (IE) dominated the browser market. Because IE came pre-installed on Windows, it was the browser of choice for most people. Firefox was the *only* alternative (unless you used a Mac, in which case, you used Safari). At it's peak, Firefox was estimated to have around 30% of the [global desktop browser market share](https://gs.statcounter.com/browser-market-share/desktop/worldwide#monthly-200901-202207) (see image below) and [over 50% in some markets](https://blog.mozilla.org/metrics/2008/12/01/firefox-surpassing-50-market-share-in-more-regions/).
+Firefox gained popularity at a time when smartphones were not a thing, Windows XP was still supported, and Internet Explorer (IE) dominated the browser market. Because IE came pre-installed on Windows, it was the browser of choice for most people. Firefox was the *only* alternative (unless you used a Mac, in which case, you used Safari). At its peak, Firefox was estimated to have around 30% of the [global desktop browser market share](https://gs.statcounter.com/browser-market-share/desktop/worldwide#monthly-200901-202207) (see image below) and [over 50% in some markets](https://blog.mozilla.org/metrics/2008/12/01/firefox-surpassing-50-market-share-in-more-regions/).
 
 {{< img src="20220802_001.png" alt="browser market share" >}}
 
@@ -121,7 +121,7 @@ Making a browser is hard work, costs a lot of money, has high stakes, and most p
 
 I’m frustrated by Mozilla. I want Firefox to succeed, and I believe in Firefox's goal of creating an open and accessible internet, but I don't know how to help Firefox.
 
-Obviously, Mozilla Corporation exists to make money, but their dependence on Google for search royalties isn't sustainable long-term. At this point, Firefox only exists because Google *allows* it to exist. As Firefox's market share shrinks, Google will pay Mozilla Corporation less and less, which will cause Mozilla Corporation to layoff more employees, which will cause work on Firefox to stall, which will cause it's market share to shrink, etc...
+Obviously, Mozilla Corporation exists to make money, but their dependence on Google for search royalties isn't sustainable long-term. At this point, Firefox only exists because Google *allows* it to exist. As Firefox's market share shrinks, Google will pay Mozilla Corporation less and less, which will cause Mozilla Corporation to layoff more employees, which will cause work on Firefox to stall, which will cause its market share to shrink, etc...
 
 I've debated paying for a Mozilla VPN subscription that I won't use, but there is no guarantee that money will go towards Firefox. I'd prefer to be able to donate to Firefox directly, like I can with Thunderbird. For now, I'm spreading the Firefox gospel where possible. Although this post was a rant about Mozilla, I'm hard on them because I love Firefox and I know they can be better stewards of the only remaining independent browser.
 
