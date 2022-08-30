@@ -11,6 +11,8 @@ cover:
     relative: false
 ---
 
+{{% series/s_minirack %}}
+
 # Update: 2021-01-10
 
 I made the following changes and updated the post below (not the pictures) to reflect those changes:
