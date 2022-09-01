@@ -1,6 +1,6 @@
 ---
 title: "Moving Proxmox VMs/CTs to a separate ZFS pool"
-date: "2022-10-01"
+date: "2022-09-01"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -16,11 +16,11 @@ cover:
 
 ## Current configuration and goals
 
-Right now, my only storage in the DeskMini H470 is a single [Samsung 970 Pro 512GB NVMe SSD](https://semiconductor.samsung.com/consumer-storage/internal-ssd/970pro/).
+Currently, my only storage in the DeskMini H470 is a single [Samsung 970 Pro 512GB NVMe SSD](https://semiconductor.samsung.com/consumer-storage/internal-ssd/970pro/).
 
-{{< img src="20220830_001.jpg" alt="samsung 970 pro" >}}
+{{< img src="20220901_001.jpg" alt="samsung 970 pro" >}}
 
-By [default](https://pve.proxmox.com/wiki/Installation), Proxmox uses 25% of the disk for root storage, 12.5% of the disk for swap (max 8GB), then the rest for LVM storage (mainly for VMs/CTs). Below is my current partition layout. I will mention that backups, ISOs, and container templates are stored on a physically separate NAS.
+By [default](https://pve.proxmox.com/wiki/Installation), Proxmox uses 25% of the disk for root storage, 12.5% of the disk for swap (max 8GB), then the rest for LVM storage (mainly for VMs/CTs). Below is my current partition layout. Note that backups, ISOs, and container templates are stored on a physically separate NAS, so their storage is not taken into account here.
 
 ```
 nvme0n1                      259:0    0 476.9G  0 disk 
@@ -62,9 +62,11 @@ nvme0n1                      259:0    0 476.9G  0 disk
 
 ```
 
-My goal is to install two SSDs into my case, setup a ZFS mirror of the two disks, and then move my VMs/CTs to that storage.
+My goal is to install two SSDs into my case, setup a ZFS mirror of the two disks, and then move my VMs/CTs to that storage. This will leave only Proxmox on the 970 Pro.
 
-{{< img src="20220830_002.png" alt="zfs mirror" >}}
+{{< img src="20220901_002.png" alt="zfs mirror" >}}
+
+Although a ZFS mirror will only be able to write as fast a single disk, it will be able to read as fast as the number of disks in the mirror (i.e., two disks).
 
 # Disks
 
@@ -73,8 +75,8 @@ My goal is to install two SSDs into my case, setup a ZFS mirror of the two disks
 The [DeskMini H470](https://www.asrock.com/nettop/Intel/DeskMini%20H470%20Series/index.asp#Specification) has the following storage options:
 
 - 2x SATA 6Gb 2.5-inch 7mm/9.5mm
-- 1x Ultra M.2 Socket 2280 PCIe Gen3 (my NVMe SSD is installed here)
-- 1x Hyper M.2 Socket 2280 PCIe Gen4 (requires 11th Gen Intel CPU)
+- 1x M.2 Socket 2280 PCIe Gen3 (my NVMe SSD is installed here)
+- 1x M.2 Socket 2280 PCIe Gen4 (requires 11th Gen Intel CPU)
 
 Without having to reinstall Proxmox, the easiest way to add storage was to add 2x SATA SSDs.
 
@@ -88,9 +90,18 @@ I spent way too much time deciding on SSDs. I knew I wanted enterprise-grade SSD
 | Samsung | [PM893 960GB](https://semiconductor.samsung.com/ssd/datacenter-ssd/pm893/mz7l3960hcjr-00a07/)                                             | Q1'21            | 128-layer TLC V-NAND  | 98k            | 30k             | 2 million hours                   | 1.752 PBW                          | [$171 @ SuperMicro](https://store.supermicro.com/960gb-sata-hds-s2t0-mz7l3960hcjra7.html), [$218 @ CDW](https://www.cdw.com/product/samsung-pm893-960gb-2.5-sata-6gbps-solid-state-drive/6763102)                       |
 | Samsung | [970 Pro 512GB](https://semiconductor.samsung.com/consumer-storage/internal-ssd/970pro/)                                                  | Q3'18            | 64-layer MLC V-NAND   | 370k           | 500k            | 1.5 million hours                 | 0.6 PBW                            | $149 (at time of purchase in 2021)                                                                                                                                                                                      |
 
-In the end, I ended up choosing the Intel D3-S4510 960GB. It came recommended on Reddit, and I wasn't 100% if Insight was selling new drives or not (again, conflicting reports on Reddit.
+In the end, I ended up choosing the Intel D3-S4510 960GB. It came recommended on Reddit, and I wasn't 100% sure if Insight was selling new drives or not (again, conflicting reports on Reddit.
 
 ## Physical installation
+
+The physical installation was easy enough, though I did need to remove the motherboard from the tray to access the screws. ASRock uses a propriety SATA cable for these ultra-tiny connectors.
+
+
+## Identify disks
+
+Start by identifying your disks. We are looking for the disk ID, as well as the sector size (this will be important later on).
+
+Legacy HDDs used 512B sectors, but SSDs (because they're flash-based) don't really have "sectors". Instead, they try to translate their storage layout into something the operating system can understand. As such, they typically report that they have 512B sectors, but most SSDs actually use 4096B sectors (or larger). It's important to attempt to find your sector size, and do research on your SSD online, but remember, **the SSD will lie to you**.
 
 # ZFS
 
@@ -99,8 +110,44 @@ In the end, I ended up choosing the Intel D3-S4510 960GB. It came recommended on
 - This is my first time using ZFS
 - I am not a ZFS expert
 - Don't blindly follow my instructions
+- Almost all of my ZFS knowledge came from [this ArsTechnica article](https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/), [Jim Salter's blog](https://jrs-s.net/), and [this article](https://bigstep.com/blog/zfs-best-practices-and-caveats).
 
 ## Create pool
+
+Using the GUI, you can create the pool and add it to Proxmox in one step.
+
+However, I'm specifically looking to add one extra thing that is not in the GUI, so I'm using the CLI. Start by creating the pool.
+
+```
+zpool create -f -o ashift=12 intel_mirror mirror /dev/disk/by-id/xxxxxx /dev/disk/by-id/yyyyyy
+```
+
+In the command above, it's important that `ashift` be the correct size (that's why we had to find our sector size earlier). It generally won't hurt if it's too big, but if it's too small, you'll defintely have some performance impact as the drive will do write amplification to fill a 4096B sector with 512B writes. For most modern SSDs, `ashift=12` is what you want. Oh, and you can't change this setting without destroying the pool, so no pressure.
+
+* `ashift=9` (2^9) = 512B sectors
+* `ashift=10` (2^10) = 1024B sectors
+* `ashift=11` (2^11) = 2048B sectors
+* `ashift=12` (2^12) = 4096B sectors
+* `ashift=13` (2^13) = 8192B sectors
+
+Here, I'm turning on `compression` and `relatime` (the option that is not in the GUI).
+
+```
+zfs set compression=lz4 intel_mirror
+zfs set relatime=on intel_mirror
+```
+
+Check the status of the pool.
+
+```
+zpool status
+```
+
+Finally, add the storage to Proxmox.
+
+```
+pvesm add zfspool intel_mirror -pool intel_mirror
+```
 
 ## Migrate VMs/CTs
 
