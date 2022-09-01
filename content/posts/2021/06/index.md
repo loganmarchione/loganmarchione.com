@@ -11,6 +11,8 @@ cover:
     relative: false
 ---
 
+{{% series/s_deskmini_h470 %}}
+
 # Introduction
 
 My hypervisor since 2017 has been an Intel [NUC7i3BNH](https://ark.intel.com/content/www/us/en/ark/products/95066/intel-nuc-kit-nuc7i3bnh.html). It has a 2c/4t 15W laptop CPU (Core i3-7100U), with 2x 16GB Crucial DDR4, and a 512GB Samsung 860 Pro. While it served me well over these years, I've outgrown the CPU and cooling solution.

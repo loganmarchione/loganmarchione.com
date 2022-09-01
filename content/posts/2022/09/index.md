@@ -1,5 +1,5 @@
 ---
-title: "Moving Proxmox VMs/CTs to a separate ZFS pool"
+title: "Adding data center SSDs to the DeskMini H470"
 date: "2022-09-01"
 author: "Logan Marchione"
 categories:
@@ -7,10 +7,12 @@ categories:
   - "cloud-internet"
   - "external"
 cover:
-    image: "/assets/featured/featured_proxmox.svg"
+    image: "/assets/featured/featured_generic_storage.svg"
     alt: "featured image"
     relative: false
 ---
+
+{{% series/s_deskmini_h470 %}}
 
 # Introduction
 
