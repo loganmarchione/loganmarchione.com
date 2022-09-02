@@ -115,7 +115,7 @@ The physical installation was easy enough, although I did need to remove the mot
 
 ## Identify disks
 
-The basic smoke test was to make sure the disks worked and showed up the kernel. I ran `lshw -class disk`, but you could also use `hwinfo --disk` to see similiar info.
+The basic smoke test was to make sure the disks worked and showed up to the kernel. I ran `lshw -class disk`, but you could also use `hwinfo --disk` to see similiar info.
 
 ```
 root@proxmox02:~# lshw -class disk
@@ -155,7 +155,7 @@ fwupdmgr get-devices
 fwupdmgr get-updates
 ```
 
-I kept receiving this:
+I kept receiving this.
 
 ```
 No updatable devices
