@@ -4,8 +4,7 @@ date: "2022-09-01"
 author: "Logan Marchione"
 categories:
   - "oc"
-  - "cloud-internet"
-  - "external"
+  - "pc-hardware"
 cover:
     image: "/assets/featured/featured_generic_storage.svg"
     alt: "featured image"
@@ -16,7 +15,15 @@ cover:
 
 # Introduction
 
-## Current configuration and goals
+Last year, I [setup the ASRock DeskMini H470 as a compact hypervisor](/2021/06/asrock-deskmini-h470-as-a-compact-hypervisor/) running Proxmox. During setup, I only installed a single NVMe SSD. However, I specifically chose the DeskMini H470 because it had space for more drives, which I knew I would eventually want to make use of. Today is that day.
+
+## Current configuration
+
+The [DeskMini H470](https://www.asrock.com/nettop/Intel/DeskMini%20H470%20Series/index.asp#Specification) has the following storage options:
+
+- 2x SATA 6Gb 2.5-inch 7mm/9.5mm
+- 1x M.2 Socket 2280 PCIe Gen3 (my NVMe SSD is installed here)
+- 1x M.2 Socket 2280 PCIe Gen4 (requires an 11th Gen Intel CPU, which I don't have)
 
 Currently, my only storage in the DeskMini H470 is a single [Samsung 970 Pro 512GB NVMe SSD](https://semiconductor.samsung.com/consumer-storage/internal-ssd/970pro/).
 
@@ -64,23 +71,22 @@ nvme0n1                      259:0    0 476.9G  0 disk
 
 ```
 
-My goal is to install two SSDs into my case, setup a ZFS mirror of the two disks, and then move my VMs/CTs to that storage. This will leave only Proxmox on the 970 Pro.
+## Goals
+
+Without having to reinstall Proxmox, the easiest way to add storage was to add 2x SATA SSDs. My goals were to:
+
+1. Install two SSDs into my case
+1. Verify the SSDs work, firmware is up to date, etc...
+1. Setup a ZFS mirror of the two disks
+1. Move my VMs/CTs to that storage (this will leave only Proxmox on the 970 Pro)
 
 {{< img src="20220901_002.png" alt="zfs mirror" >}}
 
-Although a ZFS mirror will only be able to write as fast a single disk, it will be able to read as fast as the number of disks in the mirror (i.e., two disks).
+I'll be covering the former two steps in this post, and the latter in another.
 
 # Disks
 
 ## Disk selection
-
-The [DeskMini H470](https://www.asrock.com/nettop/Intel/DeskMini%20H470%20Series/index.asp#Specification) has the following storage options:
-
-- 2x SATA 6Gb 2.5-inch 7mm/9.5mm
-- 1x M.2 Socket 2280 PCIe Gen3 (my NVMe SSD is installed here)
-- 1x M.2 Socket 2280 PCIe Gen4 (requires 11th Gen Intel CPU)
-
-Without having to reinstall Proxmox, the easiest way to add storage was to add 2x SATA SSDs.
 
 I spent way too much time deciding on SSDs. I knew I wanted enterprise-grade SSDs, which have power-loss protection and are generally rated for more writes than consumer SSDs. However, enterprise-grade SSDs are hard to find new on sale to the general public. Although I did look on eBay, I wanted the warranty that came with a new drive. Below were my options (for comparision, I added the 970 Pro to the list).
 
@@ -92,72 +98,32 @@ I spent way too much time deciding on SSDs. I knew I wanted enterprise-grade SSD
 | Samsung | [PM893 960GB](https://semiconductor.samsung.com/ssd/datacenter-ssd/pm893/mz7l3960hcjr-00a07/)                                             | Q1'21            | 128-layer TLC V-NAND  | 98k            | 30k             | 2 million hours                   | 1.752 PBW                          | [$171 @ SuperMicro](https://store.supermicro.com/960gb-sata-hds-s2t0-mz7l3960hcjra7.html), [$218 @ CDW](https://www.cdw.com/product/samsung-pm893-960gb-2.5-sata-6gbps-solid-state-drive/6763102)                       |
 | Samsung | [970 Pro 512GB](https://semiconductor.samsung.com/consumer-storage/internal-ssd/970pro/)                                                  | Q3'18            | 64-layer MLC V-NAND   | 370k           | 500k            | 1.5 million hours                 | 0.6 PBW                            | $149 (at time of purchase in 2021)                                                                                                                                                                                      |
 
-In the end, I ended up choosing the Intel D3-S4510 960GB. It came recommended on Reddit, and I wasn't 100% sure if Insight was selling new drives or not (again, conflicting reports on Reddit.
+In the end, I ended up choosing the Intel D3-S4510 960GB, as it came recommended on multiple forums. I would have preferred the D3-S4610 960GB (since it's more write-intensive), but I wasn't 100% sure if Insight was selling new drives or not (conflicting reports on Reddit).
 
 ## Physical installation
 
 The physical installation was easy enough, though I did need to remove the motherboard from the tray to access the screws. ASRock uses a propriety SATA cable for these ultra-tiny connectors.
 
+PICTURES GO HERE
 
 ## Identify disks
 
-Start by identifying your disks. We are looking for the disk ID, as well as the sector size (this will be important later on).
+Start by identifying your disks.
 
-Legacy HDDs used 512B sectors, but SSDs (because they're flash-based) don't really have "sectors". Instead, they try to translate their storage layout into something the operating system can understand. As such, they typically report that they have 512B sectors, but most SSDs actually use 4096B sectors (or larger). It's important to attempt to find your sector size, and do research on your SSD online, but remember, **the SSD will lie to you**.
+## Firmware
 
-# ZFS
+In 2018, Intel [identified a bug](https://www.intel.com/content/www/us/en/download/19412/28673/intel-ssd-s4510-s4610-2-5-material.html?) in the 1.92TB and 3.84TB models that caused the SSDs to "hang" after 1700 hours of power-on time. Even though my drives were not affected, I wanted to make sure the firmware was up to date. 
 
-:warning: WARNING :warning:
+Intel [sold their NAND flash business to SK Hynix (under the name Solidigm)](https://www.intel.com/content/www/us/en/support/articles/000060218/memory-and-storage.html) in November 2020, so I will be using the [Solidigm Storage Tool](https://www.intel.com/content/www/us/en/download/715595/solidigm-storage-tool-intel-branded-nand-ssds.html) to update the firmware.
 
-- This is my first time using ZFS
-- I am not a ZFS expert
-- Don't blindly follow my instructions
-- Almost all of my ZFS knowledge came from [this ArsTechnica article](https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/), [Jim Salter's blog](https://jrs-s.net/), and [this article](https://bigstep.com/blog/zfs-best-practices-and-caveats).
-
-## Create pool
-
-Using the GUI, you can create the pool and add it to Proxmox in one step.
-
-However, I'm specifically looking to add one extra thing that is not in the GUI, so I'm using the CLI. Start by creating the pool.
+Note that I tried using LVFS, but Intel/Solidigm don't seem to be contributing a ton of firmware files (compared to [vendors](https://fwupd.org/lvfs/vendors/) like Dell and Lenovo).
 
 ```
-zpool create -f -o ashift=12 intel_mirror mirror /dev/disk/by-id/xxxxxx /dev/disk/by-id/yyyyyy
+sudo apt -y install fwupd
+fwupdmgr get-devices
 ```
 
-In the command above, it's important that `ashift` be the correct size (that's why we had to find our sector size earlier). It generally won't hurt if it's too big, but if it's too small, you'll defintely have some performance impact as the drive will do write amplification to fill a 4096B sector with 512B writes. For most modern SSDs, `ashift=12` is what you want. Oh, and you can't change this setting without destroying the pool, so no pressure.
 
-* `ashift=9` (2^9) = 512B sectors
-* `ashift=10` (2^10) = 1024B sectors
-* `ashift=11` (2^11) = 2048B sectors
-* `ashift=12` (2^12) = 4096B sectors
-* `ashift=13` (2^13) = 8192B sectors
-
-Here, I'm turning on `compression` and `relatime` (the option that is not in the GUI).
-
-```
-zfs set compression=lz4 intel_mirror
-zfs set relatime=on intel_mirror
-```
-
-Check the status of the pool.
-
-```
-zpool status
-```
-
-Finally, add the storage to Proxmox.
-
-```
-pvesm add zfspool intel_mirror -pool intel_mirror
-```
-
-## Migrate VMs/CTs
-
-Shutdown all VMs/CTs
-
-Note that you can't move a VM/CT disk to another location if you have snapshots.
-
-## Current state
 
 # Conclusion
 
