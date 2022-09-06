@@ -115,7 +115,13 @@ The physical installation was easy enough, although I did need to remove the mot
 
 ## Identify disks
 
-The basic smoke test was to make sure the disks worked and showed up to the kernel. I ran `lshw -class disk`, but you could also use `hwinfo --disk` to see similiar info.
+The basic smoke test was to make sure the disks worked and showed up to the kernel.
+
+```
+ls -la /dev/disk/by-id/ | grep sd
+```
+
+I ran `lshw -class disk`, but you could also use `hwinfo --disk` to see similiar info. We're looking for the `sectorsize`, which will be important later when we setup ZFS.
 
 ```
 root@proxmox02:~# lshw -class disk
@@ -219,7 +225,7 @@ sudo smartctl -t long /dev/sdb
 
 # Conclusion
 
-That's it for now. Below is my new current configuation (see the two drives at the top). In my next post, I'll be setting up a ZFS pool and moving my VMs/CTs to that storage.
+That's it for now. Below is my new current configuration (see the two drives at the top). In my next post, I'll be setting up a ZFS pool and moving my VMs/CTs to that storage.
 
 ```
 NAME                         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
