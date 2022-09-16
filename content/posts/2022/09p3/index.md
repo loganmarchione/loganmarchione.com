@@ -76,7 +76,7 @@ The 10-inch rack (aka "half-rack") [isn't a standard](http://rtsound.net/half-ra
 * [Telrex](https://www.telephonewreckers.com.au/server-racks/10-inch-cabinets/) (Australia)
 * [CableHUB](https://cablehub.com.au/collections/10-mini-cabinet) (Australia)
 
-Inside the US, the only 10-inch racks and accessories I could find were specifically for audio/video applications, so I'm assuming that form-factor is more popular in the audio/video space (again, I'm not sure why).
+Inside the US, however, the only 10-inch racks and accessories I could find were specifically for audio/video applications, so I'm assuming that form-factor is more popular in the audio/video space (again, I'm not sure why). But, because it's a niche product segment, the prices were higher than I expected.
 
 * [Full Compass](https://www.fullcompass.com/searchresults.php?search_simple=true&txtAll=half+rack)
 * [Legrand AV (Middle Atlantic)](https://www.legrandav.com/search#q=half-rack&sort=relevancy&numberOfResults=20)
@@ -120,7 +120,7 @@ Note that the lip bends upwards (it is .3125-inches tall). This is the deepest s
 
 ## Middle Atlantic HR-UMS1-5.5
 
-This was "new" on eBay and arrived bent in half (hence, why it appears not flat). Also, the center-to-center width of the post holes was *slightly* wider than the others (by .375-inches total), so I had to loosen all the cage nuts to allow the rack to expand slightly.
+This was "new" on eBay and arrived bent in half (hence, why it appears not perfectly flat). Also, the center-to-center width of the post holes was *slightly* wider than the others (by .375-inches total), so I had to loosen all the cage nuts to allow the rack to expand slightly.
 
 {{< img src="20220915_011.jpeg" alt="shelf" >}}
 
@@ -136,7 +136,7 @@ One of the original shelves I purchased in 2021. The lip that I hate.
 
 # Conclusion
 
-If you want one of these and you're in Europe, lucky you. If you're in the US, your best bet is to scour eBay and Amazon for the phrase "half-rack" and find options with low/free shipping. Other than that, you can overpay for audio/video equipment. I've installed the Middle Atlantic HR-UMS1-5.5, which gives me exactly 1.75-inches to use. I will probably keep my hodgepodge of different shelves as-is for now. 
+If you want one of these and you're in Europe, lucky you. If you're in the US, your best bet is to scour eBay and Amazon for the phrase "half-rack" and find options with low/free shipping. Other than that, you can overpay for new audio/video equipment. I've installed the Middle Atlantic HR-UMS1-5.5, which gives me exactly 1.75-inches to use. I will probably keep my hodgepodge of different shelves as-is for now.
 
 {{< img src="20220915_006.jpeg" alt="mini-rack" >}}
 
