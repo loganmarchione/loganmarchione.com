@@ -16,7 +16,7 @@ cover:
 
 I'm on a quest to SSL all the things on my local network. I work in IT security, and am more than paranoid when it comes to my homelab (shout-out to [r/homelab](https://www.reddit.com/r/homelab/) and [r/selfhosted](https://www.reddit.com/r/selfhosted/)).
 
-{{< img src="20201021_001.jpg" alt="meme" >}}
+![meme](/assets/memes/ssl_all_the_things.jpg)
 
 For my web applications, everything is accessed through a [Nginx reverse proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) that uses [Let's Encrypt](https://letsencrypt.org/) wildcard certificates (using the [DNS challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge)) for encryption. It provides a single choke-point for all my traffic, all using one wildcard certificate, and all my clients accept it with the green lock.
 
