@@ -16,7 +16,7 @@ cover:
 
 # Introduction
 
-In my last post, I [added two Intel D3-S4510 960 SSDs to my ASRock DeskMini H470](/2022/09/adding-data-center-ssds-to-the-deskmini-h470/) running Proxmox. I also upgrade the firmware, as well as ran some basic tests on the drives. In this post, I'll be creating a ZFS mirror and adding it to Proxmox.
+In my last post, I [added two Intel D3-S4510 960 SSDs to my ASRock DeskMini H470](/2022/09/adding-data-center-ssds-to-the-deskmini-h470/) running Proxmox. I also upgraded the firmware, as well as ran some basic tests on the drives. In this post, I'll be creating a ZFS mirror and adding it to Proxmox.
 
 # ZFS
 
