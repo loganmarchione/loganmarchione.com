@@ -136,7 +136,7 @@ If you have a 10" rack, let me know about it! I'm looking to improve mine and wo
 
 Also, shout-out to my wife for letting me put this monstrosity in the living room. Her only complaint during the whole thing was "it's no uglier than what you have there now".
 
-![](20210104_005.gif)
+![meme](/assets/memes/johnny_utah_thumbs_up.gif)
 
 Thanks for reading!
 
