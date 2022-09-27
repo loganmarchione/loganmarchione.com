@@ -2,7 +2,7 @@
 title: "Asus PCE-AX3000 on Linux"
 date: "2022-09-27"
 author: "Logan Marchione"
-categories: 
+categories:
   - "oc"
   - "pc-hardware"
 cover:
@@ -15,7 +15,7 @@ cover:
 
 This post serves no real purpose other than to match SEO keywords for people searching for PCIe WiFi cards for Linux.
 
-My desktop is on the third floor of my house, unfortunately without wired internet. I've been using a PCIe 802.11n (WiFi 4) card since 2016 and realized it's time to upgrade. 
+My desktop is on the third floor of my house, unfortunately without wired internet. I've been using a PCIe 802.11n (WiFi 4) card since 2016 and realized it's time to upgrade.
 
 [TP-Link TL-WDN4800](https://www.tp-link.com/us/home-networking/pci-adapter/tl-wdn4800/)
 
