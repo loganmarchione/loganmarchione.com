@@ -2,7 +2,7 @@
 title: "Homelab 10\" mini-rack shelves"
 date: "2022-09-16"
 author: "Logan Marchione"
-categories: 
+categories:
   - "oc"
   - "pc-hardware"
   - "external"
