@@ -27,7 +27,7 @@ I'm starting a new job in the next few days that will require me to learn Kubern
 
 ## Lightweight k8s
 
-Production k8s installations can vary in size and complexity, but upstream k8s has a ton of components and moving pieces (etcd, kube-apiserver, kube-scheduler, kubelet, DNS, etc...). As you can imagine, it's complicated to setup correctly, especially on resource-limited or single-node clusters. Out of necessity, there are now quite a few lightweight k8s distributions that not only strip out the features most people won't use, but also simplify installation and setup.
+Production k8s installations can vary in size and complexity, but upstream k8s has a ton of components and moving pieces (etcd, kube-apiserver, kube-scheduler, kubelet, DNS, etc...). As you can imagine, it's complicated to setup correctly, especially on resource-limited or single-node clusters. Out of necessity, there are now quite a few lightweight k8s distributions that not only strip out the features most people won't use, but also simplify installation and setup. There is a pretty good comparison of some lightweight k8s distributions [here](https://hangarau.space/small-kubernetes-distributions/).
 
 - [k0s](https://k0sproject.io/) (made by Mirantis, who owns Docker, Inc.)
 - [MicroK8s](https://microk8s.io/) (made by Canonical, who also makes Ubuntu)
