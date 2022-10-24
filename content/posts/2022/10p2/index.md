@@ -1,6 +1,6 @@
 ---
 title: "How to run Renovate on a self-hosted Gitea and Drone instance"
-date: "2022-10-21"
+date: "2022-10-24"
 author: "Logan Marchione"
 categories:
   - "oc"
