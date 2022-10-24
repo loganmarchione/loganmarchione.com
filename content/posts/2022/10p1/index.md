@@ -64,7 +64,7 @@ Below is my outline on the general steps to setup a static site. You don't need 
     - After the VPS is online, you need to login, install updates, setup users, install packages, mess with configuration files, etc...
     - At the very least, you'll need a webserver installed (e.g., Nginx or Apache) and a few configuration files for your webserver put in the correct places
     - This code should be checked into Git on GitHub
-    - Bonus: Get a TLS certificate for free from [Let's Encrypt](https://letsencrypt.org/) and configure your webserver to redirect from port 80-->443
+    - Bonus: Get a TLS certificate for free from [Let's Encrypt](https://letsencrypt.org/) and configure your webserver to redirect from port 80 to 443
     - Bonus: Learn what idempotency means
     - Bonus: Instead of making one big playbook, try to use [roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
 1. Create the static site locally on your PC
