@@ -21,8 +21,7 @@ However, self-hosting Renovate is more difficult because the hosted version take
 
 As a user, there are [two ways of running Renovate](https://docs.renovatebot.com/getting-started/running/):
 1. someone else hosts Renovate and you install it for the repositories you choose (e.g., as a [GitHub app](https://github.com/apps/renovate))
-    - you extend off the global configuration provided my Renovate
-    - you add a per-repository configuration file (called `renovate.json`)
+    - you extend off the global configuration provided my Renovate by adding a per-repository configuration file (called `renovate.json`)
     - Renovate runs continuously in the background
 1. you host Renovate
     - you provide some infrastructure for Renovate to run on (e.g., by running a Docker image, using a GitHub Action, running a npm package, etc...)
@@ -30,7 +29,7 @@ As a user, there are [two ways of running Renovate](https://docs.renovatebot.com
     - you add a per-repository configuration file (called `renovate.json`)
     - Renovate needs to run on a schedule (e.g., on a cronjob)
 
-In my case, I'm running Gitea and Drone at home, so I'm going to self-host Renovate and run a Docker image as a Drone step.
+In my case, I'm running Gitea and Drone at home, so I'm going to self-host Renovate and run the Renovate Docker image as a Drone step.
 
 It's important to note that there are two configuration files, and it's recommended to keep as much configuration as possible in the per-repository files, so that end users have the most flexibility and transparency.
 - [global configuration](https://docs.renovatebot.com/self-hosted-configuration/) (called `config.js`)
