@@ -31,7 +31,7 @@ As a user, there are [two ways of running Renovate](https://docs.renovatebot.com
 
 In my case, I'm running Gitea and Drone at home, so I'm going to self-host Renovate and run the Renovate Docker image as a Drone step.
 
-It's important to note that there are two configuration files, and it's recommended to keep as much configuration as possible in the per-repository files, so that end users have the most flexibility and transparency.
+It's important to note that there are two configuration files, but it's recommended to keep as much configuration as possible in the per-repository files so that end users have the most flexibility and transparency.
 - [global configuration](https://docs.renovatebot.com/self-hosted-configuration/) (called `config.js`)
 - [per-repository configuration](https://docs.renovatebot.com/configuration-options/) (called `renovate.json`)
 
@@ -273,7 +273,7 @@ Obviously, since we pinned the Renovate image to `33.2.0`, we'll need to also pu
 
 # Conclusion
 
-I've been using Renovate for about a week now and really like it. It's obviously a much smoother experience running on GitHub than self-hosted, but it's enough really make a difference in my workflow already.
+I've been using Renovate for about a week now and really like it. It's obviously a much smoother experience running on GitHub than self-hosted, but it's enough to really make a difference in my workflow already.
 
 Also, I highly recommend checking out these article for more tips on getting Renovate setup:
 
