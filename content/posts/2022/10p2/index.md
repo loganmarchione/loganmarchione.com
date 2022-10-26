@@ -261,7 +261,7 @@ module.exports = {
 
 ## Docker image size
 
-The `renovate/renovate` [Docker image](https://docs.renovatebot.com/getting-started/running/#docker-image) is about 1.5GB in size. If you don't pin to a specific tag (like `33.2.0`), you'll waste a lot of space downloading the `latest` tag over and over again.
+The `renovate/renovate` [Docker image](https://docs.renovatebot.com/getting-started/running/#docker-image) is about 1.5GB in size (compressed). If you don't pin to a specific tag (like `33.2.0`), you'll waste a lot of space downloading the `latest` tag over and over again.
 
 There is a `slim` tag, but it only contains Node.js, so if you need anything else (Docker, Python, Java, etc...), it won't work.
 
