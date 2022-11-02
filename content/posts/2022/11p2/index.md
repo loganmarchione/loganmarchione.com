@@ -131,8 +131,8 @@ Currently, my Docker-based homelab runs on a single virtual machine on a single 
 I don't need multiple nodes at home, and the complexity of HA with compute and storage isn't worth it. For K3s, I considered installing [Rancher Longhorn](https://longhorn.io/), but it seemed like too much work. I'm currently using single-node storage, and I'll continue to do so with K3s. K3s currently supports the following local storage options:
 
 - [hostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - Mounts a file/directory from the host into the Pod (best practice to not use this).
-- [local](https://kubernetes.io/docs/concepts/storage/volumes/#local) - Like `hostPath`, but K8s tracks which node has the storage, and won't assign a pod to a different node if it's storage is on a specific node.
-- [local path provisioner](https://github.com/rancher/local-path-provisioner) - This was created by Rancher and is built into K3s (run `kubectl get storageclass`). It is supposed to be simpler than the `local` volume plugin.
+- [local](https://kubernetes.io/docs/concepts/storage/volumes/#local) - Like `hostPath`, but K8s tracks which node has the storage, and won't assign a pod to a different node if its storage is on a specific node.
+- [local path provisioner](https://github.com/rancher/local-path-provisioner) - This was created by Rancher and is built into K3s (run `kubectl get storageclass`). It is supposed to be simpler than the `local` volume plugin. This is what I'm using.
 
 ## Secret storage
 
