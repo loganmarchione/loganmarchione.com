@@ -13,9 +13,9 @@ cover:
 
 # Introduction
 
-My only PC is a desktop, where I dual boot Windows (for gaming only) and Linux (for everything else). My work provided me with Macbook (read more about that [here](/2022/04/impressions-from-a-first-time-mac-user/)), but I don't use it to manage my personal servers, write personal code, browse the internet, etc... But, it would be really nice to SSH to a server from my couch (on a device that's not my phone). I figured it was time to get a laptop. I was looking for:
+My only PC is a desktop, where I dual boot Windows (for gaming only) and Linux (for everything else). My work provided me with Macbook (read more about that [here](/2022/04/impressions-from-a-first-time-mac-user/)), but I don't use it to manage my personal servers, write personal code, browse the internet, etc... But, it would be really nice to SSH to a server from my couch on a device that's not my phone. I figured it was time to get a laptop. I was looking for:
 
-- a CPU from within the last 5 years
+- a CPU from within the last 2-3 years
 - 16GB RAM
 - SSD (not going to store anything critical on this device)
 - full-size RJ-45 ethernet, HDMI, USB, etc...
@@ -28,7 +28,7 @@ Naturally, the internet suggested a ThinkPad T-series laptop. Seeing as this wou
 
 # Specs
 
-I ended up purchasing a Lenovo ThinkPad T14 Gen2 (AMD) from the Lenovo Outlet. I've never purchased from the Lenovo Outlet before, but the model number I purchased online is not exactly the same as what showed up to my house. I'm not sure of the differences, but they're both part of the `20XK` family, so it might not matter. :man_shrugging:
+I ended up purchasing a Lenovo ThinkPad T14 Gen2 (AMD) from the Lenovo Outlet. I've never purchased from the Lenovo Outlet before, but the model number I purchased online is not *exactly* the same as what showed up to my house. I'm not sure of the differences, but they're both part of the `20XK` family, so it might not matter. :man_shrugging:
 
 - Model number on Lenovo Outlet and sticker on outside of laptop = 20XKX026US
 - Model number in software and sticker on inside of laptop = 20XK005PUS
@@ -48,14 +48,14 @@ Regardless of model number, [here](https://www.lenovo.com/us/outletus/en/p/lapto
 | Part          | Spec                                                                                                                                       | Comments                                  |
 |---------------|--------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
 | CPU           | AMD Ryzen 5 PRO 5650U                                                                                                                      | Zen3, 7nm, 6c/12t, up to 4.2GHz, 15W TDP  |
-| Graphics      | AMD Radeon Vega 7 Graphics                                                                                                                 | 7 GPU cores, up to 1.8GHz                 |
+| Graphics      | AMD Radeon Vega 7                                                                                                                          | 7 GPU cores, up to 1.8GHz                 |
 | RAM           | 8GB DDR4 3200MHz (soldered to motherboard)                                                                                                 | one open SODIMM slot                      |
 | Storage       | 256GB PCIe Gen3 x4 SSD                                                                                                                     | SKHynix_HFS256GDE9X081N                   |
-| Display       | 14.0" FHD (1920x1080) IPS, anti-glare, 300 nits, non-touch                                                                                 |                                           |
-| Camera        | 720P HD with Array Microphone & ThinkShutter                                                                                               |                                           |
+| Display       | 14.0" FHD (1920x1080) IPS                                                                                                                  | Anti-glare, 300 nits, non-touch           |
+| Camera        | 720P HD                                                                                                                                    | With microphone and ThinkShutter          |
 | WLAN          | Qualcomm WCN685x WiFi 6E                                                                                                                   |                                           |
 | LAN           | RealTek RTL8168/8111                                                                                                                       | 2x of these (I think one is USB-C)        |
-| Battery       | Integrated Li-Polymer 50Wh battery                                                                                                         |                                           |
+| Battery       | Integrated Li-Polymer 50Wh                                                                                                                 |                                           |
 | Power Supply  | 65W                                                                                                                                        |                                           |
 
 ## Upgraded
@@ -83,7 +83,7 @@ I tried to block out as many serial numbers as possible, but you can see the sin
 
 I started it up one more time to make sure everything still worked, then tested the new memory stick. I always test my memory before I use it, and I always recommend [Memtest86](https://www.memtest86.com/download.htm) (not to be confused with [Memtest86+](https://www.memtest.org/)).
 
-# Arch Linux
+# Arch Linux install
 
 I had done my research before selecting this model and found an [ArchWiki page](https://wiki.archlinux.org/title/Lenovo_ThinkPad_T14_(AMD)_Gen_2) on it, so I knew Arch should work.
 
@@ -110,10 +110,14 @@ I'm a caveman, so I don't use swap, suspend, or sleep. I shutdown my PC every ti
 +----------------------------------------------------------------------------------------------------------+
 ```
 
-Once I get to the [post-installation](https://wiki.archlinux.org/title/installation_guide#Post-installation) section of the installation, I use an [Ansible playbook](https://github.com/loganmarchione/ansible-arch-linux) to setup my packages, desktop, settings, etc... This allows me to keep my desktop and laptop setup consistent.
+Once I get to the [post-installation](https://wiki.archlinux.org/title/installation_guide#Post-installation) section of the installation, I use an [Ansible playbook](https://github.com/loganmarchione/ansible-arch-linux) to setup my packages, desktop, settings, etc... This allows me to keep my desktop and laptop setups consistent.
 
-I've been using it on and off for about a week.
+# Usage
+
+I've been using it on and off for about a week. I run KDE Plasma, so it's very customizable, and I was able to tweak power settings, Bluetooth, trackpad speed, etc...
 
 # Conclusion
+
+No complaints so far! I need to pickup a sleeve and maybe a few adapters (DisplayPort and VGA come to mind).
 
 \-Logan
