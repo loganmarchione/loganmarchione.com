@@ -62,7 +62,7 @@ Regardless of model number, [here](https://www.lenovo.com/us/outletus/en/p/lapto
 
 Below are the parts I upgraded right out of the box.
 
-| Part          | Spec                                                                                                                                                       | Comments                                          |  
+| Part          | Spec                                                                                                                                                       | Comments                                          |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
 | RAM           | [Crucial 8GB Laptop DDR4 3200 MHz SODIMM](https://www.bhphotovideo.com/c/product/1576454-REG/crucial_ct8g4sfra32a_8gb_ddr4_3200_mt_s.html) (CT8G4SFRA32A)  | 8GB soldered to motherboard plus 8GB DDR4 SODIMM  |
 | WLAN          | [Intel AX200 WiFi 6](https://www.bhphotovideo.com/c/product/1591690-REG/intel_ax200_ngwg_dtk_wi_fi_6_gig_desktop.html) (AX200.NGWG.DTK)                    | Replaced stock Qualcomm WCN685x                   |
