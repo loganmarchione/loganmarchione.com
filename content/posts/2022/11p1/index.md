@@ -1,6 +1,6 @@
 ---
 title: "Linux on the Lenovo ThinkPad T14 Gen2 (AMD)"
-date: "2022-11-11"
+date: "2022-11-09"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -28,7 +28,7 @@ Naturally, the internet suggested a ThinkPad T-series laptop. Seeing as this wou
 
 # Specs
 
-I ended up purchasing a Lenovo ThinkPad T14 Gen2 (AMD) from the Lenovo Outlet. I've never purchased from the Lenovo Outlet before, but the model number I purchased online is not *exactly* the same as what showed up to my house. I'm not sure of the differences, but they're both part of the `20XK` family, so it might not matter. :man_shrugging:
+I ended up purchasing a Lenovo ThinkPad T14 Gen2 (AMD) from the Lenovo Outlet. I've never purchased from the Lenovo Outlet before, but the model number I purchased online is not *exactly* the same as what showed up at my house. I'm not sure of the differences, but they're both part of the `20XK` family, so it might not matter. :man_shrugging:
 
 - Model number on Lenovo Outlet and sticker on outside of laptop = 20XKX026US
 - Model number in software and sticker on inside of laptop = 20XK005PUS
@@ -71,7 +71,7 @@ Below are the parts I upgraded right out of the box.
 
 I booted into the default Windows install just to make sure everything worked, then updated the BIOS.
 
-Once that was done, I swapped out the WiFi card and added a stick of DDR4 SODIMM memory. For a large OEM, Lenovo has some really great [documentation](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t14-gen-2-type-20xk-20xl/document-userguide) on their site for how to open the laptop up and access almost every part. Not as detailed as the [Framework laptop documentation](https://guides.frame.work/c/Framework_Laptop), but impressive nonetheless.
+Once that was done, I added a stick of DDR4 SODIMM RAM and swapped out the WiFi card. For a large OEM, Lenovo has some really great [documentation](https://pcsupport.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-t-series-laptops/thinkpad-t14-gen-2-type-20xk-20xl/document-userguide) on their site for how to open the laptop up and access almost every part. Not as detailed as the [Framework laptop documentation](https://guides.frame.work/c/Framework_Laptop), but impressive nonetheless.
 
 The screws on the case back were captive, which was a nice touch. There were about a dozen small clips that were almost impossible to open without a guitar pick or [opening set](https://www.ifixit.com/products/prying-and-opening-tool-assortment) from iFixit (I destroyed my credit card trying to use it as an opening tool). I would recommend opening the back **only once**, so make sure you have all the parts you need ahead of time.
 
@@ -89,7 +89,7 @@ I had done my research before selecting this model and found an [ArchWiki page](
 
 I always [install Arch](https://wiki.archlinux.org/title/installation_guide) manually from a wiki I keep in my homelab (on [DokuWiki](https://www.dokuwiki.org/dokuwiki)), but maybe one day I'll try [archinstall](https://wiki.archlinux.org/title/archinstall). I've done it manually enough times that the whole thing takes about 15 minutes now.
 
-I'm a caveman, so I don't use swap, suspend, or sleep. I shutdown my PC every time I'm done with it, then re-enter my encryption passphrase at every boot. I generally do ESP+GPT+LUKS2+SystemD boot (example below).
+I'm a caveman, so I don't use swap, suspend, or sleep. I shutdown my PC every time I'm done with it, then re-enter my encryption passphrase at every boot. I generally do ESP+GPT+LUKS2+SystemD boot (example partition layout below).
 
 ```
 +----------------------------+ +---------------------------------------------------------------------------+
@@ -112,11 +112,9 @@ I'm a caveman, so I don't use swap, suspend, or sleep. I shutdown my PC every ti
 
 Once I get to the [post-installation](https://wiki.archlinux.org/title/installation_guide#Post-installation) section of the installation, I use an [Ansible playbook](https://github.com/loganmarchione/ansible-arch-linux) to setup my packages, desktop, settings, etc... This allows me to keep my desktop and laptop setups consistent.
 
-# Usage
-
-I've been using it on and off for about a week. I run KDE Plasma, so it's very customizable, and I was able to tweak power settings, Bluetooth, trackpad speed, etc...
-
 # Conclusion
+
+I've been using this T14 on and off for about a week. I run KDE Plasma, so it's very customizable, and I was able to tweak power settings, Bluetooth, trackpad speed, etc... All the hardware works, and it does everything I ask it. I haven't run the battery down to zero, but the projected 13 hour battery life sounds correct (assuming the screen brightness isn't maxed out).
 
 No complaints so far! I need to pickup a sleeve and maybe a few adapters (DisplayPort and VGA come to mind).
 
