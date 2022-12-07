@@ -1,6 +1,6 @@
 ---
 title: "K3s cluster updates"
-date: "2022-11-30"
+date: "2022-12-30"
 author: "Logan Marchione"
 categories:
   - "oc"
