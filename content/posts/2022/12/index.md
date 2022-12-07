@@ -91,7 +91,7 @@ spec:
                   number: 80
 ```
 
-If you're interested, the Git repository that Flux watches is [here](https://github.com/loganmarchione/k8s_homelab).
+If you're interested, my homelab K3s repository that Flux watches is [here](https://github.com/loganmarchione/k8s_homelab).
 
 ## Persistent storage
 
@@ -197,9 +197,8 @@ For file-level backups, Rancher's local path provisioner stores volumes in `/var
 - Even though I'm using local storage via the local path provisioner provided by K3s, I still may using Longhorn in a single-node setup. If I ever get more nodes, it should be easy to expand.
 - I need a new strategy for secret management. As a first step, I will probably [encrypt secrets inside the cluster](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/).
 
-
 # Conclusion
 
-
+I've moved 20+ applications onto my single-node K3s cluster. I have Renovate setup watching my GitHub repo, so it is always making PRs for updates (which I like). I've also gone through a K3s, Flux, and Helm upgrade, all without issue. So far, so good!
 
 \-Logan
