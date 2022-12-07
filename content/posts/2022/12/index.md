@@ -1,6 +1,6 @@
 ---
 title: "K3s cluster updates"
-date: "2022-12-30"
+date: "2022-12-07"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -65,9 +65,9 @@ Declarative management is what you should be using in production, as it gives yo
 
 ## Flux vs ArgoCD
 
-[Flux](https://fluxcd.io/flux/) and [ArgoCD](https://argoproj.github.io/cd/) are both continuous delivery (CD) tools. They watch a Git repo for changes (in my case, GitHub) and apply them when seen.
+[Flux](https://fluxcd.io/flux/) and [ArgoCD](https://argoproj.github.io/cd/) are both continuous delivery (CD) tools. They watch a Git repo for changes (in my case, GitHub) and apply updates when seen. Hint: this is why I'm using declarative management.
 
-I originally wanted to use ArgoCD in my K3s cluster because it has a very nice web UI, but I went with Flux instead. After some testing, I discovered ArgoCD didn't support [variable substitution](https://github.com/argoproj/argo-cd/issues/5580) inside manifest files for deployments/services/ingress/etc... Even though the information isn't "secret", I didn't want to expose internal domain names in plain-text in my Git repo (same as [this post](https://budimanjojo.com/2021/10/27/variable-substitution-in-flux-gitops/)).
+I originally wanted to use ArgoCD in my K3s cluster because it has a very nice web UI, but I went with Flux instead. After some testing, I discovered ArgoCD didn't support [variable substitution](https://github.com/argoproj/argo-cd/issues/5580) inside manifest files for deployments/services/ingress/etc... Even though the information isn't "secret", I didn't want to expose internal domain names in plain-text in my Git repo (same reasoning as [this post](https://budimanjojo.com/2021/10/27/variable-substitution-in-flux-gitops/)).
 
 ```
 ---
@@ -90,6 +90,8 @@ spec:
                 port:
                   number: 80
 ```
+
+If you're interested, the Git repository that Flux watches is [here](https://github.com/loganmarchione/k8s_homelab).
 
 ## Persistent storage
 
@@ -132,7 +134,7 @@ I don't need multiple nodes at home, and the complexity of HA with compute and s
 
 - [hostPath](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) - Mounts a file/directory from the host into the Pod (best practice to not use this).
 - [local](https://kubernetes.io/docs/concepts/storage/volumes/#local) - Like `hostPath`, but K8s tracks which node has the storage, and won't assign a pod to a different node if its storage is on a specific node.
-- [local path provisioner](https://github.com/rancher/local-path-provisioner) - This was created by Rancher and is built into K3s (run `kubectl get storageclass`). It is supposed to be simpler than the `local` volume plugin. This is what I'm using.
+- [local path provisioner](https://github.com/rancher/local-path-provisioner) - This was created by Rancher and is built into K3s (run `kubectl get storageclass` to see it). This is what I'm using.
 
 ## Secret storage
 
@@ -179,6 +181,15 @@ Traefik can handle SSL/TLS natively, and it's what I currently use in my Compose
 I use Route53 for DNS, so I already had the correct IAM policy and access keys, so I was able to follow the [official documentation](https://cert-manager.io/docs/configuration/acme/dns01/route53/) and [this post](https://taco.moe/kubernetes-managed-tls-certificates-with-cert-manager) as well.
 
 ## Backups
+
+I'm running my K3s node on Proxmox, so I already have daily virtual machine backups setup via Proxmox.
+
+For file-level backups, Rancher's local path provisioner stores volumes in `/var/lib/rancher/k3s/storage/`. I'm going to end up writing a script that:
+
+1. stops K3s and all running pods
+1. uses `tar` and `zstd` to compress the entire `/var/lib/rancher/k3s/storage/` directory
+1. starts K3s and all pods
+1. moves the `filename.tar.zst` file offsite
 
 # Things I'm keeping an eye on
 
