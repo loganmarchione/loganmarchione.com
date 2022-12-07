@@ -29,7 +29,7 @@ Vanilla K8s stores all of its configuration data, state data, and metadata in [e
 
 Interestingly, while K3s can use etcd, it also has a home-grown shim called [Kine](https://github.com/k3s-io/kine/) (Kine is not etcd) which can translate a subset of etcd API calls into SQLite, MySQL, and PostgreSQL calls. This allows K3s to use other databases as backend storage (even though vanilla K8s only allows etcd).
 
-I'm going to choose to specifically use the etcd database instead of SQLite by specifying `--cluster-init` when installing K3s.
+I chose to specifically use the etcd database instead of the default SQLite by specifying `--cluster-init` when installing K3s.
 
 
 ```
