@@ -26,6 +26,10 @@ module:
   imports:
     - path: github.com/adityatelange/hugo-PaperMod
     - path: github.com/foo-dogsquared/hugo-mod-simple-icons
+    - path: github.com/loganmarchione/svg-assets
+      mounts:
+        - source: assets
+          target: assets/svg/svg-assets
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.

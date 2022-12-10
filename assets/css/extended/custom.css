@@ -25,3 +25,12 @@
 .simple-icons-inline svg {
 	height: 1em;
 }
+
+/* Needed for https://github.com/loganmarchione/svg-assets */
+.svg-assets-inline {
+	vertical-align: text-top;
+}
+
+.svg-assets-inline svg {
+	height: 1em;
+}
