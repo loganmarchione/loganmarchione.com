@@ -3,3 +3,5 @@ github.com/adityatelange/hugo-PaperMod v0.0.0-20220717061433-87ffee9fcf6d/go.mod
 github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220706232029-07de82f7804d h1:Jpt7rxBAmuzGEPIvAbfH0lekSr5onlXlVHeuHL5rAPc=
 github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20220706232029-07de82f7804d/go.mod h1:HMXyQmoARvqtDsUaPjjC3QyeJctpZNK8BnLN6wb0vfg=
 github.com/simple-icons/simple-icons v0.0.0-20220703030846-0fa7840ba0b5/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
+github.com/loganmarchione/svg-assets v0.0.0-20221210030720-dcdff3b18166 h1:gvih128qzyUte+i4exmwGEcQ8if2g2MR2cqh3w6Ctpo=
+github.com/loganmarchione/svg-assets v0.0.0-20221210030720-dcdff3b18166/go.mod h1:Se57ORSZuHVwF7YSaCm7BUFdS8qIkV+q4faRhW4/gi8=
