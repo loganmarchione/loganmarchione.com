@@ -4,4 +4,6 @@ github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221207231854-ee9d5f5f2f
 github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221207231854-ee9d5f5f2f57/go.mod h1:d5Nri63aDACCGwCkH3yixD3Qo+1xEfyIdQtifMY/ow8=
 github.com/loganmarchione/svg-assets v0.0.0-20221210034747-2fb45aebafd8 h1:Qc6rYH5zi8yvgiXzvAwlnuBDIusaZQTZpidTj9pU18o=
 github.com/loganmarchione/svg-assets v0.0.0-20221210034747-2fb45aebafd8/go.mod h1:Se57ORSZuHVwF7YSaCm7BUFdS8qIkV+q4faRhW4/gi8=
+github.com/loganmarchione/svg-assets v0.0.0-20221211034031-896eb5d9dae5 h1:zTMZvi59EJgRNMFQaDkl3bUN/OPjSMDQO9LOx8j9e30=
+github.com/loganmarchione/svg-assets v0.0.0-20221211034031-896eb5d9dae5/go.mod h1:Se57ORSZuHVwF7YSaCm7BUFdS8qIkV+q4faRhW4/gi8=
 github.com/simple-icons/simple-icons v0.0.0-20221205125008-b4ea284901fb/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
