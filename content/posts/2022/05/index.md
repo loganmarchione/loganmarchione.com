@@ -29,13 +29,13 @@ My hot water tank recently leaked, but (luckily for me) there was a floor drain 
 This got me thinking about other self-hosted, open-source applications that are truly amazing works of engineering and community collaboration. Below is what I came up with.
 
 
-| Project                                                                                                          | Category               | Paid tier?                                                | Language                                               |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------- | --------------------------------------------------------- | ------------------------------------------------------ |
-| {{< simple-icons-inline src="homeassistant" fill="#41BDF5" >}} [Home Assistant](https://www.home-assistant.io/)  | Home automation        | [Nabu Casa](https://www.nabucasa.com/)                    | [Python](https://github.com/home-assistant/core)       |
-| {{< simple-icons-inline src="jellyfin" fill="#AA5CC3" >}} [Jellyfin](https://jellyfin.org/)                      | Media server           | N/A                                                       | [C#](https://github.com/jellyfin/jellyfin)             |
-| {{< simple-icons-inline src="pihole" fill="#96060C" >}} [Pi-hole](https://pi-hole.net/)                          | Network-level ad-block | N/A                                                       | [Shell/Python/PHP](https://github.com/pi-hole/pi-hole) |
-| {{< simple-icons-inline src="nextcloud" fill="#0082C9" >}} [Nextcloud](https://nextcloud.com/)                   | Personal cloud         | [NextCloud Enterprise](https://nextcloud.com/enterprise/) | [PHP/JS](https://github.com/nextcloud/server)          |
-| {{< simple-icons-inline src="wordpress" fill="#21759B" >}} [WordPress](https://wordpress.org/)                   | Blogging               | [WordPress.com](https://wordpress.com/)                   | [PHP/JS](https://build.trac.wordpress.org/browser)     |
+| Project                                                                                               | Category               | Paid tier?                                                | Language                                               |
+| ------------------------------------------------------------------------------------------------------| ---------------------- | --------------------------------------------------------- | ------------------------------------------------------ |
+| {{< svg-assets-inline src="homeassistant-small" >}} [Home Assistant](https://www.home-assistant.io/)  | Home automation        | [Nabu Casa](https://www.nabucasa.com/)                    | [Python](https://github.com/home-assistant/core)       |
+| {{< svg-assets-inline src="jellyfin" >}} [Jellyfin](https://jellyfin.org/)                            | Media server           | N/A                                                       | [C#](https://github.com/jellyfin/jellyfin)             |
+| {{< svg-assets-inline src="pihole" >}} [Pi-hole](https://pi-hole.net/)                                | Network-level ad-block | N/A                                                       | [Shell/Python/PHP](https://github.com/pi-hole/pi-hole) |
+| {{< svg-assets-inline src="nextcloud" >}} [Nextcloud](https://nextcloud.com/)                         | Personal cloud         | [NextCloud Enterprise](https://nextcloud.com/enterprise/) | [PHP/JS](https://github.com/nextcloud/server)          |
+| {{< svg-assets-inline src="wordpress" >}} [WordPress](https://wordpress.org/)                         | Blogging               | [WordPress.com](https://wordpress.com/)                   | [PHP/JS](https://build.trac.wordpress.org/browser)     |
 
 I'm aware that this is not an exhaustive list, and that most of these applications stand on the shoulders of giants. However, when trying to sell "regular people" on self-hosted, open-source applications, this is the list to start with.
 

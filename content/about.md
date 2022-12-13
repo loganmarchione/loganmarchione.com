@@ -20,14 +20,14 @@ I hope you find something of value here! Enjoy!
 
 ## Presence on the web
 
-{{< simple-icons-inline src="twitter" fill="#1DA1F2" >}} [Twitter](https://twitter.com/loganmarchione)  
-{{< simple-icons-inline src="docker" fill="#2496ED" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
-{{< simple-icons-inline src="ycombinator" fill="#F0652F" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
-{{< simple-icons-inline src="github" fill="#181717" >}} [GitHub](https://github.com/loganmarchione)  
-{{< simple-icons-inline src="gitlab" fill="#FC6D26" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
-{{< raw_html >}}<span class="simple-icons-inline"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg></span>{{< /raw_html >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
-{{< simple-icons-inline src="steam" fill="#000000" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
-{{< simple-icons-inline src="mastodon" fill="#6364FF" >}} [Mastodon](https://mastodon.social/@loganmarchione)
+{{< svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione)  
+{{< svg-assets-inline src="docker" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
+{{< svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
+{{< svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
+{{< svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
+{{< svg-assets-inline src="sourcehut" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
+{{< svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
+{{< svg-assets-inline src="mastodon-no-gradient" >}} [Mastodon](https://mastodon.social/@loganmarchione)
 
 ## Contact info
 
