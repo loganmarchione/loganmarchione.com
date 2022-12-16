@@ -1,0 +1,7 @@
+{{/*Get the parameters */}}
+{{ $path := (.Get "src") }}
+
+{{/* Concat to create the correct path */}}
+{{- $icon := resources.Get (print "svg/homelab-svg-assets/" $path ".svg" ) -}}
+
+<span class="homelab-svg-assets-inline">{{- $icon.Content | safeHTML -}}</span>

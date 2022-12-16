@@ -20,14 +20,15 @@ I hope you find something of value here! Enjoy!
 
 ## Presence on the web
 
-{{< svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione)  
-{{< svg-assets-inline src="docker" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
-{{< svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
-{{< svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
-{{< svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
-{{< svg-assets-inline src="sourcehut" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
-{{< svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
-{{< svg-assets-inline src="mastodon-no-gradient" >}} [Mastodon](https://mastodon.social/@loganmarchione)
+{{< homelab-svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione)  
+{{< homelab-svg-assets-inline src="docker" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
+{{< homelab-svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
+{{< homelab-svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
+{{< homelab-svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
+{{< homelab-svg-assets-inline src="sourcehut" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
+{{< homelab-svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
+{{< homelab-svg-assets-inline src="mastodon-no-gradient" >}} [Mastodon](https://mastodon.social/@loganmarchione)  
+{{< homelab-svg-assets-inline src="php" >}} [Packagist (PHP)](https://packagist.org/packages/loganmarchione/)
 
 ## Contact info
 
