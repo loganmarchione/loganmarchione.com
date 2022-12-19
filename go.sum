@@ -2,6 +2,6 @@ github.com/adityatelange/hugo-PaperMod v0.0.0-20221112073733-4bd96d62719b h1:qVM
 github.com/adityatelange/hugo-PaperMod v0.0.0-20221112073733-4bd96d62719b/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
 github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221214231933-18cbd8ebaf61 h1:/sq+nKzveVF5hhxi5IM4GJ+qFh2XEcqcrEdhncsbr+8=
 github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221214231933-18cbd8ebaf61/go.mod h1:iQ64e0sT77NgciPvBsFtoMkHVQjf784FmRZS9IdzJ8E=
-github.com/loganmarchione/homelab-svg-assets v0.0.0-20221216033228-6c5041441b08 h1:UUxIEBxqM/Y5jtg3No77TPgRi7QLPinw70/ibgoday4=
-github.com/loganmarchione/homelab-svg-assets v0.0.0-20221216033228-6c5041441b08/go.mod h1:6pJO5cGKHNbObJ81HtJWt72algIDNUilaUARhSmkgXc=
+github.com/loganmarchione/homelab-svg-assets v0.0.0-20221219185027-05c6e2a60caf h1:vlrwzjTDccs68AkluXLaGRhEqsA1pAFSUa5WsNKkQlU=
+github.com/loganmarchione/homelab-svg-assets v0.0.0-20221219185027-05c6e2a60caf/go.mod h1:6pJO5cGKHNbObJ81HtJWt72algIDNUilaUARhSmkgXc=
 github.com/simple-icons/simple-icons v0.0.0-20221211155301-e5b3b29f1b12/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
