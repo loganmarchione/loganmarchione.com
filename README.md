@@ -1,6 +1,10 @@
 # loganmarchione.com
 
 [![CI/CD (loganmarchione.com)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml/badge.svg)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/main.yml)
+[![](https://img.shields.io/website?down_color=red&down_message=offline&label=loganmarchione.com&up_color=green&up_message=online&url=https%3A%2F%2Floganmarchione.com)](https://loganmarchione.com)
+[![](https://img.shields.io/website?down_color=red&down_message=offline&label=loganmarchione.github.io&up_color=green&up_message=online&url=https%3A%2F%2Floganmarchione.github.io)](https://loganmarchione.github.io)
+
+
 
 ## Overview
 
