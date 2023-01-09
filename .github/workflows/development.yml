@@ -1,0 +1,48 @@
+name: CI/CD (development)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  URL_DEV: loganmarchione.github.io
+
+jobs:
+  deploy-development:
+    name: Deploy (loganmarchione.github.io)
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the codebase
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.18'
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Build
+      run: hugo --gc -DEF --baseURL="https://${{ env.URL_DEV }}"
+
+    - name: Overwrite robots.txt (for search engines)
+      run: |
+        : > ./public/robots.txt
+        echo "User-agent: *" >> ./public/robots.txt
+        echo "Disallow: /" >> ./public/robots.txt
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        external_repository: loganmarchione/loganmarchione.github.io
+        publish_branch: gh-pages
+        publish_dir: ./public
