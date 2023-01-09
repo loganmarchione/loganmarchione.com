@@ -51,13 +51,13 @@ My [Netgear switch](https://www.netgear.com/business/wired/switches/plus/gs108pe
 * 18-5/16 (18.3125) inches center-to-center on post holes
 * 17-3/4 (17.75) inches opening width between posts
 
-{{< figure src="20220830_003.png" alt="rack width measurements" attr="Image (with misspelling) from PureStorage" attrlink="https://www.purestorage.com/nl/knowledge/definitive-guide-to-19-inch-server-rack-sizes.html">}}
+{{< figure src="20220830_003.png" width="100%" alt="rack width measurements" attr="Image (with misspelling) from PureStorage" attrlink="https://www.purestorage.com/nl/knowledge/definitive-guide-to-19-inch-server-rack-sizes.html">}}
 
 ## 10-inch racks
 
 The 10-inch rack (aka "half-rack") [isn't a standard](http://rtsound.net/half-rack-compatible-equipment/) (that I could find). Instead, it's more like a general consensus (kind of like we've unofficially settled on [two sizes of toilet seat lid](https://www.toiletseats.com/education-and-inspiration/articles/how-to-measure-a-toilet-seat/)). As such, all equipment advertised as 10-inches or half-rack *might* not be compatible.
 
-{{< figure src="20220830_002.png" alt="half-rack measurements" attr="Image from Wikipedia" attrlink="https://en.wikipedia.org/wiki/19-inch_rack#10-inch_rack">}}
+{{< figure src="20220830_002.png" width="100%" alt="half-rack measurements" attr="Image from Wikipedia" attrlink="https://en.wikipedia.org/wiki/19-inch_rack#10-inch_rack">}}
 
 10-inch racks are much more common outside the US (I'm not sure why). There are tons of companies selling 10-inch racks and accessories outside the US.
 
