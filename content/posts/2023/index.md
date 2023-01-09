@@ -65,7 +65,7 @@ Aside from the microSD card slot, there are three [base storage options](https:/
 
 The first option is an eMMC module on a carrier board that fits into a M.2 NVMe slot (eMMC is about half as fast as a SATA SSD).
 
-{{< figure src="20230106_002.png" width="100%" alt="steam deck emmc module" attr="The Big Tech Question" attrlink="https://bigtechquestion.com/2022/05/31/hardware/upgrade-ssd-steam-deck/">}}
+{{< figure src="20230106_002.png" width="100%" alt="steam deck emmc module" attr="Image from The Big Tech Question" attrlink="https://bigtechquestion.com/2022/05/31/hardware/upgrade-ssd-steam-deck/">}}
 
 The next two options are both NVMe SSDs, but I'm unable to tell if one is faster than the other (besides the larger drive being slightly faster because it's larger). While the SSD is PCIe Gen3 on both the 256GB and 512GB models, Valve warns:
 
@@ -132,7 +132,11 @@ Below are some SSDs I found in my searching. All of these are 512GB, expect the 
 | Western Digital | SN740 SDDPTQD-512G          | [Here](https://www.westerndigital.com/products/internal-drives/pc-sn740-ssd#SDDPTQD-512G)                                                                                | 5.0W  | Gen4 x4   | ~$80          | Not sold to retail customers, will need to use eBay |
 | Western Digital | SN530 SDBPTPZ-512G          | [Here](https://www.westerndigital.com/products/internal-drives/pc-sn530-ssd#SDBPTPZ-512G)                                                                                | ???   | Gen3 x4   | ~$60          | Not sold to retail customers, will need to use eBay |
 
-# Replacement procedure
+I ended up purchasing a Kioxia BG4 KBG40ZNS512G for $65. On paper, it has the lowest power draw (1.06A because `A = 3.5W/3.3V`). Hopefully this will net the longest battery life.
+
+IMAGE_GOES_HERE
+
+# Replacement
 
 ## Parts
 
@@ -140,7 +144,7 @@ You'll need a few parts to get started:
 
 1. A large, clean, metal-free work surface
 1. The replacement SSD
-1. A USB flash drive that is preinstalled with the SteamOS [recovery image](https://help.steampowered.com/en/faqs/view/1b71-edf2-eb6d-2bb3)
+1. A [USB-C flash drive](https://www.bhphotovideo.com/c/product/1547784-REG/sandisk_sdddc4_032g_a46_ultra_dual_drive_luxe.html) that is preinstalled with the SteamOS [recovery image](https://help.steampowered.com/en/faqs/view/1b71-edf2-eb6d-2bb3)
 1. Some plastic spreaders to open the case (I like [this](https://www.ifixit.com/products/prying-and-opening-tool-assortment) pack)
 1. A small screwdriver kit (I like [this](https://www.ifixit.com/products/mako-driver-kit-64-precision-bits) kit)
 1. Optional - A set of tweezers (like [this](https://www.ifixit.com/products/nylon-tipped-tweezers))
@@ -153,11 +157,18 @@ I won't rewrite iFixit's [excellent guide](https://www.ifixit.com/Guide/Steam+De
 My tips are:
 
 - Remove the microSD card before opening the case (otherwise you'll break your card)
+- Put your Steam Deck into [battery storage mode](https://www.ifixit.com/Guide/How+to+Enable+Battery+Storage+Mode/149962) before opening it up (FYI you'll need to plug in the power adapter to get it out of this mode when you're done)
+- Place the Steam Deck screen-down in its case so that you're not putting pressure on the joysticks during the disassembly
 - Don't replace the SSD until you disconnect the battery
 - After the battery is disconnected, push the power button a few times to discharge any remaining electricity
+- Don't damage the foil wrap around the SSD, you'll need to reuse it
 - When replacing the screws, turn them counter-clockwise until they click into place, then turn clockwise (this will prevent you from stripping the plastic)
 
 After you're done, you'll have a blank SSD in the Steam Deck, so you'll have to use a different computer to burn the SteamOS [recovery image](https://help.steampowered.com/en/faqs/view/1b71-edf2-eb6d-2bb3) to a USB flash drive, then boot the Steam Deck off the flash drive in order to reinstall SteamOS.
+
+After that, you should be able to boot your Steam Deck and see the expanded storage.
+
+IMAGE_GOES_HERE
 
 # Conclusion
 
