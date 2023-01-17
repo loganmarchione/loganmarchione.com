@@ -47,6 +47,7 @@ I end up referencing this materal often, so I thought I'd publish it here.
 * What are the core work hours?
 * What timezones does this position span?
 * Is there an on-call rotation or shift-work? If so, please describe.
+* What do you feel are some best perks of the position?
 
 ### About your (potential) manager
 
@@ -57,6 +58,7 @@ I end up referencing this materal often, so I thought I'd publish it here.
 * What is the number one goal/project you'd like to achieve/complete in the next year or two?
 * What do your employees do in their free time? _This not only shows that the employees have lives outside of work, but it shows that their manager knows them on a personal level._
 * What excites you personally about coming into work?
+* What is it that has kept you working for this company for so long?
 
 ### About your (potential) team/coworkers
 
