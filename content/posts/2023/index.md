@@ -119,22 +119,53 @@ Because M.2 2230 SSDs are not commonly sold to retail customers (e.g., most PCs 
 - 2A max power draw (manufacturers will often give measurments in watts, so you'll have to convert using `A = W/V`)
 - keep in mind that the M.2 slot is limited to PCIe Gen3 x4 (so a PCIe Gen4 drive is overkill)
 
-Below are some SSDs I found in my searching. All of these are 512GB, expect the Inland, which only comes in 1TB versions. Note that this is not an exhaustive list of makes/models.
+Below are some SSDs I found in my searching. All of these are 512GB, expect the Inland, which only comes in 1TB versions. I stumbled upon a much more [extensive post](https://dancharblog.wordpress.com/2020/03/19/upgrade-sl3-or-spx-to-1tb/) about replacement SSDs, so be sure to check that out for even more options.
+
+
 
 | Make            | Model                       | Link                                                                                                                                                                     | Watts | PCIe Spec | Price         | Comments                                            |
 |-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|-----------|---------------|-----------------------------------------------------|
 | Sabrent         | Rocket SB-2130-512          | [Here](https://sabrent.com/products/sb-2130-512)                                                                                                                         | 4.0W  | Gen4 x4   | $89.99        | This was just released in December 2022             |
 | Inland          | TN436                       | [Here](https://www.microcenter.com/product/649991/inland-tn436-1tb-3d-tlc-nand-pcie-gen-4-x4-nvme-m2-2230-internal-ssd-compatible-with-microsoft-surface-and-steam-deck) | 4.0W  | Gen4 x4   | $139.99       | 1TB only, in-store only                             |
 | Kioxia          | BG5 KBG50ZNS512G            | [Here](https://americas.kioxia.com/en-us/business/ssd/client-ssd/bg5.html)                                                                                               | 4.1W  | Gen4 x4   | ~$80          | Not sold to retail customers, will need to use eBay |
+| Western Digital | SN740 SDDPTQD-512G          | [Here](https://www.westerndigital.com/products/internal-drives/pc-sn740-ssd#SDDPTQD-512G)                                                                                | 5.0W  | Gen4 x4   | ~$80          | Not sold to retail customers, will need to use eBay |
 | Kioxia          | BG4 KBG40ZNS512G            | [Here](https://americas.kioxia.com/en-us/business/ssd/client-ssd/bg4.html)                                                                                               | 3.5W  | Gen3 x4   | ~$70          | Not sold to retail customers, will need to use eBay |
 | SK Hynix        | BC711 HFM512GD3GX013N       | [Here](https://product.skhynix.com/products/ssd/cssd/pc711.go)                                                                                                           | 3.5W  | Gen3 x4   | ~$65          | Not sold to retail customers, will need to use eBay |
 | Samsung         | PM991A MZ9LQ512HBLU         | ???                                                                                                                                                                      | 4.6W  | Gen3 x4   | ~$60          | Not sold to retail customers, will need to use eBay |
-| Western Digital | SN740 SDDPTQD-512G          | [Here](https://www.westerndigital.com/products/internal-drives/pc-sn740-ssd#SDDPTQD-512G)                                                                                | 5.0W  | Gen4 x4   | ~$80          | Not sold to retail customers, will need to use eBay |
 | Western Digital | SN530 SDBPTPZ-512G          | [Here](https://www.westerndigital.com/products/internal-drives/pc-sn530-ssd#SDBPTPZ-512G)                                                                                | ???   | Gen3 x4   | ~$60          | Not sold to retail customers, will need to use eBay |
 
-I ended up purchasing a Kioxia BG4 KBG40ZNS512G for $65. On paper, it has the lowest power draw (1.06A because `A = 3.5W/3.3V`). Hopefully this will net the longest battery life.
+I ended up purchasing a Kioxia BG4 KBG40ZNS512G for $65. On paper, it had the lowest power draw (1.06A because `A = 3.5W/3.3V`). Hopefully this will net the longest battery life.
 
-IMAGE_GOES_HERE
+
+Maybe I'm old, but I couldn't believe how small this thing was :exploding_head:
+
+{{< img src="20230117_002.jpeg" alt="kioxia KBG40ZNS512G" >}}
+
+{{< img src="20230117_003.jpeg" alt="kioxia KBG40ZNS512G" >}}
+
+The eBay seller was [XPC Technologies](https://www.ebay.com/str/xpctechnologies) and true to their listing, it had less than 7 power-on-hours.
+
+```
+SMART/Health Information (NVMe Log 0x02)
+Critical Warning:                   0x00
+Temperature:                        32 Celsius
+Available Spare:                    100%
+Available Spare Threshold:          50%
+Percentage Used:                    0%
+Data Units Read:                    243,326 [124 GB]
+Data Units Written:                 280,808 [143 GB]
+Host Read Commands:                 2,480,922
+Host Write Commands:                2,089,440
+Controller Busy Time:               10
+Power Cycles:                       19
+Power On Hours:                     4
+Unsafe Shutdowns:                   8
+Media and Data Integrity Errors:    0
+Error Information Log Entries:      0
+Warning  Comp. Temperature Time:    0
+Critical Comp. Temperature Time:    0
+Temperature Sensor 1:               32 Celsius
+```
 
 # Replacement
 
@@ -159,20 +190,38 @@ My tips are:
 - Remove the microSD card before opening the case (otherwise you'll break your card)
 - Put your Steam Deck into [battery storage mode](https://www.ifixit.com/Guide/How+to+Enable+Battery+Storage+Mode/149962) before opening it up (FYI you'll need to plug in the power adapter to get it out of this mode when you're done)
 - Place the Steam Deck screen-down in its case so that you're not putting pressure on the joysticks during the disassembly
-- Don't replace the SSD until you disconnect the battery
+- Don't replace the SSD until you **disconnect the battery**
 - After the battery is disconnected, push the power button a few times to discharge any remaining electricity
 - Don't damage the foil wrap around the SSD, you'll need to reuse it
-- When replacing the screws, turn them counter-clockwise until they click into place, then turn clockwise (this will prevent you from stripping the plastic)
+- When replacing the screws in the plastic back, turn them counter-clockwise until they click into place, then turn clockwise (this will prevent you from stripping the plastic)
+
+{{< img src="20230117_004.jpeg" alt="steam deck back off" >}}
+
+{{< img src="20230117_005.jpeg" alt="steam deck back off" >}}
+
+{{< img src="20230117_006.jpeg" alt="steam deck back off" >}}
 
 After you're done, you'll have a blank SSD in the Steam Deck, so you'll have to use a different computer to burn the SteamOS [recovery image](https://help.steampowered.com/en/faqs/view/1b71-edf2-eb6d-2bb3) to a USB flash drive, then boot the Steam Deck off the flash drive in order to reinstall SteamOS.
 
-After that, you should be able to boot your Steam Deck and see the expanded storage.
+After that, you should be able to boot your Steam Deck and see the expanded storage. A couple more notes:
 
-IMAGE_GOES_HERE
+- My replacement SSD didn't show up in Steam Deck BIOS (and the eBay seller specifically listed that it wouldn't)
+- When I reinstalled SteamOS, none of the controls worked (face buttons, joysticks, triggers, etc...) except for the touchscreen. After an update to the latest SteamOS, everything worked.
+- The update got stuck on "Installing" for 10+ minutes. When I forced a power-off and restarted it, a different screen came up and it worked. :man_shrugging:
+
+## Before/after
+
+Here is the Steam Deck's 64GB storage (before the upgrade)
+
+{{< img src="20230117_001.jpg" alt="steam deck 64gb storage" >}}
+
+Here is the Steam Deck's 512GB storage (after the upgrade)
+
+{{< img src="20230117_007.jpg" alt="steam deck 512gb storage" >}}
 
 # Conclusion
 
-Thanks to Lord Gaben for designing such a powerful product, but also allowing tinkerers to be able to fix and upgrade it without jumping through hoops. This is your right to repair in action.
+Thanks to Lord Gaben and Valve for designing such a powerful product, but more importantly, allowing tinkerers to be able to fix and upgrade it without jumping through hoops. This is your right to repair in action.
 
 {{< figure src="/assets/memes/gabe_newell_jesus.jpg" width="50%" alt="gabe newell jesus" attr="Gabe Newell Portrait by freddre" attrlink="https://www.deviantart.com/freddre/art/Gabe-Newell-Portrait-288307422">}}
 
