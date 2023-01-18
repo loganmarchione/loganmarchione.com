@@ -1,6 +1,6 @@
 ---
 title: "My experience replacing the Steam Deck SSD"
-date: "2023-01-07"
+date: "2023-01-17"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -63,7 +63,7 @@ Aside from the microSD card slot, there are three [base storage options](https:/
 - 256 GB NVMe SSD (PCIe Gen 3 x4 or PCIe Gen 3 x2)
 - 512 GB high-speed NVMe SSD (PCIe Gen 3 x4 or PCIe Gen 3 x2)
 
-The first option is an eMMC module on a carrier board that fits into a M.2 NVMe slot (eMMC is about half as fast as a SATA SSD).
+The first option is an eMMC module on a carrier board that fits into a M.2 NVMe slot (eMMC is about half-as-fast as a SATA SSD).
 
 {{< figure src="20230106_002.png" width="100%" alt="steam deck emmc module" attr="Image from The Big Tech Question" attrlink="https://bigtechquestion.com/2022/05/31/hardware/upgrade-ssd-steam-deck/">}}
 
@@ -119,7 +119,7 @@ Because M.2 2230 SSDs are not commonly sold to retail customers (e.g., most PCs 
 - 2A max power draw (manufacturers will often give measurments in watts, so you'll have to convert using `A = W/V`)
 - keep in mind that the M.2 slot is limited to PCIe Gen3 x4 (so a PCIe Gen4 drive is overkill)
 
-Below are some SSDs I found in my searching. All of these are 512GB, expect the Inland, which only comes in 1TB versions. I stumbled upon a much more [extensive post](https://dancharblog.wordpress.com/2020/03/19/upgrade-sl3-or-spx-to-1tb/) about replacement SSDs, so be sure to check that out for even more options.
+Below are some SSDs I found in my searching. All of these are 512GB, except the Inland, which only comes in a 1TB version. I stumbled upon a much more [extensive post](https://dancharblog.wordpress.com/2020/03/19/upgrade-sl3-or-spx-to-1tb/) about replacement SSDs, so be sure to check that out for even more options.
 
 
 
@@ -169,6 +169,8 @@ Temperature Sensor 1:               32 Celsius
 
 # Replacement
 
+The replacement process is pretty easy if you've ever built a PC before.
+
 ## Parts
 
 You'll need a few parts to get started:
@@ -193,7 +195,7 @@ My tips are:
 - Don't replace the SSD until you **disconnect the battery**
 - After the battery is disconnected, push the power button a few times to discharge any remaining electricity
 - Don't damage the foil wrap around the SSD, you'll need to reuse it
-- When replacing the screws in the plastic back, turn them counter-clockwise until they click into place, then turn clockwise (this will prevent you from stripping the plastic)
+- When replacing the screws in the plastic back, turn them counter-clockwise until they click into place, then turn clockwise (this will prevent you from cross-threading them)
 
 {{< img src="20230117_004.jpeg" alt="steam deck back off" >}}
 
@@ -206,7 +208,7 @@ After you're done, you'll have a blank SSD in the Steam Deck, so you'll have to 
 After that, you should be able to boot your Steam Deck and see the expanded storage. A couple more notes:
 
 - My replacement SSD didn't show up in Steam Deck BIOS (and the eBay seller specifically listed that it wouldn't)
-- When I reinstalled SteamOS, none of the controls worked (face buttons, joysticks, triggers, etc...) except for the touchscreen. After an update to the latest SteamOS, everything worked.
+- When I reinstalled SteamOS, none of the controls worked (face buttons, joysticks, triggers, etc...) except for the touchscreen. After an update to the latest SteamOS, everything worked again.
 - The update got stuck on "Installing" for 10+ minutes. When I forced a power-off and restarted it, a different screen came up and it worked. :man_shrugging:
 
 ## Before/after
@@ -218,6 +220,8 @@ Here is the Steam Deck's 64GB storage (before the upgrade)
 Here is the Steam Deck's 512GB storage (after the upgrade)
 
 {{< img src="20230117_007.jpg" alt="steam deck 512gb storage" >}}
+
+I didn't run any before/after benchmarks on the SSDs, those are easy enough to find [online](https://www.reddit.com/r/SteamDeck/comments/x0wdd8/disk_benchmarks_results_emmc_vs_nvme_vs_microsdxc/). Maybe it's confirmation bias, but the Steam Deck _feels_ snappier in the menus and loading games.
 
 # Conclusion
 
