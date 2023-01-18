@@ -207,7 +207,7 @@ After you're done, you'll have a blank SSD in the Steam Deck, so you'll have to 
 
 After that, you should be able to boot your Steam Deck and see the expanded storage. A couple more notes:
 
-- My replacement SSD didn't show up in Steam Deck BIOS (and the eBay seller specifically listed that it wouldn't)
+- My replacement SSD didn't show up in the Steam Deck BIOS (and the eBay seller specifically listed that it wouldn't)
 - When I reinstalled SteamOS, none of the controls worked (face buttons, joysticks, triggers, etc...) except for the touchscreen. After an update to the latest SteamOS, everything worked again.
 - The update got stuck on "Installing" for 10+ minutes. When I forced a power-off and restarted it, a different screen came up and it worked. :man_shrugging:
 
