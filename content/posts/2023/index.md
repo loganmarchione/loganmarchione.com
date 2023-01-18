@@ -25,7 +25,7 @@ You can purchase a large SSD for way less than Valve is charging and it's easy t
 
 # Introduction
 
-I wanted to pickup a [Steam Deck](https://www.steamdeck.com/en/) and was stuck on what model to purchase. The only difference between models (besides an etched glass display and a Steam Community profile bundle) is the size of the internal storage.
+I wanted to pick up a [Steam Deck](https://www.steamdeck.com/en/) and was stuck on what model to purchase. The only difference between models (besides an etched glass display and a Steam Community profile bundle) is the size of the internal storage.
 
 - $399 - 64 GB eMMC
 - $529 - 256 GB NVMe SSD
