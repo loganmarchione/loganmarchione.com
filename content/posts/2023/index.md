@@ -119,7 +119,7 @@ Because M.2 2230 SSDs are not commonly sold to retail customers (e.g., most PCs 
 - 2A max power draw (manufacturers will often give measurments in watts, so you'll have to convert using `A = W/V`)
 - keep in mind that the M.2 slot is limited to PCIe Gen3 x4 (so a PCIe Gen4 drive is overkill)
 
-Below are some SSDs I found in my searching. All of these are 512GB, except the Inland, which only comes in a 1TB version. I stumbled upon a much more [extensive post](https://dancharblog.wordpress.com/2020/03/19/upgrade-sl3-or-spx-to-1tb/) about replacement SSDs, so be sure to check that out for even more options.
+Below are some SSDs I found in my searching. All of these are 512GB, except the Inland, which only comes in a 1TB version. I also stumbled upon a much more [extensive post](https://dancharblog.wordpress.com/2020/03/19/upgrade-sl3-or-spx-to-1tb/) about replacement SSDs, so be sure to check that out for even more options.
 
 
 
