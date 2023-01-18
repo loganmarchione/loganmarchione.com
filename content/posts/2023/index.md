@@ -36,7 +36,7 @@ Every Steam Deck has a microSD card slot, so one would be tempted to purchase th
 1. The microSD card is significantly slower than any other kind of internal storage (eMMC or NVMe).
 1. Steam needs space for the [shader cache](https://www.gamersdirector.com/steam/what-is-steam-deck-shader-pre-caching/), but this space can only be on the internal storage, not the microSD card (there are hacks to move the shader cache to the microSD card, but performance is terrible). This means that a 64GB eMMC module can quickly fill up not with games, but with shader caches from the games. Obviously, the larger the game, the larger the shader cache required.
 
-Because of this, I wanted at least a 256GB SSD, but didn't want to pay the storage premium that Valve is charging.
+Because of this, I wanted at least a 256GB SSD, but didn't want to pay the storage premium that Valve was charging.
 
 - A 256GB Steam Deck is a $130 upgrade from the base model, when a 256GB SSD itself can be bought online for $50
 - A 512GB Steam Deck is a $250 upgrade from the base model, when a 512GB SSD itself can be bought online for $100
