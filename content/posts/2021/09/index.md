@@ -64,7 +64,7 @@ The site URL Amplify gives you is something like `https://branch-name.d1m7bkiki6
 
 ## What I didn't like
 
-* Lack of IPv6 support - As far as I can find, Amplify does not support IPv6 (yet). There was a [GitHub issue](https://github.com/aws-amplify/amplify-js/issues/2769) that was closed as stale, so I'm guessing it's not high on the AWS priority list. Even though I don't browse my own site over IPv6 (my ISP doesn't offer it), I want to offer IPv6 to my readers.
+* Lack of IPv6 support - As far as I can find, Amplify does not support IPv6 (yet). There was a [GitHub issue](https://github.com/aws-amplify/amplify-js/issues/2769) that was closed as stale, and [another](https://github.com/aws-amplify/amplify-hosting/issues/2474) that's been sitting open, so I'm guessing it's not high on the AWS priority list. Even though I don't browse my own site over IPv6 (my ISP doesn't offer it), I want to offer IPv6 to my readers.
 * The ability to arbitrarily host files on my VPS - I can't understate how nice it is to have a VPS in the cloud. I can uploads some random files and then quickly create an Nginx alias to access them. I could replace that with S3, but I'm already paying for the VPS, might as well use it.
 
 # Conclusion
