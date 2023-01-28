@@ -43,8 +43,8 @@ This site is generated with [Hugo](https://gohugo.io/). These stats are heavily 
 | Number of pages                 | {{< stats_count_regular_pages >}}             |
 | Number of posts                 | [{{< stats_count_posts >}}](/posts)           |
 | Number of non-posts             | {{< stats_count_non_posts >}}                 |
-| Nubmer of tags                  | [{{< stats_count_tags >}}](/tags)             |
-| Nubmer of categories            | [{{< stats_count_categories >}}](/categories) |
+| Number of tags                  | [{{< stats_count_tags >}}](/tags)             |
+| Number of categories            | [{{< stats_count_categories >}}](/categories) |
 | Total words written (in posts)  | {{< stats_word_count_total >}}                |
 | Average words per post          | {{< stats_word_count_avg >}}                  |
 | Oldest post                     | {{< stats_list_post_oldest >}}                |
