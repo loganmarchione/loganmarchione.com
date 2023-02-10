@@ -33,3 +33,20 @@ git add .
 git commit -m "Update some stuff"
 git push
 ```
+
+## GitHub Actions
+
+Below is a visual representation of the GitHub Actions workflows.
+
+```mermaid
+  graph TD
+    A((Start)) --> B[Create branch] & C[Commit to master]
+    B --> D[Commits]
+    C --> AA["Deploy to production site (loganmarchione.com)"] & BB["Deploy to development site (loganmarchione.github.io)"]
+    D --> E[Pull request to master]
+    G --> C
+    E --> BB
+    H{Dev site looks good?} -- No --> D
+    BB --> H
+    H -- Yes --> G[Merge PR]
+```
