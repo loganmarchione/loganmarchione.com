@@ -41,7 +41,7 @@ Below is a visual representation of the GitHub Actions workflows.
 ```mermaid
   graph TD
     A((Start)) --> B[Create branch] & C[Commit to master]
-    B --> D[Commits]
+    B --> D[Commits to branch]
     C --> AA["Deploy to production site (loganmarchione.com)"] & BB["Deploy to development site (loganmarchione.github.io)"]
     D --> E[Pull request to master]
     G --> C
