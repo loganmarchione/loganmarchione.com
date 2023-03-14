@@ -42,6 +42,7 @@ params:
     disableThemeToggle: false
 
     ShowReadingTime: true
+    ShowWordCount: true
     ShowShareButtons: true
     disableSpecial1stPost: true
     comments: false
