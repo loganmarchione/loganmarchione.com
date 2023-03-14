@@ -1,7 +1,7 @@
-github.com/adityatelange/hugo-PaperMod v0.0.0-20221112073733-4bd96d62719b h1:qVMvCj2yHk9oXrUSKmgtF1H4OiKE9unXClYnhMLOUHA=
-github.com/adityatelange/hugo-PaperMod v0.0.0-20221112073733-4bd96d62719b/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
-github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221214231933-18cbd8ebaf61 h1:/sq+nKzveVF5hhxi5IM4GJ+qFh2XEcqcrEdhncsbr+8=
-github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20221214231933-18cbd8ebaf61/go.mod h1:iQ64e0sT77NgciPvBsFtoMkHVQjf784FmRZS9IdzJ8E=
-github.com/loganmarchione/homelab-svg-assets v0.0.0-20221219185027-05c6e2a60caf h1:vlrwzjTDccs68AkluXLaGRhEqsA1pAFSUa5WsNKkQlU=
-github.com/loganmarchione/homelab-svg-assets v0.0.0-20221219185027-05c6e2a60caf/go.mod h1:6pJO5cGKHNbObJ81HtJWt72algIDNUilaUARhSmkgXc=
-github.com/simple-icons/simple-icons v0.0.0-20221211155301-e5b3b29f1b12/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20230304174218-d67462d0f3f2 h1:M+LrKSWoEu2Q6tcSXU72jJx+hefP2lzC5+vN+X8JzUc=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20230304174218-d67462d0f3f2/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20230301231952-9a5dcc89b5d8 h1:7Jca1thiUGIgTtFIaG8eNd/MdeohkTKLcMskQEH4Yh0=
+github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20230301231952-9a5dcc89b5d8/go.mod h1:zDOiXf41enrQS+nu8sqcGMWQC34Nlbtlw6nOo6tiBRA=
+github.com/loganmarchione/homelab-svg-assets v0.0.0-20230313193420-aafdfe1b20bd h1:i03IEiijpq4NovypSMmhODw3Gxo3FBARQwjQUJr95X8=
+github.com/loganmarchione/homelab-svg-assets v0.0.0-20230313193420-aafdfe1b20bd/go.mod h1:6pJO5cGKHNbObJ81HtJWt72algIDNUilaUARhSmkgXc=
+github.com/simple-icons/simple-icons v0.0.0-20230227135002-a766e8488428/go.mod h1:oOgUUt8yVYOso/wEBi2ojfZP2MU/xxiNccIpaE+jCvE=
