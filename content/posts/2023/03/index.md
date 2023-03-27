@@ -1,12 +1,12 @@
 ---
-title: "Continuous Delivery with Docker Compose"
+title: "Continuous Delivery with Docker Compose and Drone"
 date: "2023-03-26"
 author: "Logan Marchione"
 categories:
   - "oc"
   - "linux"
 cover:
-    image: "/assets/featured/featured_steam_deck.svg"
+    image: "/assets/featured/featured_drone.svg"
     alt: "featured image"
     relative: false
 ---
@@ -17,7 +17,7 @@ I'm slowly [transitioning](/2022/12/k3s-cluster-updates/) all of my applications
 
 I (try to) practice GitOps, so all of my Kubernetes configuration is in a [public GitHub repo](https://github.com/loganmarchione/k8s_homelab). I'm happily using [GitHub Actions](https://github.com/features/actions) and [Renovatebot](https://github.com/renovatebot/renovate) for Continuous Integration (CI). For example, each PR has tests run on it, then if specific conditions are met, the PR is merged. For Continuous Delivery (CD) I'm using [Flux](https://fluxcd.io/flux/), which runs in my K3s cluster and constantly tries to synchronize the current state to the "golden" state of the cluster on GitHub. This way, every change made to the `master` branch will be rolled out via Flux automatically.
 
-However, I still have some apps running on Docker Compose, and they might never make the transition to K3s (for one reason or another). I can still use tools for CI, but there are no real tools for CD when it comes to Docker Compose. When I merge PRs into `master`, I need to manually SSH into my Docker server, run `git pull`, then run `docker compose up -d` on each updated compose file. This is a common complaint when searching online, and I found a whole article [here](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) about different solutions.
+However, I still have some apps running on Docker Compose, and they might never make the transition to K3s (for one reason or another). I can still use tools for CI, but there are no real tools for CD when it comes to Docker Compose. When I merge PRs into `master`, I need to manually SSH into my Docker server, run `git pull`, then run `docker compose up -d` on each updated Compose file. This is a common complaint when searching online, and I found a whole article [here](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) about different solutions.
 
 This post is my attempt at CD for Docker Compose.
 
@@ -39,12 +39,13 @@ Both [Harbormaster](https://gitlab.com/stavros/harbormaster) and [Watchtower](ht
 - I would have to setup/maintain another application
 - Both of these applications need access to the Docker socket (which I don't like to give out)
 - How would I be notified of a failure to deploy new applications? (i.e., who watches the watchers?)
-- What kind of logs would these tools keep? How long would they keep them for?
+- What kind of logs would these tools keep?
+- How long would the logs be kept?
 - Why use a preexisting solution when I can spend days over-engineering something? :man_shrugging:
 
 # Push-based approach
 
-My K3s stack runs at home, but the code is public, so I'm using GitHub as my git repository and GitHub Actions as my CI service.
+My K3s stack runs at home, but the [code is public](https://github.com/loganmarchione/k8s_homelab), so I'm using GitHub as my git repository and GitHub Actions as my CI service.
 
 My Docker Compose stack also runs at home, but the Compose files aren't public (yet), so they're hosted on my [Gitea](https://gitea.io/) instance where my CI platform is [Drone](https://www.drone.io/).
 
@@ -61,7 +62,7 @@ The basic idea is this:
 **THIS IS WHERE THE CD STARTS**
 
 4. When `master` is updated, another Drone pipeline runs that SSHs from Drone into my Docker host and runs a shell script
-5. That shell script pulls the latest compose files from git (e.g., `git pull`) then runs a `for` loop to run `docker compose up -d` on each compose file
+5. That shell script pulls the latest Compose files from git (e.g., `git pull`) then runs a `for` loop to run `docker compose up -d` on each Compose file
   - The shell script logs to standard out, which means that logs are stored in Drone
   - If the exit code isn't `0`, the Drone pipeline fails, which emails me
 
@@ -120,7 +121,7 @@ steps:
 
 Then, the actual contents of `script.sh` from the example above. It basically does the following:
 
-- change directory to the git repo containing all of the Docker Compose files
+- change directory to the git repo containing all of the Compose files
 - run `git pull`
 - for each `docker-compose.yml` file, run `docker compose pull` and then `docker compose up -d`
 
