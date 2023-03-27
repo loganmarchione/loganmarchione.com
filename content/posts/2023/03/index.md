@@ -1,5 +1,5 @@
 ---
-title: "Docker Compose Continuous Delivery"
+title: "Continuous Delivery with Docker Compose"
 date: "2023-03-26"
 author: "Logan Marchione"
 categories:
@@ -17,14 +17,16 @@ I'm slowly [transitioning](/2022/12/k3s-cluster-updates/) all of my applications
 
 I (try to) practice GitOps, so all of my Kubernetes configuration is in a [public GitHub repo](https://github.com/loganmarchione/k8s_homelab). I'm happily using [GitHub Actions](https://github.com/features/actions) and [Renovatebot](https://github.com/renovatebot/renovate) for Continuous Integration (CI). For example, each PR has tests run on it, then if specific conditions are met, the PR is merged. For Continuous Delivery (CD) I'm using [Flux](https://fluxcd.io/flux/), which runs in my K3s cluster and constantly tries to synchronize the current state to the "golden" state of the cluster on GitHub. This way, every change made to the `master` branch will be rolled out via Flux automatically.
 
-However, I still have some apps running on Docker Compose, and they might never make the transition to K3s (for one reason or another). I can still use tools for CI, but there are no real tools for CD when it comes to Docker Compose. When I merge PRs into `master`, I need to SSH into my Docker server, run `git pull`, then run `docker compose up -d` on each updated compose file. There is a common complaint when searching online, and I found a whole article [here](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) about different solutions. This is my attempt at CD for Docker Compose.
+However, I still have some apps running on Docker Compose, and they might never make the transition to K3s (for one reason or another). I can still use tools for CI, but there are no real tools for CD when it comes to Docker Compose. When I merge PRs into `master`, I need to manually SSH into my Docker server, run `git pull`, then run `docker compose up -d` on each updated compose file. This is a common complaint when searching online, and I found a whole article [here](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) about different solutions.
+
+This post is my attempt at CD for Docker Compose.
 
 # Pull vs push
 
 As mentioned in [this](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) article, there are generally two ways to tackle this problem:
 
 - Pull-based approach
-  - An agent runs as an application and constantly tries to synchronize the current state to the "golden" state in git
+  - An agent runs as a container and constantly tries to synchronize the current state to the "golden" state in git
   - This is how Argo and Flux work
 - Push-based approach 
   - On each change to master, some process runs via CI pipeline that pushes the changes to the server
@@ -42,7 +44,9 @@ Both [Harbormaster](https://gitlab.com/stavros/harbormaster) and [Watchtower](ht
 
 # Push-based approach
 
-My K3s stack runs at home, but the code is public, so I'm using GitHub as my git repository and GitHub Actions as my CI service. My Docker Compose stack also runs at home, but the Compose files aren't public (yet), so they're hosted on my [Gitea](https://gitea.io/) instance where my CI platform is [Drone](https://www.drone.io/).
+My K3s stack runs at home, but the code is public, so I'm using GitHub as my git repository and GitHub Actions as my CI service.
+
+My Docker Compose stack also runs at home, but the Compose files aren't public (yet), so they're hosted on my [Gitea](https://gitea.io/) instance where my CI platform is [Drone](https://www.drone.io/).
 
 The basic idea is this:
 
@@ -72,7 +76,7 @@ Next, I needed to create a Drone pipeline to SSH into my Docker host. Drone alre
 - running Alpine
 - installing SSH
 - echoing the SSH private key from a Drone secret into a file
-- SSHing into the Docker host from Alpine and running a shell script
+- SSHing from Alpine into my Docker host, then running a shell script
 
 
 ```
@@ -86,9 +90,6 @@ trigger:
     - master
   event:
     - push
-
-depends_on:
-  - Lint on master
 
 steps:
   - name: Deploy
