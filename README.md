@@ -17,7 +17,7 @@ This repo also builds https://loganmarchione.github.io on every PR and update to
 git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 
-# if using vagrant, run these
+# if using Vagrant, run these
 vagrant up
 vagrant ssh
 cd /vagrant
