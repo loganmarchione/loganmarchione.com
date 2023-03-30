@@ -20,7 +20,6 @@ cd loganmarchione.com
 # if using Vagrant, run these
 vagrant up
 vagrant ssh
-cd /vagrant
 
 # update hugo modules (optional)
 hugo mod get
