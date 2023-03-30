@@ -25,12 +25,10 @@ vagrant ssh
 hugo mod get
 go mod tidy
 
-# make changes to the site (optional)
-
-# test changes locally
+# run
 hugo server -DEF --bind=0.0.0.0 --ignoreCache
 
-# test in browser http://localhost:1313
+# page will be available at http://localhost:1313
 
 # add, commit, push to kick off GitHub Actions
 git add .
