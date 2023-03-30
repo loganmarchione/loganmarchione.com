@@ -17,6 +17,11 @@ This repo also builds https://loganmarchione.github.io on every PR and update to
 git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 
+# if using vagrant, run these
+vagrant up
+vagrant ssh
+cd /vagrant
+
 # update hugo modules (optional)
 hugo mod get
 go mod tidy
@@ -24,7 +29,7 @@ go mod tidy
 # make changes to the site (optional)
 
 # test changes locally
-hugo server -DEF --ignoreCache
+hugo server -DEF --bind=0.0.0.0 --ignoreCache
 
 # test in browser http://localhost:1313
 
