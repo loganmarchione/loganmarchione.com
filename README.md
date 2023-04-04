@@ -26,7 +26,7 @@ hugo mod get
 go mod tidy
 
 # run
-hugo server -DEF --bind=0.0.0.0 --ignoreCache
+hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms
 
 # page will be available at http://localhost:1313
 
