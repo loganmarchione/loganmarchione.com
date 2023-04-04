@@ -1,6 +1,6 @@
 ---
 title: "Continuous Delivery with Docker Compose and Drone"
-date: "2023-03-26"
+date: "2023-04-04"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -15,22 +15,23 @@ cover:
 
 I'm slowly [transitioning](/2022/12/k3s-cluster-updates/) all of my applications from a Docker Compose-based setup to running on Kubernetes (specifically, [K3s](https://k3s.io/)). Part of the reason I love Kubernetes is the tooling around it.
 
-I (try to) practice GitOps, so all of my Kubernetes configuration is in a [public GitHub repo](https://github.com/loganmarchione/k8s_homelab). I'm happily using [GitHub Actions](https://github.com/features/actions) and [Renovatebot](https://github.com/renovatebot/renovate) for Continuous Integration (CI). For example, each PR has tests run on it, then if specific conditions are met, the PR is merged. For Continuous Delivery (CD) I'm using [Flux](https://fluxcd.io/flux/), which runs in my K3s cluster and constantly tries to synchronize the current state to the "golden" state of the cluster on GitHub. This way, every change made to the `master` branch will be rolled out via Flux automatically.
+I (try to) practice GitOps, so all of my Kubernetes configuration is in a [public GitHub repo](https://github.com/loganmarchione/k8s_homelab). I'm happily using [GitHub Actions](https://github.com/features/actions) and [Renovatebot](https://github.com/renovatebot/renovate) for Continuous Integration (CI). For example, each PR has tests run on it, then if specific conditions are met, the PR is merged. For Continuous Delivery (CD) I'm using [Flux](https://fluxcd.io/flux/), which runs in my K3s cluster and constantly tries to synchronize the current cluster state to the "golden" state of the cluster on GitHub. This way, every change made to the `master` branch will be rolled out via Flux automatically.
 
 However, I still have some apps running on Docker Compose, and they might never make the transition to K3s (for one reason or another). I can still use tools for CI, but there are no real tools for CD when it comes to Docker Compose. When I merge PRs into `master`, I need to manually SSH into my Docker server, run `git pull`, then run `docker compose up -d` on each updated Compose file. This is a common complaint when searching online, and I found a whole article [here](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) about different solutions.
 
-This post is my attempt at CD for Docker Compose.
+This post is my attempt at implementing CD for Docker Compose.
 
 # Pull vs push
 
 As mentioned in [this](https://www.augmentedmind.de/2022/03/20/continuous-deployment-with-docker/) article, there are generally two ways to tackle this problem:
 
 - Pull-based approach
-  - An agent runs as a container and constantly tries to synchronize the current state to the "golden" state in git
-  - This is how Argo and Flux work
+  - An agent runs as a container and constantly tries to synchronize the current cluster state to the "golden" state in git
+  - This is how Argo and Flux work (but I'm not running in Kubernetes)
+  - This is how Harbormaster and Watchtower work (more on that below)
 - Push-based approach 
   - On each change to master, some process runs via CI pipeline that pushes the changes to the server
-  - This is what I'm doing
+  - This is what I'm attempting
 
 ## What about Harbormaster or Watchtower?
 
@@ -51,17 +52,15 @@ My Docker Compose stack also runs at home, but the Compose files aren't public (
 
 The basic idea is this:
 
-**THIS IS WHERE THE CI STARTS**
+_THIS IS WHERE THE CI STARTS_
 
 1. A PR is opened on Gitea (e.g., by Renovatebot to bump a Docker tag from `2.42.0` to `2.43.0`)
-2. Drone runs a pipeline to automatically check specific things (e.g, linting, compatability, etc...)
-3. Assuming the pipeline passed:
-  - `major` and `minor` changes are manually merged by me in Gitea's web interface
-  - `patch` changes are automatically merged
+2. Drone runs a pipeline to automatically check specific things (e.g, linting, compatibility, etc...)
+3. Assuming the pipeline passed, I manually merge each PR in Gitea's web interface
 
-**THIS IS WHERE THE CD STARTS**
+_THIS IS WHERE THE CD STARTS_
 
-4. When `master` is updated, another Drone pipeline runs that SSHs from Drone into my Docker host and runs a shell script
+4. When `master` is updated (from the PR merge), another Drone pipeline runs that SSHs from Drone into my Docker host and runs a shell script
 5. That shell script pulls the latest Compose files from git (e.g., `git pull`) then runs a `for` loop to run `docker compose up -d` on each Compose file
   - The shell script logs to standard out, which means that logs are stored in Drone
   - If the exit code isn't `0`, the Drone pipeline fails, which emails me
@@ -70,7 +69,7 @@ The basic idea is this:
 
 Steps 1-3 above were already in place, but steps 4-5 were the new steps I needed.
 
-First, I had to create a `drone` user on my Docker host, give it [permissions](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to run docker commands, then setup a SSH keypair. The public key would live on the server, while the private key would live in Drone as a [secret](https://docs.drone.io/secret/).
+First, I had to create a `drone` user on my Docker host, give it [permissions](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to run docker commands, then setup a SSH keypair. The public key would live on the Docker host, while the private key would live in Drone as a [secret](https://docs.drone.io/secret/).
 
 Next, I needed to create a Drone pipeline to SSH into my Docker host. Drone already has a [SSH runner](https://github.com/drone-runners/drone-runner-ssh), but that's another thing to install (in addition to the Docker runner), so I figured I could just use a small Docker container (e.g., Alpine) as my SSH client. In the pipeline below, I am doing the following on each `push` to `master`:
 
@@ -165,6 +164,6 @@ The only catch with this script is to be sure that the user running it (e.g., `d
 
 # Conclusion
 
-I've been using this setup for a week or so and haven't had any issues (so far). It's definitely a little hacked together, but it requires no additional tools that I'm not already using.
+I've been using this setup for about a month now and haven't had any issues (so far). It very much mirrors my Kubernetes workflow (e.g., merge PRs from a web interface and the rest is automatic). It's definitely a _little_ hacked together, but it requires no additional tools that I'm not already using. 
 
 \-Logan
