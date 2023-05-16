@@ -91,9 +91,35 @@ Now, visit `http://your_docker_server_IP:8888/install.php` and you will see the 
 
 # Conclusion
 
-The only caveats I can think of running this way are:
+I can only think of a few caveats of running this way and they are all easy to overcome.
 
-1. Upgrades - Normally you [upgrade](https://www.dokuwiki.org/install:upgrade) DokuWiki by downloading a newer `tgz` file and overwriting your current setup. However, this kind of a pain in Docker. It's much easier to install the [Upgrade plugin](https://www.dokuwiki.org/plugin:upgrade) and use that from the web interface.
+1. Upgrades - Normally you [upgrade](https://www.dokuwiki.org/install:upgrade) DokuWiki by downloading a newer `tgz` file and overwriting your current setup. However, this kind of a pain in Docker. It's much easier to install the [official upgrade plugin](https://www.dokuwiki.org/plugin:upgrade) and use that from the web interface.
 1. Plugins - I don't have a ton of plugins (I don't use LDAP, databases, galleries, etc..). Because of this, the default PHP modules are more than enough for me. However, if you needed more, PHP offers [instructions](https://github.com/docker-library/docs/blob/master/php/README.md#how-to-install-more-php-extensions) on how to build your own PHP image.
+1. PHP settings - By default, the [max file upload size](https://www.dokuwiki.org/faq:uploadsize) is 2MB. You can get around this by adding a volume for the PHP directory (compose example below), copying the demo config file (e.g., `cp -p php.ini-production php.ini`), editing `upload_max_filesize` and `post_max_size` in `php.ini`, and restarting the container.
+```
+version: '3'
+services:
+  dokuwiki:
+    container_name: dokuwiki
+    image: php:7-apache-bullseye
+    restart: unless-stopped
+    networks:
+      - dokuwiki
+    ports:
+      - '8888:80'
+    volumes:
+      - 'dokuwiki_config:/var/www/html'
+      - 'php_config:/usr/local/etc/php'
+
+networks:
+  dokuwiki:
+
+volumes:
+  dokuwiki_config:
+    driver: local
+  php_config:
+    driver: local
+
+```
 
 \-Logan
