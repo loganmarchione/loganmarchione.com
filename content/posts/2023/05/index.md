@@ -1,23 +1,23 @@
 ---
 title: "LoRa and Meshtastic"
-date: "2023-05-10"
+date: "2023-05-24"
 author: "Logan Marchione"
 categories:
   - "oc"
   - "linux"
 cover:
-    image: "/assets/featured/featured_drone.svg"
+    image: "/assets/featured/featured_meshtastic.svg"
     alt: "featured image"
     relative: false
 ---
 
 # Introduction
 
-I've been itching to work on some hardware projects lately and kept seeing ESP32-related things pop up on Reddit. 
+I've been itching to work on some hardware projects lately and kept seeing ESP32-related things pop up on Reddit. In particular, I was coming across a lot of LoRa projects, and then started down a rabbit hole.
 
 # LoRa
 
-[LoRa](https://en.wikipedia.org/wiki/LoRa) (from **lo**ng **ra**nge) is a proprietary radio technology that is owned by [Semtech](https://en.wikipedia.org/wiki/Semtech). It is designed for long-range (e.g., 10 miles), low-bandwidth (i.e., measured in Kbps), low-power communication, primarily for the [internet of things](https://en.wikipedia.org/wiki/Internet_of_things) (IoT) network.
+[LoRa](https://en.wikipedia.org/wiki/LoRa) (from **lo**ng **ra**nge) is a proprietary radio technology that is owned by [Semtech](https://en.wikipedia.org/wiki/Semtech). It is designed for long-range (e.g., 10km), low-bandwidth (i.e., measured in Kbps), low-power communication, primarily for [internet of things](https://en.wikipedia.org/wiki/Internet_of_things) (IoT) networks.
 
 LoRa defines the **physical** layer that controls how the radio signals are modulated. Specifically, LoRa uses [chirp spread spectrum](https://en.wikipedia.org/wiki/Chirp_spread_spectrum) (CSS) to encode information. You can view more about LoRa and CSS in [this](https://www.youtube.com/watch?v=dxYY097QNs0) video.
 
@@ -59,6 +59,7 @@ It's important to note that you can use LoRa **without** using LoRaWAN. Other Lo
 * Decentralization
 * Great battery life
 * Optional GPS location sharing
+* [Open-source software](https://github.com/meshtastic/firmware)
 
 Unlike the traditional cellular network, each end-user device (e.g., phone, laptop, etc...) connects to a LoRa radio running Meshtastic, and all LoRa radios running Meshtastic can mesh together. Messages are relayed through LoRa radios until they reach their destination.
 
@@ -69,12 +70,12 @@ Unlike the traditional cellular network, each end-user device (e.g., phone, lapt
 Meshtastic firmware is available for a handful of [devices](https://meshtastic.org/docs/supported-hardware), but I was looking for:
 
 * 915MHz support (because I'm in the US)
-* WiFi and Bluetooth (this meant the MCU needed to be an ESP32 instead of the nRF52840, which lacks WiFi)
+* WiFi and Bluetooth (this meant the microcontroller needed to be an ESP32 instead of the nRF52840, which lacks WiFi)
 * USB-C
 * display
 * GPS (optional)
 
-I was also looking for the SX1262 instead of the older SX1276 (source [here](https://www.semtech.com/uploads/design-support/SG-SEMTECH-WSP.pdf)).
+I was also looking for the newer SX1262 chip instead of the older SX1276 (source [here](https://www.semtech.com/uploads/design-support/SG-SEMTECH-WSP.pdf)).
 
 {{< img src="20230510_002.png" alt="semtech chip comparison" >}}
 
@@ -88,31 +89,71 @@ This left me with the following options:
 * [LILYGO® TTGO Lora T3S3-V1.0](https://www.aliexpress.us/item/3256804440825086.html) - No GPS
 
 
-In the end, I purchased 2x:
+In the end, I purchased two of each of the following:
 
-* [LILYGO® TTGO Lora T3S3-V1.0](https://www.aliexpress.us/item/3256804440825086.html) - No GPS
+* [LILYGO® TTGO Lora T3S3-V1.0](https://www.aliexpress.us/item/3256804440825086.html) (the SX1262 915MHz version, this took about 2 weeks to arrive)
 * [3D printed case](https://www.etsy.com/listing/1470821285/ttgo-t3s3-case-for-meshtastic)
 * [915MHz antenna](https://www.amazon.com/915MHz-LoRa-Gateway-Antenna-Connector/dp/B091PRHPTJ) (with SMA male connector)
 
+{{< img src="20230524_001.jpg" alt="lora t3s3" >}}
+
 ## Device flashing
 
-I don't mind using the CLI, so I used the Python installer, but they also have a [web-based installer](https://meshtastic.org/docs/getting-started/flashing-firmware/esp32/) available too.
+First, I made sure the device was showing up. This showed that my device was using `/dev/ttyACM0`.
 
 ```
 mkdir -p ~/Downloads/lora
 cd ~/Downloads/lora
 python3 -m venv venv
 source venv/bin/activate
-pip install meshtastic-flasher
-meshtastic-flasher
+pip install esptool
+esptool.py chip_id
 ```
+
+I could not get the [web-based installer](https://meshtastic.org/docs/getting-started/flashing-firmware/esp32/web-flasher) to work, so I decided to flash with the [command-line](https://meshtastic.org/docs/getting-started/flashing-firmware/esp32/cli-script). :man_shrugging:
+
+I downloaded the latest beta firmware. At the time of this writing, this was `v2.1.11.5ec624d`.
+
+```
+wget https://github.com/meshtastic/firmware/releases/download/v2.1.11.5ec624d/firmware-2.1.11.5ec624d.zip
+unzip firmware-2.1.11.5ec624d.zip
+```
+
+This is the command I used to flash. Don't blindly copy/paste this, because the firmware is specific for the LILYGO® TTGO Lora T3S3-V1.0.
+
+```
+./device-install.sh -p /dev/ttyACM0 -f firmware-tlora-t3s3-v1-2.1.11.5ec624d.bin
+```
+
+After manually restarting the device, I was greeted by the Meshtastic logo. I repeated the flashing process for the other device.
+
+{{< img src="20230524_002.jpg" alt="meshtastic boot logo" >}}
+
+## Software setup
+
+Meshtastic offers a variety of [apps](https://meshtastic.org/docs/software), including [Apple](https://meshtastic.org/docs/software/apple/installation) and [Android](https://meshtastic.org/docs/software/android/installation) apps, as well as a [Python](https://meshtastic.org/docs/software/python/cli) app, and even a [web client](https://meshtastic.org/docs/software/web-client) (either served directly from the device's local web server, or from your browser via the Web Serial protocol).
+
+I paired one device to the Android app and another to my browser via the Web Serial protocol.
+
+{{< img src="20230524_003.png" alt="meshtastic topology" >}}
+
+Once paired and connected, I made sure to set the region to `US`, since I wanted to be on the 915MHz frequency. I didn't change the pre-shared key, so both devices were able to see one another right away and communicate.
+
+
+Here, you can see the messages on the web app.
+
+{{< img src="20230524_004.png" alt="web app" >}}
+
+Here, you can see the messages on the Android app.
+
+{{< img src="20230524_005.png" alt="android app" >}}
+
+To be clear, these devices are **NOT** communicating via text (SMS), but instead over LoRa, completely off-grid! :exploding_head:
+
+{{< img src="20230524_006.jpg" alt="meshtastic devices" >}}
 
 # Conclusion
 
-https://www.thethingsnetwork.org/docs/lorawan/what-is-lorawan/
-https://lora-alliance.org/resource_hub/what-is-lorawan/
-https://tylercipriani.com/blog/2022/07/31/meshtastic-a-review/
-
-asdf
+I'm still waiting on the 3D printed cases to arrive, but I'm going to try to head outside and do some range tests with these devices. Very cool!
 
 \-Logan
