@@ -114,7 +114,7 @@ Once I get to the [post-installation](https://wiki.archlinux.org/title/installat
 
 # Conclusion
 
-I've been using this T14 on and off for about a week. I run KDE Plasma, so it's very customizable, and I was able to tweak power settings, Bluetooth, trackpad speed, etc... All the hardware works, and it does everything I ask it. I haven't run the battery down to zero, but the projected 13 hour battery life sounds correct (assuming the screen brightness isn't maxed out).
+I've been using this T14 on and off for about a week. I run KDE Plasma, so it's very customizable, and I was able to tweak power settings, Bluetooth, trackpad speed, etc... All the hardware works, and it does everything I ask it. I haven't run the battery down to zero, but the projected 13 hour battery life works out to about 8 hours (depending on what I'm doing).
 
 No complaints so far! I need to pickup a sleeve and maybe a few adapters (DisplayPort and VGA come to mind).
 
