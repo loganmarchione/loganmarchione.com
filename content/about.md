@@ -28,6 +28,7 @@ I hope you find something of value here! Enjoy!
 {{< homelab-svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="sourcehut" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
+{{< homelab-svg-assets-inline src="lemmy" >}} [Lemmy](https://lemmy.world/u/loganmarchione)  
 {{< homelab-svg-assets-inline src="php" >}} [Packagist (PHP)](https://packagist.org/packages/loganmarchione/)  
 {{< homelab-svg-assets-inline src="npm" >}} [NPM](https://www.npmjs.com/~loganmarchione)  
 
