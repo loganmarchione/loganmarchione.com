@@ -21,7 +21,7 @@ I hope you find something of value here! Enjoy!
 ## Presence on the web
 
 {{< homelab-svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione)  
-{{< homelab-svg-assets-inline src="mastodon-no-gradient" >}} [Mastodon](https://mastodon.social/@loganmarchione)  
+{{< homelab-svg-assets-inline src="mastodon-no-gradient" >}} {{< raw_html >}}<a rel="me" href="https://mastodon.social/@loganmarchione">Mastodon</a>{{< /raw_html >}}  
 {{< homelab-svg-assets-inline src="docker" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
 {{< homelab-svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
 {{< homelab-svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
