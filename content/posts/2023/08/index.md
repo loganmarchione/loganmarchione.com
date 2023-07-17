@@ -7,7 +7,7 @@ categories:
   - "linux"
   - "pc-hardware"
 cover:
-    image: "/assets/featured/featured_meshtastic.svg"
+    image: "/assets/featured/featured_generic_thumb_up.svg"
     alt: "featured image"
     relative: false
 ---
