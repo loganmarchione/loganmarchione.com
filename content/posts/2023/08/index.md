@@ -112,7 +112,34 @@ I decided to go with [Gateron](https://www.gateron.co/) this time, just to try s
 
 ## Keycaps
 
-TEXT GOES HERE
+The Sinc has a split spacebar, so that removes a lot of options right away. Below are some keycap sets I considered, but ultimately passed on because they don't have a split spacebar:
+
+| Manufacturer                  | Name                                                                                                                | Profile        | Material                   | Comments                    |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------|----------------------------|-----------------------------|
+| Signature Plastics            | [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/)                                         | DSA            | dye-sublimated PBT         |                             |
+| Kono                          | [SA Granite](https://kono.store/products/sa-granite-keycap-set)                                                     | SA             | dye-sublimated PBT         |                             |
+| Kono                          | [KDS Solarized Dark](https://kono.store/products/kds-solarized-dark)                                                | Cherry         | dye-sublimated PBT         |                             |
+| Novelkeys???                  | [Cherry Milkshake](https://novelkeys.com/collections/keycaps/products/cherry-milkshake)                             | Cherry         | dye-sublimated PBT         |                             |
+| Novelkeys???                  | [DSA Milkshake](https://novelkeys.com/collections/keycaps/products/dsa-milkshake)                                   | DSA            | dye-sublimated PBT         |                             |
+| Drop                          | [/dev/tty](https://drop.com/buy/drop-matt3o-mt3-dev-tty-keycap-set)                                                 | MT3            | dye-sublimated PBT         |                             |
+| Drop                          | [Camillo](https://drop.com/buy/drop-mt3-camillo-keycap-set)                                                         | MT3            | doubleshot ABS             |                             |
+
+Below are keycaps that seemed like they would fit the Sinc.
+
+| Manufacturer                  | Name                                                                                                                | Profile        | Material                   | Comments                    |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------|----------------------------|-----------------------------|
+| Milkyway                      | [MW Retro Lights](https://spaceholdings.net/products/mw-retro-lights)                                               | Cherry         | dye-sublimated PBT         |                             |
+| Domikey                       | [DMK Ghost](https://www.ashkeebs.com/product/dmk-ghost-keycaps/)                                                    | Cherry         | doubleshot ABS             | Spacebar kit sold out       |
+| GMK                           | [GMK Foundation](https://cannonkeys.com/products/pre-order-gmk-foundation)                                          | Cherry         | doubleshot ABS             | Novelties kit sold out      |
+| GMK                           | [GMK DUALSHOT 2](https://omnitype.com/collections/keycaps/products/gmk-dualshot-2-keycaps)                          | Cherry         | doubleshot ABS             |                             |
+| GMK                           | [MTNU WOB](https://novelkeys.com/collections/keycaps/products/mtnu-wob)                                             | MTNU           | doubleshot PBT             | Pre-order                   |
+| GMK                           | [MTNU SUSU](https://novelkeys.com/collections/keycaps/products/mtnu-susu)                                           | MTNU           | doubleshot PBT             | Pre-order                   |
+| Signature Plastics            | [DSA Petrikeys](https://vala.supply/products/dsa-petrikeys)                                                         | DSA            | doubleshot ABS             | Would prefer text modifiers |
+| Signature Plastics            | [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2)                                                    | SA             | doubleshot ABS             |                             |
+| Drop                          | [Susuwatari](https://drop.com/buy/drop-matt3o-mt3-susuwatari-custom-keycap-set)                                     | MT3            | doubleshot ABS             |                             |
+| Drop                          | [/dev/tty R3](https://drop.com/buy/drop-matt3o-devtty-custom-keycap-set)                                            | MT3            | dye-sublimated PBT         | Unicorn barf kit sold out   |
+| Drop                          | [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set)                                                 | DCX            | doubleshot ABS             |                             |
+| PBTfans                       | [Cookies 'n Creme](https://kbdfans.com/products/pbtfans-cookies-n-creme)                                            | Cherry         | doubleshot ABS             |                             |
 
 ## Prices
 
