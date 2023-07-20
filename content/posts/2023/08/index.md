@@ -140,6 +140,7 @@ Below are keycaps that seemed like they would fit the Sinc.
 | Drop                          | [/dev/tty R3](https://drop.com/buy/drop-matt3o-devtty-custom-keycap-set)                                            | MT3            | dye-sublimated PBT         | Unicorn barf kit sold out   |
 | Drop                          | [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set)                                                 | DCX            | doubleshot ABS             |                             |
 | PBTfans                       | [Cookies 'n Creme](https://kbdfans.com/products/pbtfans-cookies-n-creme)                                            | Cherry         | doubleshot ABS             |                             |
+| PBTfans                       | [Retro Dark Lights](https://kbdfans.com/products/pbtfans-retro-dark-lights)                                         | Cherry         | doubleshot PBT             |                             |
 
 ## Prices
 
