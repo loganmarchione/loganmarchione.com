@@ -114,15 +114,15 @@ I decided to go with [Gateron](https://www.gateron.co/) this time, just to try s
 
 The Sinc has a split spacebar, so that removes a lot of options right away. Below are some keycap sets I considered, but ultimately passed on because they don't have a split spacebar:
 
-| Manufacturer                  | Name                                                                                                                | Profile        | Material                   | Comments                    |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------|----------------------------|-----------------------------|
-| Signature Plastics            | [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/)                                         | DSA            | dye-sublimated PBT         |                             |
-| Kono                          | [SA Granite](https://kono.store/products/sa-granite-keycap-set)                                                     | SA             | dye-sublimated PBT         |                             |
-| Kono                          | [KDS Solarized Dark](https://kono.store/products/kds-solarized-dark)                                                | Cherry         | dye-sublimated PBT         |                             |
-| Novelkeys???                  | [Cherry Milkshake](https://novelkeys.com/collections/keycaps/products/cherry-milkshake)                             | Cherry         | dye-sublimated PBT         |                             |
-| Novelkeys???                  | [DSA Milkshake](https://novelkeys.com/collections/keycaps/products/dsa-milkshake)                                   | DSA            | dye-sublimated PBT         |                             |
-| Drop                          | [/dev/tty](https://drop.com/buy/drop-matt3o-mt3-dev-tty-keycap-set)                                                 | MT3            | dye-sublimated PBT         |                             |
-| Drop                          | [Camillo](https://drop.com/buy/drop-mt3-camillo-keycap-set)                                                         | MT3            | doubleshot ABS             |                             |
+| Manufacturer                  | Name                                                                                                                | Profile        | Material                   |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------|----------------------------|
+| Signature Plastics            | [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/)                                         | DSA            | dye-sublimated PBT         |
+| Kono                          | [SA Granite](https://kono.store/products/sa-granite-keycap-set)                                                     | SA             | dye-sublimated PBT         |
+| Kono                          | [KDS Solarized Dark](https://kono.store/products/kds-solarized-dark)                                                | Cherry         | dye-sublimated PBT         |
+| Novelkeys???                  | [Cherry Milkshake](https://novelkeys.com/collections/keycaps/products/cherry-milkshake)                             | Cherry         | dye-sublimated PBT         |
+| Novelkeys???                  | [DSA Milkshake](https://novelkeys.com/collections/keycaps/products/dsa-milkshake)                                   | DSA            | dye-sublimated PBT         |
+| Drop                          | [/dev/tty](https://drop.com/buy/drop-matt3o-mt3-dev-tty-keycap-set)                                                 | MT3            | dye-sublimated PBT         |
+| Drop                          | [Camillo](https://drop.com/buy/drop-mt3-camillo-keycap-set)                                                         | MT3            | doubleshot ABS             |
 
 Below are keycaps that seemed like they would fit the Sinc.
 
