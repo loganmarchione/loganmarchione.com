@@ -147,25 +147,9 @@ Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a
 | PBTfans            | [Cookies 'n Creme](https://kbdfans.com/products/pbtfans-cookies-n-creme)                    | Cherry         | doubleshot ABS     | Would prefer text modifiers |
 | PBTfans            | [Retro Dark Lights](https://kbdfans.com/products/pbtfans-retro-dark-lights)                 | Cherry         | doubleshot PBT     |                             |
 
-In the end, I purchased two sets of keycaps. Neither had a dedicated 1U backspace key, so the F13 key would have to make due.
-
-First was the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set). This set cost $99.
+In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set) set. It didn't have a dedicated 1U backspace key, so the F13 key would have to make due. This set cost $99.
 
 {{< figure src="20230731_007.jpg" width="100%" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
-
-Second was the [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2). These six sets cost $203.
-
-{{< figure src="20230731_001.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_002.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_003.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_004.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_005.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_006.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
 
 ## Prices
 
