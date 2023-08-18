@@ -112,11 +112,10 @@ I decided to go with [Gateron](https://www.gateron.co/) this time, just to try s
 
 ## Keycaps
 
-The Sinc has a split spacebar, so that removes a lot of keycap options right away. Below are some keycap sets I considered, but ultimately passed on because they didn't have a split spacebar.
+The Sinc has a split spacebar, so that removed a lot of keycap options right away. Below are some keycap sets I considered, but ultimately passed on because they didn't have a split spacebar.
 
 | Manufacturer       | Name                                                                                        | Profile        | Material           |
 |--------------------|---------------------------------------------------------------------------------------------|----------------|--------------------|
-| Signature Plastics | [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/)                 | DSA            | dye-sublimated PBT |
 | Kono               | [SA Granite](https://kono.store/products/sa-granite-keycap-set)                             | SA             | dye-sublimated PBT |
 | Kono               | [KDS Solarized Dark](https://kono.store/products/kds-solarized-dark)                        | Cherry         | dye-sublimated PBT |
 | Novelkeys???       | [Cherry Milkshake](https://novelkeys.com/collections/keycaps/products/cherry-milkshake)     | Cherry         | dye-sublimated PBT |
@@ -128,7 +127,7 @@ In addition to the split spacebar, I also had to decide if I wanted to use a del
 
 {{< figure src="20230730_001.png" width="100%" alt="sinc rev4 layout backspace" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
 
-Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a split spacebar and if not included, a random key could take the place of backspace).
+Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a split spacebar and a 1U key to take the place of backspace).
 
 | Manufacturer       | Name                                                                                        | Profile        | Material           | Comments                    |
 |--------------------|---------------------------------------------------------------------------------------------|----------------|--------------------|-----------------------------|
@@ -138,6 +137,7 @@ Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a
 | GMK                | [GMK DUALSHOT 2](https://omnitype.com/collections/keycaps/products/gmk-dualshot-2-keycaps)  | Cherry         | doubleshot ABS     |                             |
 | GMK                | [MTNU WOB](https://novelkeys.com/collections/keycaps/products/mtnu-wob)                     | MTNU           | doubleshot PBT     | Pre-order                   |
 | GMK                | [MTNU SUSU](https://novelkeys.com/collections/keycaps/products/mtnu-susu)                   | MTNU           | doubleshot PBT     | Pre-order                   |
+| Signature Plastics | [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/)                 | DSA            | dye-sublimated PBT | Individual keys separate    |
 | Signature Plastics | [DSA Petrikeys](https://vala.supply/products/dsa-petrikeys)                                 | DSA            | doubleshot ABS     | Would prefer text modifiers |
 | Signature Plastics | [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2)                            | SA             | doubleshot ABS     |                             |
 | Signature Plastics | [DSS Honeywell](https://www.primekb.com/products/dss-honeywell)                             | DSS            | doubleshot ABS     |                             |
@@ -150,6 +150,36 @@ Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a
 In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set) set. It didn't have a dedicated 1U backspace key, so the F13 key would have to make due. This set cost $99.
 
 {{< figure src="20230731_007.jpg" width="100%" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
+
+I also considered these two sets, but decided to wait and see how I liked the DCX Solarized.
+
+First was the [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2). These six sets would have been $203.
+
+{{< figure src="20230731_001.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+{{< figure src="20230731_002.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+{{< figure src="20230731_003.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+{{< figure src="20230731_004.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+{{< figure src="20230731_005.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+{{< figure src="20230731_006.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
+
+Next was the [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/). These four sets would have been $180 (plus $10 for two split spacebars). DSA is nice because all the keys are the same profile, so any key can go anywhere.
+
+{{< figure src="20230818_001.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
+
+{{< figure src="20230818_002.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
+
+{{< figure src="20230818_003.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
+
+{{< figure src="20230818_004.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
+
+## Wrist wrest
+
+I'm currently using a wrist wrest (technically palm rest?) from Etsy, so I decided to look there again.
 
 ## Prices
 
