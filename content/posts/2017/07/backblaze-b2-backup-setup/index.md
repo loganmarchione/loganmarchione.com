@@ -41,7 +41,7 @@ For this, I was looking for a [raw storage endpoint](https://www.backblaze.com/b
 - [Amazon Cloud Drive](https://www.amazon.com/clouddrive)
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Amazon Glacier](https://aws.amazon.com/glacier/)
-- [Backblaze B2](https://www.backblaze.com/b2/cloud-storage.html)
+- [Backblaze B2](https://www.backblaze.com/cloud-storage)
 - [Google Nearline](https://cloud.google.com/storage-nearline/)
 - [Tarsnap](http://www.tarsnap.com/)
 
@@ -67,7 +67,7 @@ I ended up choosing Duplicity. It seemed to be the most popular program, it supp
 
 ## Sign up and install B2
 
-[Sign up](https://www.backblaze.com/b2/cloud-storage.html) for a B2 account if you don't have one already. You can download the official B2 command line tool from [these instructions](https://www.backblaze.com/b2/docs/quick_command_line.html), but I'm installing the [package](https://aur.archlinux.org/packages/backblaze-b2/) from the AUR using [pacaur](https://wiki.archlinux.org/index.php/AUR_helpers). Note - You can create a bucket from the website if you don't want to install the B2 command line tool.
+[Sign up](https://www.backblaze.com/cloud-storage) for a B2 account if you don't have one already. You can download the official B2 command line tool from [these instructions](https://www.backblaze.com/b2/docs/quick_command_line.html), but I'm installing the [package](https://aur.archlinux.org/packages/backblaze-b2/) from the AUR using [pacaur](https://wiki.archlinux.org/index.php/AUR_helpers). Note - You can create a bucket from the website if you don't want to install the B2 command line tool.
 
 ```
 pacaur -S backblaze-b2
