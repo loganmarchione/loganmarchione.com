@@ -220,6 +220,10 @@ Here are the obligatory [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlig
 
 {{< video mp4="20230821_012.mp4" >}}
 
+Here is the clack clack (unmute the video).
+
+{{< video mp4="20230822_001.mp4" >}}
+
 # Firmware
 
 The Sinc [supports QMK](https://docs.keeb.io/flashing-firmware), but [VIA](https://docs.keeb.io/via) gives you a [web interface](https://usevia.app/) and programs the board in real-time (i.e., when you change something in VIA, it updates the board right away).
@@ -232,6 +236,8 @@ I was able to change so many things:
 * rotary encoder control (turn for volume, press for play/pause)
 * create multiple layers (e.g., FN+H/FN+L to move media tracks backward/forward)
 * so, so, so many RGB options
+
+{{< img src="20230822_002.png" alt="via" >}}
 
 # Other keycaps
 
