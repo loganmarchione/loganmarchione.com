@@ -14,13 +14,18 @@ cover:
 
 # Introduction
 
-I've been using a [WASD CODE 87-key mechanical keyboard with Cherry MX Clear switches](https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html) since 2017.
+:warning: WARNING :warning:
+
+- This is an image-heavy post (I have lazy-loading enabled, so images should only load as you scroll)
+- My only "good" lighting is in the kitchen, and I don't have a DSLR or macro lens, so excuse the blurry close-up shots and shadows :man_shrugging:
+
+I've been using a [WASD CODE 87-key mechanical keyboard with Cherry MX Clear switches](https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html) since 2017. I liked it so much that I bought another (for when I used to work in the office).
 
 {{< figure src="20230714_001.jpg" width="75%" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
 
 {{< figure src="20230714_002.jpg" width="75%" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
 
-I actually have two of them (one for when I used to work in the office), but have been looking more at ergonomic keyboards and decided to make the jump to a split keyboard.
+I spend *a lot* of time in front of my computer, both for work and for hobbies. In an effort to not end up with [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury) years from now, I've been looking into more ergonomic keyboards.
 
 # The search
 
@@ -73,7 +78,7 @@ Below are the keyboards I considered. They don't solve all ergonomic challenges,
 
 ## Requirements
 
-I do mostly office work and only a little gaming, so my only hard requirements were 75% layout (I need the F-row and arrow keys) and hotswap sockets. This left the following boards:
+I do mostly office work and only a little gaming, so my only hard requirements were 75% layout (I wanted the F-row and arrow keys) and hotswap sockets. This left the following boards:
 
 | Item                                                                                                            | Starting price | Size    | Layout               | Hotswap | Connectivity                | Software               | Thumb cluster | Wrist-wrist | Tenting  | Comments                |
 |-----------------------------------------------------------------------------------------------------------------|----------------|---------|----------------------|---------|-----------------------------|------------------------|---------------|-------------|----------|-------------------------|
@@ -151,7 +156,86 @@ In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solari
 
 {{< figure src="20230731_007.jpg" width="100%" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
 
-I also considered these two sets, but decided to wait and see how I liked the DCX Solarized.
+## Wrist wrest
+
+I'm currently using a wrist wrest (technically palm rest?) from Etsy, so I decided to look there again.
+
+## Prices
+
+All-in-all, here is what I purchased. This was definitely expensive, but not out of line compared to some of the higher-end boards above.
+
+| Item                       | Price        |
+|----------------------------|--------------|
+| Board (PCB and plates)     | $134.92      |
+| Switches                   | $31          |
+| Keycaps                    | $99          |
+| Wrist/palm rest            | $XXX         |
+|                            | $XXX (total) |
+
+# Build process
+
+I won't document the complete build process here, as Keebio already has a [build video](https://www.youtube.com/watch?v=M0lVrFJ1gDc).
+
+The first thing was to snap off the macropad on the left side (since I chose plates without the macropad).
+
+{{< img src="20230821_001.jpg" alt="macropad" >}}
+
+{{< img src="20230821_002.jpg" alt="macropad" >}}
+
+I purchased the Sinc with a rotary encoder on the right side, which takes the place of a switch. This board layout is really clever in that you can choose a rotary encoder or switch in the same slot (see the multiple sets of holes).
+
+{{< img src="20230821_003.jpg" alt="rotary encoder" >}}
+
+This was the only soldering required (if you wanted a switch here, then no soldering at all).
+
+{{< img src="20230821_004.jpg" alt="rotary encoder" >}}
+
+Next were the stabilizers. It took me forever to figure out that they were supposed to be mounted in these [castellated mounting holes](https://www.pcbdirectory.com/community/what-are-castellated-holes-on-a-pcb) (i.e., the semi-circles on the very edge of the board).
+
+{{< img src="20230821_005.jpg" alt="castellated mounting holes" >}}
+
+Again, this board layout is really clever and allows a delete/backspace split or a single backspace key (see the three sets of holes). I was going with a delete/backspace split, so I didn't add a stabilizer here.
+
+{{< img src="20230821_007.jpg" alt="backspace key" >}}
+
+The Sinc is powered by a [RP2040](https://www.raspberrypi.com/products/rp2040/)!
+
+{{< img src="20230821_006.jpg" alt="rp2040" >}}
+
+Here, I added the switches to the plate. After both halves were completed, I plugged it in and tested each switch using VIA.
+
+{{< img src="20230821_008.jpg" alt="left half completed" >}}
+
+{{< img src="20230821_009.jpg" alt="both halves completed" >}}
+
+Hard to see here, but I attached the bottom plate to the top.
+
+{{< img src="20230821_010.jpg" alt="attached bottom plate" >}}
+
+Here is the final product (note that I moved some switches around for the right-side Alt/Super/Ctrl).
+
+{{< img src="20230821_011.jpg" alt="final assembly" >}}
+
+Here are the obligatory [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlights).
+
+{{< video mp4="20230821_012.mp4" >}}
+
+# Firmware
+
+The Sinc [supports QMK](https://docs.keeb.io/flashing-firmware), but [VIA](https://docs.keeb.io/via) gives you a [web interface](https://usevia.app/) and programs the board in real-time (i.e., when you change something in VIA, it updates the board right away).
+
+This was my first time using VIA, and I was blown away by the options. :exploding_head:
+
+I was able to change so many things:
+
+* remapping keys (e.g., F13 to backspace)
+* rotary encoder control (turn for volume, press for play/pause)
+* create multiple layers (e.g., FN+H/FN+L to move media tracks backward/forward)
+* so, so, so many RGB options
+
+# Other keycaps
+
+I also considered these two sets of keycaps, but decided to wait and see how I liked the DCX Solarized.
 
 First was the [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2). These six sets would have been $203.
 
@@ -177,33 +261,8 @@ Next was the [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-subl
 
 {{< figure src="20230818_004.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
 
-## Wrist wrest
-
-I'm currently using a wrist wrest (technically palm rest?) from Etsy, so I decided to look there again.
-
-## Prices
-
-All-in-all, here is what I purchased. This was definitely expensive, but not out of line compared to some of the higher-end boards above.
-
-| Item                       | Price        |
-|----------------------------|--------------|
-| Board (PCB and plates)     | $134.92      |
-| Switches                   | $31          |
-| Keycaps                    | $99          |
-| Wrist/palm rest            | $XXX         |
-|                            | $XXX (total) |
-
-# Build
-
-I won't document the complete build process here, as Keebio already has a [build guide](https://docs.keeb.io/sinc-rev3-build-guide) (it's actually for their [Quefrency](https://docs.keeb.io/quefrency-hotswap-build-guide) board, but they're so similar that it works the same).
-
-I purchased the Sinc with a rotary encoder on the right side, which takes the place of a switch. The first step was to solder that in place, and that's all the soldering that was required (the rest was hotswap).
-
-# Firmware
-
-The Sinc [supports QMK](https://docs.keeb.io/flashing-firmware), but I prefer [VIA](https://docs.keeb.io/via), since it gives you a GUI and programs in real-time.
-
 # Conclusion
 
+My CODE keyboard was from a time before custom mechanical keyboards were really a thing. I'm absolutely amazed by how configurable this board is and how comfortable it is to use. Paired with VIA, this provides so much more flexibility than I'm used to.
 
 \-Logan
