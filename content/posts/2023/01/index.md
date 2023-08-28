@@ -15,7 +15,7 @@ cover:
 
 # Update: 2023-08-28
 
-I've been using the Kioxia BG4 for over six months now without any issues. In that time, the Steam Deck has become much more popular (so popular that some of these SSDs are marketed as "Steam Deck upgrade kits"). I don't have a need to upgrade my Kioxia BG4 (yet), but you may want to consider these models as well.
+I've been using the Kioxia BG4 for over six months now without any issues. In that time, the Steam Deck has become much more popular (so popular that some of these SSDs are marketed as "Steam Deck upgrade kits"). I don't have a need to upgrade my Kioxia BG4 (yet), but you may want to consider these newer models as well.
 
 | Make            | Model                       | Link                                                                                                                                                                     | Watts | PCIe Spec | Price         | Comments                                            |
 |-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|-----------|---------------|-----------------------------------------------------|
