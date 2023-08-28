@@ -13,6 +13,17 @@ cover:
     relative: false
 ---
 
+# Update: 2023-08-28
+
+I've been using the Kioxia BG4 for over six months now without any issues. In that time, the Steam Deck has become much more popular (so popular that some of these SSDs are marketed as "Steam Deck upgrade kits"). I don't have a need to upgrade my Kioxia BG4 (yet), but you may want to consider these newer models as well.
+
+| Make            | Model                       | Link                                                                                                                                                                     | Watts | PCIe Spec | Price         | Comments                                            |
+|-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|-----------|---------------|-----------------------------------------------------|
+| Corsair         | MP600 Mini (1TB)            | [Here](https://www.corsair.com/us/en/p/data-storage/cssd-f1000gbmp600mn/mp600-mini-1tb-gen4-pcie-x4-nvme-m-2-2230-ssd-cssd-f1000gbmp600mn)                               | 4.3W  | Gen4 x4   | $94.99        |                                                     |
+| Inland          | TN446 (1TB)                 | [Here](https://www.microcenter.com/product/663766/inland-tn446-1tb-3d-tlc-nand-pcie-gen-4-x4-nvme-m2-2230-internal-ssd-compatible-with-steam-deck)                       | 4.0W  | Gen4 x4   | $109.99       | This appears to be an updated version of the TN436  |
+| Team Group      | MP44S (1TB)                 | [Here](https://www.teamgroupinc.com/en/product/mp44s)                                                                                                                    | ???   | Gen4 x4   | $77.99        | Unable to find watts or amps usage                  |
+| Kioxia          | BG6 (1TB)                   | [Here](https://americas.kioxia.com/en-us/business/news/2023/memory-20230522-1.html)                                                                                      | 4.3W  | Gen4 x4   | ???           | This was just announced in May 2023                 |
+
 # TL;DR
 
 You can purchase a large SSD for way less than Valve is charging and it's easy to replace the SSD in your Steam Deck.
