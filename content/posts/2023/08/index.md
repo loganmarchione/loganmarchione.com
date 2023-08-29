@@ -232,7 +232,7 @@ This was my first time using VIA, and I was blown away by the options. :explodin
 
 I was able to change so many things:
 
-* remapping keys (e.g., F13 to backspace)
+* remapping keys (e.g., F13 and left-spacebar to backspace)
 * rotary encoder control (turn for volume, press for play/pause)
 * create multiple layers (e.g., FN+H/FN+L to move media tracks backward/forward)
 * so, so, so many RGB options
@@ -266,6 +266,21 @@ Next was the [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-subl
 {{< figure src="20230818_003.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
 
 {{< figure src="20230818_004.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
+
+# Learning curve
+
+Having the keyboard split and slightly angled wasn't an issue for typing using the alphabet keys (e.g., QWERTY). However, anything requiring modifiers was a challenge to get used to. For example:
+
+* I'm still reaching to F13 for backspace, when I should be using my left-spacebar
+* the right-side Shift is smaller than the normal 2.75U
+* the right-side Alt/Super/Ctrl are all 1U
+* the arrow key cluster has no space around it, so I'm hitting other keys
+
+The big win here is that as I find places I can improve, I can tweak my settings on the fly with VIA.
+
+I'm not a great typist to begin with, but I think I'm able to keep up pretty well.
+
+{{< img src="20230829_001.png" alt="monkey type" >}}
 
 # Conclusion
 
