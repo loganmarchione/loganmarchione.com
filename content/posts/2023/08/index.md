@@ -1,6 +1,6 @@
 ---
 title: "Keebio Sinc split keyboard"
-date: "2023-08-01"
+date: "2023-08-30"
 author: "Logan Marchione"
 categories:
   - "oc"
@@ -11,6 +11,16 @@ cover:
     alt: "featured image"
     relative: false
 ---
+
+# TL;DR
+
+I got a new keyboard :grinning_face_with_smiling_eyes:
+
+{{< video mp4="20230821_012.mp4" >}}
+
+{{< video mp4="20230822_001.mp4" >}}
+
+{{< img src="20230830_001.jpg" alt="wrist rest" >}}
 
 # Introduction
 
@@ -45,7 +55,7 @@ A traditional keyboard can cause a few ergonomic problems:
 
 {{< figure src="20230717_003.jpg" width="50%" alt="wrist extension" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
 
-There are a number of ways to solve these problems, but the "perfect" keyboard would be:
+There are a number of ways to solve these problems, but the "perfect" keyboard would have the following qualities:
 1. Split in half to allow the arms to naturally rest shoulder-width apart (not bending the wrists)
 2. Each half would be slightly tilted downwards to allow the forearms to sit naturally (not twisting the radius and ulna)
 3. The slope of the keyboard would be minimized (or zero) to allow the wrists to rest naturally (this could also be accomplished by raising the wrists with a rest)
@@ -101,7 +111,7 @@ The Sinc comes in a [Rev. 3](https://keeb.io/collections/split-keyboards/product
 
 {{< figure src="20230718_002_sinc_rev4.png" width="100%" alt="sinc rev4 layout" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
 
-Below are the options I chose for the Sinc Rev. 4.
+Below are the options I chose for the Sinc Rev. 4 (I didn't want a left macro-pad and did want a rotary encoder on the right).
 
 {{< img src="20230718_006.png" alt="sinc rev4 options" >}}
 
@@ -109,7 +119,7 @@ Below are the options I chose for the Sinc Rev. 4.
 
 For switches, I like tactile and have been using [Cherry MX Clear switches](https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html) on my CODE board.
 
-{{< figure src="20230718_004_cherry_clear.png" width="30%" alt="cherry mx clear" attr="Image from Cherry" attrlink="https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html">}}
+{{< figure src="20230718_004_cherry_clear.png" width="20%" alt="cherry mx clear" attr="Image from Cherry" attrlink="https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html">}}
 
 I decided to go with [Gateron](https://www.gateron.co/) this time, just to try something different. Gateron Clear switches are linear (not tactile), so I went with the [Gateron G Pro 3.0 Brown switches](https://www.gateron.co/products/gateron-g-pro-3-0-switch-set?variant=40479582945369) (the Pro series is pre-lubed). Side-note: [This page](https://thegamingsetup.com/gaming-keyboard/buying-guides/keyboard-switch-chart-table) is a great place to compare switches.
 
@@ -152,25 +162,38 @@ Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a
 | PBTfans            | [Cookies 'n Creme](https://kbdfans.com/products/pbtfans-cookies-n-creme)                    | Cherry         | doubleshot ABS     | Would prefer text modifiers |
 | PBTfans            | [Retro Dark Lights](https://kbdfans.com/products/pbtfans-retro-dark-lights)                 | Cherry         | doubleshot PBT     |                             |
 
-In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set) set. It didn't have a dedicated 1U backspace key, so the F13 key would have to make due. This set cost $99.
+In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set) set. It didn't have a dedicated 1U backspace key, so the F13 key would have to make due.
 
 {{< figure src="20230731_007.jpg" width="100%" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
 
+### Other keycaps
+
+I also considered these two sets of keycaps, but decided to wait and see how I liked the DCX Solarized.
+
+* [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2)
+* [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/) (this would require 2 separate spacebars)
+
 ## Wrist wrest
 
-I'm currently using a wrist wrest (technically palm rest?) from Etsy, so I decided to look there again.
+For the CODE, I had purchased a wrist rest (technically palm rest?) from a [redditor](https://www.reddit.com/r/mechmarket/comments/hcb1v5/artisan_custom_wrist_rests_and_giveaway/).
+
+Obviously the Sinc has a split design, so I would need a split wrist rest. I ended up purchasing three, but at the time of this writing, only the first has arrived to my house.
+
+* [OKKOwood](https://www.etsy.com/shop/OKKOwood) on [Etsy](https://www.etsy.com/listing/1421300996/split-keyboard-wrist-rest-for-mechanical) (30 days to arrive from Slovenia)
+* [Keychron Wooden Palm Rest](https://www.keychron.com/products/keychron-keyboard-wooden-palm-rest?variant=40381409558617) (this was actually for the Q11, so I'm not sure how well it will fit)
+* [Digital Carpentry](https://digital-carpentry.com/products/epbt-camo-wrist-rest) (it turns out this is the same redditor, now with a store!)
 
 ## Prices
 
-All-in-all, here is what I purchased. This was definitely expensive, but not out of line compared to some of the higher-end boards above.
+All-in-all, here is what I purchased. This setup was definitely expensive, but not out of line compared to some of the higher-end boards above (while being more customizable).
 
 | Item                       | Price        |
 |----------------------------|--------------|
-| Board (PCB and plates)     | $134.92      |
+| Board (PCB and plates)     | $134         |
 | Switches                   | $31          |
 | Keycaps                    | $99          |
-| Wrist/palm rest            | $XXX         |
-|                            | $XXX (total) |
+| Wrist/palm rest            | $70          |
+|                            | $334 (total) |
 
 # Build process
 
@@ -224,6 +247,14 @@ Here is the clack clack (unmute the video).
 
 {{< video mp4="20230822_001.mp4" >}}
 
+Here are pictures with the wrist rest.
+
+{{< img src="20230830_001.jpg" alt="wrist rest" >}}
+
+{{< img src="20230830_002.jpg" alt="wrist rest" >}}
+
+{{< img src="20230830_003.jpg" alt="wrist rest" >}}
+
 # Firmware
 
 The Sinc [supports QMK](https://docs.keeb.io/flashing-firmware), but [VIA](https://docs.keeb.io/via) gives you a [web interface](https://usevia.app/) and programs the board in real-time (i.e., when you change something in VIA, it updates the board right away).
@@ -239,37 +270,9 @@ I was able to change so many things:
 
 {{< img src="20230822_002.png" alt="via" >}}
 
-# Other keycaps
-
-I also considered these two sets of keycaps, but decided to wait and see how I liked the DCX Solarized.
-
-First was the [Oblivion V2](https://drop.com/buy/drop-oblotzky-sa-oblivion-v2). These six sets would have been $203.
-
-{{< figure src="20230731_001.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_002.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_003.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_004.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_005.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-{{< figure src="20230731_006.jpg" width="100%" alt="oblivion v2" attr="Image from Drop" attrlink="https://drop.com/buy/drop-oblotzky-sa-oblivion-v2">}}
-
-Next was the [DSA Granite](https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/). These four sets would have been $180 (plus $10 for two split spacebars). DSA is nice because all the keys are the same profile, so any key can go anywhere.
-
-{{< figure src="20230818_001.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
-
-{{< figure src="20230818_002.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
-
-{{< figure src="20230818_003.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
-
-{{< figure src="20230818_004.jpg" width="100%" alt="dsa granite" attr="Image from Pimp My Keyboard" attrlink="https://pimpmykeyboard.com/sp-dsa-granite-keyset-sublimated/">}}
-
 # Learning curve
 
-Having the keyboard split and slightly angled wasn't an issue for typing using the alphabet keys (e.g., QWERTY). However, anything requiring modifiers was a challenge to get used to. For example:
+Having the keyboard split wasn't an issue for typing using the alphabet keys (e.g., QWERTY). However, anything requiring modifiers was a challenge to get used to. For example:
 
 * I'm still reaching to F13 for backspace, when I should be using my left-spacebar
 * the right-side Shift is smaller than the normal 2.75U
@@ -278,12 +281,12 @@ Having the keyboard split and slightly angled wasn't an issue for typing using t
 
 The big win here is that as I find places I can improve, I can tweak my settings on the fly with VIA.
 
-I'm not a great typist to begin with, but I think I'm able to keep up pretty well.
+I'm not a great typist to begin with, but I think I'm able to keep up pretty well. I'm sure as time goes on I'll become more comfortable.
 
 {{< img src="20230829_001.png" alt="monkey type" >}}
 
 # Conclusion
 
-My CODE keyboard was from a time before custom mechanical keyboards were really a thing. I'm absolutely amazed by how configurable this board is and how comfortable it is to use. Paired with VIA, this provides so much more flexibility than I'm used to.
+My CODE keyboard was from a time before custom mechanical keyboards were really a thing. I can't believe how many options there are now for boards, board layouts, switches, keycaps, and more (I haven't even gotten into lubing switches or designing my own board). I'm absolutely amazed by how configurable this board is and how comfortable it is to use. Paired with VIA, this provides so much more flexibility than I'm used to.
 
 \-Logan
