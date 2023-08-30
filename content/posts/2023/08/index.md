@@ -255,6 +255,18 @@ Here are pictures with the wrist rest.
 
 {{< img src="20230830_003.jpg" alt="wrist rest" >}}
 
+## Build process lessons learned
+
+I have never built a keyboard before, and to be honest, I was in a little over my head. If I could go back and do things differently, I would say this:
+
+* I had no idea how to assemble the stabilizers (I had to watch YouTube videos) and had to pay attention to the fact that some get installed upside-right, and some upside-down
+* I don't know if I should have purchased screw-in stabilizers
+* I had a keycap puller, but didn't have a switch puller :man_facepalming:, so I had to use a small screwdriver (I've since purchased a switch puller)
+* I should have started with a less flexible board layout (this would have made keycap selection and switch positioning easier)
+* I should have worked my way up to this keyboard kit by building easier boards first (e.g., starting with some barebone boards that only needed to have switches and keycaps installed)
+
+In the end, it all worked out perfectly, but it admittedly took much longer than I thought it would.
+
 # Firmware
 
 The Sinc [supports QMK](https://docs.keeb.io/flashing-firmware), but [VIA](https://docs.keeb.io/via) gives you a [web interface](https://usevia.app/) and programs the board in real-time (i.e., when you change something in VIA, it updates the board right away).
@@ -287,6 +299,8 @@ I'm not a great typist to begin with, but I think I'm able to keep up pretty wel
 
 # Conclusion
 
-My CODE keyboard was from a time before custom mechanical keyboards were really a thing. I can't believe how many options there are now for boards, board layouts, switches, keycaps, and more (I haven't even gotten into lubing switches or designing my own board). I'm absolutely amazed by how configurable this board is and how comfortable it is to use. Paired with VIA, this provides so much more flexibility than I'm used to.
+My CODE keyboard was from a time before custom mechanical keyboards were really a thing. I can't believe how many options there are now for boards, board layouts, switches, keycaps, and more (I haven't even gotten into lubing switches or designing my own board).
+
+I'm absolutely amazed by how configurable this board is and how comfortable it is to use. Paired with VIA, this provides so much more flexibility than I'm used to. I'm guessing that this will just be the first of many keyboards that I build.
 
 \-Logan
