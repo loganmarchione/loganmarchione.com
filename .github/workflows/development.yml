@@ -48,4 +48,6 @@ jobs:
         publish_dir: ./public
 
     - name: Deploy to S3
-      run: hugo deploy --maxDeletes -1 --invalidateCDN --verbose
+      run: |
+        sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
+        hugo deploy --maxDeletes -1 --invalidateCDN --verbose
