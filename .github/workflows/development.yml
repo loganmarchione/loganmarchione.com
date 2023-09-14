@@ -46,3 +46,6 @@ jobs:
         external_repository: loganmarchione/loganmarchione.github.io
         publish_branch: gh-pages
         publish_dir: ./public
+
+    - name: Deploy to S3
+      run: hugo deploy --maxDeletes -1 --invalidateCDN --verbose
