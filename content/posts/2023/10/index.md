@@ -269,7 +269,9 @@ Third is maintenance (this is actually a positive). I no longer have to install/
 
 ## Cost
 
-I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, so that was costing me $0.50/month for the hosted zone, so the only cost I added was CloudFront and Route53.
+I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, which was costing me $0.50/month for the hosted zone, so the only cost I added was CloudFront and Route53.
+
+
 
 # Conclusion
 
