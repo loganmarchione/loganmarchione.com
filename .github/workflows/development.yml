@@ -68,6 +68,9 @@ jobs:
         hugo-version: 'latest'
         extended: true
 
+    - name: Update CloudFront Distribution
+      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
+
     - name: Build
       run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
       env:
@@ -78,8 +81,7 @@ jobs:
         : > ./public/robots.txt
         echo "User-agent: *" >> ./public/robots.txt
         echo "Disallow: /" >> ./public/robots.txt
+        cat config.yaml
 
     - name: Deploy to S3
-      run: |
-        sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
-        hugo deploy --maxDeletes -1 --invalidateCDN --verbose
+      run: hugo deploy --maxDeletes -1 --invalidateCDN --logLevel info
