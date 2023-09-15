@@ -55,7 +55,7 @@ My [Netgear switch](https://www.netgear.com/business/wired/switches/plus/gs108pe
 
 ## 10-inch racks
 
-The 10-inch rack (aka "half-rack") [isn't a standard](http://rtsound.net/half-rack-compatible-equipment/) (that I could find). Instead, it's more like a general consensus (kind of like we've unofficially settled on [two sizes of toilet seat lid](https://www.toiletseats.com/education-and-inspiration/articles/how-to-measure-a-toilet-seat/)). As such, all equipment advertised as 10-inches or half-rack *might* not be compatible.
+The 10-inch rack (aka "half-rack") [isn't a standard](http://rtsound.net/half-rack-compatible-equipment/) (that I could find). Instead, it's more like a general consensus (kind of like how we've unofficially settled on [two sizes of toilet seat lid](https://www.toiletseats.com/education-and-inspiration/articles/how-to-measure-a-toilet-seat/)). Therefore, all equipment advertised as 10-inches or half-rack *might* not be compatible.
 
 {{< figure src="20220830_002.png" width="100%" alt="half-rack measurements" attr="Image from Wikipedia" attrlink="https://en.wikipedia.org/wiki/19-inch_rack#10-inch_rack">}}
 

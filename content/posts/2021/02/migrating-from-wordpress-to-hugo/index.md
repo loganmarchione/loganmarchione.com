@@ -72,7 +72,7 @@ Exporting content from WordPress was [easy](https://wordpress.org/support/articl
 
 ## Convert WordPress content
 
-This is where the trouble started. There are numerous "WordPress-to-Hugo" converters online, but none of them are perfect. In fact, Hugo doesn't even have an official tool, they rely on community projects. While many tools will produce some useable content, their quality varies depending on how customized your WordPress content is. As such, you really can't blame any single tool for not working 100%.
+This is where the trouble started. There are numerous "WordPress-to-Hugo" converters online, but none of them are perfect. In fact, Hugo doesn't even have an official tool, they rely on community projects. While many tools will produce some useable content, their quality varies depending on how customized your WordPress content is. Therefore, you really can't blame any single tool for not working 100%.
 
 I first tried the tool [SchumacherFM/wordpress-to-hugo-exporter](https://github.com/SchumacherFM/wordpress-to-hugo-exporter). The output it produced was a mix of Markdown and HTML, so I wasn't a fan of that. However, as a huge plus, it did allow the export of comments for each post, which I did make use of.
 
