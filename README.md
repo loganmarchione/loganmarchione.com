@@ -3,6 +3,7 @@
 [![CI/CD (loganmarchione.com)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/production.yml/badge.svg)](https://github.com/loganmarchione/loganmarchione.com/actions/workflows/production.yml)
 [![](https://img.shields.io/website?down_color=red&down_message=offline&label=loganmarchione.com&up_color=green&up_message=online&url=https%3A%2F%2Floganmarchione.com)](https://loganmarchione.com)
 [![](https://img.shields.io/website?down_color=red&down_message=offline&label=loganmarchione.github.io&up_color=green&up_message=online&url=https%3A%2F%2Floganmarchione.github.io)](https://loganmarchione.github.io)
+[![](https://img.shields.io/website?down_color=red&down_message=offline&label=loganmarchione.dev&up_color=green&up_message=online&url=https%3A%2F%2Floganmarchione.dev)](https://loganmarchione.dev)
 
 ## Overview
 
@@ -49,6 +50,7 @@ Below is a visual representation of the GitHub Actions workflows.
     G --> C
     E --> BB
     H{Dev site looks good?} -- No --> D
-    BB --> H
+    BB --> CC["Deploy to development site (loganmarchione.dev)"]
+    CC --> H
     H -- Yes --> G[Merge PR]
 ```
