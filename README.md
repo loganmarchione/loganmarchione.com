@@ -9,7 +9,7 @@
 
 This repo contains the source for https://loganmarchione.com, built via [Hugo](https://gohugo.io/).
 
-This repo also builds https://loganmarchione.github.io on every PR and update to every PR.
+This repo also builds https://loganmarchione.github.io and https://loganmarchione.dev on every PR and update to every PR.
 
 ## Usage
 
