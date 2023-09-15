@@ -49,6 +49,7 @@ jobs:
   loganmarchione-dev:
     name: Deploy (loganmarchione.dev)
 
+    needs: loganmarchione-github-io
     runs-on: ubuntu-latest
 
     steps:
