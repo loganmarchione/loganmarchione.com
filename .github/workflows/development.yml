@@ -2,6 +2,7 @@ name: CI/CD (development)
 
 on:
   pull_request:
+  workflow_call:
   workflow_dispatch:
 
 jobs:
