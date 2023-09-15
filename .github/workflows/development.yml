@@ -69,6 +69,13 @@ jobs:
         hugo-version: 'latest'
         extended: true
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_DEV }}
+        role-duration-seconds: 900
+        aws-region: us-east-2
+
     - name: Update CloudFront Distribution
       run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
 
