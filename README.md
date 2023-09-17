@@ -45,12 +45,12 @@ Below is a visual representation of the GitHub Actions workflows.
   graph TD
     A((Start)) --> B[Create branch] & C[Commit to master]
     B --> D[Commits to branch]
-    C --> AA["Deploy to production site (loganmarchione.com)"] & BB["Deploy to development site (loganmarchione.github.io)"]
+    C --> AA["Deploy to loganmarchione.com"] & BB["Deploy to loganmarchione.github.io"]
     D --> E[Pull request to master]
     G --> C
     E --> BB
     H{Dev site looks good?} -- No --> D
-    BB --> CC["Deploy to development site (loganmarchione.dev)"]
+    BB --> CC["Deploy to loganmarchione.dev"]
     CC --> H
     H -- Yes --> G[Merge PR]
 ```
