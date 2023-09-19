@@ -39,11 +39,11 @@ deployment:
   matchers:
     # cached with gzip compression enabled
     - pattern: "^.+\\.(js|css|svg|ttf)$"
-      cacheControl: "max-age=86400, private, must-revalidate"
+      cacheControl: "max-age=86400, no-transform, public"
       gzip: true
     # cached with gzip compression disabled
     - pattern: "^.+\\.(atom|bmp|gif|ico|jpeg|jpg|pdf|png|rss|tiff|woff|woff2|zip)$"
-      cacheControl: "max-age=86400, private, must-revalidate"
+      cacheControl: "max-age=86400, no-transform, public"
       gzip: false
     # sitemap gets a special content-type header
     - pattern: "^sitemap\\.xml$"
