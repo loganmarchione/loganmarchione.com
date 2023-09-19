@@ -36,6 +36,10 @@ deployment:
     - name: loganmarchione.dev
       URL: "s3://loganmarchione-dev?region=us-east-2"
       cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_DEV
+  matchers:
+    - pattern: "^.+\\.(atom|bmp|css|gif|ico|jpeg|jpg|js|pdf|png|rss|svg|tiff|ttf|woff|woff2|xml|zip)$"
+      cacheControl: "max-age=864000, private, must-revalidate"
+      gzip: true
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
