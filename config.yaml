@@ -37,8 +37,20 @@ deployment:
       URL: "s3://loganmarchione-dev?region=us-east-2"
       cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_DEV
   matchers:
-    - pattern: "^.+\\.(atom|bmp|css|gif|ico|jpeg|jpg|js|pdf|png|rss|svg|tiff|ttf|woff|woff2|xml|zip)$"
-      cacheControl: "max-age=864000, private, must-revalidate"
+    # cached with gzip compression enabled
+    - pattern: "^.+\\.(js|css|svg|ttf)$"
+      cacheControl: "max-age=86400, private, must-revalidate"
+      gzip: true
+    # cached with gzip compression disabled
+    - pattern: "^.+\\.(atom|bmp|gif|ico|jpeg|jpg|pdf|png|rss|tiff|woff|woff2|zip)$"
+      cacheControl: "max-age=86400, private, must-revalidate"
+      gzip: false
+    # sitemap gets a special content-type header
+    - pattern: "^sitemap\\.xml$"
+      contentType: "application/xml"
+      gzip: true
+    # not cached with gzip compression enabled
+    - pattern: "^.+\\.(html|json|xml)$"
       gzip: true
 
 params:
