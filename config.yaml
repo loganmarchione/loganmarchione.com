@@ -31,11 +31,11 @@ module:
         - source: assets
           target: assets/svg/homelab-svg-assets
 
-deployment:
-  targets:
-    - name: loganmarchione.dev
-      URL: "s3://loganmarchione-dev?region=us-east-2"
-      cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_DEV
+# deployment:
+#   targets:
+#     - name: loganmarchione.dev
+#       URL: "s3://loganmarchione-dev?region=us-east-2"
+#       cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_DEV
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
