@@ -89,12 +89,11 @@ jobs:
       env:
         URL: loganmarchione.dev
 
-    # - name: Overwrite robots.txt (for search engines)
-    #   run: |
-    #     : > ./public/robots.txt
-    #     echo "User-agent: *" >> ./public/robots.txt
-    #     echo "Disallow: /" >> ./public/robots.txt
-    #     cat config.yaml
+    - name: Overwrite robots.txt (for search engines)
+      run: |
+        : > ./public/robots.txt
+        echo "User-agent: *" >> ./public/robots.txt
+        echo "Disallow: /" >> ./public/robots.txt
 
     - name: Deploy to S3
       run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione.dev --force --logLevel info
