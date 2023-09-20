@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
 
 env:
-  URL_DEV: loganmarchione.github.io
   URL_PRD: loganmarchione.com
 
 jobs:
