@@ -7,12 +7,18 @@ on:
   workflow_dispatch:
 
 env:
+  URL_DEV: loganmarchione.github.io
   URL_PRD: loganmarchione.com
 
 jobs:
+  # deploy-development:
+    # uses: ./.github/workflows/development.yml
+    # secrets: inherit
+
   deploy-production:
     name: Deploy (loganmarchione.com)
 
+    # needs: deploy-development
     runs-on: ubuntu-latest
 
     steps:
