@@ -4,4 +4,4 @@ Disallow: /resume/*
 Disallow: /resumes/
 Disallow: /resumes/*
 Disallow: /*_resume.pdf$
-Sitemap: https://loganmarchione.dev/sitemap.xml
+Sitemap: https://loganmarchione.com/sitemap.xml
