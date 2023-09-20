@@ -7,18 +7,17 @@ on:
   workflow_dispatch:
 
 env:
-  URL_DEV: loganmarchione.github.io
   URL_PRD: loganmarchione.com
 
 jobs:
-  # deploy-development:
-    # uses: ./.github/workflows/development.yml
-    # secrets: inherit
+  deploy-development:
+    uses: ./.github/workflows/development.yml
+    secrets: inherit
 
   deploy-production:
     name: Deploy (loganmarchione.com)
 
-    # needs: deploy-development
+    needs: deploy-development
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +29,7 @@ jobs:
     - name: Setup Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.18'
+        go-version: '1.20'
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
