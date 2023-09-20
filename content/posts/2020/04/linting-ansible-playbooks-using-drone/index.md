@@ -65,7 +65,7 @@ The instructions will be different for each provider, so I'll just link the top-
 
 ## Drone
 
-Everything in Drone is Docker-first. As such, Drone is designed to be installed in a Docker container. Below is a sanitized version of my _docker-compose.yml_ file to run Drone and the Docker runner (the runner is the application that actually executes the CI/CD pipeline steps). By Default, Drone uses a SQLite database, but also [supports](https://docs.drone.io/server/storage/database/) PostgreSQL and MySQL as well. I didn't post my PostgreSQL configuration here to keep things simple.
+Everything in Drone is Docker-first. Therefore, Drone is designed to be installed in a Docker container. Below is a sanitized version of my _docker-compose.yml_ file to run Drone and the Docker runner (the runner is the application that actually executes the CI/CD pipeline steps). By Default, Drone uses a SQLite database, but also [supports](https://docs.drone.io/server/storage/database/) PostgreSQL and MySQL as well. I didn't post my PostgreSQL configuration here to keep things simple.
 
 ```
 version: '3'

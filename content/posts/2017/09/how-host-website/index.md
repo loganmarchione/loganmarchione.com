@@ -71,7 +71,7 @@ The first query your computer sends is to one of the [13 root nameservers](https
 - l.root-servers.net
 - m.root-servers.net
 
-These 13 servers are used by every other nameserver on the planet to start the DNS lookup process. As such, they are very important to the function of the internet and are sometimes the [target of attacks](https://en.wikipedia.org/wiki/Distributed_denial-of-service_attacks_on_root_nameservers).
+These 13 servers are used by every other nameserver on the planet to start the DNS lookup process. Therefore, they are very important to the function of the internet and are sometimes the [target of attacks](https://en.wikipedia.org/wiki/Distributed_denial-of-service_attacks_on_root_nameservers).
 
 It's important to note that [many types](https://en.wikipedia.org/wiki/List_of_DNS_record_types) of DNS records exist, but below are some of the most common:
 

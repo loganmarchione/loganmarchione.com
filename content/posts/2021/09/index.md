@@ -31,7 +31,7 @@ I've changed hosts and methods of hosting over the years, so here is an abbrevia
 
 ## Why AWS?
 
-As much as I don't like to give Jeff Bezos more money, my new employer (post on that coming soon!) is heavily invested in AWS. As such, I thought this would be the perfect time to migrate my site. I could simplify my site's workflow, and learn AWS/Terraform at the same time. Plus, AWS has many ways to host a site, so I can explore multiple options under one vendor.
+As much as I don't like to give Jeff Bezos more money, my new employer (post on that coming soon!) is heavily invested in AWS. Therefore, I thought this would be the perfect time to migrate my site. I could simplify my site's workflow, and learn AWS/Terraform at the same time. Plus, AWS has many ways to host a site, so I can explore multiple options under one vendor.
 
 ## Lightsail or EC2
 

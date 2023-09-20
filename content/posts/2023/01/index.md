@@ -148,7 +148,7 @@ Below are some SSDs I found in my searching. All of these are 512GB, except the 
 I ended up purchasing a Kioxia BG4 KBG40ZNS512G for $65. On paper, it had the lowest power draw (1.06A because `A = 3.5W/3.3V`). Hopefully this will net the longest battery life.
 
 
-Maybe I'm old, but I couldn't believe how small this thing was :exploding_head:
+Maybe I'm old, but I couldn't believe how small this thing was! :exploding_head:
 
 {{< img src="20230117_002.jpeg" alt="kioxia KBG40ZNS512G" >}}
 
