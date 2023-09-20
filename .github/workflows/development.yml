@@ -94,7 +94,6 @@ jobs:
         : > ./public/robots.txt
         echo "User-agent: *" >> ./public/robots.txt
         echo "Disallow: /" >> ./public/robots.txt
-        cat config.yaml
 
     - name: Deploy to S3
       run: hugo deploy --maxDeletes -1 --invalidateCDN --logLevel info
