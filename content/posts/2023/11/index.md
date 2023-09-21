@@ -13,6 +13,12 @@ cover:
 
 {{% series/s_hugo %}}
 
+# TL;DR
+
+Good news everyone! If you're reading this (in late 2023), you're reading it via CloudFront instead of a VPS!
+
+![meme](/assets/memes/good_news_everyone.jpg)
+
 # Introduction
 
 Two years ago, I [wrote](/2021/10/deploying-hugo-with-cloudfront-and-s3/) about deploying this site to CloudFront and S3. I had a test version of the site running, but there were too many moving pieces, and to be honest, I wasn't that well-versed in Terraform or AWS.
@@ -37,7 +43,7 @@ Now, I'm eating those words. I've stepped up my game and decided to try again wi
 
 ## Terraform code
 
-Not going to lie, this took me a solid week to come up with. Mostly because I have multiple static sites, and I wanted them all to be the same (without duplicating Terraform code), so I wrote a Terraform module, which I [published to GitHub](https://github.com/loganmarchione/terraform-aws-static-site). You can read the details and code on GitHub, but this module creates the S3 buckets, ACM certificates, Route53 entries, and CloudFront distribution.
+Not going to lie, this took me a solid week to come up with. I have multiple static sites and I wanted them to all have the same setup (without duplicating Terraform code), so I wrote a Terraform module, which I [published to GitHub](https://github.com/loganmarchione/terraform-aws-static-site). You can read the details and code on GitHub, but this module creates the S3 buckets, ACM certificate, Route53 entries, CloudFront distribution, and more.
 
 ```
 ################################################################################
@@ -45,7 +51,7 @@ Not going to lie, this took me a solid week to come up with. Mostly because I ha
 ################################################################################
 
 module "static_site_domain_com" {
-  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.0"
+  source = "github.com/loganmarchione/terraform-aws-static-site?ref=0.1.1"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
@@ -71,16 +77,16 @@ module "static_site_domain_com" {
   cloudfront_ssl_minimum_protocol_version = "TLSv1.2_2021"
   cloudfront_ttl_min                      = 3600
   cloudfront_ttl_default                  = 86400
-  cloudfront_ttl_max                      = 31536000
+  cloudfront_ttl_max                      = 2592000
   cloudfront_viewer_protocol_policy       = "redirect-to-https"
 
   # IAM
   iam_policy_site_updating = false
 
   # Upload default files
-  upload_index  = true
-  upload_robots = true
-  upload_404    = true
+  upload_index  = false
+  upload_robots = false
+  upload_404    = false
 }
 ```
 
@@ -88,26 +94,49 @@ Yes, there were existing modules that created static sites ([one](https://github
 
 ## CloudFront
 
-The main thing that kept me from moving away from my VPS was [Nginx](https://nginx.org/). I've been using it for years, it's easy to configure, and it has *so many options*. CloudFront is a content delivery network (CDN), not a webserver (like Nginx). Because of that, you really need to be creative when trying to get CloudFront to do webserver-type things.
+The main thing that kept me from moving away from my VPS was [Nginx](https://nginx.org/). I've been using it for years, it's easy to configure, it's a single server, it's simple, and it has *so many options*.
 
-### Default root objects
+CloudFront, however, is a content delivery network (CDN), not a webserver. Because of that, you can't do all the webserver things you were used to doing with Nginx.
 
-For example, CloudFront has a concept of [default root objects](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html#DefaultRootObjectHow).
+### Functions
 
-If you don't set a default root object, visiting `https://example.com` returns an error. However, you can manually type `https://example.com/index.html` and get the page back.
+[CloudFront Function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-functions.html) are written in Javascript and do lightweight tasks like change headers, rewrite URLs, etc... To get some of my Nginx-like functionality into CloudFront, I had to use CloudFront Functions.
 
-If you set `index.html` as the default root object and visit `https://example.com`, it works!
+First, CloudFront has a concept of [default root objects](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html#DefaultRootObjectHow). If you don't set a default root object, visiting `https://example.com` returns an error. However, you can manually type `https://example.com/index.html` to view the page (but this is ugly). To fix this, set `index.html` as the default root object and visit `https://example.com`, it works!
 
-But, if you visit any sub-page like `https://example.com/foo`, you get an error. Again, you can manually type `https://example.com/foo/index.html` and get the page back.
+But, if you visit any sub-page like `https://example.com/foo`, you get an error. Again, you can manually type `https://example.com/foo/index.html` to view the page (again, this is ugly).
 
-To get around this, I had to use a [CloudFront Function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-functions.html), which is lightweight JavaScript that runs on CloudFront's edge servers.
+
+Second, I also wanted to do URL rewrites/redirects (e.g., redirect `/feed` to `/index.xml`) like I did in Nginx.
 
 ```
-// https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/example-function-add-index.html
+  location /feed {
+    rewrite ^/feed$ /index.xml;
+  }
+```
+
+To fix both of these issues, I created a CloudFront Function that is optionally applied via my Terraform module.
+
+```
 function handler(event) {
     var request = event.request;
     var uri = request.uri;
 
+    // Responses
+    var response_feed = {
+        statusCode: 301,
+        statusDescription: "Moved Permanently",
+        headers: {
+            "location": { "value": "/index.xml" }
+        }
+    }
+
+    // Returns
+    if (uri === "/feed" || uri === "/feed/") {
+        return response_feed;
+    }
+
+    // https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/example-function-add-index.html
     // Check whether the URI is missing a file name.
     if (uri.endsWith('/')) {
         request.uri += 'index.html';
@@ -117,15 +146,76 @@ function handler(event) {
         request.uri += '/index.html';
     }
 
+    // If none of the above conditions are met, return the original request
     return request;
 }
 ```
 
 ### Caching
 
-https://serialized.net/2017/06/maximizing-performance-with-cloudfront-s3-and-hugo/
+Caching was (and still is) harder than I thought it would be. There are two kinds of caching:
 
-You can use CloudFront Functions to do lightweight tasks like change headers, rewrite URLs, etc... However, I'm not sure if this adds any latency.
+* browser caching (this is done by the user's browser and is hard for me to control)
+* CDN caching (this is done by CloudFront and is controlled by me)
+
+When someone visits a website and their browser tries to download `https://example.com/foo.jpg`, it first checks its local cache. If the file is there, it doesn't need to download it again, which makes the rest of the site load faster.
+
+With Nginx, I was able to request that the user's browser cache files for a set number of days, based on filetype.
+
+```
+  location / {
+    try_files $uri $uri/ =404;
+    #Cache these filetypes in the user's browser for a set number of days
+    location ~* \.(atom|bmp|css|doc|gif|ico|jpeg|jpg|js|pdf|png|ppt|rss|svg|tiff|ttf|woff|woff2|xls|zip)$ {
+      expires 10d;
+      add_header 'Cache-Control' 'private, must-revalidate';
+    }
+  }
+```
+
+However, what if I pushed an update to my site and *wanted* the user to download it again? Well, I couldn't control that (because it was set to expire after 10 days) and now they're viewing a version of my site with a mix of old and new assets. Obviously, I could have (and probably should have) set the number of days lower than `10`, but setting it too low defeats the purpose of a cache in the first place.
+
+{{< img src="20230921_001p1.png" alt="nginx caching" >}}
+
+The same problem applies to CloudFront, except now there is a second cache in the mix. When I push updates to S3, how can I tell CloudFront to update its copy of my static assets? Below is a [recreation of Josh Barratt's diagram](https://serialized.net/2017/06/maximizing-performance-with-cloudfront-s3-and-hugo/) that I think does a really good job of visualizing this.
+
+{{< img src="20230921_001p2.png" alt="cloudfront caching" >}}
+
+To solve these issues, I did a couple things.
+
+For browser cache, you can't actually set this in CloudFront (again, CloudFront is not a webserver). Instead, I set the `Cache-Control` header on specific files in my Hugo `config.yaml` file, which is read during the `hugo deploy` command (more on that later). This actually sets the [metadata](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingMetadata.html#SysMetadata) on the files in S3, then CloudFront just forwards that metadata to the user. Also, notice how I turned the expiration time down to `86400` (one day) instead of ten days, and that `html`, `json`, and `xml` files don't get cached at all.
+
+```
+deployment:
+  targets:
+    ...
+    ...
+    ...
+  matchers:
+    # cached with gzip compression enabled
+    - pattern: "^.+\\.(js|css|svg|ttf)$"
+      cacheControl: "max-age=86400, no-transform, public"
+      gzip: true
+    # cached with gzip compression disabled
+    - pattern: "^.+\\.(atom|bmp|gif|ico|jpeg|jpg|pdf|png|rss|tiff|woff|woff2|zip)$"
+      cacheControl: "max-age=86400, no-transform, public"
+      gzip: false
+    # sitemap gets a special content-type header
+    - pattern: "^sitemap\\.xml$"
+      contentType: "application/xml"
+      gzip: true
+    # not cached with gzip compression enabled
+    - pattern: "^.+\\.(html|json|xml)$"
+      gzip: true
+```
+
+For CloudFront cache, I've setup multiple time-to-live (TTL) values that control how long the files stay in CloudFront's cache. It's important to try to strike a balance between how long the files live in CloudFront, and how often they come from S3.
+
+* [minimum TTL](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesMinTTL) = `3600`
+* [default TTL](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDefaultTTL) = `86400`
+* [maximum TTL](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesMaxTTL) = `2592000`
+
+To force CloudFront to invalidate all files in its cache, I've setup my deployment script to force invalidation (more on that below).
 
 ## GitHub Actions
 
@@ -183,7 +273,7 @@ module "iam_github_oidc_role" {
 }
 ```
 
-My module has the option to create the IAM policy (called `SiteUpdating`) needed to allow the role to update the files in S3 and create the cache invalidation.
+My module has the option to create the IAM policy (called `SiteUpdating`) needed to allow the GitHub OIDC role to update the files in S3 and create the cache invalidation.
 
 ```
 {
@@ -219,7 +309,7 @@ My module has the option to create the IAM policy (called `SiteUpdating`) needed
 }
 ```
 
-Then, I was able to use these GitHub Actions to get everything working. Magically, the files are uploaded to S3!
+Then, I was able to use these GitHub Actions to get everything working. Magically, the files are uploaded to S3 without a password!
 
 ```
     ...
@@ -275,7 +365,7 @@ Third is maintenance (this is actually a positive). I no longer have to install/
 
 ## Cost
 
-I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, which was costing me $0.50/month for the hosted zone, so the only cost I added was CloudFront and Route53.
+I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, which was costing me $0.50/month for the hosted zone, so the only cost I added was CloudFront and ACM. Using the [AWS Pricing Calculator](https://calculator.aws/), I guessed that the site would end up costing me around $5/month. In reality,
 
 
 
