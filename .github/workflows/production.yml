@@ -54,4 +54,4 @@ jobs:
         URL: loganmarchione.com
 
     - name: Deploy to S3
-      run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-com --logLevel info
+      run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-com --force --logLevel info
