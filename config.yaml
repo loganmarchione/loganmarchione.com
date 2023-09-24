@@ -36,6 +36,9 @@ deployment:
     - name: loganmarchione-dev
       URL: "s3://loganmarchione-dev?region=us-east-2"
       cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_DEV
+    - name: loganmarchione-com
+      URL: "s3://loganmarchione-com?region=us-east-2"
+      cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_COM
   matchers:
     # cached with gzip compression enabled
     - pattern: "^.+\\.(js|css|svg|ttf)$"
