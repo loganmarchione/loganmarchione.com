@@ -6,9 +6,6 @@ on:
       - master
   workflow_dispatch:
 
-env:
-  URL_PRD: loganmarchione.com
-
 jobs:
   deploy-development:
     uses: ./.github/workflows/development.yml
@@ -19,6 +16,10 @@ jobs:
 
     needs: deploy-development
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
     - name: Check out the codebase
@@ -37,19 +38,20 @@ jobs:
         hugo-version: 'latest'
         extended: true
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_ARN_PRD }}
+        role-duration-seconds: 900
+        aws-region: us-east-2
+
+    - name: Update CloudFront Distribution
+      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_PRD/${{ secrets.CLOUDFRONT_DISTRIBUTION_PRD }}/g" config.yaml
+
     - name: Build
-      run: hugo --gc --baseURL="https://${{ env.URL_PRD }}"
+      run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+      env:
+        URL: loganmarchione.com
 
-    - name: SSH setup
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-        ssh-keyscan -p ${{ secrets.DEPLOY_PORT }} ${{ env.URL_PRD }} > ~/.ssh/known_hosts
-        chmod -R 700 ~/.ssh
-        chmod 600 ~/.ssh/deploy_key
-
-    - name: Rsync
-      run: |
-        rsync -rltvz --delete --omit-dir-times \
-          -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }}" public/ \
-          ${{ secrets.DEPLOY_USER }}@${{ env.URL_PRD }}:/var/www/${{ env.URL_PRD }}
+    - name: Deploy to S3
+      run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-com --logLevel info
