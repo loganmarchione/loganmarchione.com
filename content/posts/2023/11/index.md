@@ -102,12 +102,12 @@ CloudFront, however, is a content delivery network (CDN), not a webserver. Becau
 
 [CloudFront Function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-functions.html) are written in Javascript and do lightweight tasks like change headers, rewrite URLs, etc... To get some of my Nginx-like functionality into CloudFront, I had to use CloudFront Functions.
 
-First, CloudFront has a concept of [default root objects](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html#DefaultRootObjectHow). If you don't set a default root object, visiting `https://example.com` returns an error. However, you can manually type `https://example.com/index.html` to view the page (but this is ugly). To fix this, set `index.html` as the default root object and visit `https://example.com`, it works!
+First, CloudFront has a concept of [default root objects](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html#DefaultRootObjectHow). If you don't set a default root object, visiting `https://example.com` returns an error. However, you can manually type `https://example.com/index.html` to view the page (this is ugly). To fix this, set `index.html` as the default root object and visit `https://example.com`, it works!
 
-But, if you visit any sub-page like `https://example.com/foo`, you get an error. Again, you can manually type `https://example.com/foo/index.html` to view the page (again, this is ugly).
+But, if you visit any sub-page like `https://example.com/foo`, you get an error. Again, you can manually type `https://example.com/foo/index.html` to view the page (this is ugly). As you can see, default root objects don't work for sub-pages (because CloudFront isn't a webserver).
 
 
-Second, I also wanted to do URL rewrites/redirects (e.g., redirect `/feed` to `/index.xml`) like I did in Nginx.
+Second, I wanted to do URL rewrites/redirects (e.g., redirect `/feed` to `/index.xml`) like I did in Nginx (below).
 
 ```
   location /feed {
@@ -193,19 +193,20 @@ deployment:
     ...
   matchers:
     # cached with gzip compression enabled
-    - pattern: "^.+\\.(js|css|svg|ttf)$"
-      cacheControl: "max-age=86400, no-transform, public"
+    - pattern: "^.+\\.(js|css|md|otf|svg|ttf|txt)$"
+      cacheControl: "max-age=604800, no-transform, public"
       gzip: true
     # cached with gzip compression disabled
-    - pattern: "^.+\\.(atom|bmp|gif|ico|jpeg|jpg|pdf|png|rss|tiff|woff|woff2|zip)$"
-      cacheControl: "max-age=86400, no-transform, public"
+    - pattern: "^.+\\.(bmp|gif|ico|jpeg|jpg|mp3|mp4|pdf|png|rss|tiff|woff|woff2)$"
+      cacheControl: "max-age=604800, no-transform, public"
       gzip: false
     # sitemap gets a special content-type header
     - pattern: "^sitemap\\.xml$"
       contentType: "application/xml"
       gzip: true
-    # not cached with gzip compression enabled
+    # cached with gzip compression enabled
     - pattern: "^.+\\.(html|json|xml)$"
+      cacheControl: "max-age=3600, no-transform, public"
       gzip: true
 ```
 
@@ -215,7 +216,7 @@ For CloudFront cache, I've setup multiple time-to-live (TTL) values that control
 * [default TTL](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDefaultTTL) = `86400`
 * [maximum TTL](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesMaxTTL) = `2592000`
 
-To force CloudFront to invalidate all files in its cache, I've setup my deployment script to force invalidation (more on that below).
+To force CloudFront to refresh all files in its cache when I do a deploy, I've setup my deployment script to force invalidation (more on that below).
 
 ## GitHub Actions
 
@@ -262,18 +263,18 @@ module "oidc_provider" {
 ### Module for GitHub OIDC role
 ################################################################################
 
-module "iam_github_oidc_role" {
+module "iam_github_oidc_role_loganmarchione_com" {
   source = "github.com/terraform-aws-modules/terraform-aws-iam?ref=v5.30.0//modules/iam-github-oidc-role"
 
-  name = "GitHubActionsOIDC"
+  name = "GitHubActionsOIDC-loganmarchione-com"
   policies = {
-    SiteUpdating = module.static_site_loganmarchione_com.site_updating_iam_policy_arn
+    SiteUpdating-loganmarchione-com = module.static_site_loganmarchione_com.site_updating_iam_policy_arn
   }
   subjects = ["loganmarchione/loganmarchione.com:*"]
 }
 ```
 
-My module has the option to create the IAM policy (called `SiteUpdating`) needed to allow the GitHub OIDC role to update the files in S3 and create the cache invalidation.
+My module has the option to create the IAM policy (called `SiteUpdating-loganmarchione-com`) needed to allow the GitHub OIDC role to update the files in S3 and create the cache invalidation.
 
 ```
 {
@@ -288,6 +289,7 @@ My module has the option to create the IAM policy (called `SiteUpdating`) needed
         "s3:PutBucketPolicy",
         "s3:ListBucket",
         "s3:PutObject",
+        "s3:GetObject",
         "s3:DeleteObject",
       ],
       "Resource" : [
@@ -328,7 +330,7 @@ Then, I was able to use these GitHub Actions to get everything working. Magicall
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_DEV }}
+        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_ARN_PRD }}
         role-duration-seconds: 900
         aws-region: us-east-2
 
@@ -338,7 +340,7 @@ Then, I was able to use these GitHub Actions to get everything working. Magicall
         URL: loganmarchione.com
 
     - name: Deploy to S3
-      run: hugo deploy --maxDeletes -1 --invalidateCDN --logLevel info
+      run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-com --logLevel info
 ```
 
 Credit to these two blogs ([one](https://major.io/p/cloudfront-migration/), [two](https://robinvenables.com/posts/moving-away-from-aws-access-keys/)) for working examples. The docs for AWS and GitHub are also linked [here](https://aws.amazon.com/blogs/security/use-iam-roles-to-connect-github-actions-to-actions-in-aws/) and [here](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services), respectively.
@@ -359,14 +361,15 @@ Third is complexity (this is a negative). My site infrastructure is infinitely m
 
 First is simplicity. This was not easy to setup and took me weeks between writing the module, debugging the module, writing IAM policies, testing, etc...
 
-Second is freedom. This basically locks me into AWS. Not saying that I can't go back to a VPS (because my static site is just a bunch of HTML/CSS/JavaScript), but I'm not dependent on AWS (which never goes down :squinting_face_with_tongue:).
+Second is freedom. This basically locks me into AWS. Not saying that I can't go back to a VPS (because my static site is just a bunch of HTML/CSS/JavaScript), but I'm now dependent on AWS (which never goes down :squinting_face_with_tongue:).
 
 Third is maintenance (this is actually a positive). I no longer have to install/patch/maintain/backup a VPS, which is nice.
 
 ## Cost
 
-I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, which was costing me $0.50/month for the hosted zone, so the only cost I added was CloudFront and ACM. Using the [AWS Pricing Calculator](https://calculator.aws/), I guessed that the site would end up costing me around $5/month. In reality,
+I was using a $6/month Digital Ocean droplet as my VPS. I already had my DNS in Route53, which was costing me $0.50/month for the hosted zone, so the only costs I added were ACM, CloudFront, and S3. Using the [AWS Pricing Calculator](https://calculator.aws/), I guessed that the site would end up costing me around $3/month (not counting the $0.50 I was already paying in Route53 fees).
 
+I cut over from my VPS to CloudFront on 2023-09-24, so I have a little more than one month of AWS charges. In reality, the site actually costs $xx.xx/month.
 
 
 # Conclusion
