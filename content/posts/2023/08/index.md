@@ -68,7 +68,7 @@ It won't win any awards for looks, but the [Kinesis Freestyle2](https://kinesis-
 
 Unfortunately, the Kinesis Freestyle2 isn't "aesthetic" and is lacking a lot of enthusiast-level niceties (hotswap sockets, QMK support, USB-C, etc...).
 
-Below are the keyboards I considered. They don't solve all ergonomic challenges, but they're all split boards (you'll need to scroll left and right to see the entire table).
+Below are the keyboards I considered. They don't solve all ergonomic challenges, but they're all split boards (you'll need to scroll left and right to see the entire table). There is also a great site [here](https://golem.hu/boards/) where you can compare even more split boards.
 
 | Item                                                                                                            | Starting price | Size    | Layout               | Hotswap | Connectivity                | Software               | Thumb cluster | Wrist-wrist | Tenting  | Comments                |
 |-----------------------------------------------------------------------------------------------------------------|----------------|---------|----------------------|---------|-----------------------------|------------------------|---------------|-------------|----------|-------------------------|
