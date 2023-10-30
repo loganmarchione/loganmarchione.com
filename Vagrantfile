@@ -8,7 +8,7 @@ v_base = "debian/bookworm64"
 v_name = "hugo"
 v_cpu = 2
 v_mem = 1024
-hugo_version = "0.115.4"
+hugo_version = "0.119.0"
 
 ########################################
 # Configuration
