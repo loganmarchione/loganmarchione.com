@@ -47,6 +47,8 @@ Below is my outline on the general steps to setup a static site. You don't need 
     - This can't be done via IaC
     - I like [Hover](https://www.hover.com/), but you can also use [Cloudflare](https://www.cloudflare.com/products/registrar/), [Namecheap](https://www.namecheap.com/), [AWS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html), etc...
     - If this is a personal site, try to get a `.com` TLD, not `.net`, `.io`, `.ai`, etc...
+    - Be sure to check the renewal price in addition to the purchase price
+    - Be sure to enable WHOIS privacy (unless you want telemarketing calls)
 1. Create a GitHub account and two repositories
     - One for your IaC code (Terraform and Ansible)
     - One for your static site's code
@@ -77,6 +79,7 @@ Below is my outline on the general steps to setup a static site. You don't need 
     - This automation needs to happen on some sort of trigger (e.g., on each commit to Git, on a schedule, on a tag, etc...)
     - Bonus: Use GitHub Actions to lint your Terraform code with [tflint](https://github.com/terraform-linters/tflint) and Ansible code with [ansible-lint](https://github.com/ansible/ansible-lint)
     - Bonus: Setup a free [GitHub Pages](https://pages.github.com/) domain at `yourname.github.io` and push a dev/test version of your site to there
+    - Bonus: Setup a dependency management solution (like [Renovate](https://github.com/renovatebot/renovate) or [Dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot)) to automatically update dependencies
 
 # Cost
 
