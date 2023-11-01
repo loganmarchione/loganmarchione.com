@@ -27,7 +27,7 @@ go mod tidy
 hugo mod get
 
 # run
-hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms
+hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms --logLevel info
 
 # page will be available at http://localhost:1313
 
