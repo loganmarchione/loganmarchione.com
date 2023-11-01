@@ -23,8 +23,8 @@ vagrant up
 vagrant ssh
 
 # update hugo modules (optional)
-hugo mod get
 go mod tidy
+hugo mod get
 
 # run
 hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms
