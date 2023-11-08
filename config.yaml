@@ -41,19 +41,21 @@ deployment:
       cloudFrontDistributionID: CLOUDFRONT_DISTRIBUTION_PRD
   matchers:
     # cached with gzip compression enabled
-    - pattern: "^.+\\.(js|css|svg|ttf)$"
-      cacheControl: "max-age=86400, no-transform, public"
+    - pattern: "^.+\\.(js|css|md|otf|svg|ttf|txt)$"
+      cacheControl: "max-age=604800, no-transform, public"
       gzip: true
     # cached with gzip compression disabled
-    - pattern: "^.+\\.(atom|bmp|gif|ico|jpeg|jpg|pdf|png|rss|tiff|woff|woff2|zip)$"
-      cacheControl: "max-age=86400, no-transform, public"
+    - pattern: "^.+\\.(bmp|gif|ico|jpeg|jpg|mp3|mp4|pdf|png|rss|tiff|woff|woff2)$"
+      cacheControl: "max-age=604800, no-transform, public"
       gzip: false
     # sitemap gets a special content-type header
     - pattern: "^sitemap\\.xml$"
       contentType: "application/xml"
+      cacheControl: "max-age=3600, no-transform, public"
       gzip: true
-    # not cached with gzip compression enabled
+    # cached with gzip compression enabled
     - pattern: "^.+\\.(html|json|xml)$"
+      cacheControl: "max-age=3600, no-transform, public"
       gzip: true
 
 params:
