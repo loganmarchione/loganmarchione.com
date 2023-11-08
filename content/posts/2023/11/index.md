@@ -41,7 +41,7 @@ Now, I'm eating those words. I've stepped up my game and decided to try again wi
 
 # Design decisions
 
-## Terraform code
+## Terraform
 
 Not going to lie, this took me a solid week to come up with. I have multiple static sites and I wanted them to all have the same setup (without duplicating Terraform code), so I wrote a Terraform module, which I [published to GitHub](https://github.com/loganmarchione/terraform-aws-static-site). You can read the details and code on GitHub, but this module creates the S3 buckets, ACM certificate, Route53 entries, CloudFront distribution, and more.
 
