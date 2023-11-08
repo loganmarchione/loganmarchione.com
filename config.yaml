@@ -51,6 +51,7 @@ deployment:
     # sitemap gets a special content-type header
     - pattern: "^sitemap\\.xml$"
       contentType: "application/xml"
+      cacheControl: "max-age=3600, no-transform, public"
       gzip: true
     # cached with gzip compression enabled
     - pattern: "^.+\\.(html|json|xml)$"
