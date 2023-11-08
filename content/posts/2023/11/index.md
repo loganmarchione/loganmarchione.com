@@ -376,7 +376,7 @@ Third is maintenance (this is actually a positive). I no longer have to install/
 
 My site isn't super busy, so it's very efficient to run via a CDN instead of a dedicated VPS. I cut over from my VPS to CloudFront on 2023-09-24, so the stats below are from 2023-10-01 to 2023-10-31.
 
-I use [Plausible](https://plausible.io/) for analytics. Below you can see my traffic patterns for October 2023 (the first month on the VPS).
+I use [Plausible](https://plausible.io/) for analytics. Below you can see my traffic patterns for October 2023 (the first month on CloudFront).
 
 {{< img src="20231108_001.png" alt="plausible" >}}
 
