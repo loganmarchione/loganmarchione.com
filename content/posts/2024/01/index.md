@@ -1,6 +1,6 @@
 ---
-title: "Beryl travel router"
-date: "2023-12-01"
+title: "Beryl travel router with OpenWrt"
+date: "2024-01-01"
 author: "Logan Marchione"
 categories: 
   - "linux"
@@ -40,11 +40,17 @@ I was looking for something that had the following features:
 * preferably had USB-C power input
 * preferably had 802.11ac (WiFi 5)
 
-It just so happens that [GL.iNet](https://www.gl-inet.com/) make a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH).
+It just so happens that [GL.iNet](https://www.gl-inet.com/) make a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH). The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that had the specs I wanted and was easily available. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
 
-The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that was easily available and did what I needed. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
+{{< figure src="20231121_001.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
 
-PICTURES GO HERE
+{{< figure src="20231121_002.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
+
+{{< figure src="20231121_003.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
+
+{{< figure src="20231121_004.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
+
+{{< figure src="20231121_005.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
 
 I also considered these models:
 
