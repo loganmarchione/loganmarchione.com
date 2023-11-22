@@ -117,13 +117,13 @@ Moving on. Leave the username as "root" and the password field empty.
 
 {{< img src="20231121_008.png" alt="openwrt login page" >}}
 
-Press _Login_ to continue and you'll see the status page.
+Click on _Login_ to continue and you'll see the status page.
 
 {{< img src="20231121_009.png" alt="openwrt status page" >}}
 
 ### Set a password
 
-From the main status page, we're going to set a root password by using the link in the yellow box at the top of the page. Here, you can (and should) set a root password. Press _Save_ to continue.
+From the main status page, we're going to set a root password by using the link in the yellow box at the top of the page. Here, you can (and should) set a root password. Click on _Save_ to continue.
 
 {{< img src="20231121_010.png" alt="openwrt password change page" >}}
 
@@ -147,9 +147,19 @@ BusyBox v1.36.1 (2023-11-14 13:38:11 UTC) built-in shell (ash)
 root@OpenWrt:~#
 ```
 
+### Set hostname
+
+First, set a hostname for the device and reboot.
+
+```
+uci set system.@system[0].hostname='OpenWrt_TR'
+uci commit system
+reboot
+```
+
 ### Secure SSH
 
-First things first, SSH is listening on all interfaces (LAN and WAN). I like to only be able to SSH via the LAN interface. Use the commands below to change that.
+SSH is listening on all interfaces (LAN and WAN). I like to only be able to SSH via the LAN interface. Use the commands below to change that.
 
 ```
 uci set dropbear.@dropbear[0].Interface='lan'
@@ -168,13 +178,15 @@ uci commit network
 service network restart
 ```
 
-Log back into the web interface at the new address using your new root password.
+Login again at the new address (not `192.168.1.1`).
 
-### Setup devices
+### Devices vs interfaces
 
-First, we need to clarify some terms. In OpenWrt, a "device" is a Linux kernel network device, like `eth0`, but also includes virtual devices like the default bridge called `br-lan`. You can see devices by typing `ip link show` on the command line. An "interface" is a logical configuration associated with a specific device that allows you to define and manage network settings (e.g., IP addresses, subnet masks, security settings...). Confusingly, the devices and interfaces can (and do) sometimes have the same name by default (e.g., the `wan` interface is bound to the `wan` device).
+Now we need to clarify some terms. In OpenWrt, a "device" is a Linux kernel network device, like `eth0`, but also includes virtual devices like the default bridge called `br-lan`. You can see devices by typing `ip link show` on the command line (they're the entries without the `@` symbol).
 
-In terms of wireless, a "radio" is a device (e.g., `radio0`), but it also has an interface where you can setup your wireless settings.
+An "interface" is a logical configuration associated with a specific device that allows you to define and manage network settings (e.g., IP addresses, subnet masks, security settings...). Confusingly, the devices and interfaces can (and do) sometimes have the same name by default (e.g., the `wan` interface is bound to the `wan` device).
+
+In terms of wireless, a "radio" is a device (e.g., `radio0`), but it also has an interface (e.g., `default_radio0`) where you can setup your wireless networks.
 
 ### Setup wireless
 
@@ -192,18 +204,43 @@ service network restart
 Next, we need to enable both wireless radios and change the country code (adjust as needed).
 
 ```
-uci delete wireless.radio0.disabled
-uci delete wireless.radio1.disabled
-uci set wireless.radio0.country=US
-uci set wireless.radio1.country=US
+uci set wireless.radio0.disabled='0'
+uci set wireless.radio1.disabled='0'
+uci set wireless.radio0.country='US'
+uci set wireless.radio1.country='US'
 uci commit wireless
 service network restart
 ```
 
-In LuCI, go to _Network_, then _Wireless_. You can see here that the Beryl has two radios (`radio0` and `radio1`). You'll need to device which one will be the WAN and which will be the LAN, but keep in mind that one is 2.4GHz and one 5GHz.
+This next part is easier to do in the web interface. In LuCI, go to _Network_, then _Wireless_. You can see here that the Beryl has two radios (`radio0` and `radio1`) each with an interface broadcasting a WiFi network called `OpenWrt`. You'll need to decide which radio will be the WAN and which will be the LAN, but keep in mind that one is 2.4GHz and one 5GHz.
 
 {{< img src="20231121_011.png" alt="openwrt wireless page" >}}
 
+I've never seen a hotel with great WiFi, so I'm going to make the 2.4GHz radio (`radio0`) my wireless WAN, and have the 5GHz radio (`radio1`) as my wireless LAN. This also works for me because all of my devices that will be on the wireless LAN support 5GHz. To set this up, go to `radio0` and click on _Scan_ (if you're using the opposite radio, you'll need to adjust the rest of this tutorial as needed).
+
+{{< img src="20231121_012.png" alt="openwrt wireless page" >}}
+
+Here, you'll see all of the WiFi networks around you. I'm going to pick my home network for the setup, but at the hotel, **you'll do this same process again to select their WiFi**.
+
+Make sure you check the box that says _Replace wireless configuration_, then enter your network's WiFi password, click on _Submit_.
+
+Scroll down, then make sure the _Network_ is set to `wwan` (the interface we created earlier), and click on _Save_.
+
+Back on the wireless page, click on _Save & Apply_.
+
+At this point, the Beryl should be online and able to reach the internet.
+
+```
+ping google.com
+```
+
+### Adjust wireless LAN
+
+Now we need to setup the WiFi on the wireless LAN. Start by going back to wireless page in LuCI and click on _Edit_ on the WiFi network.
+
+Scroll down, and on the _General Setup_ tab, change the _ESSID_ to whatever you want to broadcast (I'm calling mine `OpenWrt Travel Router`).
+
+Then, on the _Wireless Security_ tab, change the _Encryption_ type to whatever you want. I'm going with `WPA3-SAE`, but if you have legacy devices that don't support WPA3, you might want to go with `WPA2-PSK` (or choose one of the `mixed` modes). Once you're done, click on _Save_. 
 
 # Conclusion
 
