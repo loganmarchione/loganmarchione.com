@@ -167,13 +167,14 @@ uci commit dropbear
 service dropbear restart
 ```
 
-### Change default IP
+### LAN settings
 
-Next, we're going to change the default IP of the router from `192.168.1.1` to `10.70.74.1` (or whatever scheme you want). Most devices ship with `192.168.1.1` as the default, and since we're going to be double-NATed, we can't have two identical IPs on the same network.
+Next, we're going to change the default IP of the router from `192.168.1.1` to `10.70.74.1` (or whatever scheme you want). Most devices ship with `192.168.1.1` as the default, and since we're going to be double-NATed, we can't have two identical IPs on the same network. We'll also set DNS here.
 
 ```
 uci set network.lan.ipaddr='10.70.74.1'
 uci set network.lan.force_link='1'
+uci set network.lan.dns='8.8.8.8 1.1.1.1'
 uci commit network
 service network restart
 ```
@@ -188,7 +189,7 @@ An "interface" is a logical configuration associated with a specific device that
 
 In terms of wireless, a "radio" is a device (e.g., `radio0`), but it also has an interface (e.g., `default_radio0`) where you can setup your wireless networks.
 
-### Setup wireless
+### Setup wireless WAN
 
 First, we're going to create a wireless WAN interface called `wwan`.
 
@@ -222,11 +223,19 @@ I've never seen a hotel with great WiFi, so I'm going to make the 2.4GHz radio (
 
 Here, you'll see all of the WiFi networks around you. I'm going to pick my home network for the setup, but at the hotel, **you'll do this same process again to select their WiFi**.
 
+{{< img src="20231121_013.png" alt="selecting a wifi network" >}}
+
 Make sure you check the box that says _Replace wireless configuration_, then enter your network's WiFi password, click on _Submit_.
 
-Scroll down, then make sure the _Network_ is set to `wwan` (the interface we created earlier), and click on _Save_.
+{{< img src="20231121_014.png" alt="joining a wifi network" >}}
+
+You can change the channel info here if you want. Past that, scroll down and make sure the _Network_ is set to `wwan` (the interface we created earlier), and click on _Save_.
+
+{{< img src="20231121_015.png" alt="wifi network settings" >}}
 
 Back on the wireless page, click on _Save & Apply_.
+
+{{< img src="20231121_016.png" alt="openwrt wireless page" >}}
 
 At this point, the Beryl should be online and able to reach the internet.
 
@@ -234,13 +243,37 @@ At this point, the Beryl should be online and able to reach the internet.
 ping google.com
 ```
 
-### Adjust wireless LAN
+### Setup wireless LAN
 
-Now we need to setup the WiFi on the wireless LAN. Start by going back to wireless page in LuCI and click on _Edit_ on the WiFi network.
+Now we need to setup the WiFi on the wireless LAN. Start by going back to wireless page in LuCI and click on _Edit_ on the WiFi network of `radio1`.
 
-Scroll down, and on the _General Setup_ tab, change the _ESSID_ to whatever you want to broadcast (I'm calling mine `OpenWrt Travel Router`).
+{{< img src="20231121_017.png" alt="openwrt wireless page" >}}
 
-Then, on the _Wireless Security_ tab, change the _Encryption_ type to whatever you want. I'm going with `WPA3-SAE`, but if you have legacy devices that don't support WPA3, you might want to go with `WPA2-PSK` (or choose one of the `mixed` modes). Once you're done, click on _Save_. 
+You can change the channel info here if you want. Past that, scroll down, and on the _General Setup_ tab, change the _ESSID_ to whatever you want to broadcast (I'm calling mine `OpenWrt_Travel_Router`) and make sure the _Network_ is set to `lan`.
+
+{{< img src="20231121_018.png" alt="wifi network settings" >}}
+
+Then, on the _Wireless Security_ tab, change the _Encryption_ type to whatever you want. I'm going with `WPA3-SAE`, but if you have legacy devices that don't support WPA3, you might want to go with `WPA2-PSK` (or choose one of the `mixed` modes). Once you're done, click on _Save_.
+
+{{< img src="20231121_019.png" alt="wifi network settings" >}}
+
+Back on the wireless page, click on _Save & Apply_.
+
+{{< img src="20231121_020.png" alt="openwrt wireless page" >}}
+
+## Checkpoint
+
+Time for a break. Disconnect the ethernet cable from the router and connect to the new SSID (mine was called `OpenWrt_Travel_Router`). You should get an IP in the same range as the wired connection (mine was `10.70.74.x`).
+
+Let's take stock of where we're at now. We have a travel router that has three basic interfaces:
+
+* wired WAN (the port labeled WAN)
+* wireless WAN (the `radio0` device)
+* a LAN bridge (both LAN ports and `radio1`)
+
+Visually, that looks like this:
+
+{{< img src="20231121_021.jpg" alt="topology" >}}
 
 # Conclusion
 
