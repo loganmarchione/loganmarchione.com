@@ -63,11 +63,26 @@ I also considered these models:
 
 ## Software
 
-GL.iNet's routers all run a custom version of OpenWrt. I'm unsure if the core OpenWrt code is stock, but at the very least, they run a proprietary (i.e., closed-source) UI on top of OpenWrt (although they do still let you [access LuCI](https://docs.gl-inet.com/router/en/4/faq/what_is_luci/)). Their UI looks great and exposes a bunch of one-click options that simplify setup.
+GL.iNet's routers all run a custom version of OpenWrt. I'm unsure if the core OpenWrt code is stock, but at the very least, they run a proprietary (i.e., closed-source) UI on top of OpenWrt (although they do still let you [access LuCI](https://docs.gl-inet.com/router/en/4/faq/what_is_luci/)). Their UI looks great and exposes a [bunch of one-click options](https://docs.gl-inet.com/router/en/3/setup/gl-mt1300/first_time_setup/) that simplify setup.
 
-PICTURES GO HERE
+* OpenVPN client/server
+* WireGuard client/server
+* Repeater
+* 3G/4G modem
+* Tethering
+* Captive portal
+* Dynamic DNS (DDNS)
+* Hardware button settings
 
-This is the part where I mention that GL.iNet is a Chinese company, if that kind of thing bothers you. Regardless of that, I'd never run anything proprietary for something that's handing out VPN access to my network, so my plan was always to immediately replace GL.iNet's version of OpenWrt with the stock version.
+This is the `3.x` version of the UI.
+
+{{< img src="20231121_006.png" alt="gl.inet default user interface" >}}
+
+This is the `4.x` version of the UI.
+
+{{< img src="20231121_007.png" alt="gl.inet default user interface" >}}
+
+Unfortunately, this is the part where I mention that GL.iNet is a Chinese company, if that kind of thing bothers you. Regardless of that, I'd never run anything proprietary for something that's handing out VPN access to my network, so my plan was always to immediately replace GL.iNet's version of OpenWrt with the stock version.
 
 # Setup
 
@@ -75,10 +90,119 @@ This is the part where I mention that GL.iNet is a Chinese company, if that kind
 
 OpenWrt has two kinds of installations:
 
+* installing from vendor firmware (called a [factory installation](https://openwrt.org/docs/guide-quick-start/factory_installation))
+* upgrading OpenWrt (called a [sysupgrade](https://openwrt.org/docs/guide-quick-start/sysupgrade.luci))
 
+Because the Beryl already ran a version of OpenWrt from GL.iNet, I needed to do a sysupgrade. The installation process was pretty simple, and I've summarized the steps from the [wiki page for the Beryl](https://openwrt.org/toh/gl.inet/gl-mt1300_v1):
+
+1. On my laptop, I went to the [OpenWrt Firmware Selector](https://firmware-selector.openwrt.org/) (this was much easier than navigating the [firmware directories](https://downloads.openwrt.org/releases/)), found my [model](https://firmware-selector.openwrt.org/?version=23.05.2&target=ramips%2Fmt7621&id=glinet_gl-mt1300), downloaded the `sysupgrade` file, and verified the `sha256` hash of the file
+1. Connected to the Beryl's LAN port (which after booting, gave me an IP in the `192.168.8.x` range)
+1. Browsed to [http://192.168.8.1/](http://192.168.8.1/), went through the setup wizard, then browsed to [http://192.168.8.1/#/upgrade](http://192.168.8.1/#/upgrade) and uploaded the `sysupgrade` file
+1. Hit an error that read `
+failed! ERROR: Incorrect firmware format!`
+1. Upgraded the factory firmware from `3.211` to `3.216` to `4.3.7` from [this page](https://dl.gl-inet.com/?model=mt1300)
+1. Repeated step 3, waited 5 mins, and rebooted into OpenWrt at [https://192.168.1.1/](https://192.168.1.1/)!
 
 ## Configure OpenWrt
 
+OpenWrt has a really great configuration system. It stores its configuration files in `/etc/config` in a system known as the [Unified Configuration Interface](https://openwrt.org/docs/guide-user/base-system/uci) (UCI). The UCI is basically a collection of easy-to-read configuration files that are all centrally located, making OpenWrt much easier to configure. You can edit these files manually with `vi` or `nano`, but there is also a [command line tool](https://openwrt.org/docs/guide-user/base-system/uci) called `uci` that you can use to edit the files (great for scripting).
+
+The web interface for OpenWrt is called [LuCI](https://openwrt.org/docs/guide-user/luci/start) (I'm guessing it's short for Lua UCI, because it's written in Lua).   What's nice about LuCI is that it reads/writes from/to the UCI files. Any changes you make in LuCI are reflected in the UCI files, and vice versa, meaning you can configure OpenWrt from the web interface, or from the command line.
+
+### Initial login
+
+Navigate to [https://192.168.1.1/](https://192.168.1.1/) in your browser and you'll be greeted by an SSL error. This is because the web interface uses a [self-signed certificate](https://openwrt.org/docs/guide-user/luci/luci.secure) out of the box. It's safe to click through this, since your traffic is encrypted and you know the certificate is from the router (or you can browse to [http://192.168.1.1/](http://192.168.1.1/) without HTTPS).
+
+Moving on. Leave the username as "root" and the password field empty.
+
+{{< img src="20231121_008.png" alt="openwrt login page" >}}
+
+Press _Login_ to continue and you'll see the status page.
+
+{{< img src="20231121_009.png" alt="openwrt status page" >}}
+
+### Set a password
+
+From the main status page, we're going to set a root password by using the link in the yellow box at the top of the page. Here, you can (and should) set a root password. Press _Save_ to continue.
+
+{{< img src="20231121_010.png" alt="openwrt password change page" >}}
+
+Also, you can now SSH into the router with those credentials.
+
+```
+> ssh root@192.168.1.1 
+root@192.168.1.1's password: 
+
+
+BusyBox v1.36.1 (2023-11-14 13:38:11 UTC) built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 23.05.2, r23630-842932a63d
+ -----------------------------------------------------
+root@OpenWrt:~#
+```
+
+### Secure SSH
+
+First things first, SSH is listening on all interfaces (LAN and WAN). I like to only be able to SSH via the LAN interface. Use the commands below to change that.
+
+```
+uci set dropbear.@dropbear[0].Interface='lan'
+uci commit dropbear
+service dropbear restart
+```
+
+### Change default IP
+
+Next, we're going to change the default IP of the router from `192.168.1.1` to `10.70.74.1` (or whatever scheme you want). Most devices ship with `192.168.1.1` as the default, and since we're going to be double-NATed, we can't have two identical IPs on the same network.
+
+```
+uci set network.lan.ipaddr='10.70.74.1'
+uci set network.lan.force_link='1'
+uci commit network
+service network restart
+```
+
+Log back into the web interface at the new address using your new root password.
+
+### Setup devices
+
+First, we need to clarify some terms. In OpenWrt, a "device" is a Linux kernel network device, like `eth0`, but also includes virtual devices like the default bridge called `br-lan`. You can see devices by typing `ip link show` on the command line. An "interface" is a logical configuration associated with a specific device that allows you to define and manage network settings (e.g., IP addresses, subnet masks, security settings...). Confusingly, the devices and interfaces can (and do) sometimes have the same name by default (e.g., the `wan` interface is bound to the `wan` device).
+
+In terms of wireless, a "radio" is a device (e.g., `radio0`), but it also has an interface where you can setup your wireless settings.
+
+### Setup wireless
+
+First, we're going to create a wireless WAN interface called `wwan`.
+
+```
+uci set network.wwan='interface'
+uci set network.wwan.proto='dhcp'
+uci set network.wwan.peerdns='0'
+uci set network.wwan.dns='8.8.8.8 1.1.1.1'
+uci commit network
+service network restart
+```
+
+Next, we need to enable both wireless radios and change the country code (adjust as needed).
+
+```
+uci delete wireless.radio0.disabled
+uci delete wireless.radio1.disabled
+uci set wireless.radio0.country=US
+uci set wireless.radio1.country=US
+uci commit wireless
+service network restart
+```
+
+In LuCI, go to _Network_, then _Wireless_. You can see here that the Beryl has two radios (`radio0` and `radio1`). You'll need to device which one will be the WAN and which will be the LAN, but keep in mind that one is 2.4GHz and one 5GHz.
+
+{{< img src="20231121_011.png" alt="openwrt wireless page" >}}
 
 
 # Conclusion
