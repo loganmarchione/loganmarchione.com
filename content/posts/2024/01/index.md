@@ -261,21 +261,30 @@ Back on the wireless page, click on _Save & Apply_.
 
 {{< img src="20231121_020.png" alt="openwrt wireless page" >}}
 
-## Checkpoint
+### Checkpoint
 
 Time for a break. Disconnect the ethernet cable from the router and connect to the new SSID (mine was called `OpenWrt_Travel_Router`). You should get an IP in the same range as the wired connection (mine was `10.70.74.x`).
 
 Let's take stock of where we're at now. We have a travel router that has three basic interfaces:
 
-* wired WAN (the port labeled WAN)
 * wireless WAN (the `radio0` device)
+* wired WAN (the port labeled WAN)
 * a LAN bridge (both LAN ports and `radio1`)
 
 Visually, that looks like this:
 
 {{< img src="20231121_021.jpg" alt="topology" >}}
 
-# Conclusion
+This is a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
 
+* paying for in-flight WiFi and [sharing it with your other devices](https://austinsnerdythings.com/2023/04/17/how-a-travel-router-can-save-you-money-and-share-wi-fi-on-flights/) (although, I'm sure this is against some terms of service)
+* a dorm or apartment where a shared router is provided by building management and you don't 100% trust it
+* physical network segmentation (as opposed to VLANs)
+
+### Tailscale
+
+Now we need to add VPN support so that we can connect back to our homelab.
+
+# Conclusion
 
 \-Logan
