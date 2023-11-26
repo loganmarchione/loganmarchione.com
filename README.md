@@ -13,12 +13,19 @@ This repo also builds https://loganmarchione.github.io and https://loganmarchion
 
 ## Usage
 
+### Pre-reqs
+
 ```
 # get a copy of the code
 git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
+```
 
-# if using Vagrant, run these
+### Vagrant or Docker (choose one)
+
+#### Vagrant
+
+```
 vagrant up
 vagrant ssh
 
@@ -28,10 +35,24 @@ hugo mod get
 
 # run
 hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms --logLevel info
+```
 
-# page will be available at http://localhost:1313
+#### Docker
 
-# add, commit, push to kick off GitHub Actions
+```
+# build the Dockerfile
+docker compose -f docker-compose-dev.yml up -d
+
+# view logs
+docker compose -f docker-compose-dev.yml logs -f
+
+# destroy when done
+docker compose -f docker-compose-dev.yml down
+```
+
+### add, commit, push to kick off GitHub Actions
+
+```
 git add .
 git commit -m "Update some stuff"
 git push
