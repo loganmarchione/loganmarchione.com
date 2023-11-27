@@ -261,7 +261,7 @@ Back on the wireless page, click on _Save & Apply_.
 
 {{< img src="20231121_020.png" alt="openwrt wireless page" >}}
 
-### Checkpoint
+## Checkpoint
 
 Time for a break. Disconnect the ethernet cable from the router and connect to the new SSID (mine was called `OpenWrt_Travel_Router`). You should get an IP in the same range as the wired connection (mine was `10.70.74.x`).
 
@@ -278,12 +278,71 @@ Visually, that looks like this:
 This is a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
 
 * paying for in-flight WiFi and [sharing it with your other devices](https://austinsnerdythings.com/2023/04/17/how-a-travel-router-can-save-you-money-and-share-wi-fi-on-flights/) (although, I'm sure this is against some terms of service)
-* a dorm or apartment where a shared router is provided by building management and you don't 100% trust it
+* a dorm/apartment/hotel where a shared network is provided by building management and you don't 100% trust it
 * physical network segmentation (as opposed to VLANs)
 
-### Tailscale
+## Tailscale
+
+### Why Tailscale?
 
 Now we need to add VPN support so that we can connect back to our homelab.
+
+I'm going to use [Tailscale](https://tailscale.com/) instead of plain [WireGuard](https://www.wireguard.com/) for this. I've found that some public networks are using [CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT) or they block the default WireGuard port (`51820/UDP`), and Tailscale can easily get around these problems. Obviously, this means that you're trusting Tailscale with access to your home network, so that's a tradeoff to consider.
+
+### Tailscale prerequisites
+
+I'm going to assume you already have a working Tailscale network. Specifically, you'll need an exit node that also accepts subnet routes that other nodes advertise.
+
+### Install packages
+
+The commands below will install Tailscale. OpenWrt versions 22.03 and later use `nftables` instead of `iptables`, but `tailscaled` requires `iptables`, so we're also installing `iptables-nft`.
+
+```
+opkg update
+opkg install iptables-nft tailscale tailscaled
+```
+
+Once Tailscale is installed, we need to enable and start it.
+
+```
+/etc/init.d/tailscale enable
+/etc/init.d/tailscale start
+```
+
+### Login to Tailscale
+
+Now, generate a unique link for your OpenWrt router. You'll need to copy/paste this link into your browser and login to your Tailscale admin interface to authorize this device (change the subnet to be whatever you chose).
+
+```
+tailscale up --advertise-routes 10.70.74.0/24 --accept-routes
+```
+
+Subnets only go one-way, from the Tailscale device to the advertised subnet device.
+
+### Admin settings
+
+Back in the Tailscale admin interface, we need to do a few more things.
+
+First, if you have [Device Approval](https://tailscale.com/kb/1099/device-approval/) enabled in Tailscale, you'll need to approve the device (after authorizing it). This step is only if you have this feature enabled.
+
+Second, you may want to [disable key expiration](https://tailscale.com/kb/1028/key-expiry/#disabling-key-expiry) for your OpenWrt travel router. This step is optional.
+
+Third, you need to [approve the subnet routes](https://tailscale.com/kb/1019/subnets/#step-3-enable-subnet-routes-from-the-admin-console) that we advertised earlier. Don't skip this step.
+
+### OpenWrt settings
+
+Now we're going to create an interface called `tailscale`.
+
+```
+uci set network.tailscale='interface'
+uci set network.tailscale.proto='none'
+uci set network.tailscale.device='tailscale0'
+uci commit network
+service network restart
+```
+
+
+opkg install kmod-ipt-conntrack kmod-ipt-nat
 
 # Conclusion
 
