@@ -13,6 +13,16 @@ cover:
     relative: false
 ---
 
+# Update: 2024-01-14
+
+I couldn't resist the lure of the [Steam Deck OLED](https://www.steamdeck.com/en/oled). I purchased the 512GB model (the same size as my Steam Deck LCD upgraded Kioxia BG4 drive) and used it for a few weeks before purchasing a 1TB Kioxia BG4. Hindsight being 20/20, I should have just purchased the 1TB Steam Deck OLED directly from Valve, since the difference between the 512GB and 1TB model was only $100, and I spent much that on the aftermarket 1TB Kioxia BG4. :man_shrugging:
+
+| Make            | Model                       | Link                                                                                                                                                                     | Watts | PCIe Spec | Price         | Comments                                            |
+|-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|-----------|---------------|-----------------------------------------------------|
+| Kioxia          | BG4 KBG40ZNS1T02            | [Here](https://www.kioxia.com/content/dam/kioxia/shared/business/ssd/client-ssd/asset/productbrief/cSSD-BG4-product-brief.pdf)                                           | 3.7W  | Gen3 x4   | ~$100         | Not sold to retail customers, will need to use eBay |
+
+I specifically chose the Kioxia BG4 again because it is PCIe Gen3 x4, which is what the Steam Deck supports. A Gen4 x4 SSD wouldn't be any faster because it's limited by the slot in the Steam Deck. In addition, I was worried about a Gen4 x4 SSD consuming more power. As it stands the 1TB Kioxia BG4 only consumes 1.12A (because `A = 3.7W/3.3V`), while both the 1TB Kioxia BG5 and BG6 consume 1.3A (because `A = 4.3W/3.3V`).
+
 # Update: 2023-08-28
 
 I've been using the Kioxia BG4 for over six months now without any issues. In that time, the Steam Deck has become much more popular (so popular that some of these SSDs are marketed as "Steam Deck upgrade kits"). I don't have a need to upgrade my Kioxia BG4 (yet), but you may want to consider these newer models as well.
