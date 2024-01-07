@@ -13,7 +13,7 @@ cover:
     relative: false
 ---
 
-# Update: 2024-01-14
+# Update: 2024-01-12
 
 I couldn't resist the lure of the [Steam Deck OLED](https://www.steamdeck.com/en/oled). I purchased the 512GB model (the same size as my Steam Deck LCD upgraded Kioxia BG4 drive) and used it for a few weeks before purchasing a 1TB Kioxia BG4. Hindsight being 20/20, I should have just purchased the 1TB Steam Deck OLED directly from Valve, since the difference between the 512GB and 1TB model was only $100, and I spent much that on the aftermarket 1TB Kioxia BG4. :man_shrugging:
 
@@ -21,7 +21,11 @@ I couldn't resist the lure of the [Steam Deck OLED](https://www.steamdeck.com/en
 |-----------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|-----------|---------------|-----------------------------------------------------|
 | Kioxia          | BG4 KBG40ZNS1T02            | [Here](https://www.kioxia.com/content/dam/kioxia/shared/business/ssd/client-ssd/asset/productbrief/cSSD-BG4-product-brief.pdf)                                           | 3.7W  | Gen3 x4   | ~$100         | Not sold to retail customers, will need to use eBay |
 
-I specifically chose the Kioxia BG4 again because it is PCIe Gen3 x4, which is what the Steam Deck supports. A Gen4 x4 SSD wouldn't be any faster because it's limited by the slot in the Steam Deck. In addition, I was worried about a Gen4 x4 SSD consuming more power. As it stands the 1TB Kioxia BG4 only consumes 1.12A (because `A = 3.7W/3.3V`), while both the 1TB Kioxia BG5 and BG6 consume 1.3A (because `A = 4.3W/3.3V`).
+I specifically chose the Kioxia BG4 again because it is PCIe Gen3 x4, which is what the Steam Deck supports. A Gen4 x4 SSD wouldn't be any faster because it's limited by the Gen3 x4 slot in the Steam Deck. In addition, I was worried about a Gen4 x4 SSD consuming more power. As it stands, the 1TB Kioxia BG4 only consumes 1.12A (because `A = 3.7W/3.3V`), while both the 1TB Kioxia BG5 and BG6 consume 1.30A (because `A = 4.3W/3.3V`).
+
+Here is the Steam Deck's 1TB storage (after the upgrade)
+
+{{< img src="20240106_001.jpg" alt="steam deck 1tb storage" >}}
 
 # Update: 2023-08-28
 
