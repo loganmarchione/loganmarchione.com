@@ -23,7 +23,7 @@ I couldn't resist the lure of the [Steam Deck OLED](https://www.steamdeck.com/en
 
 I specifically chose the Kioxia BG4 again because it is PCIe Gen3 x4, which is what the Steam Deck supports. A Gen4 x4 SSD wouldn't be any faster because it's limited by the Gen3 x4 slot in the Steam Deck. In addition, I was worried about a Gen4 x4 SSD consuming more power. As it stands, the 1TB Kioxia BG4 only consumes 1.12A (because `A = 3.7W/3.3V`), while both the 1TB Kioxia BG5 and BG6 consume 1.30A (because `A = 4.3W/3.3V`).
 
-Here is the Steam Deck's 1TB storage (after the upgrade)
+Here is the Steam Deck's 1TB storage (after the upgrade).
 
 {{< img src="20240106_001.jpg" alt="steam deck 1tb storage" >}}
 
@@ -238,11 +238,11 @@ After that, you should be able to boot your Steam Deck and see the expanded stor
 
 ## Before/after
 
-Here is the Steam Deck's 64GB storage (before the upgrade)
+Here is the Steam Deck's 64GB storage (before the upgrade).
 
 {{< img src="20230117_001.jpg" alt="steam deck 64gb storage" >}}
 
-Here is the Steam Deck's 512GB storage (after the upgrade)
+Here is the Steam Deck's 512GB storage (after the upgrade).
 
 {{< img src="20230117_007.jpg" alt="steam deck 512gb storage" >}}
 
