@@ -18,15 +18,27 @@ cover:
 
 It's been over seven years since I last touched OpenWrt. :exploding_head:
 
-I'm going on a couple of trips in the next few months and I need VPN access back to my homelab. I could setup WireGuard on each client device, but I thought it would be fun to setup WireGuard on a travel router (and to revisit OpenWrt to see what's changed).
+I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
 
 # Design
 
 ## Network overview
 
+The idea here was to connect one device to my hotel's WiFi, and then connect all of my other devices to that device. In this case, I put my own OpenWrt router behind the hotel's router.
+
+This device is a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
+
+* paying for in-flight WiFi and [sharing it with your other devices](https://austinsnerdythings.com/2023/04/17/how-a-travel-router-can-save-you-money-and-share-wi-fi-on-flights/) (although, I'm sure this is against some terms of service)
+* a dorm/apartment/hotel where a shared network is provided by building management and you don't 100% trust it
+* physical network segmentation (as opposed to VLANs)
+
+My desired setup was below.
+
+{{< img src="20240108_001.png" alt="network overview" >}}
+
 ## Hardware
 
-The trick with OpenWrt is not to get something too old (because it will have bad specs and be slow), but also not get something too new (because it won't be supported yet).
+The trick with OpenWrt is not to get hardware that is too old (because it will have bad specs and be slow), but also not get something too new (because it won't be supported yet).
 
 I was looking for something that had the following features:
 
@@ -40,7 +52,7 @@ I was looking for something that had the following features:
 * preferably had USB-C power input
 * preferably had 802.11ac (WiFi 5)
 
-It just so happens that [GL.iNet](https://www.gl-inet.com/) make a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH). The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that had the specs I wanted and was easily available. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
+It just so happened that [GL.iNet](https://www.gl-inet.com/) make a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH). The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that had the specs I wanted and was easily available. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
 
 {{< figure src="20231121_001.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
 
@@ -82,7 +94,7 @@ This is the `4.x` version of the UI.
 
 {{< img src="20231121_007.png" alt="gl.inet default user interface" >}}
 
-Unfortunately, this is the part where I mention that GL.iNet is a Chinese company, if that kind of thing bothers you. Regardless of that, I'd never run anything proprietary for something that's handing out VPN access to my network, so my plan was always to immediately replace GL.iNet's version of OpenWrt with the stock version.
+Unfortunately, this is the part where I mention that GL.iNet is a Chinese company, if that kind of thing bothers you. Regardless of that, I'd never run anything proprietary for something that's controlling access to my network, so my plan was always to immediately replace GL.iNet's version of OpenWrt with the stock version.
 
 # Setup
 
@@ -127,7 +139,7 @@ From the main status page, we're going to set a root password by using the link 
 
 {{< img src="20231121_010.png" alt="openwrt password change page" >}}
 
-Also, you can now SSH into the router with those credentials.
+You can now SSH into the router with those credentials.
 
 ```
 > ssh root@192.168.1.1 
@@ -189,7 +201,7 @@ An "interface" is a logical configuration associated with a specific device that
 
 In terms of wireless, a "radio" is a device (e.g., `radio0`), but it also has an interface (e.g., `default_radio0`) where you can setup your wireless networks.
 
-### Setup wireless WAN
+### Setup WANs
 
 First, we're going to create a wireless WAN interface called `wwan`.
 
@@ -198,6 +210,15 @@ uci set network.wwan='interface'
 uci set network.wwan.proto='dhcp'
 uci set network.wwan.peerdns='0'
 uci set network.wwan.dns='8.8.8.8 1.1.1.1'
+uci commit network
+service network restart
+```
+
+Let's also take this time to set the same DNS on the wired WAN called `wan`.
+
+```
+uci set network.wan.peerdns='0'
+uci set network.wan.dns='8.8.8.8 1.1.1.1'
 uci commit network
 service network restart
 ```
@@ -237,7 +258,7 @@ Back on the wireless page, click on _Save & Apply_.
 
 {{< img src="20231121_016.png" alt="openwrt wireless page" >}}
 
-At this point, the Beryl should be online and able to reach the internet.
+At this point, the Beryl should be online and able to reach the internet. If you can't, make sure you typed the password correctly.
 
 ```
 ping google.com
@@ -263,7 +284,9 @@ Back on the wireless page, click on _Save & Apply_.
 
 ## Checkpoint
 
-Time for a break. Disconnect the ethernet cable from the router and connect to the new SSID (mine was called `OpenWrt_Travel_Router`). You should get an IP in the same range as the wired connection (mine was `10.70.74.x`).
+Congrats, you're done!
+
+Disconnect the ethernet cable from the router and connect to the new SSID (mine was called `OpenWrt_Travel_Router`). You should get an IP in the same range as the wired connection (mine was `10.70.74.x`).
 
 Let's take stock of where we're at now. We have a travel router that has three basic interfaces:
 
@@ -275,74 +298,33 @@ Visually, that looks like this:
 
 {{< img src="20231121_021.jpg" alt="topology" >}}
 
-This is a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
+# Notes
 
-* paying for in-flight WiFi and [sharing it with your other devices](https://austinsnerdythings.com/2023/04/17/how-a-travel-router-can-save-you-money-and-share-wi-fi-on-flights/) (although, I'm sure this is against some terms of service)
-* a dorm/apartment/hotel where a shared network is provided by building management and you don't 100% trust it
-* physical network segmentation (as opposed to VLANs)
+## How to use this
 
-## Tailscale
+1. When you get to the hotel, power on the travel router and connect to the LAN (either wired or wireless)
+1. Login to LuCI
+1. If the upstream connection is wired, just plug the hotel ethernet into the WAN port on the Beryl
+1. If the upstream connection is wireless (more likely), go to `radio0` and click on _Scan_ (if you're using the opposite radio, you'll need to adjust). From the list of networks, select the hotel's WiFi. On the next screen, make sure you check the box that says _Replace wireless configuration_, then enter your hotel's WiFi password (if there is no password, leave it blank).
+1. If the hotel has a captive portal, you just need to visit a page like [https://google.com](https://google.com) on your client device and you'll be redirected.
 
-### Why Tailscale?
+There is an OpenWrt package called [travelmate](https://github.com/openwrt/packages/blob/master/net/travelmate/files/README.md) that supposedly assists with connection handling, but I never needed it during my travels.
 
-Now we need to add VPN support so that we can connect back to our homelab.
+## If you have issues
 
-I'm going to use [Tailscale](https://tailscale.com/) instead of plain [WireGuard](https://www.wireguard.com/) for this. I've found that some public networks are using [CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT) or they block the default WireGuard port (`51820/UDP`), and Tailscale can easily get around these problems. Obviously, this means that you're trusting Tailscale with access to your home network, so that's a tradeoff to consider.
-
-### Tailscale prerequisites
-
-I'm going to assume you already have a working Tailscale network. Specifically, you'll need an exit node that also accepts subnet routes that other nodes advertise.
-
-### Install packages
-
-The commands below will install Tailscale. OpenWrt versions 22.03 and later use `nftables` instead of `iptables`, but `tailscaled` requires `iptables`, so we're also installing `iptables-nft`.
+If you have problems connecting to captive portals and getting internet access, you might want to try disabling DNS rebind protection. This is because the OpenWrt router is behind another router, so DNS responses from the upstream router might contain [private IPs](https://datatracker.ietf.org/doc/html/rfc1918) (e.g., `10.0.0.0`, `172.16.0.0`, or `192.168.0.0`).
 
 ```
-opkg update
-opkg install iptables-nft tailscale tailscaled
+uci set dhcp.@dnsmasq[0].rebind_protection='0'
+uci commit dhcp
+service dnsmasq restart
 ```
 
-Once Tailscale is installed, we need to enable and start it.
+However, I've tried to fix this by setting `8.8.8.8` and `1.1.1.1` as upstream DNS servers, so they should return correct IPs, not private IPs.
 
-```
-/etc/init.d/tailscale enable
-/etc/init.d/tailscale start
-```
+## A note on VPN access
 
-### Login to Tailscale
-
-Now, generate a unique link for your OpenWrt router. You'll need to copy/paste this link into your browser and login to your Tailscale admin interface to authorize this device (change the subnet to be whatever you chose).
-
-```
-tailscale up --advertise-routes 10.70.74.0/24 --accept-routes
-```
-
-Subnets only go one-way, from the Tailscale device to the advertised subnet device.
-
-### Admin settings
-
-Back in the Tailscale admin interface, we need to do a few more things.
-
-First, if you have [Device Approval](https://tailscale.com/kb/1099/device-approval/) enabled in Tailscale, you'll need to approve the device (after authorizing it). This step is only if you have this feature enabled.
-
-Second, you may want to [disable key expiration](https://tailscale.com/kb/1028/key-expiry/#disabling-key-expiry) for your OpenWrt travel router. This step is optional.
-
-Third, you need to [approve the subnet routes](https://tailscale.com/kb/1019/subnets/#step-3-enable-subnet-routes-from-the-admin-console) that we advertised earlier. Don't skip this step.
-
-### OpenWrt settings
-
-Now we're going to create an interface called `tailscale`.
-
-```
-uci set network.tailscale='interface'
-uci set network.tailscale.proto='none'
-uci set network.tailscale.device='tailscale0'
-uci commit network
-service network restart
-```
-
-
-opkg install kmod-ipt-conntrack kmod-ipt-nat
+I chose **not** to install a VPN like WireGuard or Tailscale on the OpenWrt router. I prefer to run VPNs on each client device, but OpenWrt supports [WireGuard](https://openwrt.org/docs/guide-user/services/vpn/wireguard/client) and [Tailscale](https://openwrt.org/docs/guide-user/services/vpn/tailscale/start).
 
 # Conclusion
 
