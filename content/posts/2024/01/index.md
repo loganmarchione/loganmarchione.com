@@ -7,7 +7,7 @@ categories:
   - "oc"
   - "router"
 cover:
-    image: "/assets/featured/featured_openwrt.svg"
+    image: "/assets/featured/featured_openwrt_new.svg"
     alt: "featured image"
     relative: false
 ---
