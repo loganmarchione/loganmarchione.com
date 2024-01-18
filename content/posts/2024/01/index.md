@@ -234,7 +234,7 @@ uci commit wireless
 service network restart
 ```
 
-This next part is easier to do in the web interface. In LuCI, go to _Network_, then _Wireless_. You can see here that the Beryl has two radios (`radio0` and `radio1`) each with an interface broadcasting a WiFi network called `OpenWrt`. You'll need to decide which radio will be the WAN and which will be the LAN, but keep in mind that one is 2.4GHz and one 5GHz.
+This next part is easier to do in the web interface. In LuCI, go to _Network_, then _Wireless_. You can see here that the Beryl has two radios (`radio0` and `radio1`) each with an interface broadcasting a WiFi network called `OpenWrt`. You'll need to decide which radio will be the WAN and which will be the LAN, but keep in mind that one is 2.4GHz and one is 5GHz.
 
 {{< img src="20231121_011.png" alt="openwrt wireless page" >}}
 
@@ -258,7 +258,7 @@ Back on the wireless page, click on _Save & Apply_.
 
 {{< img src="20231121_016.png" alt="openwrt wireless page" >}}
 
-At this point, the Beryl should be online and able to reach the internet. If you can't, make sure you typed the password correctly.
+At this point, the Beryl should be online and able to reach the internet. If you can't reach the internet, make sure you typed the network password correctly.
 
 ```
 ping google.com
@@ -306,7 +306,7 @@ Visually, that looks like this:
 1. Login to LuCI
 1. If the upstream connection is wired, just plug the hotel ethernet into the WAN port on the Beryl
 1. If the upstream connection is wireless (more likely), go to `radio0` and click on _Scan_ (if you're using the opposite radio, you'll need to adjust). From the list of networks, select the hotel's WiFi. On the next screen, make sure you check the box that says _Replace wireless configuration_, then enter your hotel's WiFi password (if there is no password, leave it blank).
-1. If the hotel has a captive portal, you just need to visit a page like [https://google.com](https://google.com) on your client device and you'll be redirected.
+1. If the hotel has a captive portal, you just need to visit a page like [https://google.com](https://google.com) or [http://neverssl.com](http://neverssl.com) on your client device and you'll be redirected.
 
 There is an OpenWrt package called [travelmate](https://github.com/openwrt/packages/blob/master/net/travelmate/files/README.md) that supposedly assists with connection handling, but I never needed it during my travels.
 
@@ -320,7 +320,7 @@ uci commit dhcp
 service dnsmasq restart
 ```
 
-However, I've tried to fix this by setting `8.8.8.8` and `1.1.1.1` as upstream DNS servers, so they should return correct IPs, not private IPs.
+However, I've tried to work around this by setting `8.8.8.8` and `1.1.1.1` as upstream DNS servers, so they should return correct IPs, not private IPs.
 
 ## A note on VPN access
 
