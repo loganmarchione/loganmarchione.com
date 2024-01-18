@@ -14,7 +14,7 @@ cover:
 
 # TL;DR
 
-I got a new keyboard :grinning_face_with_smiling_eyes:
+I got a new keyboard :grin:
 
 {{< video mp4="20230821_012.mp4" >}}
 

@@ -17,7 +17,7 @@ cover:
 
 # Introduction
 
-It's been a while since my [last K3s post](/2022/03/kubernetes-guis/). In that time, I've torn-down and rebuilt my single-node cluster a dozen times, but never actually moved any workloads to that cluster. I've also been at my job using Amazon EKS for about six months, so I think I know *just* enough to be dangerous now :winking_face:.
+It's been a while since my [last K3s post](/2022/03/kubernetes-guis/). In that time, I've torn-down and rebuilt my single-node cluster a dozen times, but never actually moved any workloads to that cluster. I've also been at my job using Amazon EKS for about six months, so I think I know *just* enough to be dangerous now :wink:.
 
 # Changes since last post
 
@@ -146,7 +146,7 @@ example_here ---base64encode---> ZXhhbXBsZV9oZXJl ---base64decode---> example_he
 
 I highly recommend that you read [this post](https://www.macchaffee.com/blog/2022/k8s-secrets/) called "Plain Kubernetes Secrets are fine". I won't rehash it, but basically, the author argues that secrets have to be stored unencrypted *somewhere*, so it might as well be in your etcd, and if someone gets access to your cluster, you're screwed anyways :man_shrugging:. I considered the following options:
 
-* [Bitnami's Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) - It felt...:face_vomiting:...to store secrets in Git, even if they were encrypted
+* [Bitnami's Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) - It felt...:vomiting_face:...to store secrets in Git, even if they were encrypted
 * [Mozilla SOPS](https://github.com/mozilla/sops) - Again, storing secrets in Git
 * [External Secrets](https://github.com/external-secrets/external-secrets/) - Would require an external server/service to manage
 * [Hashicorp's Vault](https://github.com/hashicorp/vault) - While this is definitely the "best" solution, it seemed like overkill and something that could too easily go wrong (e.g., bootstrap, unsealing, backup, restore, etc...)
