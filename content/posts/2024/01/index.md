@@ -328,4 +328,6 @@ I chose **not** to install a VPN like WireGuard or Tailscale on the OpenWrt rout
 
 # Conclusion
 
+In the end, the Beryl with OpenWrt performed beautifully. Neither hotel had a wired ethernet jack (that I could find), so I ended up using the hotel's WiFi as my upstream, and connected my devices to the Beryl's WiFi. The speed directly on the hotel WiFI was exactly the same as when running on the Beryl, so the Beryl wasn't a bottleneck at all. There was one time where I was on the Beryl's WiFi but didn't have internet access, so I rebooted the router and it worked fine after that.
+
 \-Logan
