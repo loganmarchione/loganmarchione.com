@@ -1,6 +1,6 @@
 ---
 title: "Beryl travel router with OpenWrt"
-date: "2024-01-01"
+date: "2024-02-06"
 author: "Logan Marchione"
 categories: 
   - "linux"
@@ -16,17 +16,15 @@ cover:
 
 # Introduction
 
-It's been over seven years since I last touched OpenWrt. :exploding_head:
-
-I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
+I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). It's been over [seven years since I last touched OpenWrt](http://localhost:1313/2016/04/openwrt-upgrade-process/). :exploding_head: I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
 
 # Design
 
 ## Network overview
 
-The idea here was to connect one device to my hotel's WiFi, and then connect all of my other devices to that device. In this case, I put my own OpenWrt router behind the hotel's router.
+The idea here was to connect one device to my hotel's WiFi, and then connect all of my other devices to that device. In this case, I would put my own OpenWrt router behind the hotel's router (i.e., [intentionally creating a double-NAT situation](https://kb.netgear.com/30186/What-is-double-NAT-and-why-is-it-bad)).
 
-This device is a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
+The OpenWrt router would be a proper router/firewall and would be useful for a situation where you either need to share a single internet connection with multiple devices, or where you don't trust the upstream connection:
 
 * paying for in-flight WiFi and [sharing it with your other devices](https://austinsnerdythings.com/2023/04/17/how-a-travel-router-can-save-you-money-and-share-wi-fi-on-flights/) (although, I'm sure this is against some terms of service)
 * a dorm/apartment/hotel where a shared network is provided by building management and you don't 100% trust it
@@ -38,7 +36,7 @@ My desired setup was below.
 
 ## Hardware
 
-The trick with OpenWrt is not to get hardware that is too old (because it will have bad specs and be slow), but also not get something that is too new (because it won't be supported yet).
+The trick with OpenWrt is to not get hardware that is too old (because it will have bad specs and be slow), but also not get something that is too new (because it won't be supported yet).
 
 I was looking for something that had the following features:
 
@@ -49,10 +47,10 @@ I was looking for something that had the following features:
 * at least 16MB of flash storage (so I'm not having to expand storage onto an [extroot](https://openwrt.org/docs/guide-user/additional-software/extroot_configuration) like I [used to do](https://loganmarchione.com/2015/02/openwrt-with-openvpn-client-on-tp-link-tl-mr3020/#configure-extroot))
 * at least two ethernet ports (WAN and LAN)
 * at least two radios (WAN and LAN)
-* preferably had USB-C power input
-* preferably had 802.11ac (WiFi 5)
+* USB-C power input
+* 802.11ac (WiFi 5) or newer
 
-It just so happened that [GL.iNet](https://www.gl-inet.com/) makes a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH). The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that had the specs I wanted and was easily available. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
+It just so happens that [GL.iNet](https://www.gl-inet.com/) makes a bunch of full-size and travel routers that all run a custom version of OpenWrt. This was a great starting place, and I started looking at the OpenWrt [Table of Hardware](https://openwrt.org/toh/start) (ToH). The GL.iNet hardware was perfectly suited to my use case, so it was just a matter of picking a model that had the specs I wanted and was easily available. I ended up choosing the [Beryl (GL-MT1300)](https://www.gl-inet.com/products/gl-mt1300/).
 
 {{< figure src="20231121_001.jpg" width="100%" alt="beryl (GL-MT1300)" attr="Image from GL.iNet" attrlink="https://www.gl-inet.com/products/gl-mt1300/">}}
 
@@ -80,7 +78,7 @@ GL.iNet's routers all run a custom version of OpenWrt. I'm unsure if the core Op
 * OpenVPN client/server
 * WireGuard client/server
 * Repeater
-* 3G/4G modem
+* 3G/4G USB modem
 * Tethering
 * Captive portal
 * Dynamic DNS (DDNS)
@@ -117,7 +115,7 @@ failed! ERROR: Incorrect firmware format!`
 
 ## Configure OpenWrt
 
-OpenWrt has a really great configuration system. It stores its configuration files in `/etc/config` in a system known as the [Unified Configuration Interface](https://openwrt.org/docs/guide-user/base-system/uci) (UCI). The UCI is basically a collection of easy-to-read configuration files that are all centrally located, making OpenWrt much easier to configure. You can edit these files manually with `vi` or `nano`, but there is also a [command line tool](https://openwrt.org/docs/guide-user/base-system/uci) called `uci` that you can use to edit the files (great for scripting).
+OpenWrt has a really interesting configuration system. It stores its configuration files in `/etc/config` in a system known as the [Unified Configuration Interface](https://openwrt.org/docs/guide-user/base-system/uci) (UCI). The UCI is basically a collection of easy-to-read configuration files that are all centrally located, making OpenWrt much easier to configure. You can edit these files manually with `vi` or `nano`, but there is also a [command line tool](https://openwrt.org/docs/guide-user/base-system/uci) called `uci` that you can use to edit the files (great for scripting).
 
 The web interface for OpenWrt is called [LuCI](https://openwrt.org/docs/guide-user/luci/start) (I'm guessing it's short for Lua UCI, because it's written in Lua).   What's nice about LuCI is that it reads/writes from/to the UCI files. Any changes you make in LuCI are reflected in the UCI files, and vice versa, meaning you can configure OpenWrt from the web interface, or from the command line.
 
@@ -171,7 +169,7 @@ reboot
 
 ### Secure SSH
 
-SSH is listening on all interfaces (LAN and WAN). I like to only be able to SSH via the LAN interface. Use the commands below to change that.
+SSH is listening on all interfaces (LAN and WAN), but I prefer to only be able to SSH via the LAN interface. Use the commands below to change that.
 
 ```
 uci set dropbear.@dropbear[0].Interface='lan'
@@ -214,7 +212,7 @@ uci commit network
 service network restart
 ```
 
-Let's also take this time to set the same DNS on the wired WAN called `wan`.
+Let's also take this time to set the same DNS on the existing wired WAN interface called `wan`.
 
 ```
 uci set network.wan.peerdns='0'
@@ -308,11 +306,9 @@ Visually, that looks like this:
 1. If the upstream connection is wireless (more likely), go to `radio0` and click on _Scan_ (if you're using the opposite radio, you'll need to adjust). From the list of networks, select the hotel's WiFi. On the next screen, make sure you check the box that says _Replace wireless configuration_, then enter your hotel's WiFi password (if there is no password, leave it blank).
 1. If the hotel has a captive portal, you just need to visit a page like [https://google.com](https://google.com) or [http://neverssl.com](http://neverssl.com) on your client device and you'll be redirected.
 
-There is an OpenWrt package called [travelmate](https://github.com/openwrt/packages/blob/master/net/travelmate/files/README.md) that supposedly assists with connection handling, but I never needed it during my travels.
-
 ## If you have issues
 
-If you have problems connecting to captive portals and getting internet access, you might want to try disabling DNS rebind protection. This is because the OpenWrt router is behind another router, so DNS responses from the upstream router might contain [private IPs](https://datatracker.ietf.org/doc/html/rfc1918) (e.g., `10.0.0.0`, `172.16.0.0`, or `192.168.0.0`).
+If you have problems connecting to captive portals and getting internet access, you might want to try disabling DNS rebind protection. This is because the OpenWrt router is behind another router (i.e., double-NAT), so DNS responses from the upstream router might contain [private IPs](https://datatracker.ietf.org/doc/html/rfc1918) (e.g., `10.0.0.0`, `172.16.0.0`, or `192.168.0.0`).
 
 ```
 uci set dhcp.@dnsmasq[0].rebind_protection='0'
@@ -320,14 +316,20 @@ uci commit dhcp
 service dnsmasq restart
 ```
 
-However, I've tried to work around this by setting `8.8.8.8` and `1.1.1.1` as upstream DNS servers, so they should return correct IPs, not private IPs.
+However, I've tried to work around this by setting `8.8.8.8` and `1.1.1.1` as upstream DNS servers, so they should return correct IPs, not private IPs (assuming that `8.8.8.8` and `1.1.1.1` are not blocked).
 
 ## A note on VPN access
 
 I chose **not** to install a VPN like WireGuard or Tailscale on the OpenWrt router. I prefer to run VPNs on each client device, but OpenWrt supports [WireGuard](https://openwrt.org/docs/guide-user/services/vpn/wireguard/client) and [Tailscale](https://openwrt.org/docs/guide-user/services/vpn/tailscale/start).
 
+In both cases, the hotels didn't block my WireGuard VPN traffic from my phone to home. If they did, I would probably resort to using Tailscale.
+
 # Conclusion
 
-In the end, the Beryl with OpenWrt performed beautifully. Neither hotel had a wired ethernet jack (that I could find), so I ended up using the hotel's WiFi as my upstream, and connected my devices to the Beryl's WiFi. The speed directly on the hotel WiFI was exactly the same as when running on the Beryl, so the Beryl wasn't a bottleneck at all. There was one time where I was on the Beryl's WiFi but didn't have internet access, so I rebooted the router and it worked fine after that.
+In the end, the Beryl with OpenWrt performed beautifully. :ok_hand:
+
+Neither hotel had a wired ethernet jack (that I could find), so I ended up using the hotel's WiFi as my WAN, and connected my devices to the Beryl's WiFi. The speed connected directly to the hotel WiFi was exactly the same as when running on the Beryl (i.e., the Beryl wasn't a bottleneck). There was one time where I was on the Beryl's WiFi but didn't have internet access, so I rebooted the router and it worked fine after that. I should note that there is an OpenWrt package called [travelmate](https://github.com/openwrt/packages/blob/master/net/travelmate/files/README.md) that supposedly assists with connection handling, but I never needed it during my travels.
+
+{{< img src="20240127_001.jpeg" alt="beach" >}}
 
 \-Logan
