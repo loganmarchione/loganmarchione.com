@@ -1,7 +1,7 @@
 FROM debian:12-slim
 
 ARG BUILD_DATE
-ENV HUGO_VERSION 0.120.2
+ENV HUGO_VERSION 0.124.1
 
 LABEL \
   maintainer="Logan Marchione <logan@loganmarchione.com>" \
