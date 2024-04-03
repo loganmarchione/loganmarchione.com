@@ -23,7 +23,7 @@ jobs:
         go-version: '1.18'
 
     - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
+      uses: peaceiris/actions-hugo@v3
       with:
         hugo-version: '0.120.1'
         extended: true
@@ -69,7 +69,7 @@ jobs:
         go-version: '1.18'
 
     - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
+      uses: peaceiris/actions-hugo@v3
       with:
         hugo-version: '0.120.1'
         extended: true
