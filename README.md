@@ -21,21 +21,7 @@ git clone https://github.com/loganmarchione/loganmarchione.com.git
 cd loganmarchione.com
 ```
 
-### Vagrant or Docker (choose one)
-
-#### Vagrant
-
-```
-vagrant up
-vagrant ssh
-
-# update hugo modules (optional)
-go mod tidy
-hugo mod get
-
-# run
-hugo server -DEF --bind=0.0.0.0 --ignoreCache --disableFastRender --poll 700ms --logLevel info
-```
+### Build instructions
 
 #### Docker
 
