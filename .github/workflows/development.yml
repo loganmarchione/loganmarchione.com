@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      HUGO_VERSION: 0.136.5
+
     steps:
     - name: Check out the codebase
       uses: actions/checkout@v4
@@ -25,7 +28,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: '0.136.5'
+        hugo-version: $HUGO_VERSION
         extended: true
 
     - name: Build
@@ -53,6 +56,9 @@ jobs:
     needs: loganmarchione-github-io
     runs-on: ubuntu-latest
 
+    env:
+      HUGO_VERSION: 0.136.5
+
     permissions:
       id-token: write
       contents: read
@@ -71,7 +77,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: '0.136.5'
+        hugo-version: $HUGO_VERSION
         extended: true
 
     - name: Configure AWS credentials

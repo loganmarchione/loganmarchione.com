@@ -17,6 +17,9 @@ jobs:
     needs: deploy-development
     runs-on: ubuntu-latest
 
+    env:
+      HUGO_VERSION: 0.136.5
+
     permissions:
       id-token: write
       contents: read
@@ -35,7 +38,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: '0.136.5'
+        hugo-version: $HUGO_VERSION
         extended: true
 
     - name: Configure AWS credentials
