@@ -26,7 +26,7 @@ I hope you find something of value here! Enjoy!
 {{< homelab-svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
 {{< homelab-svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
 {{< homelab-svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
-{{< homelab-svg-assets-inline src="sourcehut" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
+{{< homelab-svg-assets-inline src="sourcehut-black" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
 {{< homelab-svg-assets-inline src="lemmy" >}} [Lemmy](https://lemmy.world/u/loganmarchione)  
 {{< homelab-svg-assets-inline src="php" >}} [Packagist (PHP)](https://packagist.org/packages/loganmarchione/)  
