@@ -131,7 +131,7 @@ We're going to create the following resources in one manifest file:
 
 1. Namespace - This is a best-practice way to segment the cluster (both in software and in administration)
 1. Deployment - This is where we define our container image and how many replicas we want. This is what creates the pods, which will have our containers in them.
-1. Service - This exposes our pods to eachother, as well as to the cluster itself. Remember, the pods can come and go, so their IP addresses might change over time. A service is a reliable address.
+1. Service - This exposes our pods to each other, as well as to the cluster itself. Remember, the pods can come and go, so their IP addresses might change over time. A service is a reliable address.
 1. Ingress - This exposes the services inside the cluster to the outside world. An ingress is a set of rules for traffic, while the ingress controller is the thing doing the work (e.g., nginx, Traefik, etc..).
 
 You can copy/paste the command below to create the manifest.

@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      HUGO_VERSION: '0.136.5'
+
     steps:
     - name: Check out the codebase
       uses: actions/checkout@v4
@@ -20,12 +23,12 @@ jobs:
     - name: Setup Go
       uses: actions/setup-go@v5
       with:
-        go-version: '1.18'
+        go-version: '1.23'
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: '0.120.1'
+        hugo-version: ${{ env.HUGO_VERSION }}
         extended: true
 
     - name: Build
@@ -53,6 +56,9 @@ jobs:
     needs: loganmarchione-github-io
     runs-on: ubuntu-latest
 
+    env:
+      HUGO_VERSION: '0.136.5'
+
     permissions:
       id-token: write
       contents: read
@@ -66,12 +72,12 @@ jobs:
     - name: Setup Go
       uses: actions/setup-go@v5
       with:
-        go-version: '1.18'
+        go-version: '1.23'
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: '0.120.1'
+        hugo-version: ${{ env.HUGO_VERSION }}
         extended: true
 
     - name: Configure AWS credentials
@@ -82,7 +88,7 @@ jobs:
         aws-region: us-east-2
 
     - name: Update CloudFront Distribution
-      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
+      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" hugo.yaml
 
     - name: Build
       run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"

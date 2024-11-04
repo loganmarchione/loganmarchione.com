@@ -90,7 +90,7 @@ Aside from the microSD card slot, there are three [base storage options](https:/
 
 The first option is an eMMC module on a carrier board that fits into a M.2 NVMe slot (eMMC is about half-as-fast as a SATA SSD).
 
-{{< figure src="20230106_002.png" width="100%" alt="steam deck emmc module" attr="Image from The Big Tech Question" attrlink="https://bigtechquestion.com/2022/05/31/hardware/upgrade-ssd-steam-deck/">}}
+{{< figure src="20230106_002.png" width="100%" loading="lazy" alt="steam deck emmc module" attr="Image from The Big Tech Question" attrlink="https://bigtechquestion.com/2022/05/31/hardware/upgrade-ssd-steam-deck/">}}
 
 The next two options are both NVMe SSDs, but I'm unable to tell if one is faster than the other (besides the larger drive being slightly faster because it's larger). While the SSD is PCIe Gen3 on both the 256GB and 512GB models, Valve warns:
 
@@ -252,6 +252,6 @@ I didn't run any before/after benchmarks on the SSDs, those are easy enough to f
 
 Thanks to Lord Gaben and Valve for designing such a powerful product, but more importantly, allowing tinkerers to be able to fix and upgrade it without jumping through hoops. This is your right to repair in action.
 
-{{< figure src="/assets/memes/gabe_newell_jesus.jpg" width="50%" alt="gabe newell jesus" attr="Gabe Newell Portrait by freddre" attrlink="https://www.deviantart.com/freddre/art/Gabe-Newell-Portrait-288307422">}}
+{{< figure src="/assets/memes/gabe_newell_jesus.jpg" width="50%" loading="lazy" alt="gabe newell jesus" attr="Gabe Newell Portrait by freddre" attrlink="https://www.deviantart.com/freddre/art/Gabe-Newell-Portrait-288307422">}}
 
 \-Logan

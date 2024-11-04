@@ -46,7 +46,7 @@ LoRa operates in a license-free, sub-gigahertz frequency band (i.e., under 1GHz 
 
 LoRa tries to bridge the gap between current communication technologies, like WiFi, Bluetooth, and cellular (4G/5G).
 
-{{< figure src="20230510_001.jpg" width="100%" alt="lora vs other communication types" attr="Image from The Things Network" attrlink="https://www.thethingsnetwork.org/docs/lorawan/what-is-lorawan/">}}
+{{< figure src="20230510_001.jpg" width="100%" loading="lazy" alt="lora vs other communication types" attr="Image from The Things Network" attrlink="https://www.thethingsnetwork.org/docs/lorawan/what-is-lorawan/">}}
 
 LoRa is useful for long-range, low-bandwidth, low-power communication, which is perfect for IoT devices. Some examples include:
 
