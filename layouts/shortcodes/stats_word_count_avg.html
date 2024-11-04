@@ -8,4 +8,4 @@
 
 {{ $avgPostLength := div $wordCount $postCount }}
 
-{{ $avgPostLength | lang.NumFmt 0 }}
+{{ $avgPostLength | lang.FormatNumberCustom 0 }}
