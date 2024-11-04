@@ -88,7 +88,7 @@ jobs:
         aws-region: us-east-2
 
     - name: Update CloudFront Distribution
-      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" config.yaml
+      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" hugo.yaml
 
     - name: Build
       run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
