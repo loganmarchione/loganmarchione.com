@@ -3,16 +3,14 @@ services:
   hugo:
     container_name: hugo-build-env
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/gohugoio/hugo:v0.136.5
     networks:
       - hugo
     ports:
       - '1313:1313'
     volumes:
-      - './:/src'
-    command: hugo server -DEF --bind=0.0.0.0 --ignoreCache --logLevel info
+      - './:/project'
+    command: server -DEF --bind=0.0.0.0 --ignoreCache --logLevel info
     
 networks:
   hugo:
