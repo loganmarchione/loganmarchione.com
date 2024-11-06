@@ -3,4 +3,4 @@
     {{ $scratch.Add "wordcount" .WordCount }}
 {{ end }}
 {{ $wordCount := $scratch.Get "wordcount" }}
-{{ $wordCount  | lang.NumFmt 0 }}
+{{ $wordCount  | lang.FormatNumberCustom 0 }}

@@ -31,9 +31,9 @@ I got a new keyboard :grin:
 
 I've been using a [WASD CODE 87-key mechanical keyboard with Cherry MX Clear switches](https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html) since 2017. I liked it so much that I bought another (for when I used to work in the office).
 
-{{< figure src="20230714_001.jpg" width="75%" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
+{{< figure src="20230714_001.jpg" width="75%" loading="lazy" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
 
-{{< figure src="20230714_002.jpg" width="75%" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
+{{< figure src="20230714_002.jpg" width="75%" loading="lazy" alt="code keyboard" attr="Image from WASD" attrlink="https://www.wasdkeyboards.com/code-v3-87-key-mechanical-keyboard-cherry-mx-clear.html">}}
 
 I spend *a lot* of time in front of my computer, both for work and for hobbies. In an effort to not end up with [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury) years from now, I've been looking into more ergonomic keyboards.
 
@@ -45,15 +45,15 @@ A traditional keyboard can cause a few ergonomic problems:
 
 1. Ulnar Deviation - This is when your wrists bend outwards (toward your pinky finger) and can lead to carpal tunnel syndrome.
 
-{{< figure src="20230717_001.jpg" width="50%" alt="ulnar deviation" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
+{{< figure src="20230717_001.jpg" width="50%" loading="lazy" alt="ulnar deviation" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
 
 2. Forearm Pronation - When typing with your palms face-down, it causes your radius and ulna to twist, which can lead to poor circulation and repetitive strain injuries (RSI).
 
-{{< figure src="20230717_002.jpg" width="50%" alt="forearm pronation" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
+{{< figure src="20230717_002.jpg" width="50%" loading="lazy" alt="forearm pronation" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
 
 3. Wrist extension - This is when your wrists bend upwards and can cause poor circulation and numbness.
 
-{{< figure src="20230717_003.jpg" width="50%" alt="wrist extension" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
+{{< figure src="20230717_003.jpg" width="50%" loading="lazy" alt="wrist extension" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/solutions/keyboard-risk-factors/">}}
 
 There are a number of ways to solve these problems, but the "perfect" keyboard would have the following qualities:
 1. Split in half to allow the arms to naturally rest shoulder-width apart (not bending the wrists)
@@ -62,7 +62,7 @@ There are a number of ways to solve these problems, but the "perfect" keyboard w
 
 It won't win any awards for looks, but the [Kinesis Freestyle2](https://kinesis-ergo.com/keyboards/freestyle2-keyboard/) with the [VIP3 tenting and palm rest kit](https://kinesis-ergo.com/shop/freestyle2-vip3-accessory/) is designed to tackle these exact problems (also note the ergonomic vertical mouse).
 
-{{< figure src="20230717_004.jpg" width="100%" alt="kinesis freestyle2" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/keyboards/freestyle2-keyboard/">}}
+{{< figure src="20230717_004.jpg" width="100%" loading="lazy" alt="kinesis freestyle2" attr="Image from Kinesis" attrlink="https://kinesis-ergo.com/keyboards/freestyle2-keyboard/">}}
 
 ## My options
 
@@ -103,13 +103,13 @@ I do mostly office work and only a little gaming, so my only hard requirements w
 
 I ended up purchasing the [Keebio Sinc](https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard). I was initially looking at the Keychron Q11, but the extra macro keys on the left (below) would make finding keycap sets more difficult (especially if the keys were sculpted).
 
-{{< figure src="20230718_003_q11.png" width="100%" alt="q11 layout" attr="Image from Keychron" attrlink="https://www.keychron.com/pages/keychron-q11-keycap-size">}}
+{{< figure src="20230718_003_q11.png" width="100%" loading="lazy" alt="q11 layout" attr="Image from Keychron" attrlink="https://www.keychron.com/pages/keychron-q11-keycap-size">}}
 
 The Sinc comes in a [Rev. 3](https://keeb.io/collections/split-keyboards/products/sinc-split-staggered-75-keyboard) and [Rev. 4](https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard) PCB, with the Rev. 4 having an additional circuit for more reliable startup as well as more layout options on the bottom row (see comparison below).
 
-{{< figure src="20230718_001_sinc_rev3.png" width="100%" alt="sinc rev3 layout" attr="Rev. 3 image from Keebio" attrlink="https://keeb.io/collections/split-keyboards/products/sinc-split-staggered-75-keyboard">}}
+{{< figure src="20230718_001_sinc_rev3.png" width="100%" loading="lazy" alt="sinc rev3 layout" attr="Rev. 3 image from Keebio" attrlink="https://keeb.io/collections/split-keyboards/products/sinc-split-staggered-75-keyboard">}}
 
-{{< figure src="20230718_002_sinc_rev4.png" width="100%" alt="sinc rev4 layout" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
+{{< figure src="20230718_002_sinc_rev4.png" width="100%" loading="lazy" alt="sinc rev4 layout" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
 
 Below are the options I chose for the Sinc Rev. 4 (I didn't want a left macro-pad and did want a rotary encoder on the right).
 
@@ -119,11 +119,11 @@ Below are the options I chose for the Sinc Rev. 4 (I didn't want a left macro-pa
 
 For switches, I like tactile and have been using [Cherry MX Clear switches](https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html) on my CODE board.
 
-{{< figure src="20230718_004_cherry_clear.png" width="20%" alt="cherry mx clear" attr="Image from Cherry" attrlink="https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html">}}
+{{< figure src="20230718_004_cherry_clear.png" width="20%" loading="lazy" alt="cherry mx clear" attr="Image from Cherry" attrlink="https://www.cherrymx.de/en/cherry-mx/mx-special/mx-clear.html">}}
 
 I decided to go with [Gateron](https://www.gateron.co/) this time, just to try something different. Gateron Clear switches are linear (not tactile), so I went with the [Gateron G Pro 3.0 Brown switches](https://www.gateron.co/products/gateron-g-pro-3-0-switch-set?variant=40479582945369) (the Pro series is pre-lubed). Side-note: [This page](https://thegamingsetup.com/gaming-keyboard/buying-guides/keyboard-switch-chart-table) is a great place to compare switches.
 
-{{< figure src="20230718_005_gateron_brown.png" width="100%" alt="gateron pro brown" attr="Image from Gateron" attrlink="https://www.gateron.co/products/gateron-g-pro-3-0-switch-set">}}
+{{< figure src="20230718_005_gateron_brown.png" width="100%" loading="lazy" alt="gateron pro brown" attr="Image from Gateron" attrlink="https://www.gateron.co/products/gateron-g-pro-3-0-switch-set">}}
 
 ## Keycaps
 
@@ -140,7 +140,7 @@ The Sinc has a split spacebar, so that removed a lot of keycap options right awa
 
 In addition to the split spacebar, I also had to decide if I wanted to use a delete/backspace split or a single backspace key (see below). 
 
-{{< figure src="20230730_001.png" width="100%" alt="sinc rev4 layout backspace" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
+{{< figure src="20230730_001.png" width="100%" loading="lazy" alt="sinc rev4 layout backspace" attr="Rev. 4 image from Keebio" attrlink="https://keeb.io/collections/sinc/products/sinc-rev-4-split-staggered-75-keyboard">}}
 
 Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a split spacebar and a 1U key to take the place of backspace).
 
@@ -164,7 +164,7 @@ Below are keycap sets that seemed like they would fit the Sinc (i.e., they had a
 
 In the end, I purchased the [DCX Solarized](https://drop.com/buy/drop-dcx-solarized-keycap-set) set. It didn't have a dedicated 1U backspace key, so the F13 key would have to make due.
 
-{{< figure src="20230731_007.jpg" width="100%" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
+{{< figure src="20230731_007.jpg" width="100%" loading="lazy" alt="dcx solarized" attr="Image from Drop" attrlink="https://drop.com/buy/drop-dcx-solarized-keycap-set">}}
 
 ### Other keycaps
 

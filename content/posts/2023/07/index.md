@@ -27,7 +27,7 @@ I'll start by saying that I'm not a "watch person". My daily driver is a [Casio 
 
 The GWM5610 is nothing but pragmatic. It has standard G-SHOCK toughness, 200-meter water resistance, and standard digital watch features (e.g., stopwatch, countdown timer, calendar, alarm, etc...). What sold me was that it has a small solar panel on the face and it gets the date/time via radio signals (what Casio calls [Multiband 6](https://gshock.casio.com/us/technology/radio/)). Combined, this means it _never_ needs to be taken off my wrist, _never_ needs to be charged, and the time _never_ needs to be set (talk about pragmatic).
 
-{{< figure src="20230710_001.jpg" width="35%" alt="GWM5610" attr="Image from Casio" attrlink="https://www.casio.com/us/watches/gshock/product.GW-M5610-1/">}}
+{{< figure src="20230710_001.jpg" width="35%" loading="lazy" alt="GWM5610" attr="Image from Casio" attrlink="https://www.casio.com/us/watches/gshock/product.GW-M5610-1/">}}
 
 In fact, I'll go as far as to say if you don't own one already, you should purchase one right now (also pick up a set of [these wire "bullbars"](https://www.ebay.com/itm/282968618910)).
 
@@ -110,7 +110,7 @@ As far as I understand, _everything_ in the interface is an app. This includes t
 
 The single hardware button is both the "menu" button, as well as the "back" button when navigating menus. Holding the button for two seconds in any screen will take you back to the watch face. Holding the button for ten seconds reboots the watch (you turn the watch off via the Settings menu).
 
-{{< figure src="20230710_003.png" width="25%" alt="single hardware button" attr="Image from Bangle.js 2" attrlink="https://banglejs.com/start2">}}
+{{< figure src="20230710_003.png" width="25%" loading="lazy" alt="single hardware button" attr="Image from Bangle.js 2" attrlink="https://banglejs.com/start2">}}
 
 ## Loading apps
 
@@ -181,9 +181,9 @@ Below are some critiques I had (in no particular order). They were not show-stop
 - Plastic build: I would pay more money for a metal watch body.
 - Single hardware button: I'm sure it's patented, but the Apple Watch has a hardware button, as well as Digital Crown that both rotates and presses inwards. Something like this would make navigating the watch interface easier.
 - Metal contacts touching skin: The watch has four metal contacts on the back (the outer two are for charging, the inner two are for debugging). [Per the FAQ](https://github.com/espruino/BangleApps/wiki#important-usage-information), the inner two have a small voltage running between them. The watch will ship with a piece of tape covering these two, but if the tape were to fall off, the direct contact with your skin _could_ cause corrosion on the contacts or even [skin irritation](https://www.espruino.com/Bangle.js2#contact-corrosion-skin-irritation). This _did not_ happen to me, but it's something to be aware of.
-{{< figure src="20230710_005.jpg" width="75%" alt="corrosion" attr="Image from Bangle.js 2" attrlink="https://www.espruino.com/Bangle.js2#contact-corrosion-skin-irritation">}}
+{{< figure src="20230710_005.jpg" width="75%" loading="lazy" alt="corrosion" attr="Image from Bangle.js 2" attrlink="https://www.espruino.com/Bangle.js2#contact-corrosion-skin-irritation">}}
 - Magnetic charger orientation: The magnetic charger needs to be attached to the watch from the right-side (if you're looking at the screen). I wish the cable could be omni-directional, or use wireless charging (this would also remove the need for the metal contacts).
-{{< figure src="20230710_002.png" width="25%" alt="watch charging cable" attr="Image from Bangle.js 2" attrlink="https://banglejs.com/start2">}}
+{{< figure src="20230710_002.png" width="25%" loading="lazy" alt="watch charging cable" attr="Image from Bangle.js 2" attrlink="https://banglejs.com/start2">}}
 - The magnets are weak: The magnets on the charger seem to do a good job aligning the pogo pings to the metal contact points, but they are so weak that the slightest bump makes the pins disconnect. I wish the magnets were stronger (or maybe that the pogo pins had less "spring").
 - Make LCD calibration part of the initial "Welcome" tutorial: As I mentioned, the touchscreen response was very poor until I ran the LCD calibration. I wish the LCD calibration was part of the "Welcome" tutorial. Also, I might just have fat fingers.
 - The watch needs to track the phone's silent mode: If your iPhone is in silent mode or using a [Focus](https://support.apple.com/en-us/HT212608) (like Sleep or Do Not Disturb), your watch will still get notifications. I had to manually set the watch to "quiet" time each night, then set it back each morning.

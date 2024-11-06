@@ -11,6 +11,18 @@ cover:
     relative: false
 ---
 
+# Update: 2024-08-12
+
+There are now a few companies selling pre-built Meshtastic devices, like the [CanaryOne](https://canaryradio.io/products/canaryone), [PacificNorthWest3D](https://pacificnorthwest3d.com/collections/meshtastic), and [muzi WORKS](https://muzi.works/collections/all).
+
+Jeff Geerling has an introductory [post](https://www.jeffgeerling.com/blog/2024/getting-started-meshtastic) and [video](https://www.youtube.com/watch?v=X4Akj5qF-3Q) about Meshtastic, and I ended up purchasing two of the [muzi WORKS H1 devices](https://muzi.works/products/h1-complete-device-with-upgraded-whip-antenna-heltec-v3-running-meshtastic) after watching his video (these are based on the Heltec WiFi LoRa 32 V3, so they don't have GPS on-board).
+
+{{< img src="20240812_001.jpg" alt="muzi WORKS H1" >}}
+
+This is compared to a standard 3x3 inch sticky note.
+
+{{< img src="20240812_002.jpg" alt="muzi WORKS H1" >}}
+
 # Introduction
 
 I've been itching to work on some hardware projects lately and kept seeing ESP32-related things pop up on Reddit. In particular, I was coming across a lot of LoRa projects, and then started down a rabbit hole.
@@ -34,7 +46,7 @@ LoRa operates in a license-free, sub-gigahertz frequency band (i.e., under 1GHz 
 
 LoRa tries to bridge the gap between current communication technologies, like WiFi, Bluetooth, and cellular (4G/5G).
 
-{{< figure src="20230510_001.png" width="100%" alt="lora vs other communication types" attr="Image from The Things Network" attrlink="https://www.thethingsnetwork.org/docs/lorawan/what-is-lorawan/">}}
+{{< figure src="20230510_001.jpg" width="100%" loading="lazy" alt="lora vs other communication types" attr="Image from The Things Network" attrlink="https://www.thethingsnetwork.org/docs/lorawan/what-is-lorawan/">}}
 
 LoRa is useful for long-range, low-bandwidth, low-power communication, which is perfect for IoT devices. Some examples include:
 

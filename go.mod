@@ -1,9 +1,10 @@
-module github.com/loganmarchione/loganmarchione.com
+module loganmarchione.com
 
-go 1.19
+go 1.23.2
 
 require (
-	github.com/adityatelange/hugo-PaperMod v0.0.0-20240316195851-dad94ab4b7c5 // indirect
-	github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20240327231659-ed36bf26a540 // indirect
-	github.com/loganmarchione/homelab-svg-assets v0.0.0-20240310210945-b248d19ce7d1 // indirect
+	github.com/adityatelange/hugo-PaperMod v0.0.0-20241103082835-862630533c6d // indirect
+	github.com/foo-dogsquared/hugo-mod-simple-icons v0.0.0-20241028022226-7f7e0be42a95 // indirect
+	github.com/loganmarchione/homelab-svg-assets v0.0.0-20241017142925-745e5d9249f2 // indirect
+	github.com/simple-icons/simple-icons v2.17.1+incompatible // indirect
 )
