@@ -1,6 +1,6 @@
 ---
-title: "pfSense test"
-date: "2024-04-01"
+title: "A new pfSense machine"
+date: "2024-12-01"
 author: "Logan Marchione"
 categories:
   - "cloud-internet"
