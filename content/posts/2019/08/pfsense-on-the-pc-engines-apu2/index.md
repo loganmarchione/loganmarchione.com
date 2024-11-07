@@ -12,9 +12,9 @@ cover:
     relative: false
 ---
 
-# Introduction
-
 {{% series/s_pfsense %}}
+
+# Introduction
 
 In the past few weeks, I [replaced my EdgeRouter Lite with a Netgate SG-1100](/2019/06/migrating-away-from-the-ubiquiti-edgerouter-lite/). Two weeks later, [my SG-1100 died,](/2019/07/my-sg-1100-died/) and I had to put the EdgeRouter Lite back. However, I still wanted to replace the ERL with a pfSense device (albeit, not Netgate hardware).
 
