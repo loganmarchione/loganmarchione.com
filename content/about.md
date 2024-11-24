@@ -20,15 +20,16 @@ I hope you find something of value here! Enjoy!
 
 ## Presence on the web
 
-{{< homelab-svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione)  
-{{< homelab-svg-assets-inline src="mastodon-no-gradient" >}} {{< raw_html >}}<a rel="me" href="https://mastodon.social/@loganmarchione">Mastodon</a>{{< /raw_html >}}  
+{{< homelab-svg-assets-inline src="bluesky" >}} [Bluesky](https://bsky.app/profile/loganmarchione.com) (username squatting)  
+{{< homelab-svg-assets-inline src="twitter" >}} [Twitter](https://twitter.com/loganmarchione) (username squatting)  
+{{< homelab-svg-assets-inline src="mastodon-no-gradient" >}} {{< raw_html >}}<a rel="me" href="https://mastodon.social/@loganmarchione">Mastodon</a>{{< /raw_html >}} (username squatting)  
 {{< homelab-svg-assets-inline src="docker" >}} [Docker Hub](https://hub.docker.com/u/loganmarchione)  
 {{< homelab-svg-assets-inline src="ycombinator" >}} [HackerNews](https://news.ycombinator.com/user?id=loganmarchione)  
 {{< homelab-svg-assets-inline src="github-octocat" >}} [GitHub](https://github.com/loganmarchione)  
 {{< homelab-svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="sourcehut-black" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
-{{< homelab-svg-assets-inline src="lemmy" >}} [Lemmy](https://lemmy.world/u/loganmarchione)  
+{{< homelab-svg-assets-inline src="lemmy" >}} [Lemmy](https://lemmy.world/u/loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="php" >}} [Packagist (PHP)](https://packagist.org/packages/loganmarchione/)  
 {{< homelab-svg-assets-inline src="npm" >}} [NPM](https://www.npmjs.com/~loganmarchione)  
 
