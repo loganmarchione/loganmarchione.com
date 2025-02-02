@@ -14,7 +14,7 @@ cover:
 
 # Introduction
 
-I've been dual-booting Windows and Linux (I use Arch, btw) for about five years now. This past weekend, I physically removed the SSD that held my Windows 10 installation from my desktop PC. I realized that for the first time in my entire life, I didn't have Windows available on my main computer.
+I've been dual-booting Windows and Linux (I use Arch, btw) for about ten years now. This past weekend, I physically removed the SSD that held my Windows 10 installation from my desktop PC. I realized that for the first time in my entire life, I didn't have Windows available on my main computer.
 
 ## My Windows journey
 
@@ -44,7 +44,7 @@ At some point, I purchased an ASUS Eee PC 1005HA-PU1X-BK. This was a 10" PC that
 
 {{< figure src="20250128_002.jpg" width="75%" loading="lazy" alt="ASUS Eee PC 1005HA-PU1X-BK" attr="Image from Liliputing" attrlink="https://liliputing.com/asus-eee-pc-1005ha-review/">}}
 
-I eventually got a job at a hospital working on AIX systems. I knew *some* Linux from my Ecc PC, but was told it wouldn't be too hard to learn. Things really took off then I [purchased a Raspberry Pi 3 so that I could run the UniFi controller software](/2016/11/ubiquiti-unifi-controller-setup-on-raspberry-pi-3/). I then needed a wiki to document my setup, so I installed DokuWiki, and then purchased a UPS, so I needed NUT to monitor the UPS...and so it spiraled out of control 🙃.
+In 2013, I got a job at a hospital working on AIX systems. I knew *some* Linux from my Ecc PC, but was told it wouldn't be too hard to learn. Things really took off then I [purchased a Raspberry Pi 3 so that I could run the UniFi controller software](/2016/11/ubiquiti-unifi-controller-setup-on-raspberry-pi-3/). I then needed a wiki to document my setup, so I installed DokuWiki, and then purchased a UPS, so I needed NUT to monitor the UPS...and so it spiraled out of control 🙃.
 
 # What killed Windows
 
