@@ -1,6 +1,6 @@
 ---
 title: "Goodbye to Windows"
-date: "2025-01-31"
+date: "2025-02-03"
 author: "Logan Marchione"
 categories: 
   - "linux"
@@ -20,7 +20,7 @@ I've been dual-booting Windows and Linux (I use Arch, btw) for about five years 
 
 When I was a kid, I don't remember what year we first got a computer, but I do remember that it was a loud, beige box from Compaq running [Windows 98](https://en.wikipedia.org/wiki/Windows_98). I remember using dial-up internet, playing [Total Annihilation](https://en.wikipedia.org/wiki/Total_Annihilation), and typing simple pages for school on [Office 97](https://en.wikipedia.org/wiki/Microsoft_Office_97).
 
-We steadily upgraded Windows on that computer, and eventually replaced it once or twice. I did my senior project about a friend's brother who owned a computer building/repair business, which culminated in me building a new computer for us in 2006 running Windows XP SP2.
+We steadily upgraded Windows on that computer, and eventually replaced it once or twice. I did my senior project about a friend's brother-in-law who owned a computer building/repair business (which was a viable career in the early 2000s), which culminated in me building a new computer for us in 2006 running Windows XP SP2.
 
 While in college, my parents bought me my first laptop, a Toshiba Qosmio F45-AV410 with Windows Vista (it had some really cool physical media controls), which I eventually upgraded to Windows 7.
 
@@ -50,24 +50,20 @@ I eventually got a job at a hospital working on AIX systems. I knew *some* Linux
 
 ## The browser
 
-Browsers and web apps have taken over the desktop. Everything can be done in a browser now (email, Spotify, documents, taxes, etc...). For most people, the OS is just a means to open a browser. Since most of the big browsers are open-source, every browser now runs on every OS, so your choice of OS is almost irrelevant.
+Browsers and web apps have taken over the desktop. Everything can be done in a browser now (email, Spotify, documents, taxes, etc...). For most people, the OS is just a means to open a browser. Since most of the big browsers are open-source, every browser now runs on every OS, so your choice of OS is *almost* irrelevant.
 
 ## Steam Deck
 
-Even though I booted Linux 99% of the time, I still kept Windows around for gaming. However, in 2023, [I bought a Steam Deck](/2023/01/my-experience-replacing-the-steam-deck-ssd/), and everything changed. I realized in 2025 (two years after I bought the Steam Deck), that I hadn't booted into my Windows installation once. I don't play anything with anti-cheat, but literally every game I like works great on the Steam Deck (I also play with [XREAL Air glasses](https://us.shop.xreal.com/products/xreal-air)).
+Even though I booted Linux 99% of the time, I still kept Windows around for gaming. However, in 2023, [I bought a Steam Deck](/2023/01/my-experience-replacing-the-steam-deck-ssd/), and everything changed. I realized in January 2025 (two years after I bought the Steam Deck), that I hadn't booted into my Windows installation once. I don't play anything with anti-cheat, but literally every game I play works great on the Steam Deck (I play with [XREAL Air glasses](https://us.shop.xreal.com/products/xreal-air) and [this](https://github.com/wheaney/XRLinuxDriver#steam-deck-via-decky-loader) amazing [Decky plugin](https://github.com/SteamDeckHomebrew/decky-loader)).
 
 {{< figure src="20250129_002.png" width="75%" loading="lazy" alt="Steam Deck OLED" attr="Image from Valve" attrlink="https://www.steamdeck.com/en/press">}}
 
 ## Microsoft
 
-I technically have the hardware to upgrade to Windows 11, but haven't seen a single good review about it. Every time I read about it, it's eating disk space, forcing weird changes, forcing AI, forcing Edge, etc... It's also ridiculous that Microsoft is forcing hardware replacement because of their TPM requirements. I can't believe that, if given the choice, anyone would choose this product (the problem is, people aren't given a choice).
-
-# Virtualization as a stop-gap
-
-I'm still running Windows 10 in a Proxmox-based virtual machine. I only keep this around to backup my iPhone using iTunes (yes, I backup locally). When Windows 10 goes end-of-life in October 2025, I'll either setup a Hackintosh, or just use iCloud backup (since it's now encrypted when using [Advanced Data Protection](https://support.apple.com/guide/security/advanced-data-protection-for-icloud-sec973254c5f/web)).
+I technically have the hardware to upgrade to Windows 11 (TPM 2.0, [supported CPU](https://learn.microsoft.com/en-us/windows-hardware/design/minimum/supported/windows-11-supported-amd-processors), etc...), but haven't seen a single good review about it. Every time I read about it, it's eating disk space, forcing weird changes, forcing AI, forcing Edge, etc... It's also ridiculous that Microsoft is forcing hardware replacement because of their TPM requirements (think how much e-waste this is going to produce). I can't believe that, if given the choice, anyone would choose this product (the problem is, people aren't given a choice).
 
 # Conclusion
 
-
+I'm still running Windows 10 in a Proxmox-based virtual machine. I only keep this around to backup my iPhone using iTunes (yes, I backup locally). When Windows 10 goes end-of-life in October 2025, I'll either setup a Hackintosh, or just use iCloud backup (since it's now encrypted when using [Advanced Data Protection](https://support.apple.com/guide/security/advanced-data-protection-for-icloud-sec973254c5f/web)).
 
 \-Logan
