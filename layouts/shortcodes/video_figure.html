@@ -1,0 +1,25 @@
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+  {{- $u := urls.Parse (.Get "src") -}}
+  {{- $src := $u.String -}}
+  {{- if not $u.IsAbs -}}
+    {{- with or (.Page.Resources.Get $u.Path) (resources.Get $u.Path) -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- end }}
+  <video{{ with .Get "width" }} width="{{ . }}"{{ end }} height="100%" autoplay controls loop muted playsinline>
+    <source src="{{ $src }}" type="video/mp4">
+    {{- with .Get "webm" }}<source src="{{ . }}" type="video/webm">{{ end }}
+    <p>Your browser does not support video.</p>
+  </video>
+  {{- if or (.Get "caption") (.Get "attr") }}
+  <figcaption>
+    {{- if .Get "attr" }}
+      <p>
+        {{ with .Get "attrlink" }}<a href="{{ . }}">{{- end }}
+        {{- .Get "attr" | markdownify }}
+        {{- if .Get "attrlink" }}</a>{{- end }}
+      </p>
+    {{- end }}
+  </figcaption>
+  {{- end }}
+</figure>
