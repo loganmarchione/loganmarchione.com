@@ -69,37 +69,44 @@ The [Nexcom DNA 141](https://www.nexcomusa.com/Products/network-and-communicatio
 
 I almost ended up purchasing a Lanner NCA-1510. Funny enough, the Lanner NCA-1510A is the OEM of the Netgate SG-5100, according to a few posts ([here](https://forum.netgate.com/post/1040249), [here](https://chaos.social/@JeGr/112512006883278146), [here](https://www.reddit.com/r/PFSENSE/comments/1b8lg3z/comment/kttopfw/), and [here](https://www.reddit.com/r/PFSENSE/comments/93kl91/comment/e4admnm/)).
 
-I ended up going with the 
-
-Based on [this comparison](https://www.cpubenchmark.net/compare/5050vs3129/AMD-GX-412TC-SOC-vs-Intel-Atom-C3558), the CPU in the new device should run rings around my own APU2.
-
 I ended up going with the Deciso DEC740, as it was the only one that had ECC memory in such a small footprint and it was easy to purchase as a non-business. To me, it's the spritual successor to the APU2 (it's almost the same size, same layout, but updated with modern hardware for modern applications).
 
 {{< video_figure src="20250202_001.mp4" width="100%" attr="Video from OPNsense" attrlink="https://shop.opnsense.com/product/dec740-opnsense-desktop-security-appliance/" >}}
+
+Based on [this comparison](https://www.cpubenchmark.net/compare/5050vs4304/AMD-GX-412TC-SOC-vs-AMD-Ryzen-Embedded-V1500B), the CPU in the new device should run rings around my own APU2. Plus, this device has 2x 10Gbps SFP+ ports.
+
+{{< img src="20250203_002.png" alt="cpu comparison" >}}
+
 
 # Decisions
 
 ## Did I pay over $800 for a router?!
 
-amortize
+Yes. My router is arguably the most important device on my network. It protects my network from the big, bad internet. I don't mind paying for a product that can do that job silently, reliably, 24/7, now and 10 years into the future. If I amortize the $800 over 10 years, that's only $80 per year (I spend more money on Chipotle I think).
 
-## Why pfSense
+Side note - This is a week of data from my Graylog instance. This is what my router is protecting me from.
+
+{{< img src="20250203_001.png" alt="grafana wan dashboard" >}}
+
+## Why pfSense?
 
 I know that Netgate (the company that owns pfSense) has had some controversies:
 
 - 2016: When OPNsense sense was forked from pfSense, Netgate purchased the domain OPNsense.com and [setup a parody site](https://web.archive.org/web/20160314132836/http://www.opnsense.com/) to discredit OPNsense. OPNsense had to [appeal](https://opnsense.org/opnsense-com/) to the World Intellectual Property Organization (WIPO) to get control of the domain.
-- 2017: Announced ([here](https://www.netgate.com/blog/pfsense-2-5-and-aes-ni) and [here](https://www.netgate.com/blog/more-on-aes-ni)) that pfSense 2.5 would require [AES-NI](https://en.wikipedia.org/wiki/AES_instruction_set), then [walked that back in 2019](https://www.netgate.com/blog/pfsense-2-5-0-development-snapshots-now-available)
-- 2017: Implemented a scary-lookup [disclaimer](https://www.netgate.com/blog/its-still-free-to-use) in order to use pfSense
+- 2017: Netgate announced ([here](https://www.netgate.com/blog/pfsense-2-5-and-aes-ni) and [here](https://www.netgate.com/blog/more-on-aes-ni)) that pfSense 2.5 would require [AES-NI](https://en.wikipedia.org/wiki/AES_instruction_set), then [walked that back in 2019](https://www.netgate.com/blog/pfsense-2-5-0-development-snapshots-now-available)
+- 2017: Netgate implemented a scary-looking popup [disclaimer](https://www.netgate.com/blog/its-still-free-to-use) in order to use pfSense
 - 2019: Netgate hired a developer to implement WireGuard for pfSense and then upstream the code to FreeBSD (side note - apparently the developer was [slighty crazy](https://www.theregister.com/2008/04/24/kip_macy_arrest/)). This was finished in 2020. In 2021, it was clear the code was not production-ready. Netgate gets defensive and is [called out by the WireGuard developer himself](https://lists.freebsd.org/pipermail/dev-commits-src-all/2021-March/004413.html). Netgate then has to do [damage control](https://www.netgate.com/blog/painful-lessons-learned-in-security-and-community).
-- 2021: [Announced](https://www.netgate.com/blog/announcing-pfsense-plus) a closed-source version of pfSense called pfSense Plus (which gets more love and attention from Netgate than the open-source version)
+- 2021: Netgate [announced](https://www.netgate.com/blog/announcing-pfsense-plus) a closed-source version of pfSense called pfSense Plus (which gets more love and attention from Netgate than the open-source version)
 - 2023: Netgate pushed homelabbers from a free Community Edition license to pfSense Plus (called Home+Lab edition), then changed their mind and [started charging for the Home+Lab license](https://www.netgate.com/blog/addressing-changes-to-pfsense-plus-homelab)
-- 2024: Locked the installer for pfSense CE (the free version) [behind a login page](https://www.reddit.com/r/PFSENSE/comments/1chzp1n/comment/l29c7gw/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+- 2024: Netgate locked the installer for pfSense CE (the free version) [behind a login page](https://www.reddit.com/r/PFSENSE/comments/1chzp1n/comment/l29c7gw/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 So, with all that said: why am I using pfSense?
 
-To be honest, I just don't care about any of the drama above. I trust the open-source pfSense Community Edition with the [System Patches package](https://docs.netgate.com/pfsense/en/latest/development/system-patches.html) installed. I'll continue to use the free version of pfSense until they make it not-free, or closed source, then I'll switch to OPNsense. But right now, I don't feel like learning OPNsense and re-building a firewall from scratch (I just want to restore a backup and get on with life).
+To be honest, I just don't care about any of the drama above because it doesn't affect me. I don't pay for pfSense (and wouldn't with the way Netgate acts), so I don't feel like I'm "supporting" their bad behavior. I'll continue to use the free version of pfSense until they make it paid, or closed-source, then I'll switch to OPNsense. But right now, I don't feel like learning OPNsense and re-building my firewall from scratch (I just want to restore a backup and get on with life).
 
 # Installation
+
+The installation process couldn't have been easier. pfSense has excellent documentation, and Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
 
 # Conclusion
 
