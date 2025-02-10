@@ -69,7 +69,7 @@ The [Nexcom DNA 141](https://www.nexcomusa.com/Products/network-and-communicatio
 
 I almost ended up purchasing a Lanner NCA-1510. Funny enough, the Lanner NCA-1510A is the OEM of the Netgate SG-5100, according to a few posts ([here](https://forum.netgate.com/post/1040249), [here](https://chaos.social/@JeGr/112512006883278146), [here](https://www.reddit.com/r/PFSENSE/comments/1b8lg3z/comment/kttopfw/), and [here](https://www.reddit.com/r/PFSENSE/comments/93kl91/comment/e4admnm/)).
 
-I ended up going with the Deciso DEC740, as it was the only one that had ECC memory in such a small footprint and it was easy to purchase as a non-business. To me, it's the spritual successor to the APU2 (it's almost the same size, same layout, but updated with modern hardware for modern applications).
+I ended up going with the Deciso DEC740, as it was the only one that had ECC memory in such a small footprint and it was easy to purchase as a non-business. To me, it's the spritual successor to the APU2 (it's almost the same size, same layout, but updated with modern hardware for modern applications). There is some really good information [here](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) and [here](https://web.archive.org/web/20240407173603/https://www.deciso.com/netboard-a10-gen3/) about the DEC740 and its specifications (the second link is an Archive.org link because the URL is currently returning a 404).
 
 {{< video_figure src="20250202_001.mp4" width="100%" attr="Video from OPNsense" attrlink="https://shop.opnsense.com/product/dec740-opnsense-desktop-security-appliance/" >}}
 
@@ -77,12 +77,13 @@ Based on [this comparison](https://www.cpubenchmark.net/compare/5050vs4304/AMD-G
 
 {{< img src="20250203_002.png" alt="cpu comparison" >}}
 
+I also picked up a stick of 32GB DDR4 ECC UDIMM VLP (specifically model number MTA18ADF4G72AZ-2G6 from [Memory.net](https://memory.net/product/mta18adf4g72az-2g6-micron-1x-32gb-ddr4-2666-ecc-udimm-pc4-21300v-e-dual-rank-x8-module/)) for $124. I would assume any ECC memory would work here, but it has to be UDIMM and it has to be Very Low Profile (VLP).
 
 # Decisions
 
 ## Did I pay over $800 for a router?!
 
-Yes. My router is arguably the most important device on my network. It protects my network from the big, bad internet. I don't mind paying for a product that can do that job silently, reliably, 24/7, now and 10 years into the future. If I amortize the $800 over 10 years, that's only $80 per year (I spend more money on Chipotle I think).
+Yes. My router is arguably the most important device on my network. It protects my network from the big, bad internet. I don't mind paying for a product that can do that job silently, reliably, 24/7, now and 10 years into the future. If I amortize the $800 over 10 years, that's only $80 per year (I spend more money per year on Chipotle).
 
 Side note - This is a week of data from my Graylog instance. This is what my router is protecting me from.
 
