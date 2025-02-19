@@ -137,10 +137,16 @@ To be honest, I just don't care about any of the drama above because it doesn't 
 
 ## Console settings
 
-The serial adapter shows up as `Exar Corp. XR21B1411 UART` in Linux, and I verifed it connected to `/dev/ttyUSB0` to by using `sudo dmesg | grep tty`. Then, I was able to use screen to connect to it.
+The serial adapter shows up as `Exar Corp. XR21B1411 UART` in Linux, and I verifed it connected to `/dev/ttyUSB0` to by using `sudo dmesg | grep tty`. I tried to use `screen` to connect to it, but after a while, the characters on the screen would get misaligned and impossible to read.
 
 ```
 screen /dev/ttyUSB0 115200
+```
+
+I ended up using [tio](https://github.com/tio/tio), which worked great.
+
+```
+tio /dev/ttyUSB0
 ```
 
 This was the BIOS that shipped with the DEC740. According to [this page](https://docs.opnsense.org/hardware/bios.html), it's up-to-date.
@@ -199,7 +205,102 @@ At boot, you can press `ESC` once to enter the BIOS "Front Page".
 
 ## BIOS settings
 
+### Enable ECC
+
+At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Options`, then `DDR4 Common Options`, then `Common RAS`, then `ECC Configuration`. Then, set the `DRAM ECC Enable` to `Enabled`.
+
+```
+                                                    InsydeH2O Setup Utility                                             Rev. 5.0
+                                                  AMD CBS
+/-------------------------------------------------------------------------------------+----------------------------------------\
+|ECC Configuration                                                                    |Use this option to enable / disable     |
+|                                                                                     |DRAM ECC. Auto will set ECC to enable.  |
+|DRAM ECC Symbol Size                       <x8>                                      |                                        |
+|DRAM ECC Enable                            <Auto>                                    |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                      /---------------\              |                                        |
+|                                                      |DRAM ECC Enable|              |                                        |
+|                                                      |---------------|              |                                        |
+|                                                      |Disabled       |              |                                        |
+|                                                      |Enabled        |              |                                        |
+|                                                      |Auto           |              |                                        |
+|                                                      \---------------/              |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+\-------------------------------------------------------------------------------------+----------------------------------------/
+ F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
+```
+
+### ECC error injection
+
+At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Options`, then `DDR4 Common Options`, then `Common RAS`. Then, set the `Disable Memory Error Injection` to `False` (since we want to test ECC memory errors).
+
+```
+                                                    InsydeH2O Setup Utility                                             Rev. 5.0
+                                                  AMD CBS
+/-------------------------------------------------------------------------------------+----------------------------------------\
+|Common RAS                                                                           |True: UMC::CH::MiscCfg[DisErrInj]=1     |
+|                                                                                     |                                        |
+|Data Poisoning                             <Disabled>                                |                                        |
+|>ECC Configuration                                                                   |                                        |
+|Disable Memory Error Injection             <False>                                   |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                               /------------------------------\      |                                        |
+|                                               |Disable Memory Error Injection|      |                                        |
+|                                               |------------------------------|      |                                        |
+|                                               |False                         |      |                                        |
+|                                               |True                          |      |                                        |
+|                                               \------------------------------/      |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+|                                                                                     |                                        |
+\-------------------------------------------------------------------------------------+----------------------------------------/
+ F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
+ Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
+```
+
 ### Memory overclock
+
+:warning: WARNING :warning: The RAM I bought was 2666MHz, but was showing up as 2400MHz. I tried to overclock it to 2666MHz (below), but kept getting errors when running MemTest86 Pro. You may want to skip this part.
 
 At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Options`, then `DDR4 Common Options`, then `DRAM Timing Configuration`, then accept the warning, then set `Memory Overclock Settings` to `Enabled`.
 
@@ -291,58 +392,24 @@ Then, set the `Memory Clock Speed` to `1333MHz` (since it's DDR memory, this wor
  Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
 ```
 
-### ECC error injection
-
-At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Options`, then `DDR4 Common Options`, then `Common RAS`. Then, set the `Disable Memory Error Injection` to `False` (since we want to test ECC memory errors).
-
-```
-                                                    InsydeH2O Setup Utility                                             Rev. 5.0
-                                                  AMD CBS
-/-------------------------------------------------------------------------------------+----------------------------------------\
-|Common RAS                                                                           |True: UMC::CH::MiscCfg[DisErrInj]=1     |
-|                                                                                     |                                        |
-|Data Poisoning                             <Disabled>                                |                                        |
-|>ECC Configuration                                                                   |                                        |
-|Disable Memory Error Injection             <False>                                   |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                               /------------------------------\      |                                        |
-|                                               |Disable Memory Error Injection|      |                                        |
-|                                               |------------------------------|      |                                        |
-|                                               |False                         |      |                                        |
-|                                               |True                          |      |                                        |
-|                                               \------------------------------/      |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-\-------------------------------------------------------------------------------------+----------------------------------------/
- F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
- Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
-```
-
-Press `F10` to save and reboot.
-
 ## Memory test
 
-At the Front Page, go to `Boot Manager`. I was able to boot from a flash drive containing MemTest86 Pro (since it [supports ECC injection](https://www.memtest86.com/ecc.htm) for testing ECC).
+I always test my memory, but since this was ECC memory, I needed a program to test it. Apparently, MemTest86+ (the open-source tool), [doesn't support testing ECC](https://github.com/memtest86plus/memtest86plus/discussions/248) yet. MemTest86 Pro (the closed-source tool) does [support ECC injection](https://www.memtest86.com/ecc.htm), so that's what I went with.
+
+For reference, here is the [MemTest86 Pro configuration](https://www.memtest86.com/tech_configuring-memtest.html) called `mt86.cfg` that I was using.
+
+```
+ECCPOLL=1
+ECCINJECT=1
+LANG=en-US
+AUTOMODE=1
+AUTOREPORT=1
+AUTOREPORTFMT=HTML
+EXITMODE=0
+CONSOLEONLY=1
+```
+
+At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash drive containing MemTest86 Pro and it started the test right away.
 
 ```
 /------------------------------------------------------------------------------------------------------------------------------\
@@ -386,14 +453,153 @@ At the Front Page, go to `Boot Manager`. I was able to boot from a flash drive c
 \------------------------------------------------------------------------------------------------------------------------------/
 ```
 
-I left MemTest to run and came back to this.
+You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC. I left MemTest86 Pro to run for about 12 hours and came back to this (report below).
 
-```
-```
+[Link to MemTest86 Pro HTML report](/2025/03/pfsense-on-the-opnsense-dec740/MemTest86-Report-20250218-165252.html)
 
 ## Installing pfSense
 
-https://forum.netgate.com/topic/180986/dec740-desktop-security-appliance-cannot-proceed-with-installation-of-pfsense/9?_=1739734218359
+Download the memstick installer for pfSense and write it to a USB flash drive. You can find links and instructions [here](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html), but the installer there is behind a login page (as I mentioned above), so you can get the `pfSense-CE-memstick-serial-2.7.2-RELEASE-amd64.img.gz` file directly from [here](https://atxfiles.netgate.com/mirror/downloads/).
+
+This is totally optional, but I chose to backup my current pfSense `config.xml` file and place a copy onto the installation USB flash drive as per [these instructions](https://docs.netgate.com/pfsense/en/latest/backup/restore-during-install.html#restore-configuration-from-media-during-install). That way, immediately after install, pfSense would restore my configuration file (saving me a step later).
+
+At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash drive containing the pfSense installer.
+
+```
+/------------------------------------------------------------------------------------------------------------------------------\
+|                                                         Boot Manager                                                         |
+\------------------------------------------------------------------------------------------------------------------------------/
+
+
+  Boot Option Menu
+
+  EFI Boot Devices
+  EFI Hard Drive (I947122223-TS128GMTE110S)
+  EFI USB Device (USB)
+  Internal EFI Shell
+
+  ^ and v to change option, ENTER to select an option, ESC to exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/------------------------------------------------------------------------------------------------------------------------------\
+| F1  Help                                                      ^/v   Select Item                                              |
+| Esc Exit                                                      Enter Select > SubMenu                                         |
+\------------------------------------------------------------------------------------------------------------------------------/
+```
+
+When you first see this menu, and it's counting down from 3...2...1, you need to press `ESC` once. The reason is that the DEC740 uses different serial settings that are not in the pfSense 2.7.2 installer. See [this post](https://forum.netgate.com/topic/180986/dec740-desktop-security-appliance-cannot-proceed-with-installation-of-pfsense/9?_=1739734218359) for details and [this PR](https://reviews.freebsd.org/D34329) for eventually getting this added to FreeBSD upstream.
+
+```
+-          __
+    _ __  / _|___  ___ _ __  ___  ___
+   | '_ \| |_/ __|/ _ \ '_ \/ __|/ _ \
+   | |_) |  _\__ \  __/ | | \__ \  __/
+   | .__/|_| |___/\___|_| |_|___/\___|
+   |_|
+
+
+ +---------- Welcome to pfSense -----------+      __________________________
+ |                                         |     /                       ___\
+ |  1. Boot Multi user [Enter]             |    |                      /`
+ |  2. Boot Single user                    |    |                     /    :-|
+ |  3. Escape to loader prompt             |    |      _________  ___/    /_ |
+ |  4. Reboot                              |    |    /` ____   / /__    ___/ |
+ |  5. Cons: Dual (Serial primary)         |    |   /  /   /  /    /   /     |
+ |                                         |    |  /  /___/  /    /   /      |
+ |  Options:                               |    | /   ______/    /   /       |
+ |  6. Kernel: default/kernel (1 of 1)     |    |/   /          /   /        |
+ |  7. Boot Options                        |        /          /___/         |
+ |                                         |       /                         |
+ |                                         |      /_________________________/
+ +-----------------------------------------+                                  |
+```
+
+Then, you'll see the `OK` prompt.
+
+```
+Type '?' for a list of commands, 'help' for more detailed help.
+OK
+```
+
+There, you can paste in these two commands.
+
+```
+set hw.uart.console="mm:0xfedc9000,rs:2"
+boot
+```
+
+Go through the [install process](https://docs.netgate.com/pfsense/en/latest/install/install-pfsense.html) via the serial console. Once it's done, reboot again, press `ESC` once, then enter the two commands above. Here, you'll need to setup your interfaces and VLANs. Now at the menu below, select `8` to enter the shell.
+
+```
+ 0) Logout (SSH only)                  9) pfTop
+ 1) Assign Interfaces                 10) Filter Logs
+ 2) Set interface(s) IP address       11) Restart webConfigurator
+ 3) Reset webConfigurator password    12) PHP shell + pfSense tools
+ 4) Reset to factory defaults         13) Update from console
+ 5) Reboot system                     14) Disable Secure Shell (sshd)
+ 6) Halt system                       15) Restore recent configuration
+ 7) Ping host                         16) Restart PHP-FPM
+ 8) Shell
+
+Enter an option:
+```
+
+Now, use `vi` to edit the `/boot/loader.conf.local` file to add these two lines.
+
+```
+console="efi"
+hw.uart.console="mm:0xfedc9000,rs:2"
+```
+
+Reboot using the `reboot` command, and you should see pfSense boot normally, without having to edit your console settings again.
+
+From here, you can connect an ethernet cable to your LAN interface and setup pfSense. If you're curious, here is the info about the five on-board NICs. The three RJ-45 ports are [Intel I226-V](https://man.freebsd.org/cgi/man.cgi?query=igc&manpath=FreeBSD+14.0-RELEASE) and the two SFP+ ports are from the [AMD CPU](https://man.freebsd.org/cgi/man.cgi?query=axp&manpath=FreeBSD+14.0-RELEASE).
+
+```
+igc0@pci0:2:0:0:        class=0x020000 rev=0x04 hdr=0x00 vendor=0x8086 device=0x125c subvendor=0x8086 subdevice=0x0000
+    vendor     = 'Intel Corporation'
+    device     = 'Ethernet Controller I226-V'
+    class      = network
+    subclass   = ethernet
+igc1@pci0:3:0:0:        class=0x020000 rev=0x04 hdr=0x00 vendor=0x8086 device=0x125c subvendor=0x8086 subdevice=0x0000
+    vendor     = 'Intel Corporation'
+    device     = 'Ethernet Controller I226-V'
+    class      = network
+    subclass   = ethernet
+igc2@pci0:4:0:0:        class=0x020000 rev=0x04 hdr=0x00 vendor=0x8086 device=0x125c subvendor=0x8086 subdevice=0x0000
+    vendor     = 'Intel Corporation'
+    device     = 'Ethernet Controller I226-V'
+    class      = network
+    subclass   = ethernet
+ax0@pci0:6:0:1: class=0x020000 rev=0x00 hdr=0x00 vendor=0x1022 device=0x1458 subvendor=0x1022 subdevice=0x1458
+    vendor     = 'Advanced Micro Devices, Inc. [AMD]'
+    class      = network
+    subclass   = ethernet
+ax1@pci0:6:0:2: class=0x020000 rev=0x00 hdr=0x00 vendor=0x1022 device=0x1458 subvendor=0x1022 subdevice=0x1458
+    vendor     = 'Advanced Micro Devices, Inc. [AMD]'
+    class      = network
+    subclass   = ethernet
+```
+
 
 The installation process couldn't have been easier. pfSense has excellent documentation, and Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
 
