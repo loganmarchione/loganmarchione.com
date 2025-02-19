@@ -14,6 +14,12 @@ cover:
 
 {{% series/s_openwrt %}}
 
+# Update: 2025-02-19
+
+I've used this travel router half a dozen times without issue. My initial installation was on version 23.05.2, but I've used a package called `luci-app-attendedsysupgrade` to do minor upgrades from within the OpenWrt web interface, following [these instructions](https://openwrt.org/docs/guide-user/installation/attended.sysupgrade).
+
+OpenWrt just released [version 24.10](https://openwrt.org/releases/24.10/notes-24.10.0), so I used the [sysupgrade instructions](https://openwrt.org/docs/guide-user/installation/generic.sysupgrade) to jump from 23.05.5 to 24.10.0.
+
 # Introduction
 
 I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). It's been over [seven years since I last touched OpenWrt](http://localhost:1313/2016/04/openwrt-upgrade-process/). :exploding_head: I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
