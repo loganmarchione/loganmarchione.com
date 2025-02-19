@@ -1,6 +1,6 @@
 ---
 title: "pfSense on the OPNsense DEC740"
-date: "2025-02-28"
+date: "2025-03-01"
 author: "Logan Marchione"
 categories:
   - "cloud-internet"
