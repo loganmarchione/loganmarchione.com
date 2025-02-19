@@ -461,8 +461,6 @@ You will see errors in MemTest86 Pro, since it's injecting ECC errors to test th
 
 Download the memstick installer for pfSense and write it to a USB flash drive. You can find links and instructions [here](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html), but the installer there is behind a login page (as I mentioned above), so you can get the `pfSense-CE-memstick-serial-2.7.2-RELEASE-amd64.img.gz` file directly from [here](https://atxfiles.netgate.com/mirror/downloads/).
 
-This is totally optional, but I chose to backup my current pfSense `config.xml` file and place a copy onto the installation USB flash drive as per [these instructions](https://docs.netgate.com/pfsense/en/latest/backup/restore-during-install.html#restore-configuration-from-media-during-install). That way, immediately after install, pfSense would restore my configuration file (saving me a step later).
-
 At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash drive containing the pfSense installer.
 
 ```
@@ -600,8 +598,11 @@ ax1@pci0:6:0:2: class=0x020000 rev=0x00 hdr=0x00 vendor=0x1022 device=0x1458 sub
     subclass   = ethernet
 ```
 
+I tried to backup my current pfSense `config.xml` file and place a copy onto the installation USB flash drive as per [these instructions](https://docs.netgate.com/pfsense/en/latest/backup/restore-during-install.html#restore-configuration-from-media-during-install). That way, immediately after install, pfSense would restore my configuration file (saving me a step later). However, I couldn't get this to work. I instead did a fresh install, and then restored my `config.xml` file from the menu. Because my APU2 used the `igb` driver, and this one used `igc`, pfSense gave me a GUI to update my VLANs and interfaces, then I was able to reboot without issue. If you want to see more, Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
 
-The installation process couldn't have been easier. pfSense has excellent documentation, and Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
+{{< img src="20250219_001.png" alt="pfsense interface mismatch" >}}
+
+At that point, I was able to unplug the old APU2, plug in this device, and everything was updated.
 
 # Conclusion
 
