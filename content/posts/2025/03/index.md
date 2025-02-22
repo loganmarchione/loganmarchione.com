@@ -16,13 +16,13 @@ cover:
 
 # Introduction
 
-My [APU2 is five years old now](http://localhost:1313/2019/08/pfsense-on-the-pc-engines-apu2/) and I notice that it runs slow when making changes in pfSense's web UI. The CPU is an AMD GX-412TC (from 2014) and it's running 4GB of DDR3 memory, so I guess that's to be expected. Also, I only have 500/500Mbps internet, but would like to update to 1Gbps at some point, and I'm left wondering if the APU2 could keep up with that speed. I've seen [this post](https://teklager.se/en/knowledge-base/apu2-1-gigabit-throughput-pfsense/) about routing at 1Gbps on the APU2 hardware, but I'm also running pfBlockerNG and wondering if that would affect speed.
+My [APU2 is five years old now](http://localhost:1313/2019/08/pfsense-on-the-pc-engines-apu2/) and I notice that it runs slow when making changes in pfSense's web interface. The CPU is an AMD GX-412TC (from 2014) and it's running 4GB of DDR3 memory, so I guess that's to be expected. Also, I only have 500/500Mbps internet, but would like to update to 1Gbps at some point, and I'm left wondering if the APU2 could keep up with that speed. I've seen [this post](https://teklager.se/en/knowledge-base/apu2-1-gigabit-throughput-pfsense/) about routing at 1Gbps on the APU2 hardware, but I'm also running pfBlockerNG and wondering if that would affect speed.
 
 For something as critical as a router, I didn't want to wait until it died to replace it. Thinking there would be a newer model, I went to the [PC Engines website](https://www.pcengines.ch/), only to see that they are [ending production and closing their company](https://www.pcengines.ch/eol.htm) :cry:.
 
 {{< img src="20241107_001.png" alt="pc engines eol" >}}
 
-This was really disheartening, but I understand the decision given the circumstances. The APU2 was a great machine that would be hard to replace.
+This was really disheartening, but I understand their decision given the circumstances. The APU2 was a great machine that would be hard to replace.
 
 # Hardware
 
@@ -35,11 +35,11 @@ I was looking for the following things in a replacement box:
 - Intel NICs
 - M.2 storage
 
-It's easy to find all of that in cheap Chinese mini PCs on Amazon, except ECC support. [Error correcting code (ECC) memory](https://en.wikipedia.org/wiki/ECC_memory) is special memory that has an extra chip on the stick that is used for parity bits to detect and correct bit-flips in memory. It's generally used on servers, and hardly ever used on consumer PCs (especially mini PCs). However, I was also trying to find something that was from a relatively well-known manufacturer that wouldn't burn my house down. The Chinese mini PCs worry me, because they're all no-name brands that disappear from Amazon after a few months and provide no support if they don't disappear.
+It's easy to find all of that in cheap Chinese mini PCs on Amazon, except ECC support. [Error correcting code (ECC) memory](https://en.wikipedia.org/wiki/ECC_memory) is special memory that has an extra chip on the RAM stick that is used for parity bits to detect and correct bit-flips in memory. It's generally used on servers, and hardly ever used on consumer PCs (especially mini PCs). I was also trying to find something that was from a relatively well-known manufacturer that wouldn't burn my house down. The Chinese mini PCs worry me, because they're all no-name brands that disappear from Amazon after a few months (or provide no support if they don't disappear).
 
 ## Comparison
 
-Below are the devices that I found in my searching (the first one is the current APU2D4 that I have now).
+I must have looked at hundreds or thousands of mini PCs on obscure industrial and electronics distributor websites. Below are the devices that I found in my searching (the first one is the current APU2D4 that I have now).
 
 | Make/Model                                                                                                                                                | Specific model number                                    | CPU                                    | RAM                                    | ECC                           | Storage                              | Ports                      | NICs                                | Price (main unit only) | Comments                                          |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|----------------------------------------|----------------------------------------|-------------------------------|--------------------------------------|----------------------------|-------------------------------------|------------------------|---------------------------------------------------|
@@ -58,28 +58,26 @@ Below are devices that I looked at, but there was one reason or another that the
 - [GIGAIPC QBiX-EHLA6412-A1](https://www.gigaipc.com/en/products-detail/QBiX-EHLA6412-A1/) (Celeron CPU, which means no ECC support)
 - [Jetway FBU03](https://jetwaycomputer.com/FBU03.html) (Celeron CPU, which means no ECC support)
 - [Polywell Nano-N305L4](https://www.polywell.com/nano-n305l4) (i3-N305 CPU, which means no ECC support)
-- [Portwell CAF-0100](https://portwell.com/products/detail.php?CUSTCHAR1=CAF-0100) (Too wide for a half-rack, IB-ECC)
+- [Portwell CAF-0100](https://portwell.com/products/detail.php?CUSTCHAR1=CAF-0100) (Too wide for a mini-rack, IB-ECC)
 
 
 ## Purchase
 
-I must have looked at hundreds or thousands of mini PCs on obscure industrial and electronics distributor websites.
-
-The [Nexcom DNA 141](https://www.nexcomusa.com/Products/network-and-communication-solutions/cyber-security-solutions/desktop-x86-based-appliance/desktop-x86-based-appliance-dna-141) would have made the perfect router (chef's kiss), but I was unable to find a reseller/distributor. I reached out to Nexcom, but they informed me that they don't sell to individuals. When I asked about a reseller/distributor in the US, they stopped replying 🤷.
+The [Nexcom DNA 141](https://www.nexcomusa.com/Products/network-and-communication-solutions/cyber-security-solutions/desktop-x86-based-appliance/desktop-x86-based-appliance-dna-141) would have made the perfect router (chef's kiss), but I was unable to find a reseller/distributor. I reached out to Nexcom directly, but they informed me that they don't sell to individuals. When I asked about a reseller/distributor in the US, they stopped replying 🤷.
 
 I almost ended up purchasing a Lanner NCA-1510. Funny enough, the Lanner NCA-1510A is the OEM of the Netgate SG-5100, according to a few posts ([here](https://forum.netgate.com/post/1040249), [here](https://chaos.social/@JeGr/112512006883278146), [here](https://www.reddit.com/r/PFSENSE/comments/1b8lg3z/comment/kttopfw/), and [here](https://www.reddit.com/r/PFSENSE/comments/93kl91/comment/e4admnm/)).
 
-I ended up going with the Deciso DEC740, as it was the only one that had ECC memory in such a small footprint and it was easy to purchase as a non-business.
+I ended up going with the Deciso DEC740, as it was the only one that had ECC memory in such a small footprint and it was easy to purchase as a non-business. To me, it's the spritual successor to the APU2 (it's almost the same size, same layout, but updated with modern hardware).
 
 {{< video_figure src="20250202_001.mp4" width="100%" attr="Video from OPNsense" attrlink="https://shop.opnsense.com/product/dec740-opnsense-desktop-security-appliance/" >}}
 
-To me, it's the spritual successor to the APU2 (it's almost the same size, same layout, but updated with modern hardware for modern applications). There is some really good information [here](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) and [here](https://web.archive.org/web/20240407173603/https://www.deciso.com/netboard-a10-gen3/) about the DEC740 and its specifications (the second link is an Archive.org link because the URL is currently returning a 404). The box included the DEC740, the US power adapter, and a mini-USB cable (for the serial port).
-
-{{< img src="20250215_002.jpg" alt="dec740" >}}
-
-Based on [this comparison](https://www.cpubenchmark.net/compare/5050vs4304/AMD-GX-412TC-SOC-vs-AMD-Ryzen-Embedded-V1500B), the CPU in the new device should run rings around my own APU2. Plus, this device has 2x 10Gbps SFP+ ports.
+There is some really good information [here](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) and [here](https://web.archive.org/web/20240407173603/https://www.deciso.com/netboard-a10-gen3/) about the DEC740 (the second link is an Archive.org link because the URL is currently returning a 404) and [here](https://en.wikichip.org/wiki/amd/ryzen_embedded/v1500b) about the Ryzen CPU. Based on [this comparison](https://www.cpubenchmark.net/compare/5050vs4304/AMD-GX-412TC-SOC-vs-AMD-Ryzen-Embedded-V1500B), the CPU in the DEC740 should run rings around my APU2. Plus, this device has 2x 10Gbps SFP+ ports for future-proofing.
 
 {{< img src="20250203_002.png" alt="cpu comparison" >}}
+
+The DEC740 came from the Netherlands via FedEx and was in excellent shape when it arrived. The box included the DEC740, the US power adapter, and a mini-USB cable (for the serial port).
+
+{{< img src="20250215_002.jpg" alt="dec740" >}}
 
 ## ECC RAM upgrade
 
@@ -132,6 +130,8 @@ I know that Netgate (the company that owns pfSense) has had some controversies:
 So, with all that said: why am I using pfSense?
 
 To be honest, I just don't care about any of the drama above because it doesn't affect me. I don't pay for pfSense (and wouldn't with the way Netgate acts), so I don't feel like I'm "supporting" their bad behavior. I'll continue to use the free version of pfSense until they make it paid, or closed-source, then I'll switch to OPNsense. But right now, I don't feel like learning OPNsense and re-building my firewall from scratch (I just want to restore a backup and get on with life).
+
+Just to note, the DEC740 comes pre-installed with OPNsense and they will email you a key for OPNsense Business Edition, if you ever want to switch.
 
 # Pre-installation
 
@@ -394,7 +394,7 @@ Then, set the `Memory Clock Speed` to `1333MHz` (since it's DDR memory, this wor
 
 ## Memory test
 
-I always test my memory, but since this was ECC memory, I needed a program to test it. Apparently, MemTest86+ (the open-source tool), [doesn't support testing ECC](https://github.com/memtest86plus/memtest86plus/discussions/248) yet. MemTest86 Pro (the closed-source tool) does [support ECC injection](https://www.memtest86.com/ecc.htm), so that's what I went with.
+I always test my memory, but since this was ECC memory, I needed a program to test the ECC functionality. Apparently, MemTest86+ (the open-source tool), [doesn't support testing ECC](https://github.com/memtest86plus/memtest86plus/discussions/248) yet. MemTest86 Pro (the closed-source tool) does [support ECC injection](https://www.memtest86.com/ecc.htm), so that's what I went with.
 
 For reference, here is the [MemTest86 Pro configuration](https://www.memtest86.com/tech_configuring-memtest.html) called `mt86.cfg` that I was using.
 
@@ -453,7 +453,7 @@ At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash dri
 \------------------------------------------------------------------------------------------------------------------------------/
 ```
 
-You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC. I left MemTest86 Pro to run for about 12 hours and came back to this (report below).
+You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC functionality. I left MemTest86 Pro to run for about 12 hours and came back to this (report below).
 
 [Link to MemTest86 Pro HTML report](/2025/03/pfsense-on-the-opnsense-dec740/MemTest86-Report-20250218-165252.html)
 
@@ -545,7 +545,7 @@ set hw.uart.console="mm:0xfedc9000,rs:2"
 boot
 ```
 
-Go through the [install process](https://docs.netgate.com/pfsense/en/latest/install/install-pfsense.html) via the serial console. Once it's done, reboot again, press `ESC` once, then enter the two commands above. Here, you'll need to setup your interfaces and VLANs. Now at the menu below, select `8` to enter the shell.
+Go through the [install process](https://docs.netgate.com/pfsense/en/latest/install/install-pfsense.html) via the serial console. Once it's done, reboot again, press `ESC` once, then enter the two commands above. Here, you'll need to setup your interfaces and VLANs. Now, at the menu below, select `8` to enter the shell.
 
 ```
  0) Logout (SSH only)                  9) pfTop
@@ -561,7 +561,7 @@ Go through the [install process](https://docs.netgate.com/pfsense/en/latest/inst
 Enter an option:
 ```
 
-Now, use `vi` to edit the `/boot/loader.conf.local` file to add these two lines.
+Use `vi` to edit the `/boot/loader.conf.local` file to add these two lines.
 
 ```
 console="efi"
@@ -598,12 +598,24 @@ ax1@pci0:6:0:2: class=0x020000 rev=0x00 hdr=0x00 vendor=0x1022 device=0x1458 sub
     subclass   = ethernet
 ```
 
-I tried to backup my current pfSense `config.xml` file and place a copy onto the installation USB flash drive as per [these instructions](https://docs.netgate.com/pfsense/en/latest/backup/restore-during-install.html#restore-configuration-from-media-during-install). That way, immediately after install, pfSense would restore my configuration file (saving me a step later). However, I couldn't get this to work. I instead did a fresh install, and then restored my `config.xml` file from the menu. Because my APU2 used the `igb` driver, and this one used `igc`, pfSense gave me a GUI to update my VLANs and interfaces, then I was able to reboot without issue. If you want to see more, Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
+I tried to backup my current pfSense `config.xml` file and place a copy onto the installation USB flash drive as per [these instructions](https://docs.netgate.com/pfsense/en/latest/backup/restore-during-install.html#restore-configuration-from-media-during-install). That way, immediately after install, pfSense would restore my configuration file (saving me a step later). However, I couldn't get this to work. I instead did a fresh install, and then restored my `config.xml` file from the web interface. Because my APU2 used the `igb` driver, and the DEC740 used `igc`, pfSense gave me a warning in the web interface to update my VLANs and interfaces, then I was able to reboot without issue. If you want to see more, Tom Lawrence has a [great video](https://www.youtube.com/watch?v=0oi02LayIIM) talking about the process of restoring from a backup (both to the same hardware, and different hardware).
 
 {{< img src="20250219_001.png" alt="pfsense interface mismatch" >}}
 
-At that point, I was able to unplug the old APU2, plug in this device, and everything was updated.
+At that point, I was able to unplug the old APU2, plug in the DEC740, and everything was working (hardware cutovers never go this smoothly)!
+
+You can see the drop in CPU usage from around 20% on the APU2 to 5% on the DEC740.
+
+{{< img src="20250222_001.png" alt="pfsense cpu/memory usage" >}}
 
 # Conclusion
+
+I've been using the DEC740 for about a week now without any issues.
+
+I don't measure per-device power on my UPS, but the CPU on the APU2 had a TDP of 6W, while the CPU on the DEC740 has a TDP of 16W, so it does use more power (but not much more).
+
+pfSense automatically picked up the AMD thermal sensor. The APU2 ran at around 50°C, while the DEC740 runs at around 44°C (the APU2 used a thermal pad instead of thermal paste, and the DEC740 has a heavy, metal heatsink).
+
+I'm planning on calling Verizon to increase my FiOS plan to 1Gbps, so I'm looking forward to that day. I'm very happy with the DEC740 so far, and I'm hoping it will give my homelab 10 years of room to grow (now I just need some 10Gbps switches 😅).
 
 \-Logan
