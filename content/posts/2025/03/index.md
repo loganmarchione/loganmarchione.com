@@ -49,7 +49,7 @@ I must have looked at hundreds or thousands of mini PCs on obscure industrial an
 | [Portwell ANS-9122-21](https://portwell.com/products/detail.php?CUSTCHAR1=ANS-9122-21)                                                                    | AS1-3324                                                 | Intel Atom C3436L (4c/4t, 10.75W)      | 1x DDR4-1866 SO-DIMM slot (max 32GB)   | Yes                           | 1x M.2 slot                          | 4x RJ-45                   | ???                                 | ???                    |                                                   |
 | Broadcom AppNeta m50                                                                                                                                      | Custom fanless version of the AAEON FWS-2362             | Intel Atom C3558 (4c/4t, 16W)          | ???                                    | Yes                           | ???                                  | 4x RJ-45                   | 4x Intel X553                       | ???                    | This is only available as an eBay special         |
 | [Nexcom DNA 141](https://www.nexcomusa.com/Products/network-and-communication-solutions/cyber-security-solutions/desktop-x86-based-appliance/desktop-x86-based-appliance-dna-141) | 10L00014100X0                    | Intel Atom x7203C (2c/2t, 9W)          | 1x DDR4-3200 SO-DIMM slot (max 32GB)   | ??? (sales never replied)     | 1x M.2 2242                          | 4x RJ-45                   | 4x Intel i226                       | ???                    |                                                   |
-| [Lanner NCA-1510](https://www.lannerinc.com/products/network-appliances/x86-desktop-network-appliances/nca-1510)                                          | NCA-1510A                                                | Intel Atom C3558 (4c/4t, 16W)          | 1x DDR4-2133 SO-DIMM slot (max 16GB)   | Yes                           | 1x 2.5" bay                          | 6x RJ-45                   | ???                                 | ???                    |                                                   |
+| [Lanner NCA-1510](https://www.lannerinc.com/products/network-appliances/x86-desktop-network-appliances/nca-1510)                                          | NCA-1510A                                                | Intel Atom C3558 (4c/4t, 16W)          | 1x DDR4-2133 SO-DIMM slot (max 16GB)   | Yes                           | 1x 2.5" bay                          | 6x RJ-45                   | ???                                 | ???                    | This is only available as an eBay special         |
 
 Below are devices that I looked at, but there was one reason or another that they didn't make the cut...
 
@@ -85,11 +85,12 @@ I also picked up a stick of 32GB DDR4 ECC UDIMM VLP (specifically model number M
 
 {{< img src="20250215_001.jpg" alt="vlp ram" >}}
 
-There are four Torx screws on the bottom of the unit (one with an [unenforcable-in-the-USA](https://en.wikipedia.org/wiki/Magnuson%E2%80%93Moss_Warranty_Act) "void if removed" sticker). Then, the black heatsink part of the unit slides away from the front face.
+There are four Torx screws on the bottom of the unit (one with an [unenforcable-in-the-USA](https://en.wikipedia.org/wiki/Magnuson%E2%80%93Moss_Warranty_Act) "warranty void if removed" sticker). Then, the black heatsink part of the unit slides away from the front face.
 
 {{< img src="20250215_003.jpg" alt="dec740 opened" >}}
 
-There are four more Torx screws holding the PCB onto the black heatsink. The SSD is a Transcend 128GB NVMe PCIe Gen3 x4 (TS128GMTE110S). I didn't bother to replace this, since I ship my logs to [Graylog](https://graylog.org/), so they're not stored on the SSD anyway.
+There are four more Torx screws holding the PCB onto the black heatsink. The SSD is a Transcend 128GB NVMe PCIe Gen3 x4 (TS128GMTE110S). I didn't bother to replace this, since I ship my logs to [Graylog](https://graylog.org/), so they're not stored on the SSD anyway. Just to note, the DEC740 comes pre-installed with OPNsense and they will email you a key for OPNsense Business Edition, if you ever need to reinstall.
+
 
 {{< img src="20250215_004.jpg" alt="dec740 opened" >}}
 
@@ -130,8 +131,6 @@ I know that Netgate (the company that owns pfSense) has had some controversies:
 So, with all that said: why am I using pfSense?
 
 To be honest, I just don't care about any of the drama above because it doesn't affect me. I don't pay for pfSense (and wouldn't with the way Netgate acts), so I don't feel like I'm "supporting" their bad behavior. I'll continue to use the free version of pfSense until they make it paid, or closed-source, then I'll switch to OPNsense. But right now, I don't feel like learning OPNsense and re-building my firewall from scratch (I just want to restore a backup and get on with life).
-
-Just to note, the DEC740 comes pre-installed with OPNsense and they will email you a key for OPNsense Business Edition, if you ever want to switch.
 
 # Pre-installation
 
@@ -396,7 +395,7 @@ Then, set the `Memory Clock Speed` to `1333MHz` (since it's DDR memory, this wor
 
 I always test my memory, but since this was ECC memory, I needed a program to test the ECC functionality. Apparently, MemTest86+ (the open-source tool), [doesn't support testing ECC](https://github.com/memtest86plus/memtest86plus/discussions/248) yet. MemTest86 Pro (the closed-source tool) does [support ECC injection](https://www.memtest86.com/ecc.htm), so that's what I went with.
 
-For reference, here is the [MemTest86 Pro configuration](https://www.memtest86.com/tech_configuring-memtest.html) called `mt86.cfg` that I was using.
+For reference, here is the [MemTest86 Pro configuration file](https://www.memtest86.com/tech_configuring-memtest.html) called `mt86.cfg` that I was using.
 
 ```
 ECCPOLL=1
