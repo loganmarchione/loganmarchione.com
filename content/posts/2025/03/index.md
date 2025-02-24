@@ -16,7 +16,7 @@ cover:
 
 # Introduction
 
-My [APU2 is five years old now](http://localhost:1313/2019/08/pfsense-on-the-pc-engines-apu2/) and I notice that it runs slow when making changes in pfSense's web interface. The CPU is an AMD GX-412TC (from 2014) and it's running 4GB of DDR3 memory, so I guess that's to be expected. Also, I only have 500/500Mbps internet, but would like to update to 1Gbps at some point, and I'm left wondering if the APU2 could keep up with that speed. I've seen [this post](https://teklager.se/en/knowledge-base/apu2-1-gigabit-throughput-pfsense/) about routing at 1Gbps on the APU2 hardware, but I'm also running pfBlockerNG and wondering if that would affect speed.
+My [APU2 is five years old now](/2019/08/pfsense-on-the-pc-engines-apu2/) and I notice that it runs slow when making changes in pfSense's web interface. The CPU is an AMD GX-412TC (from 2014) and it's running 4GB of DDR3 memory, so I guess that's to be expected. Also, I only have 500/500Mbps internet, but would like to update to 1Gbps at some point, and I'm left wondering if the APU2 could keep up with that speed. I've seen [this post](https://teklager.se/en/knowledge-base/apu2-1-gigabit-throughput-pfsense/) about routing at 1Gbps on the APU2 hardware, but I'm also running pfBlockerNG and wondering if that would affect speed.
 
 For something as critical as a router, I didn't want to wait until it died to replace it. Thinking there would be a newer model, I went to the [PC Engines website](https://www.pcengines.ch/), only to see that they are [ending production and closing their company](https://www.pcengines.ch/eol.htm) :cry:.
 

@@ -22,7 +22,7 @@ OpenWrt just released [version 24.10](https://openwrt.org/releases/24.10/notes-2
 
 # Introduction
 
-I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). It's been over [seven years since I last touched OpenWrt](http://localhost:1313/2016/04/openwrt-upgrade-process/). :exploding_head: I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
+I've been on a couple trips in the last month and needed a way to share a single internet connection with multiple devices (e.g., Steam Deck, laptops, phones, etc...). It's been over [seven years since I last touched OpenWrt](/2016/04/openwrt-upgrade-process/). :exploding_head: I thought it would be fun to setup OpenWrt on a travel router and to revisit OpenWrt to see what's changed.
 
 # Design
 
