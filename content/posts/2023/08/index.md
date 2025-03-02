@@ -16,9 +16,9 @@ cover:
 
 I got a new keyboard :grin:
 
-{{< video mp4="20230821_012.mp4" >}}
+{{< video src="20230821_012.mp4" width="100%" >}}
 
-{{< video mp4="20230822_001.mp4" >}}
+{{< video src="20230822_001.mp4" width="100%" >}}
 
 {{< img src="20230830_001.jpg" alt="wrist rest" >}}
 
@@ -241,11 +241,11 @@ Here is the final product (note that I moved some switches around for the right-
 
 Here are the obligatory [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlights).
 
-{{< video mp4="20230821_012.mp4" >}}
+{{< video src="20230821_012.mp4" width="100%" >}}
 
 Here is the clack clack (unmute the video).
 
-{{< video mp4="20230822_001.mp4" >}}
+{{< video src="20230822_001.mp4" width="100%" >}}
 
 Here are pictures with the wrist rest.
 

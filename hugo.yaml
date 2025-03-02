@@ -22,6 +22,11 @@ minify:
     disableXML: true
     minifyOutput: false
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 module:
   imports:
     - path: github.com/adityatelange/hugo-PaperMod

@@ -52,7 +52,7 @@ Then, I stumbled onto [this post](https://www.reddit.com/r/homelab/comments/k47m
 
 And here is the obligatory GIF of the [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlights).
 
-{{< video mp4="20210104_004.mp4" >}}
+{{< video src="20210104_004.mp4" width="100%" >}}
 
 ## Parts
 

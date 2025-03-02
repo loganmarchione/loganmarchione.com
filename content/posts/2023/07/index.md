@@ -86,7 +86,7 @@ The package took about a week to arrive to my house in the US from the UK. In th
 
 The battery was dead on arrival, so I plugged it in and the "Welcome" tutorial ran.
 
-{{< video mp4="20230709_001.mp4" >}}
+{{< video src="20230709_001.mp4" width="100%" >}}
 
 ## Battery
 

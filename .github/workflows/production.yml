@@ -52,7 +52,7 @@ jobs:
       run: sed -i "s/CLOUDFRONT_DISTRIBUTION_PRD/${{ secrets.CLOUDFRONT_DISTRIBUTION_PRD }}/g" hugo.yaml
 
     - name: Build
-      run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+      run: hugo --gc --baseURL="https://${{ env.URL }}"
       env:
         URL: loganmarchione.com
 
