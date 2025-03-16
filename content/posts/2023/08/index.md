@@ -12,6 +12,12 @@ cover:
     relative: false
 ---
 
+# Update: 2025-03-16
+
+I picked up a set of [aluminum plates](https://keeb.io/products/sinc-aluminum-plates) for my Sinc, as well as some [replacement rubber feet](https://keeb.io/products/skuf-silicone-rubber-keyboard-feet). You can see the aluminum on the right. Very pleased!
+
+{{< img src="20250315_001.jpg" alt="aluminum plates" >}}
+
 # TL;DR
 
 I got a new keyboard :grin:
