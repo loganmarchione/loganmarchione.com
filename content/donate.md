@@ -11,7 +11,7 @@ ShowToc: true
 
 This is a bit of an awkward topic. Over the years, I've had enough people ask me if I accept donations that I thought it would be best to make a quick reference page about it.
 
-While offering to donate to me is flattering and humbling, I have to decline. Instead, I think you should donate to organizations, developers, and projects that have a _real_ impact on open source software. In most case, I'm standing on the shoulders of giants and simply repackaging or repurposing existing software. I believe that you should be donating to _those_ projects, not mine.
+While offering to donate to me is flattering and humbling, I have to decline. Instead, I think you should donate to organizations, developers, and projects that have a _real_ impact on open source software. In most cases, I'm standing on the shoulders of giants and simply repackaging or repurposing existing software. I believe that you should be donating to _those_ projects, not mine.
 
 You can view my public contributions below. These are the organizations, developers, and projects that I really enjoy (in no particular order). Use them as inspiration.
 
