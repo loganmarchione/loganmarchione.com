@@ -1,7 +1,8 @@
 baseURL: "https://loganmarchione.com"
 languageCode: "en-us"
 title: Logan Marchione
-paginate: 10
+pagination:
+  pagerSize: 10
 
 permalinks:
   posts: /:year/:month/:title/
