@@ -15,40 +15,38 @@ jobs:
       HUGO_VERSION: '0.146.7'
 
     steps:
-    - name: Check out the codebase
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_withdeploy_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-    - name: Setup Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: '1.23'
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v3
-      with:
-        hugo-version: ${{ env.HUGO_VERSION }}
-        extended: true
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
-    - name: Build
-      run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
-      env:
-        URL: loganmarchione.github.io
+      - name: Build
+        run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+        env:
+          URL: loganmarchione.github.io
 
-    - name: Overwrite robots.txt (for search engines)
-      run: |
-        : > ./public/robots.txt
-        echo "User-agent: *" >> ./public/robots.txt
-        echo "Disallow: /" >> ./public/robots.txt
+      - name: Overwrite robots.txt (for search engines)
+        run: |
+          : > ./public/robots.txt
+          echo "User-agent: *" >> ./public/robots.txt
+          echo "Disallow: /" >> ./public/robots.txt
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        external_repository: loganmarchione/loganmarchione.github.io
-        publish_branch: gh-pages
-        publish_dir: ./public
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          external_repository: loganmarchione/loganmarchione.github.io
+          publish_branch: gh-pages
+          publish_dir: ./public
 
   loganmarchione-dev:
     name: Deploy (loganmarchione.dev)
@@ -64,42 +62,40 @@ jobs:
       contents: read
 
     steps:
-    - name: Check out the codebase
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_withdeploy_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-    - name: Setup Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: '1.23'
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v3
-      with:
-        hugo-version: ${{ env.HUGO_VERSION }}
-        extended: true
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: ${{ secrets.ROLE_TO_ASSUME_ARN_DEV }}
-        role-duration-seconds: 900
-        aws-region: us-east-2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME_ARN_DEV }}
+          role-duration-seconds: 900
+          aws-region: us-east-2
 
-    - name: Update CloudFront Distribution
-      run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" hugo.yaml
+      - name: Update CloudFront Distribution
+        run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" hugo.yaml
 
-    - name: Build
-      run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
-      env:
-        URL: loganmarchione.dev
+      - name: Build
+        run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+        env:
+          URL: loganmarchione.dev
 
-    - name: Overwrite robots.txt (for search engines)
-      run: |
-        : > ./public/robots.txt
-        echo "User-agent: *" >> ./public/robots.txt
-        echo "Disallow: /" >> ./public/robots.txt
+      - name: Overwrite robots.txt (for search engines)
+        run: |
+          : > ./public/robots.txt
+          echo "User-agent: *" >> ./public/robots.txt
+          echo "Disallow: /" >> ./public/robots.txt
 
-    - name: Deploy to S3
-      run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-dev --logLevel info
+      - name: Deploy to S3
+        run: hugo deploy --maxDeletes -1 --invalidateCDN --target loganmarchione-dev --logLevel info
