@@ -14,11 +14,52 @@ cover:
 
 {{% series/s_openwrt %}}
 
+# Update: 2025-07-22
+
+A lot has changed in the world of OpenWrt!
+
+The `opkg` package manager has been [replaced](https://forum.openwrt.org/t/the-future-is-now-opkg-vs-apk/201164) by `apk`, the [same package manager from Alpine Linux](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper). However, `apk` is currently only available on SNAPSHOT builds, so I'm guessing it will come as default in the 25.xx version.
+
+In addition, there is [yet another tool to upgrade OpenWrt installations](https://openwrt.org/docs/guide-user/installation/sysupgrade.owut) called `owut` ([insert xkcd standards comic here](https://xkcd.com/927/)). At the very least, this one seems to be the be-all, end-all upgrade tool. There was [another tool](https://openwrt.org/packages/pkgdata/auc) called `auc` that `owut` replaced, by the way. 
+
+I just performed a patch upgrade on my travel router, from version 24.10.0 to 24.10.2. First, I installed `owut`.
+
+```
+opkg update && opkg install owut
+```
+
+This is the result of checking for an upgrade.
+
+```
+root@OpenWrt_TR:~# owut check
+ASU-Server     https://sysupgrade.openwrt.org
+Upstream       https://downloads.openwrt.org
+Target         ramips/mt7621
+Profile        glinet_gl-mt1300
+Package-arch   mipsel_24kc
+Version-from   24.10.0 r28427-6df0e3d02a (kernel 6.6.73)
+Version-to     24.10.2 r28739-d9340319c6 (kernel 6.6.93)
+95 packages are out-of-date
+It is safe to proceed with an upgrade
+```
+
+To perform the upgrade, I only had to run the command below and the router rebooted.
+
+```
+owut upgrade
+```
+
+I'll have to wait for the next major version (e.g., 25.xx) to see if `owut` can upgrade to that version, or if I'll have to use the [sysupgrade instructions](https://openwrt.org/docs/guide-user/installation/generic.sysupgrade) for that.
+
 # Update: 2025-02-19
 
-I've used this travel router half a dozen times without issue. My initial installation was on version 23.05.2, but I've used a package called `luci-app-attendedsysupgrade` to do minor upgrades from within the OpenWrt web interface, following [these instructions](https://openwrt.org/docs/guide-user/installation/attended.sysupgrade).
+I've used this travel router half a dozen times without issue. My initial installation was on version 23.05.2, but I used a package called `luci-app-attendedsysupgrade` to do patch upgrades from within the OpenWrt web interface, following [these instructions](https://openwrt.org/docs/guide-user/installation/attended.sysupgrade).
 
-OpenWrt just released [version 24.10](https://openwrt.org/releases/24.10/notes-24.10.0), so I used the [sysupgrade instructions](https://openwrt.org/docs/guide-user/installation/generic.sysupgrade) to jump from 23.05.5 to 24.10.0.
+```
+opkg update && opkg install luci-app-attendedsysupgrade
+```
+
+OpenWrt just released [version 24.10](https://openwrt.org/releases/24.10/notes-24.10.0), so I used the [sysupgrade instructions](https://openwrt.org/docs/guide-user/installation/generic.sysupgrade) to jump from 23.05.5 to 24.10.0. Apparently the `luci-app-attendedsysupgrade` package can't do major upgrades.
 
 # Introduction
 
