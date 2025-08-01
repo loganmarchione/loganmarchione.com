@@ -11,6 +11,10 @@ cover:
     relative: false
 ---
 
+# Update: 2025-08-01
+
+There is apparently an [official DokuWiki image](https://hub.docker.com/r/dokuwiki/dokuwiki) now. You should probably use that instead of this method.
+
 # Introduction
 
 I've been trying to get my homelab applications moved from running on VM/LXC to Docker. There's nothing wrong with VMs or LXC containers, but I'm trying to manage fewer servers and "snowflakes" (even though I do my installs with Ansible).
