@@ -16,3 +16,6 @@ $RECYCLE.BIN/
 
 # Vagrant
 .vagrant/
+
+# VSCode
+.vscode/
