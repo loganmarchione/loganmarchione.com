@@ -63,10 +63,14 @@ I must have looked at hundreds or thousands of mini PCs on obscure industrial an
 | [SuperMicro SYS-E100-14AM-H](https://www.supermicro.com/en/products/system/iot/box_pc/sys-e100-14am-h)                                                    | N/A                     | Intel x7835RE (8c/8t, 12W)             | 1x DDR5-4800 SO-DIMM slot (max 16GB)   | No   | 1x M.2 2280 NVMe PCIe Gen3 x1              | 2x Intel i226IT                     | ~$500                  |                                                   |
 | [SuperMicro SYS-E100-14AM-L](https://www.supermicro.com/en/products/system/iot/fanless%20embedded/sys-e100-14am-l)                                        | N/A                     | Intel N97 (4c/4t, 12W)                 | 1x DDR5-4800 SO-DIMM slot (max 16GB)   | No   | 1x M.2 2280 NVMe PCIe Gen3 x1              | 2x Intel i226IT                     | ~$500                  |                                                   |
 
+## Purchase
 
+I also picked up two upgrades:
 
-OM8SGP42048K2-A00
+- a stick of 16GB DDR4 ECC UDIMM VLP (specifically model number MTA18ADF2G72AZ-2G6 from [Memory.net](https://memory.net/product/mta18adf2g72az-2g6-micron-1x-16gb-ddr4-2666-ecc-udimm-pc4-21300v-e-dual-rank-x8-module/)) for $84
+- an industrial-grade 2TB NVMe SSD (specifically model number OM8SGP42048K2-A00 from [Mouser.com](https://www.mouser.com/ProductDetail/Kingston/OM8SGP42048K2-A00?qs=%252BICfH0Hx1eSIkRKcGCyUfA%3D%3D)) for $229
 
+You can see my post [here](/2025/03/pfsense-on-the-opnsense-dec740/#ecc-ram-upgrade) on what the inside of the DEC740 looks like, so I won't re-hash that.
 
 # Conclusion
 
