@@ -57,7 +57,7 @@ Both 8020.net and Misumi have 3D building tools (and they both let you download 
 
 {{< img src="20250814_004.png" alt="IdeaBuilder" >}}
 
-To get an idea of price, below are the parts that are part of my IdeaBuilder 3D design (i.e., this is what you get if you upload the JSON file).
+To get an idea of price, below are the parts that were part of my IdeaBuilder 3D design (i.e., this is what you get if you upload the JSON file).
 
 | Part                            | Link                                            | Quantity | Price (per unit) | Total price       | Comments     |
 |---------------------------------|-------------------------------------------------|----------|------------------|-------------------|--------------|
@@ -94,18 +94,27 @@ I purchased the 20x20 aluminum from Misumi, since the hardware (e.g., corners, s
 | 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 225mm |
 | 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 220mm |
 | 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 215mm |
-|                                 |                                                                         |          | Total            | $58.80            |              |
+| Corner brackets                 | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 16       | $1.43            | $22.88            |              |
+|                                 |                                                                         |          | Total            | $81.68            |              |
 
-I purchased all the hardware from Amazon, since it was much cheaper than anything 8020.net or Misumi had to offer. For some reason, 8020.net doesn't make hidden corner brackets for their 20x20 aluminum, only for larger aluminum profiles. Misumi does make [hidden corner brackets](https://us.misumi-ec.com/vona2/detail/110310741779/?CategorySpec=unitType%3A%3A1%0900000042729%3A%3Ab&Tab=wysiwyg_area_1&curSearch=%7B%22field%22%3A%22%40search%22%2C%22seriesCode%22%3A%22110310741779%22%2C%22innerCode%22%3A%22%22%2C%22sort%22%3A1%2C%22specSortFlag%22%3A0%2C%22allSpecFlag%22%3A0%2C%22page%22%3A1%2C%22pageSize%22%3A%2260%22%2C%22SP100565480%22%3A%22b%22%2C%22jp000191066%22%3A%22mig00000000411894%22%2C%22fixedInfo%22%3A%22innerCode%3AMDMC000009F6CK%7C6%22%7D), but they're really expensive.
+I purchased almost all of the hardware from Amazon, since it was much cheaper than anything 8020.net or Misumi had to offer. First, the hardware to support the shelves. I used hidden corner brackets for the front and back of the rack, since that's where the shelves would load from (regular corner brackets would interfere with the shelves). There are 24 corners total, with 8 using hidden corner brackets and 16 using regular corner brackets. For some reason, 8020.net doesn't make hidden corner brackets for their 20x20 aluminum, only for larger aluminum profiles. Misumi does make [hidden corner brackets](https://us.misumi-ec.com/vona2/detail/110310741779/?CategorySpec=unitType%3A%3A1%0900000042729%3A%3Ab&Tab=wysiwyg_area_1&curSearch=%7B%22field%22%3A%22%40search%22%2C%22seriesCode%22%3A%22110310741779%22%2C%22innerCode%22%3A%22%22%2C%22sort%22%3A1%2C%22specSortFlag%22%3A0%2C%22allSpecFlag%22%3A0%2C%22page%22%3A1%2C%22pageSize%22%3A%2260%22%2C%22SP100565480%22%3A%22b%22%2C%22jp000191066%22%3A%22mig00000000411894%22%2C%22fixedInfo%22%3A%22innerCode%3AMDMC000009F6CK%7C6%22%7D), but they're really expensive.
+
 
 | Part                            | Link                                                                                            | Quantity | Price (per unit) | Total price       | Comments        |
 |---------------------------------|-------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------|
-| M5 spring T-nut (20-pack)       | [Amazon](https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG)        | 1        | $9.79            | $9.79             | For the shelves |
-| M5 washers (75-pack)            | [Amazon](https://www.amazon.com/uxcell-Stainless-Washers-Thickness-Construction/dp/B0F9KN21P1)  | 1        | $8.07            | $8.07             | For the shelves |
-| M5 x 8.00mm hex screw (50-pack) | [Amazon](https://www.amazon.com/Alloy-Steel-Socket-Screws-Black/dp/B015A34BUQ)                  | 1        | $8.89            | $8.89             | For the shelves |
-| Hidden corner bracket (10-pack) | [TODO]()                                                                                        | 1        | $9.07            | $                 | For the corners |
-| 20x20 endcaps (10-pack)         | [Amazon](https://www.amazon.com/uxcell-Extruded-Aluminum-European-Extrusion/dp/B0DM5Q7FDN)      | 1        | $5.99            | $5.99             |                 |
-|                                 |                                                                                                 |          | Total            | $                 |                 |
+| M5 spring T-nut (20-pack)       | [Amazon](https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG)        | 1        | $9.79            | $9.79             |                 |
+| M5 washers (75-pack)            | [Amazon](https://www.amazon.com/uxcell-Stainless-Washers-Thickness-Construction/dp/B0F9KN21P1)  | 1        | $8.07            | $8.07             |                 |
+| M5 x 8.00mm hex screw (50-pack) | [Amazon](https://www.amazon.com/Alloy-Steel-Socket-Screws-Black/dp/B015A34BUQ)                  | 1        | $8.89            | $8.89             |                 |
+| Hidden corner bracket (24-pack) | [Amazon](https://www.amazon.com/L-Shape-Interior-Connector-Aluminum-Extrusion/dp/B0D8LGH99N)    | 1        | $12.99           | $12.99            |                 |
+|                                 |                                                                                                 |          | Total            | $39.74            |                 |
+
+Next is the hardware for the regular corner brackets.
+
+| Part                            | Link                                                                                            | Quantity | Price (per unit) | Total price       | Comments        |
+|---------------------------------|-------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------|
+| M5 T-nut (50-pack)              | [Amazon](https://www.amazon.com/uxcell-Nuts-50pcs-Fastener-Extrusion/dp/B0C9QQNBPR)             | 1        | $8.99            | $8.99             |                 |
+| M5 x 8.00mm hex screw (50-pack) | [Amazon](https://www.amazon.com/uxcell-M5x8mm-Socket-Button-Screws/dp/B09R3R36BV)               | 1        | $7.79            | $7.79             |                 |
+|                                 |                                                                                                 |          | Total            | $16.78            |                 |
 
 I also added these 1U parts.
 
