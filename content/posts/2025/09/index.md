@@ -19,6 +19,11 @@ I built a new rack out of 20x20mm aluminum. Read more to build your own!
 
 # Introduction
 
+:warning: WARNING :warning:
+
+- This post has embedded 3D models (if you have WebGL enabled), so they might take a few seconds to load
+- The 3D models are available to download, but they're only accurate to the nearest whole millimeter
+
 I've been using my home-made [mini-rack](/2021/01/homelab-10-mini-rack/) for a few years now. My main complaint is that the shelves *themselves* are the horizontal structure on the front face of the unit. If I start removing them, the unit flexes.
 
 {{< img src="20220915_001.jpeg" alt="mini-rack" >}}
@@ -49,11 +54,11 @@ I've been seeing a ton of racks made of extruded aluminum. I guess I'm late on t
 
 {{< figure src="20250814_003.jpg" width="25%" loading="lazy" alt="20x40 aluminum" attr="20x40 aluminum from 8020.net" attrlink="https://8020.net/20-2040.html">}}
 
-From what I can tell, [8020.net](https://8020.net) and [Misumi](https://us.misumi-ec.com/) are the biggest and/or most popular distributors, though you can also get this stuff cheap on Amazon and AliExpress. What's nice is that since aluminum is a relatively soft metal, you can cut it with a bandsaw or chop saw. I don't have one of those, but both 8020.net and Misumi will cut it for you (for a small fee).
-
 I decided on 20x20 aluminum rails. They are relatively small, but I have seen rails as small as 15x15 or 10x10. I decided to mount the shelves directly to the aluminum rails (in-place of [traditional rack rails](https://www.penn-elcom.com/us/4u-rack-rail-with-full-holes-0-08in-thick-r0863-2mm-04)).
 
-Both 8020.net and Misumi have 3D building tools (and they both let you download 3D models of their products for use in other tools). 8020.net has the browser-based [IdeaBuilder](https://ideabuilder.io/) that lets you model *almost* anything in their catalog, while Misumi has [Frames](https://us.misumi-ec.com/service/promotion/frames/) (I wasn't able to use this because it is Windows-only). In IdeaBuilder, you can save your model to the cloud or a local file, and then upload the Bill of Materials (BoM) to your cart to get a list of all the parts you need. Below is what I built in just a few minutes in IdeaBuilder. If you're interested, [here is the JSON file](/2025/09/homelab-10-mini-rack-v2/v2.json) that you can upload to IdeaBuilder to get started. 
+From what I can tell, [8020.net](https://8020.net) and [Misumi](https://us.misumi-ec.com/) are the biggest and/or most popular distributors, though you can also get this stuff cheap on Amazon and AliExpress. What's nice is that since aluminum is a relatively soft metal, you can cut it with a bandsaw or chop saw. I don't have one of those, but both 8020.net and Misumi will cut it for you (for a small fee).
+
+Both 8020.net and Misumi have 3D building tools (and they both let you download 3D models of their products for use in other tools). 8020.net has the browser-based [IdeaBuilder](https://ideabuilder.io/) that lets you model *almost* anything in their catalog, while Misumi has [Frames](https://us.misumi-ec.com/service/promotion/frames/) (I wasn't able to use this because it is Windows-only). In IdeaBuilder, you can save your model to the cloud or a local file, and then upload the Bill of Materials (BoM) to your cart to get a list of all the parts you need. Below is what I built in just a few minutes in IdeaBuilder. If you're interested, [here is the JSON file](/2025/09/homelab-10-mini-rack-v2/v2.json) of the model below that you can upload to IdeaBuilder to get started (this was not my final design/dimensions).
 
 {{< img src="20250814_004.png" alt="IdeaBuilder" >}}
 
@@ -69,15 +74,73 @@ To get an idea of price, below are the parts that were part of my IdeaBuilder 3D
 | M5 T-nut                        | [8020.net](https://8020.net/14122.html)         | 48       | $0.35            | $16.80            |              |
 |                                 |                                                 |          | Total            | $216.88           |              |
 
-I also built the same rack (without hardware) using Misumi's 20x20 aluminum in [Tinkercad](https://www.tinkercad.com/) (this is a 3D model, so you should be able to rotate/zoom below). [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi.stl) if you want to download it.
-
-{{< threejs-stl version="0.179.1" id="mini-rackv2" width="600" height="600" color="#a7adb1ff" background="#e9e9e9ff" rotateX="-90" rotateY="0" rotateZ="0" center="true" stl="tinkercad-misumi.stl" >}}
-
-An important note is that not all 20x20 aluminum is the same. In the examples below, both are 20mm on all four sides, but the 8020.net aluminum "slot" opening is only 5.26mm wide, while the Misumi slot is 6mm wide. For example, [these](https://www.amazon.com/uxcell-Interior-Connector-Aluminum-Extrusion/dp/B07VP59DY5) hidden corner brackets didn't fit into the 20x20 aluminum from 8020.net, since the "slot" is 5.26mm, not a true 6mm, so keep that in mind.
+An important note is that not all 20x20 aluminum is the same. In the examples below, both are 20mm on all four sides, but the 8020.net aluminum "slot" opening is only 5.26mm wide, while the Misumi slot is 6mm wide. For example, [these](https://www.amazon.com/uxcell-Interior-Connector-Aluminum-Extrusion/dp/B07VP59DY5) hidden corner brackets didn't fit into the 20x20 aluminum from 8020.net, since the "slot" is 5.26mm, not a full 6mm. Because of that, I went with Misumi rails, since they have a wider slot, which would accept more third-party parts.
 
 {{< figure src="20250901_001.jpg" width="50%" loading="lazy" alt="20x20 aluminum" attr="20x20 aluminum from 8020.net" attrlink="https://8020.net/20-2020.html">}}
 
 {{< figure src="20250901_002.jpg" width="50%" loading="lazy" alt="20x20 aluminum" attr="20x20 aluminum from Misumi.com" attrlink="https://us.misumi-ec.com/vona2/detail/110302683830/">}}
+
+# 3D model
+
+I've been meaning to learn some basic 3D modeling, so this was a good excuse. I didn't need anything complicated like [Autodesk Fusion360](https://www.autodesk.com/products/fusion-360/personal) or [FreeCAD](https://www.freecad.org/). However, an Autodesk product called [Tinkercad](https://www.tinkercad.com/) fit the bill perfectly. The learning curve was very easy and they have great [tutorials](https://www.tinkercad.com/learn) to get you started.
+
+I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkercad (this is a 3D model, so you should be able to rotate/zoom below). [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi.stl) if you want to download it.
+
+{{< threejs-stl
+    version="0.179.1"
+    id="mini-rackv2"
+    width="600"
+    height="600"
+    color="#a7adb1ff"
+    background="#e9e9e9ff"
+    rotateX="-90"
+    rotateY="0"
+    rotateZ="0"
+    center="true"
+    showEdges="true"
+    edgeColor="#000000ff"
+    edgeThreshold="5"
+    stl="tinkercad-misumi.stl" >}}
+
+For the next two models, there was no pre-existing model to import, so I had to break out the calipers and create these by hand. They're not perfect, everything is only accurate to the nearest whole millimeter.
+
+I modeled the shelves I was going to use. [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad_deskpi_rackmate_1u_shelf.stl) if you want to download it.
+
+{{< threejs-stl
+    version="0.179.1"
+    id="1u shelf"
+    width="600"
+    height="600"
+    color="#a7adb1ff"
+    background="#e9e9e9ff"
+    rotateX="-90"
+    rotateY="0"
+    rotateZ="0"
+    center="true"
+    showEdges="true"
+    edgeColor="#000000ff"
+    edgeThreshold="5"
+    stl="tinkercad_deskpi_rackmate_1u_shelf.stl" >}}
+
+I also modeled the patch panel. [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad_navepoint_1u_patch_panel.stl) if you want to download it.
+
+{{< threejs-stl
+    version="0.179.1"
+    id="1u patch panel"
+    width="600"
+    height="600"
+    color="#a7adb1ff"
+    background="#e9e9e9ff"
+    rotateX="-90"
+    rotateY="0"
+    rotateZ="0"
+    center="true"
+    showEdges="true"
+    edgeColor="#000000ff"
+    edgeThreshold="5"
+    stl="tinkercad_navepoint_1u_patch_panel.stl" >}}
+
+
 
 # Presenting: The mini-rack, v2
 

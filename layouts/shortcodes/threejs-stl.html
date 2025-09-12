@@ -12,6 +12,9 @@
 {{ $rotateX := .Get "rotateX" | default "0" }}
 {{ $rotateY := .Get "rotateY" | default "0" }}
 {{ $rotateZ := .Get "rotateZ" | default "0" }}
+{{ $showEdges := .Get "showEdges" | default "true" }}
+{{ $edgeColor := .Get "edgeColor" | default "#333333" }}
+{{ $edgeThreshold := .Get "edgeThreshold" | default "15" }}
 
 <!-- Create a container for rendering the scene -->
 <div id="threejs-container-{{ $id }}" style="width: {{ $width }}px; height: {{ $height }}px; border: 1px solid #ccc; margin: 20px 0;"></div>
@@ -120,17 +123,20 @@ loader.load('{{ $stl }}', function (geometry) {
     const size = box.getSize(new THREE.Vector3()).length();
     const center = box.getCenter(new THREE.Vector3());
     
-    // Create material
     // Handle colors - truncate to 6 chars if longer (remove alpha channel)
     const objectColor = '{{ $color }}'.length > 7 ? '{{ $color }}'.substring(0, 7) : '{{ $color }}';
+    const edgeColorValue = '{{ $edgeColor }}'.length > 7 ? '{{ $edgeColor }}'.substring(0, 7) : '{{ $edgeColor }}';
     console.log('Object color:', objectColor);
+    console.log('Edge color:', edgeColorValue);
+
+    // Create material for the solid mesh
     const material = new THREE.MeshPhongMaterial({ 
         color: objectColor,
         shininess: 100,
         side: THREE.DoubleSide
     });
     
-    // Create mesh
+    // Create the main mesh
     const mesh = new THREE.Mesh(geometry, material);
     
     // Apply any rotation specified in parameters
@@ -142,22 +148,39 @@ loader.load('{{ $stl }}', function (geometry) {
     mesh.receiveShadow = true;
     scene.add(mesh);
     
+    {{ if eq $showEdges "true" }}
+    // Create edge geometry to show surface boundaries
+    const edges = new THREE.EdgesGeometry(geometry, {{ $edgeThreshold }});
+    const edgeMaterial = new THREE.LineBasicMaterial({
+        color: edgeColorValue,
+        linewidth: 1
+    });
+    const edgeLines = new THREE.LineSegments(edges, edgeMaterial);
+
+    // Apply the same rotation to the edge lines
+    edgeLines.rotation.x = {{ $rotateX }} * Math.PI / 180;
+    edgeLines.rotation.y = {{ $rotateY }} * Math.PI / 180;
+    edgeLines.rotation.z = {{ $rotateZ }} * Math.PI / 180;
+
+    scene.add(edgeLines);
+    {{ end }}
+
     // Position camera - start further back to avoid clipping
     camera.position.copy(center);
     camera.position.x += size * 1.5;
     camera.position.y += size * 0.5;
     camera.position.z += size * 1.5;
     camera.lookAt(center);
-    
+
     // Update camera planes based on object size
     camera.near = size * 0.01;
     camera.far = size * 10;
     camera.updateProjectionMatrix();
-    
+
     // Update controls
     controls.target.copy(center);
     controls.update();
-    
+
 }, function (progress) {
     // Loading progress
     console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
