@@ -17,6 +17,8 @@ cover:
 
 I built a new rack out of 20x20mm aluminum. Read more to build your own!
 
+TODO: add picture here
+
 # Introduction
 
 :warning: WARNING :warning:
@@ -44,7 +46,7 @@ Also, in my last post, I said:
 
 > I know that the [imperial system](https://en.wikipedia.org/wiki/Imperial_units) of units is inferior to the metric system, but these are 10-inch racks, not 254mm racks :man_shrugging:
 
-Well, I'm eating my words now. Because of the small dimensions I'm working with, I decided to do all of my measurements in millimeters. With that said, the holes on the [shelves](https://deskpi.com/products/deskpi) I'm using are 235mm center-to-center, so that was my basis for the mini-rack.
+Well, I'm eating my words now. Because of the small dimensions I'm working with, I decided to do all of my measurements in millimeters. With that said, the holes on the [shelves](https://www.amazon.com/RackMate-Accessories-Cantilever-Equipment-Rackmate/dp/B0DWMFR111) I'm using are 237mm center-to-center, so that was my basis for the mini-rack.
 
 # Design
 
@@ -54,7 +56,7 @@ I've been seeing a ton of racks made of extruded aluminum. I guess I'm late on t
 
 {{< figure src="20250814_003.jpg" width="25%" loading="lazy" alt="20x40 aluminum" attr="20x40 aluminum from 8020.net" attrlink="https://8020.net/20-2040.html">}}
 
-I decided on 20x20 aluminum rails. They are relatively small, but I have seen rails as small as 15x15 or 10x10. I decided to mount the shelves directly to the aluminum rails (in-place of [traditional rack rails](https://www.penn-elcom.com/us/4u-rack-rail-with-full-holes-0-08in-thick-r0863-2mm-04)).
+I decided on 20x20 aluminum rails. They are relatively small, but I have seen rails as small as 15x15mm or 10x10mm. I decided to mount the shelves directly to the aluminum rails (in-place of [traditional rack rails](https://www.penn-elcom.com/us/4u-rack-rail-with-full-holes-0-08in-thick-r0863-2mm-04)).
 
 From what I can tell, [8020.net](https://8020.net) and [Misumi](https://us.misumi-ec.com/) are the biggest and/or most popular distributors, though you can also get this stuff cheap on Amazon and AliExpress. What's nice is that since aluminum is a relatively soft metal, you can cut it with a bandsaw or chop saw. I don't have one of those, but both 8020.net and Misumi will cut it for you (for a small fee).
 
@@ -62,29 +64,17 @@ Both 8020.net and Misumi have 3D building tools (and they both let you download 
 
 {{< img src="20250814_004.png" alt="IdeaBuilder" >}}
 
-To get an idea of price, below are the parts that were part of my IdeaBuilder 3D design (i.e., this is what you get if you upload the JSON file).
-
-| Part                            | Link                                            | Quantity | Price (per unit) | Total price       | Comments     |
-|---------------------------------|-------------------------------------------------|----------|------------------|-------------------|--------------|
-| 20x20 aluminum                  | [8020.net](https://8020.net/20-2020.html)       | 4        | $5.35            | $21.40            | Cut to 225mm |
-| 20x20 aluminum                  | [8020.net](https://8020.net/20-2020.html)       | 4        | $5.29            | $21.16            | Cut to 220mm |
-| 20x20 aluminum                  | [8020.net](https://8020.net/20-2020.html)       | 4        | $5.24            | $20.96            | Cut to 215mm |
-| 2-hole corner bracket           | [8020.net](https://8020.net/20-4119.html)       | 24       | $4.67            | $112.08           |              |
-| M5 x 8.00mm screw               | [8020.net](https://8020.net/11-5308.html)       | 48       | $0.51            | $24.48            |              |
-| M5 T-nut                        | [8020.net](https://8020.net/14122.html)         | 48       | $0.35            | $16.80            |              |
-|                                 |                                                 |          | Total            | $216.88           |              |
-
 An important note is that not all 20x20 aluminum is the same. In the examples below, both are 20mm on all four sides, but the 8020.net aluminum "slot" opening is only 5.26mm wide, while the Misumi slot is 6mm wide. For example, [these](https://www.amazon.com/uxcell-Interior-Connector-Aluminum-Extrusion/dp/B07VP59DY5) hidden corner brackets didn't fit into the 20x20 aluminum from 8020.net, since the "slot" is 5.26mm, not a full 6mm. Because of that, I went with Misumi rails, since they have a wider slot, which would accept more third-party parts.
 
 {{< figure src="20250901_001.jpg" width="50%" loading="lazy" alt="20x20 aluminum" attr="20x20 aluminum from 8020.net" attrlink="https://8020.net/20-2020.html">}}
 
 {{< figure src="20250901_002.jpg" width="50%" loading="lazy" alt="20x20 aluminum" attr="20x20 aluminum from Misumi.com" attrlink="https://us.misumi-ec.com/vona2/detail/110302683830/">}}
 
-# 3D model
+## 3D model
 
 I've been meaning to learn some basic 3D modeling, so this was a good excuse. I didn't need anything complicated like [Autodesk Fusion360](https://www.autodesk.com/products/fusion-360/personal) or [FreeCAD](https://www.freecad.org/). However, an Autodesk product called [Tinkercad](https://www.tinkercad.com/) fit the bill perfectly. The learning curve was very easy and they have great [tutorials](https://www.tinkercad.com/learn) to get you started.
 
-I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkercad (this is a 3D model, so you should be able to rotate/zoom below). [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi.stl) if you want to download it.
+I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkercad (this is a 3D model, so you should be able to rotate/zoom below). The Tinkercad link is [here](https://www.tinkercad.com/things/jxaDc5besOI-mini-rack-v2), and the STL file is [here](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi_rack_v2.stl) if you want to download it. To save weight and make the rack shorter, I removed the two top cross-bars at the front and back (since the rack is only 4U, I don't need that much structural stability).
 
 {{< threejs-stl
     version="0.179.1"
@@ -100,11 +90,11 @@ I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkerc
     showEdges="true"
     edgeColor="#000000ff"
     edgeThreshold="5"
-    stl="tinkercad-misumi.stl" >}}
+    stl="tinkercad-misumi_rack_v2.stl" >}}
 
-For the next two models, there was no pre-existing model to import, so I had to break out the calipers and create these by hand. They're not perfect, everything is only accurate to the nearest whole millimeter.
+For the next two items, there was no pre-existing model to import, so I had to break out the calipers and create these by hand. They're not perfect, everything is only accurate to the nearest whole millimeter.
 
-I modeled the shelves I was going to use. [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad_deskpi_rackmate_1u_shelf.stl) if you want to download it.
+I modeled the shelves I was going to use (Tinkercad link [here](https://www.tinkercad.com/things/37CqfJjxWGh-deskpi-rackmate-10-inch-1u-rack-shelf), STL file [here](/2025/09/homelab-10-mini-rack-v2/tinkercad_deskpi_rackmate_1u_shelf.stl)).
 
 {{< threejs-stl
     version="0.179.1"
@@ -122,7 +112,7 @@ I modeled the shelves I was going to use. [Here is the STL file](/2025/09/homela
     edgeThreshold="5"
     stl="tinkercad_deskpi_rackmate_1u_shelf.stl" >}}
 
-I also modeled the patch panel. [Here is the STL file](/2025/09/homelab-10-mini-rack-v2/tinkercad_navepoint_1u_patch_panel.stl) if you want to download it.
+I also modeled the patch panel (Tinkercad link [here](https://www.tinkercad.com/things/50AKhJJ7L3K-navepoint-10-inch-1u-12-port-modular-patch-panel), STL file [here](/2025/09/homelab-10-mini-rack-v2/tinkercad_navepoint_1u_patch_panel.stl)).
 
 {{< threejs-stl
     version="0.179.1"
@@ -140,57 +130,51 @@ I also modeled the patch panel. [Here is the STL file](/2025/09/homelab-10-mini-
     edgeThreshold="5"
     stl="tinkercad_navepoint_1u_patch_panel.stl" >}}
 
-
-
 # Presenting: The mini-rack, v2
 
-## Pictures
+
+This was my final 3D design.
+
+TODO: add STL here
+
+And this was the finished product! Fit together like a glove (chef's kiss).
 
 TODO: add pictures here
 
 ## Parts
 
-I purchased the 20x20 aluminum from Misumi, since the hardware (e.g., corners, screws, T-nuts, etc...) was too expensive from their catalog.
-
-| Part                            | Link                                                                    | Quantity | Price (per unit) | Total price       | Comments     |
-|---------------------------------|-------------------------------------------------------------------------|----------|------------------|-------------------|--------------|
-| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 225mm |
-| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 220mm |
-| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 4        | $4.90            | $19.60            | Cut to 215mm |
-| Corner brackets                 | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)       | 16       | $1.43            | $22.88            |              |
-|                                 |                                                                         |          | Total            | $81.68            |              |
-
-I purchased almost all of the hardware from Amazon, since it was much cheaper than anything 8020.net or Misumi had to offer. First, the hardware to support the shelves. I used hidden corner brackets for the front and back of the rack, since that's where the shelves would load from (regular corner brackets would interfere with the shelves). There are 24 corners total, with 8 using hidden corner brackets and 16 using regular corner brackets. For some reason, 8020.net doesn't make hidden corner brackets for their 20x20 aluminum, only for larger aluminum profiles. Misumi does make [hidden corner brackets](https://us.misumi-ec.com/vona2/detail/110310741779/?CategorySpec=unitType%3A%3A1%0900000042729%3A%3Ab&Tab=wysiwyg_area_1&curSearch=%7B%22field%22%3A%22%40search%22%2C%22seriesCode%22%3A%22110310741779%22%2C%22innerCode%22%3A%22%22%2C%22sort%22%3A1%2C%22specSortFlag%22%3A0%2C%22allSpecFlag%22%3A0%2C%22page%22%3A1%2C%22pageSize%22%3A%2260%22%2C%22SP100565480%22%3A%22b%22%2C%22jp000191066%22%3A%22mig00000000411894%22%2C%22fixedInfo%22%3A%22innerCode%3AMDMC000009F6CK%7C6%22%7D), but they're really expensive.
-
+I purchased the 20x20 aluminum from Misumi, since they could cut it for me.
 
 | Part                            | Link                                                                                            | Quantity | Price (per unit) | Total price       | Comments        |
 |---------------------------------|-------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------|
-| M5 spring T-nut (20-pack)       | [Amazon](https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG)        | 1        | $9.79            | $9.79             |                 |
-| M5 washers (75-pack)            | [Amazon](https://www.amazon.com/uxcell-Stainless-Washers-Thickness-Construction/dp/B0F9KN21P1)  | 1        | $8.07            | $8.07             |                 |
-| M5 x 8.00mm hex screw (50-pack) | [Amazon](https://www.amazon.com/Alloy-Steel-Socket-Screws-Black/dp/B015A34BUQ)                  | 1        | $8.89            | $8.89             |                 |
-| Hidden corner bracket (24-pack) | [Amazon](https://www.amazon.com/L-Shape-Interior-Connector-Aluminum-Extrusion/dp/B0D8LGH99N)    | 1        | $12.99           | $12.99            |                 |
-|                                 |                                                                                                 |          | Total            | $39.74            |                 |
+| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 225mm    |
+| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 200mm    |
+| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 217mm    |
+| Corner brackets                 | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110300438930/?ProductCode=HBLSS5)            | 16       | $1.43            | $22.88            |                 |
+| End caps                        | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110300440510/?ProductCode=HFCL5-2020-B)      | 8        | $2.55            | $20.40            |                 | 
+|                                 |                                                                                                 |          | Total            | $102.08           |                 |
 
-Next is the hardware for the regular corner brackets.
+I purchased almost all of the hardware (e.g., screws, T-nuts, etc...) from Amazon, since it was much cheaper than anything Misumi had to offer. I used hidden corner brackets for the front and back of the rack, since that's where the shelves would load from (regular corner brackets would interfere with the shelves). Misumi makes [hidden corner brackets](https://us.misumi-ec.com/vona2/detail/110310741779/?ProductCode=SH-SHBLBS5), but they're really expensive.
 
 | Part                            | Link                                                                                            | Quantity | Price (per unit) | Total price       | Comments        |
 |---------------------------------|-------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------|
+| M5 spring T-nut (20-pack)       | [Amazon](https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG)        | 1        | $9.79            | $9.79             | For the shelves |
+| M5 washers (75-pack)            | [Amazon](https://www.amazon.com/uxcell-Stainless-Washers-Thickness-Construction/dp/B0F9KN21P1)  | 1        | $8.07            | $8.07             | For the shelves |
+| Hidden corner bracket (24-pack) | [Amazon](https://www.amazon.com/L-Shape-Interior-Connector-Aluminum-Extrusion/dp/B0D8LGH99N)    | 1        | $12.99           | $12.99            | For the shelves |
 | M5 T-nut (50-pack)              | [Amazon](https://www.amazon.com/uxcell-Nuts-50pcs-Fastener-Extrusion/dp/B0C9QQNBPR)             | 1        | $8.99            | $8.99             |                 |
 | M5 x 8.00mm hex screw (50-pack) | [Amazon](https://www.amazon.com/uxcell-M5x8mm-Socket-Button-Screws/dp/B09R3R36BV)               | 1        | $7.79            | $7.79             |                 |
-|                                 |                                                                                                 |          | Total            | $16.78            |                 |
+|                                 |                                                                                                 |          | Total            | $47.63            |                 |
 
 I also added these 1U parts.
 
-| Part                         | Link                                                                                               | Quantity | Price (per unit) | Total price       | Comments     |
-|------------------------------|----------------------------------------------------------------------------------------------------|----------|------------------|-------------------|--------------|
-| 1U shelves (2-pack)          | [Amazon](https://www.amazon.com/RackMate-Accessories-Cantilever-Equipment-Rackmate/dp/B0DWMFR111)  | 2        | $36.54           | $73.08            | 4 shelves    |
-| 1U patch panel (12-port)     | [Amazon](https://www.amazon.com/NavePoint-12-Port-Modular-Patch-Panel/dp/B0CH1H22VY)               | 1        | $27.59           | $27.59            |              |
-| Cat6A couplers (12-pack)     | [Amazon](https://www.amazon.com/trueCABLE-Keystone-Unshielded-Performance-Compliant/dp/B0916BNH9B) | 1        | $22.11           | $22.11            |              |
-|                              |                                                                                                    |          | Total            | $122.78           |              |
+| Part                         | Link                                                                                               | Quantity | Price (per unit) | Total price       | Comments        |
+|------------------------------|----------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------|
+| 1U shelves (2-pack)          | [Amazon](https://www.amazon.com/RackMate-Accessories-Cantilever-Equipment-Rackmate/dp/B0DWMFR111)  | 2        | $36.54           | $73.08            | 4 shelves total |
+| 1U patch panel (12-port)     | [Amazon](https://www.amazon.com/NavePoint-12-Port-Modular-Patch-Panel/dp/B0CH1H22VY)               | 1        | $27.59           | $27.59            |                 |
+| Cat6A couplers (12-pack)     | [Amazon](https://www.amazon.com/trueCABLE-Keystone-Unshielded-Performance-Compliant/dp/B0916BNH9B) | 1        | $22.11           | $22.11            |                 |
+|                              |                                                                                                    |          | Total            | $122.78           |                 |
 
-In total, that's $ in new parts for the rack and hardware.
-
-I also took this opportunity to upgrade from a UniFi [USW-Lite-8-POE](https://store.ui.com/us/en/category/switching-utility/products/usw-lite-8-poe) to a [USW-Lite-16-POE](https://store.ui.com/us/en/category/switching-utility/products/usw-lite-16-poe).
+In total, that's $272.49 in new parts for the rack, hardware, shelves, and patch panel.
 
 # Conclusion
 
