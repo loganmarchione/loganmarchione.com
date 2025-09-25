@@ -49,7 +49,7 @@ Also, in my last post, I said:
 
 > I know that the [imperial system](https://en.wikipedia.org/wiki/Imperial_units) of units is inferior to the metric system, but these are 10-inch racks, not 254mm racks :man_shrugging:
 
-Well, I'm eating my words now. Because of the small dimensions I'm working with, I decided to do all of my measurements in millimeters. With that said, the holes on the [shelves](https://www.amazon.com/RackMate-Accessories-Cantilever-Equipment-Rackmate/dp/B0DWMFR111) I'm using are 237mm center-to-center, and 1U is 45mm tall, so that was my basis for the mini-rack.
+Well, I'm eating my words now. Because of the small dimensions I'm working with, I decided to do all of my measurements in millimeters. With that said, the holes on the [shelves](https://www.amazon.com/RackMate-Accessories-Cantilever-Equipment-Rackmate/dp/B0DWMFR111) I'm using are 237mm center-to-center, and 1U is 45mm tall, so those measurements were the basis for the mini-rack.
 
 # Design
 
@@ -75,9 +75,9 @@ An important note is that not all 20x20 aluminum is the same. In the examples be
 
 ## 3D model
 
-I've been meaning to learn some basic 3D modeling, so this was a good excuse. I didn't need anything complicated like [Autodesk Fusion360](https://www.autodesk.com/products/fusion-360/personal) or [FreeCAD](https://www.freecad.org/). However, an Autodesk product called [Tinkercad](https://www.tinkercad.com/) fit the bill perfectly. The learning curve was very easy and they have great [tutorials](https://www.tinkercad.com/learn) to get you started.
+I've been meaning to learn some basic 3D modeling, so this was a good excuse. I didn't need anything complicated like [Autodesk Fusion360](https://www.autodesk.com/products/fusion-360/personal) or [FreeCAD](https://www.freecad.org/). Instead, another Autodesk product called [Tinkercad](https://www.tinkercad.com/) fit the bill perfectly. The learning curve was very easy and they have great [tutorials](https://www.tinkercad.com/learn) to get you started.
 
-I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkercad (this is a 3D model, so you should be able to rotate/zoom below). The Tinkercad link is [here](https://www.tinkercad.com/things/jxaDc5besOI-mini-rack-v2), and the STL file is [here](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi_rack_v2.stl) if you want to download it. To save weight and make the rack shorter, I removed the two top cross-bars at the front and back (since the rack is only 4U, I don't need that much structural stability).
+I built the new rack (without hardware) using Misumi's 20x20 aluminum in Tinkercad (this is a 3D model, so you should be able to rotate/zoom below). The Tinkercad link is [here](https://www.tinkercad.com/things/jxaDc5besOI-mini-rack-v2), and the STL file is [here](/2025/09/homelab-10-mini-rack-v2/tinkercad-misumi_rack_v2.stl) if you want to download it. To save weight and make the rack shorter, I removed the two top rails at the front and back (since the rack is only 4U, I don't need that much structural stability).
 
 {{< threejs-stl
     version="0.179.1"
@@ -183,10 +183,10 @@ I purchased the 20x20 aluminum from Misumi, since they could cut it for me.
 |---------------------------------|-------------------------------------------------------------------------------------------------|----------|------------------|-------------------|-----------------------------|
 | 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 225mm for "depth"    |
 | 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 215mm for "height"   |
-| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 4        | $4.90            | $19.60            | Cut to 217mm for "width"    |
+| 20x20 aluminum                  | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110302683830/)                               | 2        | $4.90            | $9.80             | Cut to 217mm for "width"    |
 | Corner brackets                 | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110300438930/?ProductCode=HBLSS5)            | 16       | $1.43            | $22.88            |                             |
 | End caps                        | [Misumi.com](https://us.misumi-ec.com/vona2/detail/110300440510/?ProductCode=HFCL5-2020-B)      | 8        | $2.55            | $20.40            |                             |
-|                                 |                                                                                                 |          | Total            | $102.08           |                             |
+|                                 |                                                                                                 |          | Total            | $92.28            |                             |
 
 I purchased almost all of the hardware (e.g., screws, T-nuts, etc...) from Amazon, since it was much cheaper than anything Misumi had to offer. I used hidden corner brackets for the front and back of the rack, since that's where the shelves would load from (regular corner brackets would interfere with the shelves). Misumi makes [hidden corner brackets](https://us.misumi-ec.com/vona2/detail/110310741779/?ProductCode=SH-SHBLBS5), but they're really expensive. Be warned, however, that the hidden corner brackets from Amazon are cast alumium, so they're really not able to take a ton of force.
 
@@ -208,13 +208,13 @@ I also added these 1U parts.
 | Cat6A couplers (12-pack)     | [Amazon](https://www.amazon.com/trueCABLE-Keystone-Unshielded-Performance-Compliant/dp/B0916BNH9B) | 1        | $22.11           | $22.11            |                 |
 |                              |                                                                                                    |          | Total            | $122.78           |                 |
 
-In total, that's $272.49 in new parts for the rack, hardware, shelves, and patch panel. That is more expensive than the [DeskPi Rack Mate T0](https://deskpi.com/products/deskpi-rackmate-t1-rackmount-10-inch-4u-server-cabinet-for-network-servers-audio-and-video-equipment) at $79.99, but this price includes the shelves and patch panel.
+In total, that's $262.69 in new parts for the rack, hardware, shelves, and patch panel. That is more expensive than the [DeskPi Rack Mate T0](https://deskpi.com/products/deskpi-rackmate-t1-rackmount-10-inch-4u-server-cabinet-for-network-servers-audio-and-video-equipment) at $79.99, but this price includes the shelves and patch panel.
 
 # Conclusion
 
 What would I do differently next time?
 
-First, I would buy a small chop saw. Each cut from 8020.net is $2.87, so that's $34.44 on cuts alone. For the same price, I could buy a mini cut-off saw, purchase 20x20 aluminum in bulk from Amazon, then cut it myself.
+First, I would buy a small chop saw. Each cut from 8020.net is $2.87, so that's $28.70 on cuts alone. For the same price, I could buy a mini cut-off saw, purchase 20x20 aluminum in bulk from Amazon, then cut it myself.
 
 {{< figure src="20250925_010.jpg" width="50%" loading="lazy" alt="mini cut-off saw" attr="Mini Cut-Off Saw from Harbor Freight" attrlink="https://www.harborfreight.com/09-amp-2-in-mini-cut-off-saw-70478.html">}}
 
@@ -223,7 +223,7 @@ Second, I'd probably use the spring T-nuts everywhere. The little spring-load ba
 
 {{< figure src="20250925_008.jpg" width="50%" loading="lazy" alt="m5 spring t-nut t0" attr="M5 spring T-nut from Amazon" attrlink="https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG">}}
 
-Third, since I purchased four shelves, and the shelf that the rack sits on is open in the back, I would mount an extra shelf on the back of the rack to give me more space for one more item.
+Third, since I purchased four shelves, and the wooden shelf that the rack sits on is open in the back, I would mount an extra shelf on the back of the rack to give me more space for one more item.
 
 {{< img src="20250925_009.png" alt="mini-rack assembled with extra shelf" >}}
 
