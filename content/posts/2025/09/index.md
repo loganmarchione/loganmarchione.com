@@ -219,7 +219,7 @@ First, I would buy a small chop saw. Each cut from 8020.net is $2.87, so that's 
 {{< figure src="20250925_010.jpg" width="50%" loading="lazy" alt="mini cut-off saw" attr="Mini Cut-Off Saw from Harbor Freight" attrlink="https://www.harborfreight.com/09-amp-2-in-mini-cut-off-saw-70478.html">}}
 
 
-Second, I'd probably use the spring T-nuts everywhere. The little spring-load ball detent holds the nuts in place, so they don't slide around in the rail slots.
+Second, I'd probably use spring T-nuts everywhere. The little spring-loaded ball detent holds the nuts in place, so they don't slide around in the rail slots.
 
 {{< figure src="20250925_008.jpg" width="50%" loading="lazy" alt="m5 spring t-nut t0" attr="M5 spring T-nut from Amazon" attrlink="https://www.amazon.com/uxcell-Elastic-Aluminum-Extrusion-Profile/dp/B07KWV51VG">}}
 
