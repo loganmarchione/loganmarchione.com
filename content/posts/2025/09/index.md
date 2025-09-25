@@ -169,7 +169,7 @@ I had to add an extra set of corner brackets for the top rails, since with only 
 
 {{< img src="20250925_005.jpeg" alt="mini-rack assembled" >}}
 
-Here is the rack loaded with gear. I purposely made the vertical aluminum rails a little too tall, to give me some "wiggle room" for taller items to fit on the shelves.
+Here is the rack loaded with gear. I purposely made the vertical aluminum rails a little too tall, to give me some "wiggle room" for taller items to fit on the shelves. Because I'm not using traditional rack rails, I can infinitely adjust the shelves up or down as needed.
 
 {{< img src="20250925_006.jpeg" alt="mini-rack assembled with gear" >}}
 
