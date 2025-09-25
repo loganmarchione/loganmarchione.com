@@ -67,7 +67,7 @@ Both 8020.net and Misumi have 3D building tools (and they both let you download 
 
 {{< img src="20250814_004.png" alt="IdeaBuilder" >}}
 
-An important note is that not all 20x20 aluminum is the same. In the examples below, both are 20mm on all four sides, but the 8020.net aluminum "slot" opening is only 5.26mm wide, while the Misumi slot is 6mm wide. For example, [these](https://www.amazon.com/uxcell-Interior-Connector-Aluminum-Extrusion/dp/B07VP59DY5) hidden corner brackets didn't fit into the 20x20 aluminum from 8020.net, since the "slot" is 5.26mm, not a full 6mm. Because of that, I went with Misumi rails, since they have a wider slot, which would accept more third-party parts.
+An important note is that not all 20x20 aluminum is the same. In the examples below, both are 20mm on all four sides, but the 8020.net aluminum "slot" opening is only 5.26mm wide, while the Misumi slot is 6mm wide. For example, [these](https://www.amazon.com/uxcell-Interior-Connector-Aluminum-Extrusion/dp/B07VP59DY5) hidden corner brackets didn't fit into the 20x20 aluminum from 8020.net, since the slot is 5.26mm, not a full 6mm. Because of that, I went with Misumi rails, since they have a wider slot, which would accept more third-party parts.
 
 {{< figure src="20250901_001.jpg" width="50%" loading="lazy" alt="20x20 aluminum" attr="20x20 aluminum from 8020.net" attrlink="https://8020.net/20-2020.html">}}
 
