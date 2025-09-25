@@ -15,9 +15,11 @@ cover:
 
 # TL;DR
 
-I built a new rack out of 20x20mm aluminum. Read more to build your own!
+I built a new rack out of 20x20mm extruded aluminum. Read more to build your own!
 
-{{< img src="20250925_005.jpeg" alt="mini-rack assembled" >}}
+{{< img src="20250925_004.jpeg" alt="mini-rack assembled" >}}
+
+{{< img src="20250925_006.jpeg" alt="mini-rack assembled with gear" >}}
 
 # Introduction
 
