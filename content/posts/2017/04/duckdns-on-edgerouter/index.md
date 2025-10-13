@@ -7,7 +7,6 @@ categories:
   - "linux"
   - "oc"
   - "router"
-  - "external"
 cover:
     image: "/assets/featured/featured_ubiquiti_edgemax.svg"
     alt: "featured image"

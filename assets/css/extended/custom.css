@@ -1,6 +1,10 @@
 /* Change default width of content */
 :root {
+<<<<<<< HEAD
     --main-width: 1080px;
+=======
+    --main-width: 900px;
+>>>>>>> master
 }
 
 /* Needed for my ASCII art drawings so they don't wrap on small screens  */

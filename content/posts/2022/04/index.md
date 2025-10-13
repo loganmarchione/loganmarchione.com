@@ -5,7 +5,6 @@ author: "Logan Marchione"
 categories:
   - "oc"
   - "mac-hardware"
-  - "external"
 cover:
     image: "/assets/featured/featured_generic_thumb_down.svg"
     alt: "featured image"
