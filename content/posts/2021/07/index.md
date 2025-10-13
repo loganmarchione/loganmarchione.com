@@ -6,7 +6,6 @@ categories:
   - "oc"
   - "linux"
   - "raspberry"
-  - "external"
 cover:
     image: "/assets/featured/featured_raspberry_logo.svg"
     alt: "featured image"

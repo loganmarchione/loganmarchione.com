@@ -7,7 +7,6 @@ categories:
   - "linux"
   - "oc"
   - "storage"
-  - "external"
 cover:
     image: "/assets/featured/featured_backblaze_logo.svg"
     alt: "featured image"

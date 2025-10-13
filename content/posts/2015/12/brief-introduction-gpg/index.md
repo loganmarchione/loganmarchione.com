@@ -6,7 +6,6 @@ categories:
 categories: 
   - "encryption-privacy"
   - "oc"
-  - "external"
 cover:
     image: "/assets/featured/featured_gnupg.svg"
     alt: "featured image"

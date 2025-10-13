@@ -5,7 +5,6 @@ author: "Logan Marchione"
 categories:
   - "oc"
   - "pc-hardware"
-  - "external"
 cover:
     image: "/assets/featured/featured_generic_storage.svg"
     alt: "featured image"
