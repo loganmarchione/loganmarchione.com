@@ -1,6 +1,6 @@
 ---
 title: "Proxmox Backup Server"
-date: "2025-09-01"
+date: "2025-10-31"
 author: "Logan Marchione"
 categories:
   - "oc"
