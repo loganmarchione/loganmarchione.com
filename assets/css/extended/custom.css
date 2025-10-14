@@ -1,6 +1,6 @@
 /* Change default width of content */
 :root {
-    --main-width: 900px;
+    --main-width: 1080px;
 }
 
 /* Needed for my ASCII art drawings so they don't wrap on small screens  */
