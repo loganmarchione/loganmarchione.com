@@ -441,9 +441,9 @@ At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash dri
 \------------------------------------------------------------------------------------------------------------------------------/
 ```
 
-You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC functionality. I left MemTest86 Pro to run for about 12 hours and came back to this (report below).
+You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC functionality. I left MemTest86 Pro to run for about 6 hours and came back to this (report below).
 
-[Link to MemTest86 Pro HTML report](/2025/03/pfsense-on-the-opnsense-dec740/MemTest86-Report-20250218-165252.html)
+[Link to MemTest86 Pro HTML report](/2025/10/MemTest86-Report-20251014-010205_656452.html)
 
 ## Installing Proxmox Backup Server
 
