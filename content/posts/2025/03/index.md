@@ -157,7 +157,7 @@ Processor Type : AMD Ryzen Embedded V1500B
 System Memory Speed : 2400 MHz
 ```
 
-At boot, you can press `ESC` once to enter the BIOS "Front Page".
+At boot, you can press `ESC` once to enter the BIOS "Front Page" (you need to very quick with this first `ESC`).
 
 ```
                                                            Front Page
@@ -248,6 +248,7 @@ At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Optio
 |                                                                                     |                                        |
 \-------------------------------------------------------------------------------------+----------------------------------------/
  F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
+ Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
 ```
 
 ### ECC error injection
@@ -262,7 +263,7 @@ At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Optio
 |                                                                                     |                                        |
 |Data Poisoning                             <Disabled>                                |                                        |
 |>ECC Configuration                                                                   |                                        |
-|Disable Memory Error Injection             <False>                                   |                                        |
+|Disable Memory Error Injection             <True>                                    |                                        |
 |                                                                                     |                                        |
 |                                                                                     |                                        |
 |                                                                                     |                                        |
