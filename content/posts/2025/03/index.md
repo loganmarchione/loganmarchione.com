@@ -457,7 +457,7 @@ You will see errors in MemTest86 Pro, since it's injecting ECC errors to test th
 
 [Link to MemTest86 Pro HTML report](/2025/03/MemTest86-Report-20250218-165252.html)
 
-## Installing pfSense
+# Installing pfSense
 
 Download the memstick installer for pfSense and write it to a USB flash drive. You can find links and instructions [here](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html), but the installer there is behind a login page (as I mentioned above), so you can get the `pfSense-CE-memstick-serial-2.7.2-RELEASE-amd64.img.gz` file directly from [here](https://atxfiles.netgate.com/mirror/downloads/).
 
