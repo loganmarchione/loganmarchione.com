@@ -1,5 +1,5 @@
 ---
-title: "Linux (more specifically, Proxmox Backup Server) on the OPNsense DEC740"
+title: "Proxmox Backup Server on the OPNsense DEC740"
 date: "2025-10-31"
 author: "Logan Marchione"
 categories:
@@ -336,50 +336,6 @@ On the same screen, set `Uart Driver Type` to `AMD Serial Driver`.
  Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
 ```
 
-TODO remove this?
-```
-                                                    InsydeH2O Setup Utility                                             Rev. 5.0
-        Advanced
-/-------------------------------------------------------------------------------------+----------------------------------------\
-|Console Redirection Setup                                                            |Console Redirection continue works      |
-|                                                                                     |after Legacy Boot.                      |
-|Console Serial Redirect                    <Enabled>                                 |                                        |
-|Terminal Type                              <VT_100>                                  |                                        |
-|Baud Rate                                  <115200>                                  |                                        |
-|Data Bits                                  <8 Bits>                                  |                                        |
-|Parity                                     <None>                                    |                                        |
-|Stop Bits                                  <1 Bit>                                   |                                        |
-|Flow Control                               <None>                                    |                                        |
-|Information Wait Time                      < 5 Seconds>                              |                                        |
-|C.R. After Legacy Boot                     <No>                                      |                                        |
-|Text Mode Resolution                       <AUTO>                                    |                                        |
-|Auto Refresh                               <Disabled>                                |                                        |
-|Auto adjust Terminal resolution            <Disabled>                                |                                        |
-|                                                   /----------------------\          |                                        |
-|>UART0                                             |C.R. After Legacy Boot|          |                                        |
-| Enable VT-100,115200,N81                          |----------------------|          |                                        |
-|                                                   |Yes                   |          |                                        |
-|                                                   |No                    |          |                                        |
-|                                                   \----------------------/          |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-|                                                                                     |                                        |
-\-------------------------------------------------------------------------------------+----------------------------------------/
- F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
- Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
-```
-
 ## Memory test
 
 I always test my memory, but since this was ECC memory, I needed a program to test the ECC functionality. Apparently, MemTest86+ (the open-source tool), [doesn't support testing ECC](https://github.com/memtest86plus/memtest86plus/discussions/248) yet. MemTest86 Pro (the closed-source tool) does [support ECC injection](https://www.memtest86.com/ecc.htm), so that's what I went with.
@@ -445,18 +401,18 @@ You will see errors in MemTest86 Pro, since it's injecting ECC errors to test th
 
 [Link to MemTest86 Pro HTML report](/2025/10/MemTest86-Report-20251014-010205_656452.html)
 
-## Installing Proxmox Backup Server
+# Installing Proxmox Backup Server
 
 This is where things get difficult. I found [this](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) really helpful page by Jochen Demmer, along with this accompanying [YouTube video](https://www.youtube.com/watch?v=w33ijSZEEUc). In it, Jochen describes how he tried to install Proxmox, but was unable to get it to boot. I even emailed Jochen, but he had no further information than what was in the post and video. He actually ended up pulling the NVMe SSD out of the DEC740 and installing it in a different PC to write Proxmox to it.
 
 
-Armed with that information, I wrote the [PBS ISO](https://www.proxmox.com/en/downloads/proxmox-backup-server/iso) directly to a USB flash drive using `dd` and immediately ran into the same issue as Jochen (not sure what I expected to happen). The error is below, nothing else on the screen.
+Armed with that information, I wrote the [PBS ISO](https://www.proxmox.com/en/downloads/proxmox-backup-server/iso) directly to a USB flash drive using `dd` and immediately ran into the same issue as Jochen (not sure what I expected to happen). The error is below, nothing else on the screen. I suspect this is something to do with the lack of a graphics output on this board and the fact that I'm using serial.
 
 ```
 error: file `/boot/' not found.
 ```
 
-As a last-ditch attempt, I then wrote [Ventoy](https://www.ventoy.net/en/index.html) to the USB flash drive and copied the PBS ISO to the mounted directory. Sure enough, Ventoy booted without issue! If you don't set the two `Uart Configuration Options` in the BIOS (from above), this won't work.
+I then wrote [Ventoy](https://www.ventoy.net/en/index.html) to the USB flash drive and copied the PBS ISO to the mounted directory. Sure enough, Ventoy booted without issue (if you don't set the two `Uart Configuration Options` in the BIOS from above, this won't work)
 
 ```
                              GNU GRUB  version 2.04
@@ -558,17 +514,316 @@ Here, the only one that worked was choosing `Install Proxmox Backup Server (Seri
       Use the ^ and v keys to select which entry is highlighted.
 ```
 
-After showing the Linux boot log (progress!), I had to press `Ctrl+D` two separate times, and then the PBS serial installer started! From here, I was able to install PBS like normal.
+After showing the Linux boot log (progress!), I had to press `Ctrl+D` two separate times, and then the PBS serial installer started.
 
 {{< img src="20251013_001.png" alt="proxmox serial installer" >}}
 
 I'm unsure why Ventoy worked, when writing the PBS ISO directly to a USB flash drive didn't. A few notes:
 
 - I was unable to set the [`nomodeset`](https://pbs.proxmox.com/docs/using-the-installer.html#nomodeset-kernel-param) kernel parameter, since I never got to the boot menu in the first place.
-- The installation [documation](https://pbs.proxmox.com/docs/using-the-installer.html) says that the `Serial Console Debug Mode` "sets up the Linux kernel to use the (first) serial port of the machine for in- and output", but I was unsure how to set this manually.
+- The installation [documation](https://pbs.proxmox.com/docs/using-the-installer.html) says that the `Serial Console Debug Mode` "sets up the Linux kernel to use the (first) serial port of the machine for in- and output", but I was unsure how to trigger this manually.
 - I tried to edit the PBS ISO on the USB flash drive to change boot settings in `/boot/grub/grub.cfg`, but the filesystem seemed to be read-only, so I was unable to change anything (no matter how I wrote the ISO or how I mounted it).
 
-From here, you can connect an ethernet cable to your LAN interface and setup PBS.
+## Boot issues
+
+If you install Proxmox and reboot, you'll end up with some sort of boot issue, like a kernel panic.
+
+```
+[    3.747466] /dev/root: Can't open blockdev
+[    3.752058] VFS: Cannot open root device "ZFS=rpool/ROOT/pbs-1" or unknown-block(0,0): error -6
+[    3.761773] Please append a correct "root=" boot option; here are the available partitions:
+[    3.771110] List of all bdev filesystems:
+[    3.775592]  ext3
+[    3.775594]  ext2
+[    3.777743]  ext4
+[    3.779894]  squashfs
+[    3.782043]  vfat
+[    3.784584]  fuseblk
+[    3.786734]
+[    3.790843] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[    3.800074] CPU: 0 UID: 0 PID: 1 Comm: swapper/0 Not tainted 6.14.8-2-pve #1
+[    3.807948] Hardware name: Deciso B.V. OPNsense Desktop Security Appliance/Netboard-A10 Gen.3, BIOS 05.38.26.0025-A10.33 03/05/2025
+[    3.821151] Call Trace:
+[    3.823886]  <TASK>
+[    3.826231]  dump_stack_lvl+0x5f/0x90
+[    3.830326]  dump_stack+0x10/0x18
+[    3.834028]  panic+0x12b/0x2fa
+[    3.837446]  mount_root_generic+0x1cc/0x280
+[    3.842121]  mount_root+0x13f/0x160
+[    3.846018]  prepare_namespace+0x1e8/0x260
+[    3.850592]  kernel_init_freeable+0x278/0x2c0
+[    3.855461]  ? __pfx_kernel_init+0x10/0x10
+[    3.860039]  kernel_init+0x1b/0x160
+[    3.863936]  ret_from_fork+0x47/0x70
+[    3.867929]  ? __pfx_kernel_init+0x10/0x10
+[    3.872505]  ret_from_fork_asm+0x1a/0x30
+[    3.876887]  </TASK>
+[    3.879443] Kernel Offset: 0xe00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[    3.891296] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
+```
+
+The problem is that Ventoy in `grub2 mode` adds an extra kernel parameter `rdinit=/vtoy/vtoy` to the bootloader. This is documented [here](https://forum.proxmox.com/threads/ventoy-install-of-proxmox-8-1-halts-at-loading-initial-ramdisk.143196/), [here](https://github.com/ventoy/Ventoy/issues/2782), and [here](https://bugzilla.proxmox.com/show_bug.cgi?id=5661). The fix is to remove it and reboot, but doing that isn't easy.
+
+According to the [documentation](https://pve.proxmox.com/wiki/Host_Bootloader), ZFS uses `systemd-boot`, while XFS uses GRUB.
+
+>For EFI Systems installed with ZFS as the root filesystem systemd-boot is used, unless Secure Boot is enabled. All other deployments use the standard GRUB bootloader (this usually also applies to systems which are installed on top of Debian).
+
+This means that the files that you need to update will depend on which bootloader you used, which is itself dependant on which filesystem you chose.
+
+### If you're using ZFS on root
+
+I had to boot into the `Serial Console Debug Mode` again (from Ventoy). From there, I imported the pool, then mounted it and the required directories.
+
+```
+# import the ZFS pool
+# the key is the -N flag, which doesn't mount the ZFS filesystem (since we already have a / mount, we can't mount / over it)
+zpool import
+zpool import -f -N rpool
+zpool list
+
+# mount the zpool to /mnt
+# again, we're going out of our way to not auto-mount / over top of /
+zfs set mountpoint=legacy rpool/ROOT/pbs-1
+mount -t zfs rpool/ROOT/pbs-1 /mnt
+ls -la /mnt/etc/kernel
+
+# mount required directoriesw
+mount -t proc proc /mnt/proc
+mount -t sysfs sys /mnt/sys
+mount --rbind /dev /mnt/dev
+mount --rbind /run /mnt/run
+
+# create /boot/efi and mount /dev/nvme0n1p2 there
+mkdir -p /mnt/boot/efi
+mount /dev/nvme0n1p2 /mnt/boot/efi
+```
+
+Now, we're doing the actual `chroot`, editing the files, and [rebuilding the bootloader](https://pve.proxmox.com/wiki/Host_Bootloader).
+
+```
+# chroot in
+chroot /mnt /bin/bash
+
+# find the files
+# i think you only need to edit /etc/kernel/cmdline, but i'm editing both
+grep -ir vtoy /etc
+
+# edit the files
+vi /etc/default/grub.d/installer.cfg
+vi /etc/kernel/cmdline
+
+# refresh the bootloader
+proxmox-boot-tool refresh
+```
+
+Finally, we need to cleanup.
+
+```
+# set mountpoint back to / (so that we can boot later) and exit the chroot
+zfs set mountpoint=/ rpool/ROOT/pbs-1
+exit
+
+# unmount
+umount /mnt/boot/efi
+umount /mnt/run
+umount -l /mnt/dev
+umount /mnt/sys
+umount /mnt/proc
+umount /mnt
+
+# make sure /proc is mounted in the live environment and export the pool
+mount -t proc proc /proc
+zpool export rpool
+reboot
+```
+
+Now, rebooting will boot right into PBS.
+
+### If you're using XFS on root
+
+After reboot, Proxmox didn't successfully boot, but I was able to press `e` at the boot menu.
+
+```
+                                                 GNU GRUB  version 2.12-9+pmx2
+
+ /--------------------------------------------------------------------------------------------------------------------------\
+ |*Proxmox Backup Server GNU/Linux                                                                                          |
+ | Advanced options for Proxmox Backup Server GNU/Linux                                                                     |
+ | Memory test (memtest86+x64.efi)                                                                                          |
+ | Memory test (memtest86+x64.efi, serial console)                                                                          |
+ | UEFI Firmware Settings                                                                                                   |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ \--------------------------------------------------------------------------------------------------------------------------/
+
+      Use the ^ and v keys to select which entry is highlighted.
+      Press enter to boot the selected OS, `e' to edit the commands before booting or `c' for a command-line. ESC to
+      return previous menu.
+```
+
+This let me edit the `linux` line to remove `rdinit=/vtoy/vtoy`. Just keep in mind these are Emacs key-bindings, not Vim.
+
+```
+                                                 GNU GRUB  version 2.12-9+pmx2
+
+ /--------------------------------------------------------------------------------------------------------------------------\
+ |setparams 'Proxmox Backup Server GNU/Linux'                                                                               |
+ |                                                                                                                          |
+ |        load_video                                                                                                        |
+ |        insmod gzio                                                                                                       |
+ |        if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi                                                |
+ |        insmod part_gpt                                                                                                   |
+ |        insmod lvm                                                                                                        |
+ |        insmod xfs                                                                                                        |
+ |        set root='lvmid/YpoGgW-14qn-h088-qtno-FYIK-V42G-A2uv1g/w0L6uL-O41B-YC8H-Ptrd-lOjp-0ZO8-CGt7E5'                    |
+ |        if [ x$feature_platform_search_hint = xy ]; then                                                                  |
+ |          search --no-floppy --fs-uuid --set=root --hint='lvmid/YpoGgW-14qn-h088-qtno-FYIK-V42G-A2uv1g/w0L6uL-O41B-YC8H-Pt|
+ |d-lOjp-0ZO8-CGt7E5'  6570ee59-9fae-408e-bc20-acf495306d65                                                                 |
+ |        else                                                                                                              |
+ |          search --no-floppy --fs-uuid --set=root 6570ee59-9fae-408e-bc20-acf495306d65                                    |
+ |        fi                                                                                                                |
+ |        echo        'Loading Linux 6.14.8-2-pve ...'                                                                      |
+ |        linux        /boot/vmlinuz-6.14.8-2-pve root=/dev/mapper/pbs-root ro  console=ttyS0,115200 rdinit=/vtoy/vtoy quiet|
+ |        echo        'Loading initial ramdisk ...'                                                                         |
+ |        initrd        /boot/initrd.img-6.14.8-2-pve                                                                       |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ |                                                                                                                          |
+ \--------------------------------------------------------------------------------------------------------------------------/
+
+      Minimum Emacs-like screen editing is supported. TAB lists completions. Press Ctrl-x or F10 to boot, Ctrl-c or F2
+      for a command-line or ESC to discard edits and return to the GRUB menu.
+```
+
+Once you're done, press `F10` to boot, and PBS will start, but the fix is just temporary. From here, login as `root` and edit the file `/etc/default/grub.d/installer.cfg` to remove `rdinit=/vtoy/vtoy`, then run `update-grub` to permanently update your bootloader.
+
+```
+GRUB_TERMINAL_INPUT="console serial"
+GRUB_TERMINAL_OUTPUT="gfxterm serial"
+GRUB_SERIAL_COMMAND="serial --unit=0 --speed=115200"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyS0,115200 rdinit=/vtoy/vtoy"
+```
+
+Now, rebooting will boot right into PBS.
+
+## Setup Proxmox Backup Server
+
+From here, you can connect an ethernet cable to your LAN interface and setup PBS. If you're curious, here is the info about the five on-board NICs. The three RJ-45 ports are [Intel I226-V](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/net/ethernet/intel/igc/) and the two SFP+ ports are from the [AMD CPU](https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/drivers/net/ethernet/amd/xgbe/).
+
+```
+02:00.0 Ethernet controller: Intel Corporation Ethernet Controller I226-V (rev 04)
+        Subsystem: Intel Corporation Device 0000
+        Flags: bus master, fast devsel, latency 0, IRQ 31
+        Memory at d0a00000 (32-bit, non-prefetchable) [size=1M]
+        Memory at d0b00000 (32-bit, non-prefetchable) [size=16K]
+        Capabilities: [40] Power Management version 3
+        Capabilities: [50] MSI: Enable- Count=1/1 Maskable+ 64bit+
+        Capabilities: [70] MSI-X: Enable+ Count=5 Masked-
+        Capabilities: [a0] Express Endpoint, IntMsgNum 0
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Device Serial Number f4-90-ea-ff-ff-01-a3-d6
+        Capabilities: [1c0] Latency Tolerance Reporting
+        Capabilities: [1f0] Precision Time Measurement
+        Capabilities: [1e0] L1 PM Substates
+        Kernel driver in use: igc
+        Kernel modules: igc
+
+03:00.0 Ethernet controller: Intel Corporation Ethernet Controller I226-V (rev 04)
+        Subsystem: Intel Corporation Device 0000
+        Flags: bus master, fast devsel, latency 0, IRQ 66
+        Memory at d0800000 (32-bit, non-prefetchable) [size=1M]
+        Memory at d0900000 (32-bit, non-prefetchable) [size=16K]
+        Capabilities: [40] Power Management version 3
+        Capabilities: [50] MSI: Enable- Count=1/1 Maskable+ 64bit+
+        Capabilities: [70] MSI-X: Enable+ Count=5 Masked-
+        Capabilities: [a0] Express Endpoint, IntMsgNum 0
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Device Serial Number f4-90-ea-ff-ff-01-a3-d7
+        Capabilities: [1c0] Latency Tolerance Reporting
+        Capabilities: [1f0] Precision Time Measurement
+        Capabilities: [1e0] L1 PM Substates
+        Kernel driver in use: igc
+        Kernel modules: igc
+
+04:00.0 Ethernet controller: Intel Corporation Ethernet Controller I226-V (rev 04)
+        Subsystem: Intel Corporation Device 0000
+        Flags: bus master, fast devsel, latency 0, IRQ 76
+        Memory at d0600000 (32-bit, non-prefetchable) [size=1M]
+        Memory at d0700000 (32-bit, non-prefetchable) [size=16K]
+        Capabilities: [40] Power Management version 3
+        Capabilities: [50] MSI: Enable- Count=1/1 Maskable+ 64bit+
+        Capabilities: [70] MSI-X: Enable+ Count=5 Masked-
+        Capabilities: [a0] Express Endpoint, IntMsgNum 0
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Device Serial Number f4-90-ea-ff-ff-01-a3-d8
+        Capabilities: [1c0] Latency Tolerance Reporting
+        Capabilities: [1f0] Precision Time Measurement
+        Capabilities: [1e0] L1 PM Substates
+        Kernel driver in use: igc
+        Kernel modules: igc
+
+06:00.1 Ethernet controller: Advanced Micro Devices, Inc. [AMD] XGMAC 10GbE Controller
+        Subsystem: Advanced Micro Devices, Inc. [AMD] XGMAC 10GbE Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 32
+        Memory at d0060000 (32-bit, non-prefetchable) [size=128K]
+        Memory at d0040000 (32-bit, non-prefetchable) [size=128K]
+        Memory at d0082000 (64-bit, non-prefetchable) [size=8K]
+        Capabilities: [48] Vendor Specific Information: Len=08 <?>
+        Capabilities: [50] Power Management version 3
+        Capabilities: [64] Express Endpoint, IntMsgNum 0
+        Capabilities: [a0] MSI: Enable- Count=1/8 Maskable- 64bit+
+        Capabilities: [c0] MSI-X: Enable+ Count=7 Masked-
+        Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+        Capabilities: [150] Advanced Error Reporting
+        Capabilities: [2a0] Access Control Services
+        Kernel driver in use: amd-xgbe
+        Kernel modules: amd_xgbe
+
+06:00.2 Ethernet controller: Advanced Micro Devices, Inc. [AMD] XGMAC 10GbE Controller
+        Subsystem: Advanced Micro Devices, Inc. [AMD] XGMAC 10GbE Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 39
+        Memory at d0020000 (32-bit, non-prefetchable) [size=128K]
+        Memory at d0000000 (32-bit, non-prefetchable) [size=128K]
+        Memory at d0080000 (64-bit, non-prefetchable) [size=8K]
+        Capabilities: [48] Vendor Specific Information: Len=08 <?>
+        Capabilities: [50] Power Management version 3
+        Capabilities: [64] Express Endpoint, IntMsgNum 0
+        Capabilities: [a0] MSI: Enable- Count=1/8 Maskable- 64bit+
+        Capabilities: [c0] MSI-X: Enable+ Count=7 Masked-
+        Capabilities: [100] Vendor Specific Information: ID=0001 Rev=1 Len=010 <?>
+        Capabilities: [150] Advanced Error Reporting
+        Capabilities: [2a0] Access Control Services
+        Kernel driver in use: amd-xgbe
+        Kernel modules: amd_xgbe
+```
 
 # Conclusion
 
