@@ -157,7 +157,7 @@ Processor Type : AMD Ryzen Embedded V1500B
 System Memory Speed : 2400 MHz
 ```
 
-At boot, you can press `ESC` once to enter the BIOS "Front Page" (you need to very quick with this first `ESC`).
+At boot, you can press `ESC` once to enter the BIOS "Front Page" (you need to be very quick with this first `ESC`).
 
 ```
                                                            Front Page
