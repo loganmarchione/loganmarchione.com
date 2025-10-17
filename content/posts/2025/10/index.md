@@ -14,16 +14,16 @@ cover:
 
 # Introduction
 
-I know I'm about five years too late too the party, but I finally setup [Proxmox Backup Server (PBS)](https://www.proxmox.com/en/products/proxmox-backup-server/overview).
+I know I'm about five years too late too the party, but I'm finally getting around to setting up [Proxmox Backup Server (PBS)](https://www.proxmox.com/en/products/proxmox-backup-server/overview).
 
-Right now, I have 10 servers inside my Proxmox Virtual Environment (VE) setup, made up of a mix of virtual machines (VMs) and LXC containers (LXCs). I'm using the [built-in Proxmox VE backup system](https://pve.proxmox.com/wiki/Backup_and_Restore) to backup my VMs/LXCs to my NAS. This results in about 250GB of backups, which happen once a week. I keep 12 weeks of backups, so that's 3TB of backups on my NAS. Even if nothing changes week-to-week on a single server, the entire machine is getting backed up every week, taking up the full amount of space.
+Right now, I have 10 servers inside my Proxmox Virtual Environment (PVE) setup, made up of a mix of virtual machines (VMs) and LXC containers (LXCs). I'm currently using the [built-in PVE backup system](https://pve.proxmox.com/wiki/Backup_and_Restore) to backup my VMs/LXCs to my NAS. This results in about 250GB of backups, which happen once a week. I keep 12 weeks of backups, so that's 3TB of backups on my NAS. Even if nothing changes week-to-week on a single VM/LXC, the entire machine is getting backed up every week, taking up the full amount of space.
 
-Proxmox Backup Server is a separate backup solution that has a [ton of features](https://www.proxmox.com/en/products/proxmox-backup-server/features):
+PBS is a backup solution from the makers of PVE that has a [ton of features](https://www.proxmox.com/en/products/proxmox-backup-server/features):
 
-- designed specifically to work with Proxmox VE
+- designed specifically to work with PVE
 - open-source
 - written in Rust (so it's memory safe)
-- free (as in freedom and beer), though they do have a [paid support plan](https://www.proxmox.com/en/products/proxmox-backup-server/pricing) (but I'm unsure why it's so much more expensive than [the Proxmox VE support plan](https://www.proxmox.com/en/products/proxmox-virtual-environment/pricing))
+- free (as in freedom and beer), though they do have a [paid support plan](https://www.proxmox.com/en/products/proxmox-backup-server/pricing) (but I'm unsure why it's so much more expensive than [the PVE support plan](https://www.proxmox.com/en/products/proxmox-virtual-environment/pricing))
 - incremental backups
 - deduplication
 - compression
@@ -31,13 +31,13 @@ Proxmox Backup Server is a separate backup solution that has a [ton of features]
 - checksums
 - granular restores (e.g., single files from a machine)
 
-The big selling points here are incremental backups and deduplication. Incremental, meaning that there is a single, large, initial backup for each machine, and then each subsequent backup only backs up the changed files. Deduplication, meaning that files that are the same across backups are only stored once. Both of these combined can save you a *ton* of space on backups. I've read online that the deduplication ratio can be as high as 50:1 or 100:1 (as in, `ratio = original_data_size / stored_data_size`).
+The big selling points here are incremental backups and deduplication. Incremental, meaning that there is a single, large, initial backup for each machine, and then each subsequent backup only backs up the changed files. Deduplication, meaning that files that are the same across backups are only stored once. Both of these combined can save you a *ton* of space on backups. I've read online that the deduplication ratio can be as high as 50:1 or 100:1.
 
 # Hardware
 
-I was looking for the following things in a PBS box:
+You can [install PBS](https://pbs.proxmox.com/docs/installation.html#server-installation) on a VM running inside PVE, or even on the same host as PVE (it uses a different port), but you can run into some unique failure modes doing this. It's much easier to run PBS on a separate piece of hardware. With that said, I was looking for the following things in a PBS box:
 
-- small (needs to fit in my [mini-rack](/2021/01/homelab-10-mini-rack/))
+- small (needs to fit in my [mini-rack](/2025/09/homelab-10-mini-rack-v2/))
 - x86 (to run PBS)
 - DDR4/DDR5 memory (ECC if possible)
 - fanless (one less thing to dust)
@@ -65,7 +65,7 @@ I must have looked at hundreds or thousands of mini PCs on obscure industrial an
 
 ## Purchase
 
-I once again found myself purchasing a second [OPNsense DEC740](https://shop.opnsense.com/product/dec740-opnsense-desktop-security-appliance/) ([the last one was for my pfSense router](/2025/03/pfsense-on-the-opnsense-dec740/)). I would love to find out who OEMs these for OPNsense so I could purchase 10 of them (without OPNsense installed). I really love these little boxes, I just wish they weren't so expensive 😅.
+However, I once again found myself purchasing another [OPNsense DEC740](https://shop.opnsense.com/product/dec740-opnsense-desktop-security-appliance/) (the last one was for  [my pfSense router](/2025/03/pfsense-on-the-opnsense-dec740/)). I would love to find out who OEMs these for OPNsense so I could purchase five of them (without OPNsense installed). I really love these little boxes, I just wish they weren't so expensive 😅.
 
 {{< img src="20250215_002.jpg" alt="dec740" >}}
 
@@ -74,7 +74,7 @@ I also picked up two upgrades:
 - a stick of 16GB DDR4 ECC UDIMM VLP (specifically model number MTA18ADF2G72AZ-2G6 from [Memory.net](https://memory.net/product/mta18adf2g72az-2g6-micron-1x-16gb-ddr4-2666-ecc-udimm-pc4-21300v-e-dual-rank-x8-module/)) for $84
 - an industrial-grade 2TB NVMe SSD (specifically model number OM8SGP42048K2-A00 from [Mouser.com](https://www.mouser.com/ProductDetail/Kingston/OM8SGP42048K2-A00?qs=%252BICfH0Hx1eSIkRKcGCyUfA%3D%3D)) for $229
 
-You can see my post [here](/2025/03/pfsense-on-the-opnsense-dec740/#ecc-ram-upgrade) on what the inside of the DEC740 looks like, so I won't re-hash that.
+You can see my post [here](/2025/03/pfsense-on-the-opnsense-dec740/#ecc-ram-upgrade) on what the inside of the DEC740 looks like, so I won't re-post those pictures here.
 
 # Pre-installation
 
@@ -403,7 +403,7 @@ You will see errors in MemTest86 Pro, since it's injecting ECC errors to test th
 
 # Installing Proxmox Backup Server
 
-This is where things get difficult. I found [this](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) really helpful page by Jochen Demmer, along with this accompanying [YouTube video](https://www.youtube.com/watch?v=w33ijSZEEUc). In it, Jochen describes how he tried to install Proxmox, but was unable to get it to boot. I even emailed Jochen, but he had no further information than what was in the post and video. He actually ended up pulling the NVMe SSD out of the DEC740 and installing it in a different PC to write Proxmox to it.
+This is where things got difficult. I found [this](https://wiki.junicast.de/en/junicast/review/opnsense_dec740) really helpful page about the DEC740 by Jochen Demmer, along with this accompanying [YouTube video](https://www.youtube.com/watch?v=w33ijSZEEUc). In it, Jochen describes how he tried to install Proxmox, but was unable to get it to boot. I even emailed Jochen, but he had no further information than what was in the post and video. He actually ended up pulling the NVMe SSD out of the DEC740 and installing it in a different PC to write Proxmox to it.
 
 
 Armed with that information, I wrote the [PBS ISO](https://www.proxmox.com/en/downloads/proxmox-backup-server/iso) directly to a USB flash drive using `dd` and immediately ran into the same issue as Jochen (not sure what I expected to happen). The error is below, nothing else on the screen. I suspect this is something to do with the lack of a graphics output on this board and the fact that I'm using serial.
@@ -518,15 +518,16 @@ After showing the Linux boot log (progress!), I had to press `Ctrl+D` two separa
 
 {{< img src="20251013_001.png" alt="proxmox serial installer" >}}
 
-I'm unsure why Ventoy worked, when writing the PBS ISO directly to a USB flash drive didn't. A few notes:
+I'm unsure why Ventoy worked, when writing the PBS ISO directly to a USB flash drive with `dd` didn't. A few notes:
 
-- I was unable to set the [`nomodeset`](https://pbs.proxmox.com/docs/using-the-installer.html#nomodeset-kernel-param) kernel parameter, since I never got to the boot menu in the first place.
+- In addition to `dd` and Ventoy, I also tried [UNetbootin](https://unetbootin.github.io/), [KDE ISO Image Writer](https://apps.kde.org/isoimagewriter/), and [Raspberry Pi Imager](https://github.com/raspberrypi/rpi-imager).
+- I was unable to set the [`nomodeset`](https://pbs.proxmox.com/docs/using-the-installer.html#nomodeset-kernel-param) kernel parameter in PBS, since I never got to the PBS boot menu in the first place.
 - The installation [documation](https://pbs.proxmox.com/docs/using-the-installer.html) says that the `Serial Console Debug Mode` "sets up the Linux kernel to use the (first) serial port of the machine for in- and output", but I was unsure how to trigger this manually.
 - I tried to edit the PBS ISO on the USB flash drive to change boot settings in `/boot/grub/grub.cfg`, but the filesystem seemed to be read-only, so I was unable to change anything (no matter how I wrote the ISO or how I mounted it).
 
 ## Boot issues
 
-If you install Proxmox and reboot, you'll end up with some sort of boot issue, like a kernel panic.
+If you install Proxmox using the above instructions and reboot, you'll end up with some sort of boot issue, like a kernel panic.
 
 ```
 [    3.747466] /dev/root: Can't open blockdev
@@ -564,11 +565,11 @@ If you install Proxmox and reboot, you'll end up with some sort of boot issue, l
 
 The problem is that Ventoy in `grub2 mode` adds an extra kernel parameter `rdinit=/vtoy/vtoy` to the bootloader. This is documented [here](https://forum.proxmox.com/threads/ventoy-install-of-proxmox-8-1-halts-at-loading-initial-ramdisk.143196/), [here](https://github.com/ventoy/Ventoy/issues/2782), and [here](https://bugzilla.proxmox.com/show_bug.cgi?id=5661). The fix is to remove it and reboot, but doing that isn't easy.
 
-According to the [documentation](https://pve.proxmox.com/wiki/Host_Bootloader), ZFS uses `systemd-boot`, while XFS uses GRUB.
+According to the Proxmox [documentation](https://pve.proxmox.com/wiki/Host_Bootloader), ZFS uses `systemd-boot`, while XFS uses GRUB.
 
 >For EFI Systems installed with ZFS as the root filesystem systemd-boot is used, unless Secure Boot is enabled. All other deployments use the standard GRUB bootloader (this usually also applies to systems which are installed on top of Debian).
 
-This means that the files that you need to update will depend on which bootloader you used, which is itself dependant on which filesystem you chose.
+This means that the bootloader files that you need to update will depend on which bootloader you used, which is itself dependent on which filesystem you chose.
 
 ### If you're using ZFS on root
 
@@ -587,18 +588,16 @@ zfs set mountpoint=legacy rpool/ROOT/pbs-1
 mount -t zfs rpool/ROOT/pbs-1 /mnt
 ls -la /mnt/etc/kernel
 
-# mount required directoriesw
+# mount required directories
 mount -t proc proc /mnt/proc
 mount -t sysfs sys /mnt/sys
 mount --rbind /dev /mnt/dev
 mount --rbind /run /mnt/run
-
-# create /boot/efi and mount /dev/nvme0n1p2 there
 mkdir -p /mnt/boot/efi
 mount /dev/nvme0n1p2 /mnt/boot/efi
 ```
 
-Now, we're doing the actual `chroot`, editing the files, and [rebuilding the bootloader](https://pve.proxmox.com/wiki/Host_Bootloader).
+Then, we're doing the actual `chroot`, editing the files, and [rebuilding the bootloader](https://pve.proxmox.com/wiki/Host_Bootloader).
 
 ```
 # chroot in
@@ -637,11 +636,11 @@ zpool export rpool
 reboot
 ```
 
-Now, rebooting will boot right into PBS.
+Now, rebooting will start PBS up.
 
 ### If you're using XFS on root
 
-After reboot, Proxmox didn't successfully boot, but I was able to press `e` at the boot menu.
+After reboot, Proxmox didn't successfully boot, but I was able see the boot menu and then press `e` at it.
 
 ```
                                                  GNU GRUB  version 2.12-9+pmx2
@@ -732,7 +731,7 @@ GRUB_SERIAL_COMMAND="serial --unit=0 --speed=115200"
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyS0,115200 rdinit=/vtoy/vtoy"
 ```
 
-Now, rebooting will boot right into PBS.
+Now, rebooting will start PBS up.
 
 ## Setup Proxmox Backup Server
 
@@ -826,5 +825,9 @@ From here, you can connect an ethernet cable to your LAN interface and setup PBS
 ```
 
 # Conclusion
+
+I don't have PBS setup or connected to PVE yet (I'm still working on that), but I don't forsee having any issues 🤞. My ultimate plan is to backup PVE to PBS, and then have PBS [sync all that content](https://pbs.proxmox.com/docs/managing-remotes.html) to my NAS (for backup to the cloud).
+
+{{< img src="20251016_001.png" alt="pbs dashboard" >}}
 
 \-Logan
