@@ -157,7 +157,7 @@ Processor Type : AMD Ryzen Embedded V1500B
 System Memory Speed : 2400 MHz
 ```
 
-At boot, you can press `ESC` once to enter the BIOS "Front Page".
+At boot, you can press `ESC` once to enter the BIOS "Front Page" (you need to be very quick with this first `ESC`).
 
 ```
                                                            Front Page
@@ -248,6 +248,7 @@ At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Optio
 |                                                                                     |                                        |
 \-------------------------------------------------------------------------------------+----------------------------------------/
  F1  Help                       ^/v Select Item                F5/F6 Change Values            F9  Setup Defaults
+ Esc Exit                       </> Select Item                Enter Select > SubMenu         F10 Save and Exit
 ```
 
 ### ECC error injection
@@ -262,7 +263,7 @@ At the Front Page, go to `Setup Utility`, then `AMD CBS`, then `UMC Common Optio
 |                                                                                     |                                        |
 |Data Poisoning                             <Disabled>                                |                                        |
 |>ECC Configuration                                                                   |                                        |
-|Disable Memory Error Injection             <False>                                   |                                        |
+|Disable Memory Error Injection             <True>                                    |                                        |
 |                                                                                     |                                        |
 |                                                                                     |                                        |
 |                                                                                     |                                        |
@@ -454,9 +455,9 @@ At the Front Page, go to `Boot Manager`. I was able to boot from a USB flash dri
 
 You will see errors in MemTest86 Pro, since it's injecting ECC errors to test the ECC functionality. I left MemTest86 Pro to run for about 12 hours and came back to this (report below).
 
-[Link to MemTest86 Pro HTML report](/2025/03/pfsense-on-the-opnsense-dec740/MemTest86-Report-20250218-165252.html)
+[Link to MemTest86 Pro HTML report](/2025/03/MemTest86-Report-20250218-165252.html)
 
-## Installing pfSense
+# Installing pfSense
 
 Download the memstick installer for pfSense and write it to a USB flash drive. You can find links and instructions [here](https://docs.netgate.com/pfsense/en/latest/install/download-installer-image.html), but the installer there is behind a login page (as I mentioned above), so you can get the `pfSense-CE-memstick-serial-2.7.2-RELEASE-amd64.img.gz` file directly from [here](https://atxfiles.netgate.com/mirror/downloads/).
 
