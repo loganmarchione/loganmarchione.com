@@ -30,6 +30,7 @@ If you're looking for more, I also suggest donating to these groups (in no parti
 {{< homelab-svg-assets-inline src="openbsd" >}} [The OpenBSD Foundation](https://www.openbsdfoundation.org/donations.html)  
 {{< homelab-svg-assets-inline src="python" >}} [The Python Software Foundation](https://www.python.org/psf/donations/)  
 {{< homelab-svg-assets-inline src="softwareinthepublicinterest" >}} [Software in the Public Interest (SPI)](https://www.spi-inc.org/) (this covers many [projects](https://www.spi-inc.org/projects/), like Arch Linux, Debian, OpenZFS, PostgreSQL, and more!)  
+{{< homelab-svg-assets-inline src="softwarefreedomconservancy" >}} [Software Freedom Conservancy (SFC)](https://sfconservancy.org/) (this covers many [projects](https://sfconservancy.org/projects/current/), like BusyBox, coreboot, git, QEMU, and more!)  
 {{< homelab-svg-assets-inline src="mozillathunderbird" >}} [Thunderbird](https://give.thunderbird.net/)  
 
 ## Ads/sponsorship
