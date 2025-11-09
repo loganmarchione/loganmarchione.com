@@ -31,8 +31,11 @@ markup:
 module:
   imports:
     - path: github.com/adityatelange/hugo-PaperMod
+      version: 1cf53273c3ba58f0593ecb7c2befe11274f51a4e
     - path: github.com/foo-dogsquared/hugo-mod-simple-icons
+      version: 209df91fb560f4f90f26e5442e56dfcdbcd6f4e1
     - path: github.com/loganmarchione/homelab-svg-assets
+      version: 8c19e3e7ad726904a4f1d75e314562f333f744b8
       mounts:
         - source: assets
           target: assets/svg/homelab-svg-assets
