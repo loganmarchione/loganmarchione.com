@@ -3,7 +3,6 @@ title: "A brief introduction to GPG"
 date: "2015-12-31"
 author: "Logan Marchione"
 categories: 
-categories: 
   - "encryption-privacy"
   - "oc"
 cover:
