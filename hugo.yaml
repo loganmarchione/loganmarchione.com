@@ -30,8 +30,10 @@ markup:
 
 module:
   imports:
+    # https://github.com/adityatelange/hugo-PaperMod/issues/1796
     - path: github.com/adityatelange/hugo-PaperMod
       version: 1cf53273c3ba58f0593ecb7c2befe11274f51a4e
+    # https://github.com/gohugoio/hugo/issues/14010
     - path: github.com/foo-dogsquared/hugo-mod-simple-icons
       version: 209df91fb560f4f90f26e5442e56dfcdbcd6f4e1
     - path: github.com/loganmarchione/homelab-svg-assets
