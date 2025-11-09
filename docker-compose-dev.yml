@@ -3,7 +3,7 @@ services:
   hugo:
     container_name: hugo-build-env
     restart: unless-stopped
-    image: ghcr.io/gohugoio/hugo:v0.149.1
+    image: ghcr.io/gohugoio/hugo:v0.152.2
     networks:
       - hugo
     ports:
