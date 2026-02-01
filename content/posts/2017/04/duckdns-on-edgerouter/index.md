@@ -50,12 +50,14 @@ set service dns dynamic interface eth0 service custom-duckdns
 set service dns dynamic interface eth0 service custom-duckdns host-name loganmarchione
 set service dns dynamic interface eth0 service custom-duckdns login nouser
 set service dns dynamic interface eth0 service custom-duckdns password your-token-here
-set service dns dynamic interface eth0 service custom-duckdns protocol dyndns2
+set service dns dynamic interface eth0 service custom-duckdns protocol duckdns
 set service dns dynamic interface eth0 service custom-duckdns server www.duckdns.org
 commit
 save
 exit
 ```
+
+Note - Thank you to AK for the email! Apparently a newer EdgeRouter update allows you to use `protocol duckdns` instead of `protocol dyndns2`.
 
 A couple notes on the options:
 
