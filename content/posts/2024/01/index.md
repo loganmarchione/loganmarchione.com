@@ -14,6 +14,27 @@ cover:
 
 {{% series/s_openwrt %}}
 
+# Update: 2026-03-12
+
+Another release of OpenWrt, another smooth upgrade! First, I installed `owut`.
+
+```
+opkg update && opkg install owut
+```
+
+Then, I checked my upgrade path.
+
+```
+owut check --verbose --version-to 25.12
+```
+
+Finally, I upgraded to 25.12.
+
+```
+owut upgrade --verbose --version-to 25.12
+```
+
+
 # Update: 2025-07-22
 
 A lot has changed in the world of OpenWrt!
