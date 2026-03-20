@@ -43,7 +43,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           external_repository: loganmarchione/loganmarchione.github.io
           publish_branch: gh-pages
           publish_dir: ./public
