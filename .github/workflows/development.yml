@@ -29,10 +29,21 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Build
-        run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+      - name: Build with Hugo
         env:
           URL: loganmarchione.github.io
+        run: |
+          hugo \
+            --gc \
+            -DEF \
+            --baseURL "https://${{ env.URL }}"
 
       - name: Overwrite robots.txt (for search engines)
         run: |
@@ -40,13 +51,18 @@ jobs:
           echo "User-agent: *" >> ./public/robots.txt
           echo "Disallow: /" >> ./public/robots.txt
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Verify files
+        run: |
+          sudo apt update && sudo apt-get install -y tree && tree ./public
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          external_repository: loganmarchione/loganmarchione.github.io
-          publish_branch: gh-pages
-          publish_dir: ./public
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   loganmarchione-dev:
     name: Deploy (loganmarchione.dev)
@@ -86,10 +102,14 @@ jobs:
       - name: Update CloudFront Distribution
         run: sed -i "s/CLOUDFRONT_DISTRIBUTION_DEV/${{ secrets.CLOUDFRONT_DISTRIBUTION_DEV }}/g" hugo.yaml
 
-      - name: Build
-        run: hugo --gc -DEF --baseURL="https://${{ env.URL }}"
+      - name: Build with Hugo
         env:
           URL: loganmarchione.dev
+        run: |
+          hugo \
+            --gc \
+            -DEF \
+            --baseURL "https://${{ env.URL }}"
 
       - name: Overwrite robots.txt (for search engines)
         run: |
