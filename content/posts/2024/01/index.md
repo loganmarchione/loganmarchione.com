@@ -34,7 +34,6 @@ Finally, I upgraded to 25.12.
 owut upgrade --verbose --version-to 25.12
 ```
 
-
 # Update: 2025-07-22
 
 A lot has changed in the world of OpenWrt!
