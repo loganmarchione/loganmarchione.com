@@ -92,15 +92,15 @@ params:
     assets:
         disableHLJS: true
         disableFingerprinting: false
-        favicon: "/assets/favicon/favicon_loganmarchione_logo.svg"
-        favicon16x16: "/assets/favicon/favicon_loganmarchione_logo.svg"
-        favicon32x32: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        favicon: "/assets/favicon/favicon.svg"
+        favicon16x16: "/assets/favicon/favicon.svg"
+        favicon32x32: "/assets/favicon/favicon.svg"
         apple_touch_icon: "/assets/favicon/apple-touch-icon.png"
-        safari_pinned_tab: "/assets/favicon/favicon_loganmarchione_logo.svg"
+        safari_pinned_tab: "/assets/favicon/favicon.svg"
 
     label:
         text: "Logan Marchione"
-        icon: /assets/favicon/favicon_loganmarchione_logo.svg
+        icon: /assets/favicon/favicon.svg
         iconHeight: 35
 
     # home-info mode
