@@ -20,10 +20,6 @@ We're moving house this year, and there is going to be a period of about a month
 
 ## Hardware
 
-As I said in [my last post](2024/02/beryl-travel-router-with-openwrt/):
-
->The trick with OpenWrt is to not get hardware that is too old (because it will have bad specs and be slow), but also not get something that is too new (because it won’t be supported yet).
-
 For this temporary setup, I just need an all-in-one router/switch/WAP. I went back to [GL.iNet](https://www.gl-inet.com/) to see what they offered, and after doing some reading online, found the [Flint 2](https://www.gl-inet.com/products/gl-mt6000/). There is a newer [Flint 3](https://www.gl-inet.com/products/gl-be9300/), which has WiFi 7 (802.11be) and 6GHz support, but it isn't yet supported by OpenWrt (whereas the [Flint 2 is listed in the Table of Hardware](https://openwrt.org/toh/gl.inet/gl-mt6000)). 
 
 {{< figure src="20260523_001.jpg" width="50%" loading="lazy" alt="flint 2 (GL-MT6000)" attr="Image from GL.iNet" attrlink="https://store-us.gl-inet.com/products/flint-2-gl-mt6000-wi-fi-6-high-performance-home-router">}}
