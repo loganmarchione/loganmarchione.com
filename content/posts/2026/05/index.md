@@ -179,8 +179,10 @@ wifi reload
 service network restart
 ```
 
+As a quick sanity-check, I connected the Flint 2 WAN port to my current network switch. It pulled an IP address from DHCP and I was able to get online right afterwards.
+
 # Conclusion
 
-This setup is dead-simple. It provides DHCP, DNS, secure firewall, and 5GHz WiFi. It's perfect for my month-long temporary setup, but if I were doing this long-term, I'd change more (VLANs, dual-band WiFi, WiFi channel width, etc...). Overall, I'm happy with this and hope it serves me well!
+This setup is dead-simple. It provides DHCP, DNS, secure firewall, and 5GHz WiFi. It's perfect for my month-long temporary setup, but if I were doing this long-term, I'd customize it even more (e.g., VLANs, dual-band WiFi, WiFi channel width, etc...). Overall, I'm happy with this and hope it serves me well!
 
 \-Logan
