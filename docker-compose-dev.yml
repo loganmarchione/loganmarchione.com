@@ -1,9 +1,8 @@
-version: '3'
 services:
   hugo:
     container_name: hugo-build-env
     restart: unless-stopped
-    image: ghcr.io/gohugoio/hugo:v0.152.2
+    image: ghcr.io/gohugoio/hugo:v0.165.0
     networks:
       - hugo
     ports:
@@ -11,6 +10,6 @@ services:
     volumes:
       - './:/project'
     command: server -DEF --bind=0.0.0.0 --ignoreCache --logLevel info
-    
+
 networks:
   hugo:
