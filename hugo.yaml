@@ -1,5 +1,5 @@
 baseURL: "https://loganmarchione.com"
-languageCode: "en-us"
+locale: "en-us"
 title: Logan Marchione
 pagination:
   pagerSize: 10
@@ -32,10 +32,10 @@ module:
   imports:
     # https://github.com/adityatelange/hugo-PaperMod/issues/1796
     - path: github.com/adityatelange/hugo-PaperMod
-      version: 87de3fb02411f6fe639fdd333544d57e19a3779c
+      version: d3768854d00ad003b0a8dbdba254ce9224377a01
     # https://github.com/gohugoio/hugo/issues/14010
     - path: github.com/foo-dogsquared/hugo-mod-simple-icons
-      version: 339013b0b36329f588e16a5a11a6a8d2c060ee63
+      version: aaa0b98b11b284a37cb3a8040fafd2840ad2d389
     - path: github.com/loganmarchione/homelab-svg-assets
       version: "0.5.0"
       mounts:
@@ -73,7 +73,7 @@ params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     title: "Logan Marchione"
     description: "Logan Marchione"
-    author: Me
+    author: "Logan Marchione"
     #images: ["<link or path of image for opengraph, twitter-cards>"]
 
     defaultTheme: auto
@@ -102,16 +102,6 @@ params:
         text: "Logan Marchione"
         icon: /assets/favicon/favicon.svg
         iconHeight: 35
-
-    # home-info mode
-#    homeInfoParams:
-#        Title: "Hi there \U0001F44B"
-#        Content: >
-#            My name is Logan Marchione, and this is my sandbox on the web to learn about the internet, crypto{graphy,currency}, Linux, hosting, code, etc...
-#            
-#            - I also use this space to share and document ideas for future reference.
-#            
-#            - I hope you find something of value here! Enjoy!
 
 #    socialIcons:
 #        - name: RSS
