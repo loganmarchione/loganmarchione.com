@@ -35,8 +35,6 @@ If you're looking for more, I also suggest donating to these groups (in no parti
 
 ## Ads/sponsorship
 
-As-of 2022-02-07, I am a verified [Brave Creator](https://creators.brave.com/). If you use the [Brave browser](https://brave.com/), you can send me a tip in [BAT](https://basicattentiontoken.org/). Being part of the Brave Creator program doesn't inject anything into the traffic between my site and your browser, it simply gives you the option to send me BAT (and if you're not using Brave, none of this applies to you).
-
 I don't accept sponsors or free items in exchange for review.
 
 \-Logan
