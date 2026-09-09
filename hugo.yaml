@@ -167,4 +167,4 @@ privacy:
   vimeo:
     disable: true
   youtube:
-    disable: true
+    disable: false
