@@ -43,7 +43,7 @@ Pokémon is the only game on this list I can't defend on its own merits. The bat
 
 I didn't know it at the time (I was only nine years old), but this would be the best game I would ever play.
 
-The first time through, the game was about killing bad guys, getting out of the Water Temple, and beating the boss. I replayed it through my teens with the explicit purpose of 100% completion, learning from each previous playthrough: every piece of heart, every mask, all 100 Gold Skulltulas. I replayed it again as an adult and the weight of the story hit me like a ton of bricks.
+The first time through, the game was about killing bad guys, getting out of the Water Temple, and beating the boss. I replayed it through my teens with the explicit purpose of 100% completion, learning from each previous playthrough: every piece of heart, every mask, all 100 Gold Skulltulas, etc... I replayed it again as an adult and the weight of the story hit me like a ton of bricks.
 
 It took me a while to notice that those three playthroughs *are the plot*. You're a kid, you pull a sword out of a pedestal in the Temple of Time, and you wake up seven years older to find your world on fire and everyone you knew scattered. There are the obvious themes of the [hero's journey](https://en.wikipedia.org/wiki/Hero%27s_journey), but underneath that, it's a game about the world moving on without asking your permission. I got a different game every time because I kept showing up as a different person.
 
