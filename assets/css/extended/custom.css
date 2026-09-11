@@ -39,3 +39,14 @@
 .homelab-svg-assets-inline svg {
 	height: 1em;
 }
+
+.youtube-embedded {
+  max-width: 600px;
+}
+
+.youtube-embedded iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
