@@ -63,7 +63,7 @@ If you haven't, I highly recommend watching [this video](https://www.youtube.com
 
 Halo did a lot of things right (the lore, the soundtrack, the dual-stick controls, the split-screen multiplayer), but the thing that got me was one shot in the first thirty minutes. You come out of a crashed lifepod, look up, and the ring is *above* you. It curves off the top of the sky and comes back down somewhere behind you.
 
-Every game world I'd played up to that point ended at a wall. Halo's world ended by pointing at itself. Nobody had to tell me where I was, how big it was, or how much trouble I was in, because I could see the ground I'd be standing on in six hours hanging over my head. I wasn't playing a shooter. I was the guy in the movie.
+Every game world I'd played up to that point ended at a wall. Halo's world ended at a ring. Nobody had to tell me where I was, how big it was, or how much trouble I was in, because I could see the ground I'd be standing on in six hours hanging over my head. I wasn't playing a shooter, I was the guy in the movie.
 
 ## Resident Evil (2002)
 
@@ -171,6 +171,7 @@ Below are some games that I'd like to play. I'm spoiled for choice here and hone
 - Halo: Campaign Evolved (2026)
 - Control Resonant (2026)
 - The Legend of Zelda: Ocarina of Time Remake (2026)
+- Fable (2027)
 - Exodus (2027)
 - The Expanse: Osiris Reborn (2027)
 - Gen Atlas (TBD)
@@ -179,7 +180,7 @@ Below are some games that I'd like to play. I'm spoiled for choice here and hone
 
 Writing this out, I noticed a couple things.
 
-First, most of these entries aren't really about a game, they're about a few moments: the Ashtray Maze, the first Phantom, seeing the Halo ring up close, pulling the Master Sword from the Temple of Time. Thousands of hours, but what I actually kept is about ninety seconds each.
+First, most of these entries aren't really about a game, they're about a few moments: the Ashtray Maze, the first Phantom, seeing the Halo ring up close, pulling the Master Sword from the Temple of Time. Thousands of hours, but what I actually kept was about ninety seconds each.
 
 Second, this list skews hard towards when I was younger. Is that because games today are cash-grab remakes, because I had more free time, or because a game could only ever suggest a world and my brain had to do the rest of the work? I'm going to say yes to all three (and then point out that quiet a few games on my "what's next" list are remakes or remasters).
 
