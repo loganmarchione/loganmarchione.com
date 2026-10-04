@@ -136,7 +136,7 @@ That left me with this configuration that ultimately had to go into Terraform.
 
 I won't paste all the Terraform in-line here, just check [my repo](https://github.com/loganmarchione/homelab-infra-terraform/tree/b32a59506fd9d35df8fced756c3fb00f53a0892a/talos) to see what it looks like. A couple things to note with the Terraform:
 
-- When you run `terraform apply` you should see the console in the Proxmox web UI on the three nodes start do work
+- When you run `terraform apply` you should see the console in the Proxmox web UI on the three nodes start to do work (screenshot below)
 - You can check the `variables.tf` file to see the settings for each node (e.g., the hostname and disks used)
 - You can search `talos.tf` to find the `LinkAliasConfig`. This is where I set the VIP on the link that has a Proxmox-prefixed MAC address (because some links were using `ens18` and some where using `eth0`). This way, I didn't have to specify which NIC to use on each node (it's kind of like a wildcard).
 - I haven't tested how to upgrade Talos or Kubernetes yet, or what to do when the Talos certificates expire
