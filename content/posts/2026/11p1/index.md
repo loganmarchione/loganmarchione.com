@@ -15,14 +15,13 @@ cover:
 
 # Introduction
 
-Recently, my employer pushed Claude Code to everyone's laptops. It is my assumption that if they pushed Claude Code to every machine, they trust Claude Code with any/all data on that machine. It's not *my* machine, so it's not my decision to argue for or against 🤷.
+Recently, my employer pushed Claude Code to everyone's laptops. I assume that if they pushed Claude Code to every machine, they trust Claude Code with any/all data on that machine. It's not *my* machine, so it's not my decision to argue for or against 🤷.
 
 At work it's their risk; at home it's mine.
 
 At home, I pay for a Claude subscription. I use [Zed](https://zed.dev/) as my editor, and I typically open Zed by going to a specific directory and running `zeditor .` so Zed only sees that specific directory. Inside Zed, I use Claude via the API (which is billed separately from the subscription), so I get a native experience in Zed's Agent Panel (the ✨ icon). However, I'm discovering that Anthropic's pricing model makes it cheaper to use the Claude subscription instead of the API, so that means Zed is out for larger tasks. I want to use Claude Code (part of the subscription) natively on my workstation, but I don't trust it with complete access to all of my files (e.g., I don't want it reading my browser history, grabbing my SSH private keys, etc...). 
 
-
-My first thought was to run it in a VM, but that seemed like overkill. Anthropic offers a [Dev Container](https://code.claude.com/docs/en/devcontainer), but it's built around VS Code, which I don't use. There's also a [built-in sandbox](https://code.claude.com/docs/en/sandboxing), but it only wraps the shell commands Claude runs. Claude's own file-reading tools, hooks, and MCP servers still run as me, with access to my whole home directory, and by default even sandboxed commands can read `~/.ssh`.
+My first thought was to run it in a VM, but that seemed like overkill. Anthropic offers a [Dev Container](https://code.claude.com/docs/en/devcontainer), but it's built around VS Code, which I don't use. There's also a [built-in sandbox](https://code.claude.com/docs/en/sandboxing), but it only wraps the shell commands Claude runs. Claude Code's own file-reading tools, hooks, and MCP servers still run as me, with access to my whole home directory, and by default even sandboxed commands can read `~/.ssh`.
 
 The built-in sandbox has a `dangerouslyDisableSandbox` retry escape hatch, and it's enforced by the same process it's sandboxing (who watches the watchmen?). You want a boundary that the agent doesn't control. Anthropic's own docs say the sandbox "is not a complete isolation boundary" and recommend running Claude Code itself in a container or VM if you want one. So that's what I did.
 
@@ -83,7 +82,7 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
-    command:
+    entrypoint:
       - claude
       - --append-system-prompt
       - >-
@@ -135,9 +134,10 @@ Some notes on this setup:
 - The `PROJECT_DIR` is mounted as `/work` inside the container.
 - The default `node:24` container runs as `root` (inside the container), but using `HOST_UID` and `HOST_GID` will run the container as your user/group on the host (so all the changes that Claude Code makes inside the container should match your user/group on the host).
 - On first run, Claude Code won't be able to open your browser (because it's inside a container), so just copy/paste the URL from the Claude Code prompt (inside the container) to your browser (on the host). The authentication token is stored in the `claude-config` named volume on your host at `/var/lib/docker/volumes`.
-- You can't run `claude --continue` or `claude --resume` directly on the host, but you can launch the container and then run `/continue` or `/resume` at the Claude Code prompt.
+- `CLAUDE_CONFIG_DIR` keeps all of Claude Code's state (including `.claude.json`, which would otherwise live outside `~/.claude`) in the `claude-config` named volume, so it persists between runs.
 - Run `/exit` at the Claude Code prompt to exit, which terminates the container (no container left to clean up).
 - Auto-updates are disabled (`DISABLE_AUTOUPDATER`), so to install a newer version, just `/exit` the Claude Code session, update the version in `CLAUDE_CODE_VERSION` and restart the container (the default version is `2.1.310`).
+- Some settings are environment variables (in the `environment:` section) and some are Claude Code settings (in the inline `claude-managed-settings` config) which compose mounts at `/etc/claude-code/managed-settings.json` (not every option exists in both forms)
 - You can (and should) adjust the `append-system-prompt` as needed.
 
 ## Protections/risks
@@ -155,9 +155,14 @@ Where the gaps are:
 - Network egress (to your LAN and the internet) is wide open
   - The Dev Container has an [egress firewall](https://github.com/anthropics/claude-code/blob/main/.devcontainer/init-firewall.sh), but that requires the `NET_ADMIN` and `NET_RAW` capabilities
 - There is a possibility of prompt injection (I've tried to limit this via the `append-system-prompt`)
-- It's possible for Claude to write something to a place that *you* will execute later (like `.git/hooks`)
-- Some settings are environment variables (in the `environment:` section) and some are Claude Code settings (in the inline `claude-managed-settings` config) which compose mounts at `/etc/claude-code/managed-settings.json` (not every option exists in both forms)
+- It's possible for Claude to write something to a place that *you* will unknowingly execute later (like `.git/hooks`)
 
 # Conclusion
+
+This setup doesn't make Claude Code safe. It moves the trust boundary from Claude Code's own permission system to Docker and a single bind mount. The container limits what Claude can reach, not what it can do with what it reaches.
+
+To further lock it down, I'm considering running a [Squid](https://www.squid-cache.org/) or [Tinyproxy](https://tinyproxy.github.io/) container as well, routing all of container's traffic through the proxy, but only allowing egress to a few specific hosts (effectively giving me the egress firewall I mentioned earlier).
+
+For a few extra keystrokes, I get to use my subscription without handing over my home directory. That's a trade I'm happy to make 🤷.
 
 \-Logan
