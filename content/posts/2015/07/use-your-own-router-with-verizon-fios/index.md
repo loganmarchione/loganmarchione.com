@@ -5,7 +5,6 @@ author: "Logan Marchione"
 categories: 
   - "oc"
   - "router"
-  - "external"
 cover:
     image: "/assets/featured/featured_generic_router.svg"
     alt: "featured image"
