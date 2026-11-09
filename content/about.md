@@ -48,8 +48,12 @@ This site is generated with [Hugo](https://gohugo.io/). These stats are heavily 
 | Number of tags                  | [{{< stats_count_tags >}}](/tags)             |
 | Number of categories            | [{{< stats_count_categories >}}](/categories) |
 | Total words written (in posts)  | {{< stats_word_count_total >}}                |
+| Total reading time (in posts)   | {{< stats_reading_time_total >}}              |
+| Longest post                    | {{< stats_list_post_longest >}}               |
 | Average words per post          | {{< stats_word_count_avg >}}                  |
 | Oldest post                     | {{< stats_list_post_oldest >}}                |
 | Newest post                     | {{< stats_list_post_newest >}}                |
+| Years blogging                  | {{< stats_years_blogging >}}                  |
+| Generated with                  | {{< stats_build_info >}}                      |
 
 \-Logan
