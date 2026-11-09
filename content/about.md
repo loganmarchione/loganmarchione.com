@@ -29,7 +29,6 @@ I hope you find something of value here! Enjoy!
 {{< homelab-svg-assets-inline src="gitlab" >}} [GitLab](https://gitlab.com/loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="sourcehut-black" >}} [sourcehut](https://sr.ht/~loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="steam" >}} [Steam](https://steamcommunity.com/id/loganmarchione/)  
-{{< homelab-svg-assets-inline src="lemmy" >}} [Lemmy](https://lemmy.world/u/loganmarchione) (username squatting)  
 {{< homelab-svg-assets-inline src="php" >}} [Packagist (PHP)](https://packagist.org/packages/loganmarchione/)  
 {{< homelab-svg-assets-inline src="npm" >}} [NPM](https://www.npmjs.com/~loganmarchione)  
 
@@ -40,7 +39,7 @@ I hope you find something of value here! Enjoy!
 # Hugo stats
 This site is generated with [Hugo](https://gohugo.io/). These stats are heavily inspired by [Luke Harris](https://www.lkhrs.com/blog/2022/04/add-stats-to-hugo/).
 
-|                                 |                                               |
+| By the numbers                  |                                               |
 |---------------------------------|-----------------------------------------------|
 | Number of pages                 | {{< stats_count_regular_pages >}}             |
 | Number of posts                 | [{{< stats_count_posts >}}](/posts)           |
