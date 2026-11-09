@@ -32,10 +32,10 @@ module:
   imports:
     # https://github.com/adityatelange/hugo-PaperMod/issues/1796
     - path: github.com/adityatelange/hugo-PaperMod
-      version: d3768854d00ad003b0a8dbdba254ce9224377a01
+      version: 118119693d8b5ac211b939775678310973bcb232
     # https://github.com/gohugoio/hugo/issues/14010
     - path: github.com/foo-dogsquared/hugo-mod-simple-icons
-      version: aaa0b98b11b284a37cb3a8040fafd2840ad2d389
+      version: 3a882159631a1b0b7dafabb94dcc2fc9a7426d7c
     - path: github.com/loganmarchione/homelab-svg-assets
       version: "0.5.0"
       mounts:
