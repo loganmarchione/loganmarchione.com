@@ -1,0 +1,3 @@
+{{- $mins := 0 }}
+{{- range where site.RegularPages "Section" "posts" }}{{ $mins = add $mins .ReadingTime }}{{ end }}
+{{- printf "%.1f hours" (div (float $mins) 60) -}}

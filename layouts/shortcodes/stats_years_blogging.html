@@ -1,0 +1,1 @@
+{{- range first 1 (where site.RegularPages "Section" "posts").ByDate }}{{ sub now.Year .Date.Year }}{{ end -}}
